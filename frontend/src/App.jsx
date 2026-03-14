@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react"
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid,
@@ -6,17 +7,6 @@ import {
 } from "recharts"
 
 const API = import.meta.env.VITE_API_URL
-```
-
-**Create a `.gitignore` in the project root:**
-```
-venv/
-__pycache__/
-*.pkl
-data/
-.env
-frontend/node_modules/
-frontend/dist/
 
 const GESTURE_COLORS = {
   "index flex":  "#60a5fa",
@@ -37,7 +27,6 @@ const GESTURES = [
 ]
 
 function windowToChart(window) {
-  // Only render channels 0, 1, 2 for clarity
   return window.map((sample, i) => ({
     t: i,
     ch1: sample[0],
@@ -75,6 +64,7 @@ function GestureCard({ name, confidence, isActive, onClick }) {
 }
 
 export default function App() {
+  const navigate = useNavigate()
   const [prediction, setPrediction] = useState(null)
   const [chartData, setChartData] = useState([])
   const [allProbs, setAllProbs] = useState({})
@@ -87,18 +77,13 @@ export default function App() {
     setLoading(true)
     setError(null)
     try {
-      // 1. Get a real EMG sample from the dataset
       const url = gestureId
         ? `${API}/sample?gesture_id=${gestureId}`
         : `${API}/sample`
       const { data: sample } = await axios.get(url)
-
-      // 2. Send it to the model for prediction
       const { data: result } = await axios.post(`${API}/predict`, {
         emg_window: sample.emg_window
       })
-
-      // 3. Update UI
       setChartData(windowToChart(sample.emg_window))
       setPrediction(result)
       setAllProbs(result.all_probabilities)
@@ -109,10 +94,8 @@ export default function App() {
     }
   }, [])
 
-  // Load a sample on mount
   useEffect(() => { fetchAndPredict() }, [fetchAndPredict])
 
-  // Live mode — re-fetch every 800ms
   useEffect(() => {
     if (isLive) {
       intervalRef.current = setInterval(() => fetchAndPredict(), 800)
@@ -127,25 +110,18 @@ export default function App() {
 
   return (
     <div style={{ maxWidth: 1000, margin: "0 auto", padding: "40px 24px" }}>
-      
-    import { useNavigate } from "react-router-dom"
 
-    // Inside the App() function, add at the top:
-    const navigate = useNavigate()
+      <button
+        onClick={() => navigate("/")}
+        style={{
+          background: "none", border: "none", color: "#64748b",
+          fontSize: 14, cursor: "pointer", marginBottom: 24,
+          padding: 0, display: "flex", alignItems: "center", gap: 6
+        }}
+      >
+        ← back
+      </button>
 
-    // Then as the first element inside the return's outer div:
-    <button
-      onClick={() => navigate("/")}
-      style={{
-        background: "none", border: "none", color: "#64748b",
-        fontSize: 14, cursor: "pointer", marginBottom: 24,
-        padding: 0, display: "flex", alignItems: "center", gap: 6
-      }}
-    >
-      ← back
-    </button>
-
-      {/* Header */}
       <div style={{ marginBottom: 40 }}>
         <h1 style={{ fontSize: 28, letterSpacing: "-0.5px" }}>
           Myo<span style={{ color: "#60a5fa" }}>Signal</span>
@@ -159,8 +135,6 @@ export default function App() {
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", gap: 24 }}>
-
-        {/* Left — waveform + prediction */}
         <div>
           <div style={{
             background: "#1e2130", borderRadius: 16,
@@ -229,7 +203,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* Prediction banner */}
           {prediction && (
             <div style={{
               background: `${activeColor}18`,
@@ -254,7 +227,6 @@ export default function App() {
           )}
         </div>
 
-        {/* Right — gesture cards */}
         <div>
           <h2 style={{ fontSize: 15, fontWeight: 600, marginBottom: 12, color: "#94a3b8" }}>
             Gestures

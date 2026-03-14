@@ -22,3 +22,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Ignore all other data except these subjects
+data/DB5_s2/
+data/DB5_s3/
+data/DB5_s4/
+data/DB5_s5/
+data/DB5_s6/
+data/DB5_s7/
+data/DB5_s8/
+data/DB5_s9/
+data/DB5_s10/
