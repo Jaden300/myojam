@@ -98,20 +98,6 @@ export default function App() {
     return () => clearInterval(intervalRef.current)
   }, [mode, isLive, fetchDataset])
 
-  // Simulate mode
-  useEffect(() => {
-    if (mode === "simulate" && isLive) {
-      intervalRef.current = setInterval(() => {
-        const emg = generateSimEMG()
-        setChartData(windowToChart(emg))
-        predict(emg)
-      }, 900)
-    } else {
-      clearInterval(intervalRef.current)
-    }
-    return () => clearInterval(intervalRef.current)
-  }, [mode, isLive, predict])
-
   // Auto-scroll log
   useEffect(() => {
     if (logRef.current) logRef.current.scrollTop = 0
@@ -221,7 +207,7 @@ export default function App() {
             border: "1px solid var(--border)",
             borderRadius: 6, padding: 3
           }}>
-            {[["dataset", "DATASET"], ["simulate", "SIMULATE"], ["sensor", "SENSOR"]].map(([m, label]) => (
+            {[["dataset", "DATASET"], ["sensor", "SENSOR"]].map(([m, label]) => (
               <button key={m} onClick={() => { setMode(m); setIsLive(false) }} style={{
                 background: mode === m ? "var(--border2)" : "transparent",
                 border: "none", color: mode === m ? "var(--text)" : "var(--text2)",
@@ -459,10 +445,12 @@ export default function App() {
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
 
             {/* Gesture map */}
+            {mode === "dataset" && (
             <div style={{
               background: "var(--surface)", border: "1px solid var(--border)",
               borderRadius: 8, padding: 20
             }}>
+              
               <div style={{
                 fontFamily: "var(--mono)", fontSize: 10,
                 color: "var(--text2)", letterSpacing: "0.1em", marginBottom: 14
@@ -506,6 +494,8 @@ export default function App() {
                   )
                 })}
               </div>
+            
+
               {mode === "dataset" && (
                 <p style={{
                   fontFamily: "var(--mono)", fontSize: 10,
@@ -513,6 +503,7 @@ export default function App() {
                 }}>CLICK ANY GESTURE TO LOAD A REAL NINAPRO SAMPLE</p>
               )}
             </div>
+          )}
 
             {/* Live action log */}
             <div style={{
