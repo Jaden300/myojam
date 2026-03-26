@@ -1,5 +1,6 @@
 import Navbar from "./Navbar"
 import { useNavigate } from "react-router-dom"
+import Footer from "./Footer"
 
 const STEPS = [
   {

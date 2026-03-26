@@ -7,7 +7,7 @@ from scipy.signal import butter, filtfilt
 import os
 import random
 
-app = FastAPI(title="MyoSignal API")
+app = FastAPI(title="myojam API")
 
 # Allow React frontend to talk to this server
 app.add_middleware(
@@ -60,7 +60,7 @@ class PredictionResponse(BaseModel):
 
 @app.get("/")
 def root():
-    return {"status": "MyoSignal API running"}
+    return {"status": "myojam API running"}
 
 @app.get("/gestures")
 def get_gestures():

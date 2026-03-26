@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import Navbar from "./Navbar"
 import HeroSphere from "./HeroSphere"
+import Footer from "./Footer"
 
 
 const STATS = [

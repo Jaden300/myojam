@@ -1,4 +1,5 @@
 import Navbar from "./Navbar"
+import Footer from "./Footer"
 
 function FaceAvatar({ seed, size = 80 }) {
   const s = seed * 1000
