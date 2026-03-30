@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pyc
+build/
+dist/
+my_emg_data.json
+model/gesture_classifier.pkl
+model/my_gesture_classifier.pkl
+data/DB5_s1/
