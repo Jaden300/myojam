@@ -28,31 +28,32 @@ export default function NewsletterPopup() {
         @keyframes panelOut   { from { opacity: 1; transform: scale(1) translateY(0); } to { opacity: 0; transform: scale(0.96) translateY(16px); } }
       `}</style>
 
-      {/* Overlay */}
+      {/* Overlay — now handles centering */}
       <div
         onClick={close}
         style={{
           position: "fixed", inset: 0, zIndex: 500,
           background: "rgba(0,0,0,0.5)", backdropFilter: "blur(6px)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          padding: "16px",
           animation: `${closing ? "overlayOut" : "overlayIn"} 0.3s ease forwards`
         }}
       />
-
-      {/* Panel */}
-      <div style={{
-        position: "fixed", zIndex: 501,
-        top: "50%", left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: "min(680px, 92vw)",
-        maxHeight: "90vh",
-        background: "var(--bg)",
-        borderRadius: "var(--radius-lg)",
-        border: "1px solid var(--border)",
-        boxShadow: "0 24px 80px rgba(0,0,0,0.2)",
-        overflow: "hidden",
-        display: "flex", flexDirection: "column",
-        animation: `${closing ? "panelOut" : "panelIn"} 0.3s cubic-bezier(0.34,1.56,0.64,1) forwards`
-      }}>
+        {/* Panel — click doesn't bubble to overlay */}
+        <div
+          onClick={e => e.stopPropagation()}
+          style={{
+            width: "min(680px, 100%)",
+            maxHeight: "90vh",
+            background: "var(--bg)",
+            borderRadius: "var(--radius-lg)",
+            border: "1px solid var(--border)",
+            boxShadow: "0 24px 80px rgba(0,0,0,0.2)",
+            overflow: "hidden",
+            display: "flex", flexDirection: "column",
+            animation: `${closing ? "panelOut" : "panelIn"} 0.3s cubic-bezier(0.34,1.56,0.64,1) forwards`
+          }}
+        >
         {/* Header */}
         <div style={{
           background: "linear-gradient(135deg, #fff0f5 0%, #ffffff 70%)",

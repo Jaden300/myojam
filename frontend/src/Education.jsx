@@ -191,7 +191,7 @@ export default function Education() {
       </div>
 
       {/* Submit article embed */}
-        <div style={{ marginTop: 64 }}>
+        <div style={{ marginTop: 64, maxWidth: 820, margin: "64px auto 0" }}>
           <div style={{ marginBottom: 24 }}>
             <h2 style={{
               fontSize: 24, fontWeight: 600, color: "var(--text)",
@@ -206,10 +206,11 @@ export default function Education() {
           </div>
           <div style={{
             background: "var(--bg-secondary)", borderRadius: "var(--radius)",
-            border: "1px solid var(--border)", overflow: "hidden"
+            border: "1px solid var(--border)", overflow: "hidden",
+            padding: "0 24px"
           }}>
             <iframe
-              src="https://tally.so/embed/jaWRk1?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+              src="https://tally.so/embed/SUBMIT_ID?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
               width="100%"
               height="600"
               frameBorder="0"
