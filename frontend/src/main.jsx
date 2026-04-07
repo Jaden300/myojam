@@ -15,6 +15,7 @@ import ScrollToTop from "./ScrollToTop"
 import ChatWidget from "./ChatWidget"
 import Education from "./Education"
 import EMGExplainer from "./EMGExplainer"
+import OpenSourceEMG from "./OpenSourceEMG"
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -33,6 +34,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/education" element={<Education />} />
         <Route path="/education/emg-explainer" element={<EMGExplainer />} />
+        <Route path="/education/open-source-emg" element={<OpenSourceEMG />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -1,5 +1,6 @@
 import Navbar from "./Navbar"
 import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 import Footer from "./Footer"
 
 const ARTICLES = [
@@ -10,12 +11,44 @@ const ARTICLES = [
     summary: "What is EMG, how does surface signal acquisition work, and how does myojam turn a forearm twitch into a computer action? A full explainer from the biology up.",
     readTime: "8 min read",
     author: "Jaden W.",
+    date: "2026-04-06",
+    dateLabel: "April 6, 2026",
+    likes: 47,
+    helpfulness: 1,  // lower = more helpful (rank 1 = most helpful)
   },
-  // future articles go here
+  {
+    slug: "/education/open-source-emg",
+    tag: "Accessibility",
+    title: "From lab to laptop: democratising EMG",
+    summary: "EMG-based prosthetics have existed for 60 years. So why isn't muscle-computer control mainstream? How open datasets, affordable hardware, and open-source tools are changing that.",
+    readTime: "6 min read",
+    author: "Jaden W.",
+    date: "2026-03-28",
+    dateLabel: "March 28, 2026",
+    likes: 31,
+    helpfulness: 2,
+  },
 ]
+
+const SORT_OPTIONS = [
+  { key: "latest",     label: "Latest" },
+  { key: "popular",    label: "Most popular" },
+  { key: "helpful",    label: "Most helpful" },
+]
+
+function sorted(articles, key) {
+  const a = [...articles]
+  if (key === "latest")  return a.sort((x, y) => y.date.localeCompare(x.date))
+  if (key === "popular") return a.sort((x, y) => y.likes - x.likes)
+  if (key === "helpful") return a.sort((x, y) => x.helpfulness - y.helpfulness)
+  return a
+}
 
 export default function Education() {
   const navigate = useNavigate()
+  const [sortKey, setSortKey] = useState("latest")
+
+  const displayed = sorted(ARTICLES, sortKey)
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg)" }}>
@@ -54,10 +87,26 @@ export default function Education() {
         </div>
       </div>
 
-      {/* Article cards */}
-      <div style={{ maxWidth: 820, margin: "0 auto", padding: "64px 32px 80px" }}>
+      {/* Articles */}
+      <div style={{ maxWidth: 820, margin: "0 auto", padding: "48px 32px 80px" }}>
+
+        {/* Sort bar */}
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 32 }}>
+          <span style={{ fontSize: 13, color: "var(--text-tertiary)", fontWeight: 300, marginRight: 4 }}>Sort by</span>
+          {SORT_OPTIONS.map(opt => (
+            <button key={opt.key} onClick={() => setSortKey(opt.key)} style={{
+              background: sortKey === opt.key ? "var(--accent-soft)" : "var(--bg-secondary)",
+              border: `1px solid ${sortKey === opt.key ? "rgba(255,45,120,0.2)" : "var(--border)"}`,
+              borderRadius: 100, padding: "6px 14px",
+              fontSize: 12, fontWeight: sortKey === opt.key ? 500 : 400,
+              color: sortKey === opt.key ? "var(--accent)" : "var(--text-secondary)",
+              cursor: "pointer", fontFamily: "var(--font)", transition: "all 0.15s"
+            }}>{opt.label}</button>
+          ))}
+        </div>
+
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-          {ARTICLES.map(a => (
+          {displayed.map(a => (
             <div
               key={a.slug}
               onClick={() => navigate(a.slug)}
@@ -80,13 +129,14 @@ export default function Education() {
             >
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 16 }}>
                 <div style={{ flex: 1 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14, flexWrap: "wrap" }}>
                     <span style={{
                       fontSize: 11, fontWeight: 500, color: "var(--accent)",
                       background: "var(--accent-soft)", border: "1px solid rgba(255,45,120,0.15)",
                       borderRadius: 100, padding: "3px 10px"
                     }}>{a.tag}</span>
                     <span style={{ fontSize: 12, color: "var(--text-tertiary)", fontWeight: 300 }}>{a.readTime}</span>
+                    <span style={{ fontSize: 12, color: "var(--text-tertiary)", fontWeight: 300 }}>♥ {a.likes}</span>
                   </div>
                   <h2 style={{
                     fontSize: 20, fontWeight: 600, color: "var(--text)",
@@ -97,7 +147,7 @@ export default function Education() {
                     lineHeight: 1.7, fontWeight: 300, marginBottom: 16
                   }}>{a.summary}</p>
                   <span style={{ fontSize: 13, color: "var(--text-tertiary)", fontWeight: 300 }}>
-                    By {a.author}
+                    By {a.author} · {a.dateLabel}
                   </span>
                 </div>
                 <span style={{ fontSize: 20, color: "var(--text-tertiary)", flexShrink: 0, marginTop: 4 }}>→</span>

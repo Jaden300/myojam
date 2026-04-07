@@ -1,6 +1,7 @@
 import Navbar from "./Navbar"
 import { useNavigate } from "react-router-dom"
 import Footer from "./Footer"
+import ArticleBar from "./ArticleUtils"
 
 function FaceAvatar({ seed, size = 48 }) {
   const skinTones = ["#f5dce4", "#e8c9a0", "#c8956c", "#8d5524", "#f5dce4"]
@@ -197,8 +198,17 @@ export default function EMGExplainer() {
           </p>
         </div>
 
-        {/* Back link */}
-        <div style={{ marginTop: 48, display: "flex", justifyContent: "center" }}>
+        <ArticleBar
+          url="https://myojam.com/education/emg-explainer"
+          title="The science of muscle-computer interfaces — myojam"
+          citation={{
+            apa: `W., J. (2026, April 6). The science of muscle-computer interfaces. myojam. https://myojam.com/education/emg-explainer`
+          }}
+          presetLikes={47}
+          storageKey="like_emg_explainer"
+        />
+
+        <div style={{ marginTop: 32, display: "flex", justifyContent: "center" }}>
           <button onClick={() => navigate("/education")} style={{
             background: "transparent", color: "var(--text-secondary)",
             border: "1px solid var(--border-mid)", borderRadius: 100,
