@@ -738,6 +738,7 @@ export default function App() {
         <button
           data-tally-open="jaWR24"
           data-tally-width="400"
+          data-tally-hide-title="1"
           style={{
             position: "fixed", bottom: 24, left: 24, zIndex: 100,
             background: "var(--bg)", border: "1px solid var(--border)",
