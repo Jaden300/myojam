@@ -19,32 +19,30 @@ import SignalPlayground from "./SignalPlayground"
 import ScrollToTop from "./ScrollToTop"
 import NewsletterPopup from "./NewsletterPopup"
 import ChatWidget from "./ChatWidget"
-import { LangProvider } from "./i18n"
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <LangProvider>
-      <BrowserRouter>
-        <ScrollToTop />
-        <NewsletterPopup />
-        <ChatWidget />
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/demo" element={<App />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/how-it-works" element={<HowItWorks />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/team" element={<Team />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/education" element={<Education />} />
-          <Route path="/education/emg-explainer" element={<EMGExplainer />} />
-          <Route path="/education/open-source-emg" element={<OpenSourceEMG />} />
-          <Route path="/education/random-forest-emg" element={<RandomForestEMG />} />
-          <Route path="/education/ninapro-db5" element={<NinaproDB5 />} />
-          <Route path="/playground" element={<SignalPlayground />} />
-        </Routes>
-      </BrowserRouter>
-    </LangProvider>
+    <BrowserRouter>
+      <ScrollToTop />
+      <NewsletterPopup />
+      <ChatWidget />
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/demo" element={<App />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/education" element={<Education />} />
+        <Route path="/education/emg-explainer" element={<EMGExplainer />} />
+        <Route path="/education/open-source-emg" element={<OpenSourceEMG />} />
+        <Route path="/education/random-forest-emg" element={<RandomForestEMG />} />
+        <Route path="/education/ninapro-db5" element={<NinaproDB5 />} />
+        <Route path="/playground" element={<SignalPlayground />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 )

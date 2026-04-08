@@ -1,11 +1,23 @@
 import { useNavigate, useLocation } from "react-router-dom"
+import { useState, useEffect } from "react"
 import Logo from "./Logo"
-import { useLang } from "./i18n"
+import { t, getLang, setLang } from "./i18n"
 
 export default function Navbar() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const { lang, setLang, t } = useLang()
+  const [lang, setLangState] = useState(getLang())
+
+  useEffect(() => {
+    const handler = () => setLangState(getLang())
+    window.addEventListener("langchange", handler)
+    return () => window.removeEventListener("langchange", handler)
+  }, [])
+
+  function switchLang(l) {
+    setLang(l)
+    setLangState(l)
+  }
 
   const links = [
     [t("nav_howItWorks"), "/how-it-works"],
@@ -27,9 +39,7 @@ export default function Navbar() {
     }}>
       <div onClick={() => navigate("/")} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}>
         <Logo size={26} />
-        <span style={{ fontFamily: "var(--font)", fontWeight: 600, fontSize: 17, letterSpacing: "-0.3px", color: "var(--text)" }}>
-          myojam
-        </span>
+        <span style={{ fontFamily: "var(--font)", fontWeight: 600, fontSize: 17, letterSpacing: "-0.3px", color: "var(--text)" }}>myojam</span>
       </div>
 
       <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
@@ -47,7 +57,7 @@ export default function Navbar() {
           border: "1px solid var(--border)", borderRadius: 100, padding: 2
         }}>
           {["en", "fr"].map(l => (
-            <button key={l} onClick={() => setLang(l)} style={{
+            <button key={l} onClick={() => switchLang(l)} style={{
               background: lang === l ? "#fff" : "transparent",
               border: "none", borderRadius: 100,
               padding: "3px 10px", fontSize: 12, fontWeight: lang === l ? 600 : 400,
@@ -61,11 +71,9 @@ export default function Navbar() {
 
         <a href="https://github.com/user-attachments/files/26291771/myojam-mac.zip"
           style={{
-            background: "var(--accent)", color: "#fff",
-            border: "none", borderRadius: 100,
-            padding: "7px 20px", fontSize: 14,
-            fontFamily: "var(--font)", fontWeight: 500,
-            textDecoration: "none"
+            background: "var(--accent)", color: "#fff", border: "none",
+            borderRadius: 100, padding: "7px 20px", fontSize: 14,
+            fontFamily: "var(--font)", fontWeight: 500, textDecoration: "none"
           }}>{t("nav_download")}</a>
       </div>
     </nav>
