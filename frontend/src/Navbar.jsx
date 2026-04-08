@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from "react-router-dom"
 import { useState, useEffect, useRef } from "react"
 import Logo from "./Logo"
 import { t, getLang, setLang } from "./i18n"
-import { IconGear, IconBook, IconBulb, IconPeople, IconRocket, IconBuilding, IconMail, IconDemo } from "./Icons"
+import { IconGear, IconBook, IconBulb, IconPeople, IconRocket, IconBuilding, IconMail, IconDemo, IconCode } from "./Icons"
 
 function Dropdown({ label, items, pathname }) {
   const [open, setOpen] = useState(false)
