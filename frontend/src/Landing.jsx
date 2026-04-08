@@ -4,7 +4,7 @@ import Navbar from "./Navbar"
 import HeroSphere from "./HeroSphere"
 import Footer from "./Footer"
 import EMGPulseCanvas from "./EMGPulseCanvas"
-
+import { t } from "./i18n"
 
 const STATS = [
   ["84.85%", "Cross-subject accuracy", "Tested across 10 clinical subjects"],
