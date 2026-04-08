@@ -22,6 +22,21 @@ import ChatWidget from "./ChatWidget"
 import Careers from "./Careers"
 import Demos from "./Demos"
 import Corporations from "./Corporations"
+import GestureGame from "./GestureGame"
+import FrequencyAnalyzer from "./FrequencyAnalyzer"
+import ConfusionExplorer from "./ConfusionExplorer"
+import MuscleMemory from "./articles/MuscleMemory"
+import PhantomLimb from "./articles/PhantomLimb"
+import WhyEMGIsHard from "./articles/WhyEMGIsHard"
+import BuildYourOwn from "./articles/BuildYourOwn"
+import FutureOfBCI from "./articles/FutureOfBCI"
+import EthicsOfEMG from "./articles/EthicsofEMG"
+import WindowingExplained from "./articles/WindowingExplained"
+import MyoCode from "./MyoCode"
+import Educators from "./Educators"
+import LessonEMGBasics from "./educators/LessonEMGBasics"
+import LessonGestureClassifier from "./educators/LessonGestureClassifier"
+import EducatorResources from "./educators/EducatorResources"
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -48,6 +63,21 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/careers" element={<Careers />} />
         <Route path="/demos" element={<Demos />} />
         <Route path="/corporations" element={<Corporations />} />
+        <Route path="/game" element={<GestureGame />} />
+        <Route path="/frequency" element={<FrequencyAnalyzer />} />
+        <Route path="/confusion" element={<ConfusionExplorer />} />
+        <Route path="/education/muscle-memory" element={<MuscleMemory />} />
+        <Route path="/education/phantom-limb" element={<PhantomLimb />} />
+        <Route path="/education/why-emg-is-hard" element={<WhyEMGIsHard />} />
+        <Route path="/education/build-your-own" element={<BuildYourOwn />} />
+        <Route path="/education/future-of-bci" element={<FutureOfBCI />} />
+        <Route path="/education/ethics-of-emg" element={<EthicsOfEMG />} />
+        <Route path="/education/windowing-explained" element={<WindowingExplained />} />
+        <Route path="/myocode" element={<MyoCode />} />
+        <Route path="/educators" element={<Educators />} />
+        <Route path="/educators/lesson-emg-basics" element={<LessonEMGBasics />} />
+        <Route path="/educators/lesson-gesture-classifier" element={<LessonGestureClassifier />} />
+        <Route path="/educators/resources" element={<EducatorResources />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

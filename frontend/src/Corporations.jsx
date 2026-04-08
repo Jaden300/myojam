@@ -2,25 +2,26 @@ import { useNavigate } from "react-router-dom"
 import Navbar from "./Navbar"
 import Footer from "./Footer"
 import { Reveal, StaggerList, HoverCard, SectionPill } from "./Animate"
+import { IconAccessibility, IconHeart, IconBrain, IconRobot } from "./Icons"
 
 const USE_CASES = [
   {
-    icon: "♿",
+    Icon: IconAccessibility,
     title: "Accessibility tooling",
     body: "Integrate gesture-based input into your product for users with motor impairments. myojam's open pipeline is a working proof of concept you can build on."
   },
   {
-    icon: "🏥",
+    Icon: IconHeart,
     title: "Rehabilitation technology",
     body: "EMG-based interaction has direct applications in physical and occupational therapy. Our signal processing pipeline is designed to run on consumer hardware at low latency."
   },
   {
-    icon: "🎮",
+    Icon: IconBrain,
     title: "Human-computer interaction research",
     body: "Academic labs and R&D teams can use myojam as a baseline for EMG gesture classification experiments — saving months of pipeline development."
   },
   {
-    icon: "🤖",
+    Icon: IconRobot,
     title: "Robotics & prosthetics",
     body: "The same gesture classification approach that controls a cursor can control a robotic limb. The Ninapro-trained model generalises across subjects out of the box."
   },
@@ -164,12 +165,17 @@ export default function Corporations() {
                 <div style={{
                   width: 48, height: 48, borderRadius: 14, flexShrink: 0,
                   background: "var(--accent-soft)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 22
-                }}>{uc.icon}</div>
+                  display: "flex", alignItems: "center", justifyContent: "center"
+                }}>
+                  <uc.Icon size={22} color="var(--accent)" />
+                </div>
                 <div>
-                  <div style={{ fontSize: 16, fontWeight: 600, color: "var(--text)", marginBottom: 8 }}>{uc.title}</div>
-                  <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, fontWeight: 300, margin: 0 }}>{uc.body}</p>
+                  <div style={{ fontSize: 16, fontWeight: 600, color: "var(--text)", marginBottom: 8 }}>
+                    {uc.title}
+                  </div>
+                  <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, fontWeight: 300, margin: 0 }}>
+                    {uc.body}
+                  </p>
                 </div>
               </HoverCard>
             )}

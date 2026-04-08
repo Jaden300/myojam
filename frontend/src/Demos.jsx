@@ -2,11 +2,22 @@ import { useNavigate } from "react-router-dom"
 import Navbar from "./Navbar"
 import Footer from "./Footer"
 import { Reveal, StaggerList, HoverCard, SectionPill } from "./Animate"
+import { IconBolt, IconPencil, IconBrain, IconChart, IconDemo } from "./Icons"
 
+// Map demo icon names to actual SVG components
+const ICON_MAP = {
+  live:   IconBolt,
+  pencil: IconPencil,
+  game:   IconBrain,
+  chart:  IconChart,
+  matrix: IconDemo,
+}
+
+// Demo data
 const DEMOS = [
   {
     slug: "/demo",
-    icon: "⚡",
+    icon: "live",
     tag: "Live classifier",
     title: "EMG Gesture Demo",
     desc: "Load real EMG windows from the Ninapro DB5 dataset and watch the Random Forest classifier predict gestures in real time. Includes a 3D hand model, confidence scores, and per-gesture accuracy breakdown. No hardware needed.",
@@ -17,14 +28,58 @@ const DEMOS = [
   },
   {
     slug: "/playground",
-    icon: "✏️",
+    icon: "pencil",
     tag: "Interactive",
     title: "Signal Playground",
-    desc: "Draw an EMG-like waveform with your mouse and watch the feature extraction pipeline compute MAV, RMS, ZC, and WL live as you draw. See how different signal shapes produce different feature profiles and gesture predictions.",
+    desc: "Draw an EMG-like waveform with your mouse and watch the feature extraction pipeline compute MAV, RMS, ZC, and WL live as you draw. No data loading needed — just draw.",
     features: ["Draw any waveform", "Live feature extraction", "Heuristic classification", "Feature explainer"],
     cta: "Open playground →",
     bg: "linear-gradient(135deg, #f0f4ff 0%, #fafafa 100%)",
     accent: "#3B82F6",
+  },
+  {
+    slug: "/game",
+    icon: "game",
+    tag: "Mini-game",
+    title: "Gesture Reaction Game",
+    desc: "A gesture flashes on screen. Press the matching key before the timer runs out. Three difficulty levels — how fast can your fingers react?",
+    features: ["3 difficulty levels", "Streak tracking", "Reaction scoring", "Keyboard-driven"],
+    cta: "Play now →",
+    bg: "linear-gradient(135deg, #fff5f0 0%, #fafafa 100%)",
+    accent: "#F59E0B",
+  },
+  {
+    slug: "/frequency",
+    icon: "chart",
+    tag: "Signal processing",
+    title: "EMG Frequency Analyzer",
+    desc: "Load a real Ninapro EMG window and inspect its frequency spectrum. Watch the 20–90Hz bandpass filter isolate gesture signal from noise in real time across any of the 16 electrode channels.",
+    features: ["Real Ninapro windows", "16 channel selector", "Bandpass filter viz", "Frequency band legend"],
+    cta: "Open analyzer →",
+    bg: "linear-gradient(135deg, #f5f0ff 0%, #fafafa 100%)",
+    accent: "#8B5CF6",
+  },
+  {
+    slug: "/confusion",
+    icon: "matrix",
+    tag: "Model evaluation",
+    title: "Confusion Matrix Explorer",
+    desc: "An interactive heatmap of the classifier's cross-subject accuracy. Click any cell to see how often one gesture is confused for another — and the biomechanical reason why.",
+    features: ["Interactive heatmap", "Per-gesture recall", "Confusion explanations", "Click-to-explore"],
+    cta: "Explore →",
+    bg: "linear-gradient(135deg, #f0fff8 0%, #fafafa 100%)",
+    accent: "#10B981",
+  },
+  {
+    slug: "/myocode",
+    icon: "code",
+    tag: "Block coding",
+    title: "myocode",
+    desc: "A Scratch-like block coding environment where EMG gestures are first-class events. Snap blocks together, draw on a canvas, move a sprite, and build programs that respond to muscle signals — no hardware needed.",
+    features: ["Visual block coding", "EMG gesture events", "Live canvas stage", "Example programs"],
+    cta: "Open myocode →",
+    bg: "linear-gradient(135deg, #f5f0ff 0%, #fafafa 100%)",
+    accent: "#8B5CF6",
   },
 ]
 
@@ -35,6 +90,7 @@ export default function Demos() {
     <div style={{ minHeight: "100vh", background: "var(--bg)" }}>
       <Navbar />
 
+      {/* Hero */}
       <div style={{
         background: "linear-gradient(135deg, #fff0f5 0%, #ffffff 60%)",
         borderBottom: "1px solid var(--border)",
@@ -62,6 +118,7 @@ export default function Demos() {
         </div>
       </div>
 
+      {/* Demo cards */}
       <div style={{ maxWidth: 860, margin: "0 auto", padding: "64px 32px 80px" }}>
         <StaggerList
           items={DEMOS}
@@ -84,12 +141,21 @@ export default function Demos() {
                 padding: "36px 40px",
                 display: "flex", alignItems: "flex-start", gap: 24
               }}>
-                <div style={{
-                  width: 56, height: 56, borderRadius: 18, flexShrink: 0,
-                  background: demo.accent + "18",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 26
-                }}>{demo.icon}</div>
+                {/* Icon container */}
+                {(() => {
+                  const Icon = ICON_MAP[demo.icon] || IconBolt
+                  return (
+                    <div style={{
+                      width: 56, height: 56, borderRadius: 18, flexShrink: 0,
+                      background: demo.accent + "18",
+                      display: "flex", alignItems: "center", justifyContent: "center"
+                    }}>
+                      <Icon size={26} color={demo.accent} />
+                    </div>
+                  )
+                })()}
+
+                {/* Text content */}
                 <div style={{ flex: 1 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
                     <span style={{
@@ -131,6 +197,7 @@ export default function Demos() {
           )}
         />
 
+        {/* Desktop app CTA */}
         <Reveal delay={0.3}>
           <div style={{
             marginTop: 48, textAlign: "center",
