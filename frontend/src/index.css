@@ -6,35 +6,43 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
+  --font: -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  --accent: #FF2D78;
+  --accent-soft: rgba(255, 45, 120, 0.08);
   --bg: #FFFFFF;
   --bg-secondary: #F5F5F7;
-  --bg-tertiary: #FAFAFA;
-  --surface: #FFFFFF;
-  --border: rgba(0,0,0,0.08);
-  --border-mid: rgba(0,0,0,0.12);
-  --accent: #FF2D78;
-  --accent-soft: #FFF0F5;
-  --accent-mid: rgba(255,45,120,0.12);
   --text: #1D1D1F;
   --text-secondary: #6E6E73;
   --text-tertiary: #AEAEB2;
-  --radius: 20px;
-  --radius-sm: 12px;
-  --radius-lg: 28px;
-  --shadow: 0 2px 16px rgba(0,0,0,0.06);
-  --shadow-lg: 0 8px 48px rgba(0,0,0,0.10);
-  --font: 'Outfit', -apple-system, sans-serif;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-mid: rgba(0, 0, 0, 0.15);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-lg: 24px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
 }
 
-html { scroll-behavior: smooth; }
+[data-theme="dark"] {
+  --accent: #FF375F;
+  --accent-soft: rgba(255, 55, 95, 0.12);
+  --bg: #0A0A0A;
+  --bg-secondary: #141414;
+  --text: #F5F5F7;
+  --text-secondary: #98989D;
+  --text-tertiary: #48484A;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-mid: rgba(255, 255, 255, 0.15);
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: var(--font);
   background: var(--bg);
   color: var(--text);
-  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 ::selection { background: var(--accent); color: #fff; }

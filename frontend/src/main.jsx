@@ -39,7 +39,10 @@ import LessonGestureClassifier from "./educators/LessonGestureClassifier"
 import EducatorResources from "./educators/EducatorResources"
 import Changelog from "./Changelog"
 import Elevate from "./Elevate"
+import Research from "./Research"
 
+import { initTheme } from "./theme"
+initTheme()
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -83,6 +86,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/educators/resources" element={<EducatorResources />} />
         <Route path="/changelog" element={<Changelog />} />
         <Route path="/elevate" element={<Elevate />} />
+        <Route path="/research" element={<Research />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
