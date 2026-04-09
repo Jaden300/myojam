@@ -27,9 +27,66 @@ const REASONS = [
 ]
 
 const ROLES = [
-  { Icon: IconBrain, title: "ML Research Contributor", type: "Volunteer · Remote", tags: ["Python", "scikit-learn", "EMG", "Signal Processing"], desc: "Help improve the gesture classifier — better features, new architectures, cross-subject adaptation. You'll work directly with Ninapro DB5 and real sensor data." },
-  { Icon: IconCode, title: "Frontend Developer", type: "Volunteer · Remote", tags: ["React", "Three.js", "Vite"], desc: "Build new interactive features for myojam.com. The signal playground, education hub, and 3D hand model are good examples of what we make." },
-  { Icon: IconBolt, title: "Hardware Engineer", type: "Volunteer · Remote", tags: ["Arduino", "MyoWare", "Embedded C"], desc: "Improve the Arduino firmware, explore higher-density electrode configurations, and help make the hardware setup more accessible to new users." },
+  {
+    title:"ML Research Contributor",
+    type:"Volunteer · Remote",
+    tags:["Python","scikit-learn","EMG","Signal Processing"],
+    desc:"Help improve the gesture classifier — better features, new architectures, cross-subject adaptation. You'll work directly with Ninapro DB5 and real sensor data.",
+  },
+  {
+    title:"Frontend Developer",
+    type:"Volunteer · Remote",
+    tags:["React","Three.js","Vite","CSS"],
+    desc:"Build new interactive features for myojam.com. The signal playground, education hub, and 3D hand model are good examples of what we make.",
+  },
+  {
+    title:"Hardware Engineer",
+    type:"Volunteer · Remote",
+    tags:["Arduino","MyoWare","Embedded C","Signal Acquisition"],
+    desc:"Improve the Arduino firmware, explore higher-density electrode configurations, and help make the hardware setup more accessible to new users.",
+  },
+  {
+    title:"Biomedical Research Contributor",
+    type:"Volunteer · Remote",
+    tags:["Neuroscience","EMG","Research Methods","Academic Writing"],
+    desc:"Contribute to the scientific documentation of myojam's methodology. Help design experiments, review signal processing decisions, and improve cross-subject generalisation.",
+  },
+  {
+    title:"Technical Writer",
+    type:"Volunteer · Remote",
+    tags:["Documentation","Markdown","API docs","Education"],
+    desc:"Write and maintain technical documentation — API references, setup guides, hardware walkthroughs, and tutorials. Make the project accessible to people at every skill level.",
+  },
+  {
+    title:"Education Content Creator",
+    type:"Volunteer · Remote",
+    tags:["Curriculum Design","Biology","CS Education","Writing"],
+    desc:"Develop lesson plans, articles, and educational resources for the myojam educators hub. Background in science communication, biology, or computer science education is a plus.",
+  },
+  {
+    title:"iOS / Android Developer",
+    type:"Volunteer · Remote",
+    tags:["React Native","iOS","Android","Bluetooth"],
+    desc:"Build a companion mobile app for monitoring gesture classification in real time — current gesture, confidence score, and session statistics over Bluetooth.",
+  },
+  {
+    title:"UX / Accessibility Researcher",
+    type:"Volunteer · Remote",
+    tags:["UX Research","Accessibility","User Testing","A11y"],
+    desc:"Conduct user research with people who have motor impairments, evaluate the usability of myojam's interfaces, and recommend improvements grounded in real user needs.",
+  },
+  {
+    title:"Community Manager",
+    type:"Volunteer · Remote",
+    tags:["Community","Social Media","Outreach","Writing"],
+    desc:"Help grow the myojam community — manage communications, coordinate ELEVATE competition participants, support the Discord, and amplify the project's reach.",
+  },
+  {
+    title:"Windows / Linux Port Contributor",
+    type:"Volunteer · Remote",
+    tags:["Python","PyQt6","Windows","Linux","Cross-platform"],
+    desc:"The desktop app currently only supports macOS due to cliclick and osascript dependencies. Help build a cross-platform input layer so myojam works on Windows and Linux.",
+  },
 ]
 
 export default function Careers() {
