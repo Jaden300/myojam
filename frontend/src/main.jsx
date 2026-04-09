@@ -30,7 +30,7 @@ import PhantomLimb from "./articles/PhantomLimb"
 import WhyEMGIsHard from "./articles/WhyEMGIsHard"
 import BuildYourOwn from "./articles/BuildYourOwn"
 import FutureOfBCI from "./articles/FutureOfBCI"
-import EthicsOfEMG from "./articles/EthicsOfEMG"
+import EMGEthics from "./articles/EMGEthics"
 import WindowingExplained from "./articles/WindowingExplained"
 import MyoCode from "./MyoCode"
 import Educators from "./Educators"
@@ -74,7 +74,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/education/why-emg-is-hard" element={<WhyEMGIsHard />} />
         <Route path="/education/build-your-own" element={<BuildYourOwn />} />
         <Route path="/education/future-of-bci" element={<FutureOfBCI />} />
-        <Route path="/education/ethics-of-emg" element={<EthicsOfEMG />} />
+        <Route path="/education/ethics-of-emg" element={<EMGEthics />} />
         <Route path="/education/windowing-explained" element={<WindowingExplained />} />
         <Route path="/myocode" element={<MyoCode />} />
         <Route path="/educators" element={<Educators />} />
