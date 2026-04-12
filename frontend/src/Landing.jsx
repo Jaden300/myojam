@@ -330,6 +330,41 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* ── SOCIAL */}
+      <section style={{ padding:"0 32px 0", marginBottom:0 }}>
+        <div style={{ maxWidth:920, margin:"0 auto" }}>
+          <Reveal>
+            <div style={{ background:"var(--bg-secondary)", border:"1px solid var(--border)", borderRadius:"var(--radius)", padding:"32px 40px", display:"flex", justifyContent:"space-between", alignItems:"center", gap:24, flexWrap:"wrap" }}>
+              <div>
+                <div style={{ fontSize:10, color:"var(--accent)", textTransform:"uppercase", letterSpacing:"0.2em", marginBottom:6 }}>Follow the project</div>
+                <div style={{ fontSize:16, fontWeight:600, color:"var(--text)", letterSpacing:"-0.3px" }}>Stay connected as myojam grows.</div>
+              </div>
+              <div style={{ display:"flex", gap:10 }}>
+                {[
+                  { icon:"fab fa-github",      href:"https://github.com/Jaden300/myojam",          label:"GitHub"    },
+                  { icon:"fab fa-linkedin-in",  href:"https://linkedin.com/in/jaden-wong09",        label:"LinkedIn"  },
+                  { icon:"fab fa-instagram",    href:"https://instagram.com/YOUR_HANDLE",           label:"Instagram" },
+                  { icon:"fab fa-x-twitter",    href:"https://x.com/YOUR_HANDLE",                  label:"X"         },
+                  { icon:"fab fa-youtube",      href:"https://youtube.com/YOUR_CHANNEL",            label:"YouTube"   },
+                  { icon:"fab fa-tiktok",       href:"https://tiktok.com/@YOUR_HANDLE",            label:"TikTok"    },
+                ].map(s => (
+                  <a key={s.label} href={s.href} target="_blank" rel="noreferrer" title={s.label} style={{
+                    width:44, height:44, borderRadius:"50%",
+                    border:"1px solid var(--border)",
+                    display:"flex", alignItems:"center", justifyContent:"center",
+                    color:"var(--text-secondary)", fontSize:16,
+                    background:"var(--bg)", transition:"all 0.2s"
+                  }}
+                    onMouseEnter={e=>{ e.currentTarget.style.borderColor="var(--accent)"; e.currentTarget.style.color="var(--accent)"; e.currentTarget.style.transform="translateY(-4px)"; e.currentTarget.style.boxShadow="0 8px 20px rgba(255,45,120,0.2)" }}
+                    onMouseLeave={e=>{ e.currentTarget.style.borderColor="var(--border)"; e.currentTarget.style.color="var(--text-secondary)"; e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.boxShadow="none" }}
+                  ><i className={s.icon}/></a>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ── FINAL CTA */}
       <section style={{ padding:"0 32px 80px" }}>
         <div style={{ maxWidth:920, margin:"0 auto" }}>

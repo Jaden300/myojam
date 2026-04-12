@@ -23,6 +23,41 @@ export default function Contact() {
           fontWeight: 300, marginBottom: 56
         }}>Questions about the project, research collaboration, or building on top of myojam? Reach out.</p>
 
+        {/* Social links */}
+          <Reveal delay={0.1}>
+            <div style={{ marginBottom:40 }}>
+              <div style={{ fontSize:11, fontWeight:600, color:"var(--accent)", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:16 }}>Follow the project</div>
+              <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:10 }}>
+                {[
+                  { icon:"fab fa-github",     href:"https://github.com/Jaden300/myojam",  label:"GitHub",   sub:"Source code" },
+                  { icon:"fab fa-linkedin-in", href:"https://linkedin.com/in/jaden-wong09",label:"LinkedIn", sub:"Updates"     },
+                  { icon:"fab fa-instagram",  href:"https://instagram.com/YOUR_HANDLE",   label:"Instagram",sub:"@myojam"     },
+                  { icon:"fab fa-x-twitter",  href:"https://x.com/YOUR_HANDLE",           label:"X",        sub:"@myojam"     },
+                  { icon:"fab fa-youtube",    href:"https://youtube.com/YOUR_CHANNEL",    label:"YouTube",  sub:"Demos"       },
+                  { icon:"fab fa-tiktok",     href:"https://tiktok.com/@YOUR_HANDLE",    label:"TikTok",   sub:"@myojam"     },
+                ].map(s => (
+                  <a key={s.label} href={s.href} target="_blank" rel="noreferrer" style={{
+                    background:"var(--bg-secondary)", border:"1px solid var(--border)",
+                    borderRadius:12, padding:"14px 16px",
+                    display:"flex", alignItems:"center", gap:10,
+                    transition:"border-color 0.2s, transform 0.2s"
+                  }}
+                    onMouseEnter={e=>{ e.currentTarget.style.borderColor="rgba(255,45,120,0.3)"; e.currentTarget.style.transform="translateY(-2px)" }}
+                    onMouseLeave={e=>{ e.currentTarget.style.borderColor="var(--border)"; e.currentTarget.style.transform="translateY(0)" }}
+                  >
+                    <div style={{ width:32, height:32, borderRadius:"50%", background:"var(--accent-soft)", border:"1px solid rgba(255,45,120,0.15)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:14, color:"var(--accent)", flexShrink:0 }}>
+                      <i className={s.icon}/>
+                    </div>
+                    <div>
+                      <div style={{ fontSize:13, fontWeight:600, color:"var(--text)" }}>{s.label}</div>
+                      <div style={{ fontSize:11, color:"var(--text-tertiary)", fontWeight:300 }}>{s.sub}</div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
         {/* Links */}
         <StaggerList
           items={[
