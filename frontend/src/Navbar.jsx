@@ -168,6 +168,8 @@ export default function Navbar() {
           [t("nav_educators"),   "/educators",       IconGraduate],
           [t("nav_howItWorks"),  "/how-it-works",    IconMicroscope],
           ["Interactive tools",  "/demos",           IconBolt],
+          ["Live Signal",        "/signal",          IconBolt],
+          ["MyoCode",            "/myocode",         IconCode],
           ["Resources",          "/resources",       IconLink],
           ["Submit an article",  "/submit-article",  IconPencil],
         ]}/>

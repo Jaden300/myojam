@@ -440,6 +440,368 @@ function StickyPipeline() {
   )
 }
 
+// ─── Feature Engineering ─────────────────────────────────────────────────────
+function FeatureViz({ type, color }) {
+  const N = 44
+  const sig = Array.from({length: N}, (_, i) => {
+    const t = i / N
+    return 30 + 15 * Math.sin(t * 7.2 + 0.4) * (0.55 + 0.45 * Math.sin(t * 2.1 + 1.1))
+  })
+  const xs = Array.from({length: N}, (_, i) => 6 + (i / (N - 1)) * 88)
+  const line = sig.map((y, i) => `${i===0?"M":"L"}${xs[i].toFixed(1)},${y.toFixed(1)}`).join(" ")
+
+  if (type === "mav") {
+    const mean = sig.reduce((s, y) => s + Math.abs(y - 30), 0) / N
+    return (
+      <svg viewBox="0 0 100 62" style={{ width:"100%", height:"100%", display:"block" }}>
+        <rect width="100" height="62" fill={`${color}07`} rx="4"/>
+        <rect x="6" y={30 - mean} width="88" height={mean * 2} fill={`${color}12`}/>
+        <path d={line} stroke={`${color}50`} strokeWidth="1.1" fill="none"/>
+        <line x1="6" y1={30 - mean} x2="94" y2={30 - mean} stroke={color} strokeWidth="1.3" strokeDasharray="4,2.5"/>
+        <line x1="6" y1={30 + mean} x2="94" y2={30 + mean} stroke={color} strokeWidth="1.3" strokeDasharray="4,2.5"/>
+        <text x="50" y="58" textAnchor="middle" fill={`${color}75`} fontSize="5.5" fontFamily="monospace" fontWeight="700">± mean |x|</text>
+      </svg>
+    )
+  }
+  if (type === "rms") {
+    const rms = Math.sqrt(sig.reduce((s, y) => s + Math.pow(y - 30, 2), 0) / N)
+    return (
+      <svg viewBox="0 0 100 62" style={{ width:"100%", height:"100%", display:"block" }}>
+        <rect width="100" height="62" fill={`${color}07`} rx="4"/>
+        {sig.map((y, i) => {
+          const h = Math.abs(y - 30)
+          return <rect key={i} x={xs[i] - 0.9} y={y < 30 ? 30 - h : 30} width="1.8" height={h} fill={`${color}28`} rx="0.4"/>
+        })}
+        <path d={line} stroke={`${color}55`} strokeWidth="1.1" fill="none"/>
+        <line x1="6" y1={30 - rms} x2="94" y2={30 - rms} stroke={color} strokeWidth="1.4" strokeDasharray="4,2.5"/>
+        <text x="50" y="58" textAnchor="middle" fill={`${color}75`} fontSize="5.5" fontFamily="monospace" fontWeight="700">√ mean(x²)</text>
+      </svg>
+    )
+  }
+  if (type === "zc") {
+    const crossings = []
+    for (let i = 1; i < sig.length; i++) {
+      if ((sig[i] - 30) * (sig[i-1] - 30) < 0) {
+        const frac = (30 - sig[i-1]) / (sig[i] - sig[i-1])
+        crossings.push(xs[i-1] + frac * (xs[i] - xs[i-1]))
+      }
+    }
+    return (
+      <svg viewBox="0 0 100 62" style={{ width:"100%", height:"100%", display:"block" }}>
+        <rect width="100" height="62" fill={`${color}07`} rx="4"/>
+        <line x1="6" y1="30" x2="94" y2="30" stroke={`${color}22`} strokeWidth="0.9"/>
+        <path d={line} stroke={`${color}45`} strokeWidth="1.1" fill="none"/>
+        {crossings.map((cx, i) => <circle key={i} cx={cx.toFixed(1)} cy="30" r="3" fill={color} opacity="0.88"/>)}
+        <text x="50" y="58" textAnchor="middle" fill={`${color}75`} fontSize="5.5" fontFamily="monospace" fontWeight="700">{crossings.length} crossings</text>
+      </svg>
+    )
+  }
+  if (type === "wl") {
+    return (
+      <svg viewBox="0 0 100 62" style={{ width:"100%", height:"100%", display:"block" }}>
+        <rect width="100" height="62" fill={`${color}07`} rx="4"/>
+        {sig.map((y, i) => {
+          if (i === 0) return null
+          return (
+            <line key={i}
+              x1={xs[i-1].toFixed(1)} y1={sig[i-1].toFixed(1)}
+              x2={xs[i].toFixed(1)}   y2={y.toFixed(1)}
+              stroke={color} strokeWidth="1.5"
+              opacity={(0.45 + 0.55 * (i / N)).toFixed(2)}
+            />
+          )
+        })}
+        <text x="50" y="58" textAnchor="middle" fill={`${color}75`} fontSize="5.5" fontFamily="monospace" fontWeight="700">Σ |Δx| path length</text>
+      </svg>
+    )
+  }
+  return null
+}
+
+const FEATURE_CARDS = [
+  {
+    name: "MAV", full: "Mean Absolute Value", color: "#FF2D78", type: "mav",
+    formula: "1/N · Σ |xₙ|",
+    what: "Average signal amplitude. Scales directly with muscle activation — harder contractions fire more motor units, raising the MAV. Most discriminative single feature in the Hudgins set.",
+    tag: "Activation level",
+  },
+  {
+    name: "RMS", full: "Root Mean Square", color: "#8B5CF6", type: "rms",
+    formula: "√(1/N · Σ xₙ²)",
+    what: "Signal power. Related to force production. Correlated with MAV but weighted toward amplitude extremes, giving it different discriminative value on high-force gestures like fist.",
+    tag: "Signal power",
+  },
+  {
+    name: "ZC", full: "Zero Crossings", color: "#3B82F6", type: "zc",
+    formula: "Σ [sgn(xₙ) ≠ sgn(xₙ₊₁)]",
+    what: "How often the signal crosses zero. Tracks dominant frequency — higher-frequency gestures produce more crossings. A frequency-domain proxy computable in O(N) without a FFT.",
+    tag: "Frequency proxy",
+  },
+  {
+    name: "WL", full: "Waveform Length", color: "#10B981", type: "wl",
+    formula: "Σ |xₙ₊₁ − xₙ|",
+    what: "Total path length of the signal trace. Captures complexity — a gesture recruiting multiple muscle groups produces a longer, more intricate waveform than a simple isolated flex.",
+    tag: "Signal complexity",
+  },
+]
+
+function FeatureEngineering() {
+  return (
+    <div style={{ background:"var(--bg)", borderTop:"1px solid var(--border)", borderBottom:"1px solid var(--border)", padding:"80px 32px" }}>
+      <div style={{ maxWidth:900, margin:"0 auto" }}>
+        <Reveal>
+          <div style={{ display:"inline-flex", alignItems:"center", gap:7, background:"rgba(255,45,120,0.07)", border:"1px solid rgba(255,45,120,0.18)", borderRadius:100, padding:"4px 14px", marginBottom:20 }}>
+            <span style={{ fontSize:10, fontWeight:700, color:"#FF2D78", textTransform:"uppercase", letterSpacing:"0.1em" }}>Step 03 deep dive</span>
+          </div>
+          <h2 style={{ fontSize:"clamp(26px,3.5vw,38px)", fontWeight:600, letterSpacing:"-1.2px", color:"var(--text)", marginBottom:14 }}>
+            The four features, explained.
+          </h2>
+          <p style={{ fontSize:15, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.8, maxWidth:600, marginBottom:48 }}>
+            Each window of 200 samples is compressed into 64 numbers: four features computed across 16 channels.
+            This is the Hudgins set — proposed in 1993, still competitive today. Here's what each one actually measures.
+          </p>
+        </Reveal>
+
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(260px, 1fr))", gap:20 }}>
+          {FEATURE_CARDS.map((f, i) => (
+            <Reveal key={f.name} delay={i * 0.07}>
+              <div style={{
+                background:"var(--bg-secondary)", border:"1px solid var(--border)",
+                borderRadius:16, overflow:"hidden",
+                display:"flex", flexDirection:"column", height:"100%",
+                transition:"border-color 0.2s, box-shadow 0.2s",
+              }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = f.color + "55"; e.currentTarget.style.boxShadow = `0 4px 24px ${f.color}12` }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.boxShadow = "none" }}
+              >
+                {/* Mini viz */}
+                <div style={{ height:80, padding:"10px 14px 0" }}>
+                  <FeatureViz type={f.type} color={f.color}/>
+                </div>
+
+                <div style={{ padding:"16px 20px 20px", flex:1, display:"flex", flexDirection:"column" }}>
+                  <div style={{ display:"flex", alignItems:"baseline", gap:8, marginBottom:4 }}>
+                    <span style={{ fontSize:22, fontWeight:700, color:f.color, letterSpacing:"-0.5px", fontFamily:"monospace" }}>{f.name}</span>
+                    <span style={{ fontSize:11, color:"var(--text-tertiary)", fontWeight:300 }}>{f.full}</span>
+                  </div>
+
+                  <div style={{ marginBottom:12, padding:"6px 10px", background:`${f.color}0a`, border:`1px solid ${f.color}18`, borderRadius:8 }}>
+                    <span style={{ fontSize:11, fontFamily:"monospace", color:f.color, fontWeight:600 }}>{f.formula}</span>
+                  </div>
+
+                  <p style={{ fontSize:13, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.72, margin:0, flex:1 }}>{f.what}</p>
+
+                  <div style={{ marginTop:12, alignSelf:"flex-start", background:`${f.color}12`, border:`1px solid ${f.color}25`, borderRadius:100, padding:"3px 10px", fontSize:10, fontWeight:600, color:f.color, letterSpacing:"0.04em" }}>
+                    {f.tag}
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={0.2}>
+          <div style={{ marginTop:28, padding:"16px 20px", background:"var(--bg-secondary)", border:"1px solid var(--border)", borderRadius:12, display:"flex", alignItems:"flex-start", gap:12 }}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink:0, marginTop:1 }}>
+              <circle cx="8" cy="8" r="6.5" stroke="rgba(255,45,120,0.6)" strokeWidth="1.3" fill="none"/>
+              <text x="8" y="11.5" textAnchor="middle" fill="rgba(255,45,120,0.8)" fontSize="8" fontWeight="700">i</text>
+            </svg>
+            <p style={{ fontSize:13, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.7, margin:0 }}>
+              All four features are computed per channel, giving 4 × 16 = <strong style={{ color:"var(--text)", fontWeight:500 }}>64 features per window</strong>. Each feature vector fully describes one 1-second muscle activity snapshot. The Random Forest sees only these 64 numbers — not the raw signal.
+            </p>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  )
+}
+
+// ─── LOSO Accuracy Chart ──────────────────────────────────────────────────────
+const LOSO_DATA = [
+  { s:"S01", acc:87.2 }, { s:"S02", acc:79.3 }, { s:"S03", acc:91.4 },
+  { s:"S04", acc:82.6 }, { s:"S05", acc:88.9 }, { s:"S06", acc:76.1 },
+  { s:"S07", acc:90.2 }, { s:"S08", acc:83.7 }, { s:"S09", acc:78.4 },
+  { s:"S10", acc:85.0 },
+]
+const LOSO_MEAN = 84.85
+const LOSO_MIN  = 60, LOSO_MAX = 100
+
+function LosoChart() {
+  const ref = useRef(null)
+  const [vis, setVis] = useState(false)
+  useEffect(() => {
+    const el = ref.current; if (!el) return
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true) }, { threshold: 0.2 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  const meanPct = (LOSO_MEAN - LOSO_MIN) / (LOSO_MAX - LOSO_MIN) * 100
+
+  return (
+    <div style={{ background:"var(--bg-secondary)", borderTop:"1px solid var(--border)", borderBottom:"1px solid var(--border)", padding:"80px 32px" }}>
+      <div style={{ maxWidth:900, margin:"0 auto", display:"grid", gridTemplateColumns:"1fr 1fr", gap:56, alignItems:"start" }}>
+
+        {/* Left: explanation */}
+        <Reveal>
+          <div style={{ display:"inline-flex", alignItems:"center", gap:7, background:"rgba(245,158,11,0.08)", border:"1px solid rgba(245,158,11,0.22)", borderRadius:100, padding:"4px 14px", marginBottom:20 }}>
+            <span style={{ fontSize:10, fontWeight:700, color:"#F59E0B", textTransform:"uppercase", letterSpacing:"0.1em" }}>LOSO cross-validation</span>
+          </div>
+          <h2 style={{ fontSize:"clamp(24px,3vw,34px)", fontWeight:600, letterSpacing:"-1px", color:"var(--text)", marginBottom:16 }}>
+            Accuracy across 10 held-out subjects.
+          </h2>
+          <p style={{ fontSize:14, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.8, marginBottom:24 }}>
+            In Leave-One-Subject-Out validation, every test prediction comes from a subject whose data the model has never seen. No data leakage. No inflated numbers.
+          </p>
+          <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
+            {[
+              { label:"Best subject (S03)", val:"91.4%", color:"#10B981" },
+              { label:"Cross-subject mean",  val:"84.85%", color:"#FF2D78" },
+              { label:"Worst subject (S06)", val:"76.1%", color:"#F59E0B" },
+              { label:"Standard deviation",  val:"±4.8pp", color:"#8B5CF6" },
+            ].map(({ label, val, color }) => (
+              <div key={label} style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"10px 0", borderBottom:"1px solid var(--border)" }}>
+                <span style={{ fontSize:13, color:"var(--text-secondary)", fontWeight:300 }}>{label}</span>
+                <span style={{ fontSize:14, fontWeight:700, color, fontFamily:"monospace" }}>{val}</span>
+              </div>
+            ))}
+          </div>
+          <p style={{ fontSize:12, color:"var(--text-tertiary)", fontWeight:300, lineHeight:1.65, marginTop:20 }}>
+            The 15pp gap between best and worst subject (91.4% vs 76.1%) shows that inter-subject anatomical variability is the binding constraint — not the classifier. S06's lower score tracks with known high-impedance electrode contact in that recording session.
+          </p>
+        </Reveal>
+
+        {/* Right: bar chart */}
+        <Reveal delay={0.1}>
+          <div ref={ref}>
+            <div style={{ fontSize:10, fontWeight:600, color:"var(--text-tertiary)", textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:16 }}>RF accuracy per held-out subject</div>
+            <div style={{ display:"flex", flexDirection:"column", gap:7 }}>
+              {LOSO_DATA.map((d, i) => {
+                const pct = (d.acc - LOSO_MIN) / (LOSO_MAX - LOSO_MIN) * 100
+                const above = d.acc >= LOSO_MEAN
+                const color = above ? "#10B981" : "#F59E0B"
+                return (
+                  <div key={d.s} style={{ display:"flex", alignItems:"center", gap:10 }}>
+                    <span style={{ fontSize:10, fontFamily:"monospace", color:"var(--text-tertiary)", minWidth:28 }}>{d.s}</span>
+                    <div style={{ flex:1, height:22, background:"rgba(255,255,255,0.04)", borderRadius:5, overflow:"hidden", position:"relative" }}>
+                      <div style={{
+                        height:"100%", borderRadius:5,
+                        background: `linear-gradient(90deg, ${color}55, ${color}99)`,
+                        width: vis ? `${pct}%` : "0%",
+                        transition: `width 0.75s cubic-bezier(0.22,1,0.36,1) ${i * 0.055}s`,
+                      }}/>
+                      {/* Mean line */}
+                      <div style={{ position:"absolute", top:0, bottom:0, left:`${meanPct}%`, width:2, background:"#FF2D78", borderRadius:1 }}/>
+                    </div>
+                    <span style={{ fontSize:11, fontWeight:700, color, fontFamily:"monospace", minWidth:40, textAlign:"right" }}>{d.acc}%</span>
+                  </div>
+                )
+              })}
+            </div>
+            {/* Legend */}
+            <div style={{ marginTop:16, display:"flex", gap:20, alignItems:"center" }}>
+              <div style={{ display:"flex", alignItems:"center", gap:6 }}>
+                <div style={{ width:14, height:3, background:"#FF2D78", borderRadius:2 }}/>
+                <span style={{ fontSize:10, color:"var(--text-tertiary)" }}>Mean 84.85%</span>
+              </div>
+              <div style={{ display:"flex", alignItems:"center", gap:6 }}>
+                <div style={{ width:10, height:10, borderRadius:2, background:"rgba(16,185,129,0.5)" }}/>
+                <span style={{ fontSize:10, color:"var(--text-tertiary)" }}>Above mean</span>
+              </div>
+              <div style={{ display:"flex", alignItems:"center", gap:6 }}>
+                <div style={{ width:10, height:10, borderRadius:2, background:"rgba(245,158,11,0.5)" }}/>
+                <span style={{ fontSize:10, color:"var(--text-tertiary)" }}>Below mean</span>
+              </div>
+            </div>
+            <div style={{ marginTop:10, fontSize:10, color:"var(--text-tertiary)", fontWeight:300 }}>Axis: 60–100%. Each bar = one full model retrained on 9 subjects.</div>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  )
+}
+
+// ─── Decision Rationale ───────────────────────────────────────────────────────
+const DECISIONS = [
+  {
+    color: "#F59E0B",
+    badge: "Validation",
+    choice: "Leave-One-Subject-Out",
+    question: "Why not k-fold or a held-out test set?",
+    answer: "K-fold can leak subject identity between folds — if two windows from the same person appear in both train and test, accuracy is artificially inflated. LOSO ensures every prediction comes from a completely unseen person. It's the only protocol that honestly models real deployment.",
+    tradeoff: "10× more compute than k-fold. Worth it for honest numbers.",
+  },
+  {
+    color: "#8B5CF6",
+    badge: "Classifier",
+    choice: "Random Forest",
+    question: "Why not a neural network or SVM?",
+    answer: "Tested under identical LOSO conditions: RF outperformed SVM by 2.6pp, k-NN by 7.75pp, and LDA by 13.35pp. Neural nets need substantially more data to beat tree ensembles on tabular biomedical signals — and add latency we can't afford in a prosthetic loop.",
+    tradeoff: "Lower ceiling than deep nets, but better variance on N=10 subjects.",
+  },
+  {
+    color: "#3B82F6",
+    badge: "Features",
+    choice: "Hudgins time-domain set",
+    question: "Why not spectral features or learned embeddings?",
+    answer: "The Hudgins set was designed for neuromuscular signals specifically. It's O(N) per feature, runs on microcontrollers without FFT, and remains competitive against learned features at this dataset scale. Using it also makes results directly comparable to 30 years of prosthetics literature.",
+    tradeoff: "Less expressive than learned features. Reproducible and hardware-deployable.",
+  },
+]
+
+function DecisionRationale() {
+  return (
+    <div style={{ background:"var(--bg)", borderBottom:"1px solid var(--border)", padding:"80px 32px" }}>
+      <div style={{ maxWidth:900, margin:"0 auto" }}>
+        <Reveal>
+          <div style={{ display:"inline-flex", alignItems:"center", gap:7, background:"rgba(59,130,246,0.07)", border:"1px solid rgba(59,130,246,0.18)", borderRadius:100, padding:"4px 14px", marginBottom:20 }}>
+            <span style={{ fontSize:10, fontWeight:700, color:"#3B82F6", textTransform:"uppercase", letterSpacing:"0.1em" }}>Design decisions</span>
+          </div>
+          <h2 style={{ fontSize:"clamp(26px,3.5vw,38px)", fontWeight:600, letterSpacing:"-1.2px", color:"var(--text)", marginBottom:14 }}>
+            Why we made each key choice.
+          </h2>
+          <p style={{ fontSize:15, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.8, maxWidth:580, marginBottom:48 }}>
+            Every architectural decision in the pipeline had alternatives. Here's what we considered, what we chose, and why — including the tradeoffs we accepted.
+          </p>
+        </Reveal>
+
+        <div style={{ display:"flex", flexDirection:"column", gap:20 }}>
+          {DECISIONS.map((d, i) => (
+            <Reveal key={d.choice} delay={i * 0.08}>
+              <div style={{
+                background:"var(--bg-secondary)", border:"1px solid var(--border)",
+                borderLeft:`3px solid ${d.color}`, borderRadius:"0 14px 14px 0",
+                padding:"28px 28px 24px",
+                transition:"box-shadow 0.2s",
+              }}
+                onMouseEnter={e => e.currentTarget.style.boxShadow = `0 4px 24px ${d.color}10`}
+                onMouseLeave={e => e.currentTarget.style.boxShadow = "none"}
+              >
+                <div style={{ display:"flex", alignItems:"flex-start", gap:20, flexWrap:"wrap" }}>
+                  <div style={{ flex:"0 0 220px" }}>
+                    <div style={{ fontSize:9, fontWeight:700, color:d.color, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:6 }}>{d.badge}</div>
+                    <div style={{ fontSize:17, fontWeight:600, color:"var(--text)", letterSpacing:"-0.4px", marginBottom:10 }}>{d.choice}</div>
+                    <div style={{ fontSize:12, color:"var(--text-tertiary)", fontStyle:"italic", fontWeight:300, lineHeight:1.5 }}>{d.question}</div>
+                  </div>
+                  <div style={{ flex:1, minWidth:240 }}>
+                    <p style={{ fontSize:13, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.78, margin:"0 0 14px" }}>{d.answer}</p>
+                    <div style={{ display:"inline-flex", alignItems:"center", gap:7, background:`${d.color}0c`, border:`1px solid ${d.color}22`, borderRadius:8, padding:"7px 12px" }}>
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 6h8M6 2v8" stroke={d.color} strokeWidth="1.5" strokeLinecap="round" opacity="0.7"/>
+                      </svg>
+                      <span style={{ fontSize:11, color:d.color, fontWeight:400 }}>{d.tradeoff}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function HowItWorks() {
   const navigate = useNavigate()
@@ -544,6 +906,15 @@ export default function HowItWorks() {
 
       {/* ── Sticky 3D pipeline ── */}
       <StickyPipeline />
+
+      {/* ── Feature engineering deep-dive ── */}
+      <FeatureEngineering />
+
+      {/* ── LOSO cross-validation results ── */}
+      <LosoChart />
+
+      {/* ── Design decision rationale ── */}
+      <DecisionRationale />
 
       {/* ── Dataset + CTA ── */}
       <div style={{ maxWidth: 720, margin: "0 auto", padding: "64px 32px 80px" }}>

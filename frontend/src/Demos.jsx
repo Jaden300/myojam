@@ -198,6 +198,70 @@ function PipelineViz() {
   )
 }
 
+function LiveSignalViz() {
+  const channels = [
+    { cy: 30, amp: 11, phase: 0.0, color: "#FF2D78" },
+    { cy: 55, amp: 8,  phase: 1.3, color: "#A78BFA" },
+    { cy: 78, amp: 6,  phase: 2.6, color: "#22D3EE" },
+  ]
+  function wpt(i, cy, amp, phase) {
+    const n = i / 44
+    return cy
+      + amp * 0.55 * Math.sin(n * 8 * Math.PI + phase)
+      + amp * 0.30 * Math.sin(n * 20 * Math.PI + phase * 1.3 + 0.8)
+      + amp * 0.15 * Math.sin(n * 48 * Math.PI + phase * 0.7 + 1.5)
+  }
+  return (
+    <svg width="100%" viewBox="0 0 200 150" style={{overflow:"visible"}}>
+      <rect x={0} y={0} width={126} height={100} rx={6} fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.07)" strokeWidth={0.5}/>
+      {channels.map(({ cy, amp, phase, color }, ci) => {
+        const d = Array.from({length:45},(_,i) => `${i===0?"M":"L"}${(18+i*2.3).toFixed(1)},${wpt(i,cy,amp,phase).toFixed(1)}`).join(" ")
+        return (
+          <g key={ci}>
+            <text x={14} y={cy+3.5} textAnchor="end" fill={`${color}70`} fontSize={6} fontWeight={700} fontFamily="monospace">CH{ci+1}</text>
+            <path d={d} stroke={color} strokeWidth={1.2} fill="none" style={{filter:`drop-shadow(0 0 2px ${color})`}}/>
+          </g>
+        )
+      })}
+      <rect x={4} y={108} width={118} height={18} rx={4} fill="rgba(255,45,120,0.12)" stroke="rgba(255,45,120,0.25)" strokeWidth={0.8}/>
+      <text x={12} y={121} fill="rgba(255,255,255,0.38)" fontSize={7}>Predicted</text>
+      <text x={63} y={121} textAnchor="middle" fill="#FF2D78" fontSize={8.5} fontWeight={700}>FIST</text>
+      <text x={115} y={121} textAnchor="end" fill="rgba(255,255,255,0.6)" fontSize={7} fontWeight={600}>94.2%</text>
+      {/* 3D hand panel */}
+      <rect x={132} y={0} width={68} height={100} rx={6} fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.07)" strokeWidth={0.5}/>
+      <text x={166} y={56} textAnchor="middle" fontSize={38}>✊</text>
+      <text x={166} y={88} textAnchor="middle" fill="rgba(255,255,255,0.22)" fontSize={6.5} fontWeight={300}>3D model</text>
+      <text x={166} y={136} textAnchor="middle" fill="rgba(255,45,120,0.5)" fontSize={7} fontWeight={600}>LIVE SENSOR</text>
+    </svg>
+  )
+}
+
+function MyoCodeViz() {
+  const blocks = [
+    { y:6,   indent:0,  w:148, color:"#F59E0B", label:"when gesture: FIST" },
+    { y:28,  indent:0,  w:134, color:"#3B82F6", label:"repeat 3 times" },
+    { y:50,  indent:10, w:112, color:"#10B981", label:"move forward 40" },
+    { y:72,  indent:10, w:112, color:"#10B981", label:"turn right 90°" },
+    { y:94,  indent:0,  w:134, color:"#8B5CF6", label:"draw line to stage" },
+    { y:116, indent:0,  w:100, color:"#EF4444", label:"play sound: pop" },
+  ]
+  return (
+    <svg width="100%" viewBox="0 0 200 150" style={{overflow:"visible"}}>
+      {blocks.map((b,i) => (
+        <g key={i}>
+          <rect x={4+b.indent} y={b.y} width={b.w} height={19} rx={4} fill={`${b.color}20`} stroke={`${b.color}50`} strokeWidth={0.8}/>
+          {b.indent > 0 && <line x1={10} y1={b.y+9.5} x2={14+b.indent} y2={b.y+9.5} stroke={`${b.color}40`} strokeWidth={0.8}/>}
+          <text x={10+b.indent} y={b.y+13} fill={b.color} fontSize={7.5} fontWeight={600} fontFamily="monospace">{b.label}</text>
+        </g>
+      ))}
+      {/* Mini stage */}
+      <rect x={158} y={6} width={38} height={36} rx={4} fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" strokeWidth={0.8}/>
+      <path d="M163,37 L167,29 L172,32 L176,24 L180,30 L184,22 L190,29" stroke="#10B981" strokeWidth={1.2} fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+      <text x={177} y={55} textAnchor="middle" fill="rgba(255,255,255,0.25)" fontSize={6.5}>canvas</text>
+    </svg>
+  )
+}
+
 // ── Tool data ─────────────────────────────────────────────────────────────────
 const TOOLS = [
   {
@@ -255,6 +319,28 @@ const TOOLS = [
     Viz: PipelineViz,
     what: "You'll see the full signal-to-prediction chain in a single view — the only tool that shows all four pipeline stages simultaneously on real data.",
   },
+  {
+    slug: "/signal",
+    tag: "Live hardware",
+    title: "Live Signal + 3D Hand",
+    desc: "Connect a MyoWare 2.0 sensor and Arduino, and watch your actual muscle signal render in real time alongside a 3D hand model that mirrors every gesture. This is the full desktop experience in the browser.",
+    features: ["Real-time EMG waveform", "3D animated hand model", "Live gesture classification", "Requires sensor + Arduino"],
+    cta: "Open live view →",
+    accent: "#FF2D78",
+    Viz: LiveSignalViz,
+    what: "You'll see your own forearm signal — not simulated data — processed and classified live. The latency between muscle contraction and gesture label is typically under 5ms.",
+  },
+  {
+    slug: "/myocode",
+    tag: "Block coding",
+    title: "MyoCode",
+    desc: "A Scratch-style block coding environment where your EMG gestures trigger code. Build programs that respond to fist, point, peace, and more — no typing required, just flex.",
+    features: ["Gesture-driven blocks", "Canvas stage", "6 gesture triggers", "No hardware needed"],
+    cta: "Open MyoCode →",
+    accent: "#F59E0B",
+    Viz: MyoCodeViz,
+    what: "You'll understand how gesture events can replace keyboard inputs — the foundation of every muscle-computer interface, expressed as visual code anyone can modify.",
+  },
 ]
 
 // ── Page ──────────────────────────────────────────────────────────────────────
@@ -278,10 +364,10 @@ export default function Demos() {
               Learn by doing.<br/><span style={{ color: PINK }}>No hardware required.</span>
             </h1>
             <p style={{ fontSize: 16, color: "rgba(255,255,255,0.65)", fontWeight: 300, lineHeight: 1.8, maxWidth: 500, marginBottom: 36 }}>
-              Five browser-based tools for exploring EMG signal processing, gesture classification, and machine learning — all running on real data from the Ninapro DB5 dataset.
+              Seven interactive tools for exploring EMG signal processing, gesture classification, and machine learning — five run entirely in the browser, two connect to live hardware.
             </p>
             <div style={{ display: "flex", gap: 36, flexWrap: "wrap" }}>
-              {[["5","interactive tools"],["16,269","EMG windows"],["0","hardware needed"]].map(([v,l])=>(
+              {[["7","interactive tools"],["16,269","EMG windows"],["5","browser-only"]].map(([v,l])=>(
                 <div key={l}>
                   <div style={{ fontSize: 22, fontWeight: 700, color: "#fff", letterSpacing: "-0.5px" }}>{v}</div>
                   <div style={{ fontSize: 9.5, color: "rgba(255,255,255,0.38)", fontWeight: 300, textTransform: "uppercase", letterSpacing: "0.08em", marginTop: 2 }}>{l}</div>
