@@ -3,7 +3,7 @@ import Navbar from "./Navbar"
 import Footer from "./Footer"
 import UpNext from "./UpNext"
 import { Reveal } from "./Animate"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 
 const AUTHORS = [
   {
@@ -285,6 +285,13 @@ function VariabilityTaxonomy() {
 }
 
 function AccuracyGapChart() {
+  const [vis, setVis] = useState(false)
+  const ref = useRef(null)
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true) }, { threshold: 0.2 })
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [])
   const conditions = [
     { label: "Within-subject, controlled",          val: 95,  color: "#10B981", note: "Best-case laboratory" },
     { label: "Cross-subject, LOSO",                 val: 85,  color: "#3B82F6", note: "myojam benchmark" },
@@ -294,12 +301,12 @@ function AccuracyGapChart() {
     { label: "All conditions combined (estimated)", val: 63,  color: "#EF4444", note: "Scheme & Englehart, 2011" },
   ]
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+    <div ref={ref} style={{ display: "flex", flexDirection: "column", gap: 9 }}>
       {conditions.map((c, i) => (
         <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{ width: 200, fontSize: 11, color: "var(--text-secondary)", fontWeight: 300, textAlign: "right", flexShrink: 0, lineHeight: 1.35 }}>{c.label}</div>
           <div style={{ flex: 1, height: 10, background: "var(--border)", borderRadius: 100, overflow: "hidden" }}>
-            <div style={{ height: "100%", width: `${c.val}%`, background: c.color, borderRadius: 100 }}/>
+            <div style={{ height: "100%", width: vis ? `${c.val}%` : "0%", background: c.color, borderRadius: 100, transition: `width 0.8s ease ${i * 0.1}s` }}/>
           </div>
           <div style={{ width: 32, fontSize: 12, fontWeight: 700, color: c.color, flexShrink: 0 }}>{c.val}%</div>
           <div style={{ width: 170, fontSize: 10, color: "var(--text-tertiary)", fontWeight: 300, flexShrink: 0, fontStyle: "italic" }}>{c.note}</div>
@@ -313,6 +320,13 @@ function AccuracyGapChart() {
 }
 
 function MitigationChart() {
+  const [vis, setVis] = useState(false)
+  const ref = useRef(null)
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true) }, { threshold: 0.2 })
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [])
   const strategies = [
     { label: "No mitigation (cross-subject baseline)", val: 84.9, color: "#6B7280" },
     { label: "+ Amplitude normalisation (MVC)",        val: 86.7, color: "#3B82F6" },
@@ -322,12 +336,12 @@ function MitigationChart() {
     { label: "+ Full session retraining",              val: 95.2, color: "#FF2D78" },
   ]
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+    <div ref={ref} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
       {strategies.map((s, i) => (
         <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{ width: 220, fontSize: 11, color: "var(--text-secondary)", fontWeight: 300, textAlign: "right", flexShrink: 0, lineHeight: 1.4 }}>{s.label}</div>
           <div style={{ flex: 1, height: 11, background: "var(--border)", borderRadius: 100, overflow: "hidden" }}>
-            <div style={{ height: "100%", width: `${s.val}%`, background: s.color, borderRadius: 100 }}/>
+            <div style={{ height: "100%", width: vis ? `${s.val}%` : "0%", background: s.color, borderRadius: 100, transition: `width 0.8s ease ${i * 0.12}s` }}/>
           </div>
           <div style={{ width: 40, fontSize: 12, fontWeight: 700, color: s.color, flexShrink: 0 }}>{s.val}%</div>
         </div>

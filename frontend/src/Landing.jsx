@@ -35,10 +35,30 @@ const STATS = [
 ]
 
 const PILLARS = [
-  { slug:"/education", icon:IconBook,       color:BLUE,   title:"Education hub",       sub:"11 in-depth articles",        desc:"From the biology of muscle contraction to the ethics of biometric data — rigorously written, openly published, free forever." },
-  { slug:"/educators", icon:IconGraduate,   color:PURPLE, title:"For educators",        sub:"Ready-to-teach lesson plans", desc:"Full lesson plans with datasets, worksheets, and curriculum alignment. From middle school to university." },
-  { slug:"/demos",     icon:IconBolt,       color:PINK,   title:"Interactive tools",    sub:"4 hands-on tools",           desc:"Signal playground, frequency analyzer, confusion matrix explorer, and a gesture reaction game — all in your browser." },
-  { slug:"/research",  icon:IconMicroscope, color:GREEN,  title:"Open research",        sub:"Fully documented pipeline",  desc:"The complete signal processing pipeline, trained model weights, and training data — published, reproducible, MIT licensed." },
+  {
+    slug:"/education", icon:IconBook, color:BLUE,
+    title:"Education hub",
+    sub:"11 in-depth articles",
+    desc:"EMG science doesn't have a good public textbook. These 11 articles are the resource we wished existed — from how action potentials produce muscle electrical signals to why cross-subject generalization is still an open research problem.",
+  },
+  {
+    slug:"/educators", icon:IconGraduate, color:PURPLE,
+    title:"For educators",
+    sub:"Ready-to-teach lesson plans",
+    desc:"Three complete lesson plans tested at middle school to university level. Each includes real Ninapro EMG data, printable student worksheets, and explicit alignment to biology and CS curriculum standards.",
+  },
+  {
+    slug:"/demos", icon:IconBolt, color:PINK,
+    title:"Interactive tools",
+    sub:"Seven browser tools",
+    desc:"A real-time signal playground, frequency analyzer, confusion matrix explorer, reaction game, live EMG canvas, gesture block-coding environment, and classifier visualizer — all running in your browser, no install required.",
+  },
+  {
+    slug:"/research", icon:IconMicroscope, color:GREEN,
+    title:"Open research",
+    sub:"Fully documented pipeline",
+    desc:"Every stage documented: 16-ch EMG → Butterworth filter → 200-sample windows → 64 Hudgins features → 500-tree Random Forest. Trained weights, Ninapro DB5 training set, and full reproducible pipeline on GitHub under MIT.",
+  },
 ]
 
 const ARTICLES = [
@@ -394,6 +414,88 @@ export default function Landing() {
               <div style={{ fontSize:11, color:"var(--text-tertiary)", fontWeight:300, lineHeight:1.4 }}>{s.sub}</div>
             </div>
           )}/>
+        </div>
+      </section>
+
+      {/* ── DEMOS ──────────────────────────────────────────────────── */}
+      <section style={{ padding:"72px 32px", borderBottom:"1px solid var(--border)", background:"var(--bg)" }}>
+        <div style={{ maxWidth:1000, margin:"0 auto" }}>
+          <Reveal>
+            <SectionPill>🎮 Try it now</SectionPill>
+            <h2 style={{ fontSize:"clamp(28px,4vw,46px)", fontWeight:800, letterSpacing:"-1.5px", color:"var(--text)", marginBottom:10 }}>
+              Don't just read about it.
+            </h2>
+            <p style={{ fontSize:15, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.75, marginBottom:44, maxWidth:440 }}>
+              Five experiments running in your browser right now. No hardware, no install, no signup.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.08}>
+            {/* 3 featured cards */}
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:14, marginBottom:14 }}>
+              {[
+                {
+                  grad:"linear-gradient(135deg,#FF2D78 0%,#F97316 100%)",
+                  emoji:"🧠", badge:"✨ NEW",
+                  title:"Signal Guesser",
+                  desc:"5 rounds. Real EMG data. Can you out-guess a Random Forest?",
+                  cta:"Play →", slug:"/guess",
+                },
+                {
+                  grad:"linear-gradient(135deg,#2563EB 0%,#7C3AED 100%)",
+                  emoji:"✏️", badge:"⚡ LIVE",
+                  title:"Signal Playground",
+                  desc:"Draw any waveform with your mouse. Watch MAV, RMS, ZC, WL update as you draw.",
+                  cta:"Draw →", slug:"/playground",
+                },
+                {
+                  grad:"linear-gradient(135deg,#D97706 0%,#F59E0B 100%)",
+                  emoji:"🎯", badge:"🎮 GAME",
+                  title:"Gesture Game",
+                  desc:"A target gesture appears — match it before time runs out. Three difficulty levels.",
+                  cta:"Play →", slug:"/game",
+                },
+              ].map(card => (
+                <div key={card.slug}
+                  onClick={()=>navigate(card.slug)}
+                  style={{ background:card.grad, borderRadius:20, padding:"26px 22px", cursor:"pointer", transition:"transform 0.2s,box-shadow 0.2s", position:"relative", overflow:"hidden" }}
+                  onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-5px) scale(1.01)";e.currentTarget.style.boxShadow="0 24px 56px rgba(0,0,0,0.32)"}}
+                  onMouseLeave={e=>{e.currentTarget.style.transform="translateY(0) scale(1)";e.currentTarget.style.boxShadow="none"}}
+                >
+                  {/* Decorative circle */}
+                  <div style={{ position:"absolute", top:-30, right:-30, width:120, height:120, borderRadius:"50%", background:"rgba(255,255,255,0.08)", pointerEvents:"none" }}/>
+                  <div style={{ background:"rgba(255,255,255,0.22)", borderRadius:100, padding:"3px 10px", fontSize:10, color:"#fff", fontWeight:700, letterSpacing:"0.04em", display:"inline-block", marginBottom:14 }}>{card.badge}</div>
+                  <div style={{ fontSize:48, lineHeight:1, marginBottom:12 }}>{card.emoji}</div>
+                  <div style={{ fontSize:20, fontWeight:800, color:"#fff", letterSpacing:"-0.4px", marginBottom:8 }}>{card.title}</div>
+                  <p style={{ fontSize:13, color:"rgba(255,255,255,0.82)", fontWeight:300, lineHeight:1.65, margin:"0 0 20px" }}>{card.desc}</p>
+                  <button
+                    onClick={e=>{e.stopPropagation();navigate(card.slug)}}
+                    style={{ background:"rgba(255,255,255,0.95)", color:"#111", border:"none", borderRadius:100, padding:"8px 18px", fontSize:12, fontWeight:800, cursor:"pointer", fontFamily:"var(--font)", letterSpacing:"0.01em" }}>
+                    {card.cta}
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            {/* Secondary strip */}
+            <div style={{ display:"flex", gap:8, flexWrap:"wrap", alignItems:"center" }}>
+              <span style={{ fontSize:11, color:"var(--text-tertiary)", fontWeight:300, marginRight:2 }}>More tools →</span>
+              {[
+                { label:"Pipeline Explorer", slug:"/pipeline", color:PINK   },
+                { label:"Confusion Matrix",  slug:"/confusion",color:BLUE   },
+                { label:"Frequency Analyzer",slug:"/frequency",color:PURPLE },
+                { label:"Live Signal",        slug:"/signal",   color:GREEN  },
+                { label:"MyoCode",            slug:"/myocode",  color:AMBER  },
+              ].map(t=>(
+                <button key={t.slug} onClick={()=>navigate(t.slug)}
+                  style={{ background:"none", border:"1px solid var(--border)", borderRadius:100, padding:"5px 14px", fontSize:12, color:"var(--text-secondary)", cursor:"pointer", fontFamily:"var(--font)", transition:"border-color 0.15s,color 0.15s" }}
+                  onMouseEnter={e=>{e.currentTarget.style.borderColor=t.color;e.currentTarget.style.color=t.color}}
+                  onMouseLeave={e=>{e.currentTarget.style.borderColor="var(--border)";e.currentTarget.style.color="var(--text-secondary)"}}>
+                  {t.label}
+                </button>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 

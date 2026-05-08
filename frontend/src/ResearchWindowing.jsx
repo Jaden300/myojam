@@ -3,7 +3,7 @@ import Navbar from "./Navbar"
 import Footer from "./Footer"
 import UpNext from "./UpNext"
 import { Reveal } from "./Animate"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 
 const AUTHORS = [
   {
@@ -238,6 +238,13 @@ const WINDOW_DATA = [
 ]
 
 function WindowAccuracyChart() {
+  const [vis, setVis] = useState(false)
+  const ref = useRef(null)
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true) }, { threshold: 0.2 })
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [])
   return (
     <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
       <div style={{ display:"flex", alignItems:"center", gap:16, marginBottom:4 }}>
@@ -250,13 +257,14 @@ function WindowAccuracyChart() {
           <span style={{ fontSize:10, color:"var(--text-tertiary)", fontWeight:300 }}>Within clinical latency threshold (≤300 ms)</span>
         </div>
       </div>
-      {WINDOW_DATA.map(d => (
-        <div key={d.dur} style={{ display:"flex", alignItems:"center", gap:10 }}>
+      <div ref={ref} style={{ display:"flex", flexDirection:"column", gap:0 }}>
+      {WINDOW_DATA.map((d, i) => (
+        <div key={d.dur} style={{ display:"flex", alignItems:"center", gap:10, marginBottom:6 }}>
           <div style={{ width:130, fontSize:11, color:"var(--text-secondary)", fontWeight:300, textAlign:"right", flexShrink:0, lineHeight:1.3 }}>
             {d.dur} ms ({d.samples} samples)
           </div>
           <div style={{ flex:1, height:11, background: d.clinical ? "rgba(239,68,68,0.08)" : "var(--border)", borderRadius:100, overflow:"hidden", border: d.clinical ? "1px dashed rgba(239,68,68,0.4)" : "none" }}>
-            <div style={{ height:"100%", width:`${d.acc}%`, background: d.dur===1250 ? "#10B981" : d.dur===1000 ? "#FF2D78" : d.color, borderRadius:100 }}/>
+            <div style={{ height:"100%", width: vis ? `${d.acc}%` : "0%", background: d.dur===1250 ? "#10B981" : d.dur===1000 ? "#FF2D78" : d.color, borderRadius:100, transition:`width 0.8s ease ${i * 0.08}s` }}/>
           </div>
           <div style={{ width:44, fontSize:12, fontWeight:700, color: d.dur===1250 ? "#10B981" : d.dur===1000 ? "#FF2D78" : d.color, flexShrink:0 }}>{d.acc}%</div>
           <div style={{ width:28, fontSize:10, color: d.clinical ? "#EF4444" : "var(--text-tertiary)", flexShrink:0, fontWeight: d.clinical ? 600 : 300 }}>
@@ -264,6 +272,7 @@ function WindowAccuracyChart() {
           </div>
         </div>
       ))}
+      </div>
       <div style={{ marginTop:6, fontSize:10, color:"var(--text-tertiary)", textAlign:"center", fontWeight:300 }}>
         Pink bar = myojam baseline (1000 ms) · Green bar = peak accuracy (1250 ms) · Red-shaded rows = within clinical latency threshold (Farrell & Weir, 2007)
       </div>

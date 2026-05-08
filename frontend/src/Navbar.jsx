@@ -164,6 +164,7 @@ export default function Navbar() {
 
       <div style={{ display:"flex", alignItems:"center", gap:24 }}>
         <Dropdown label={t("nav_learn")} pathname={pathname} items={[
+          ["Get started",        "/get-started",     IconRocket],
           [t("nav_education"),   "/education",       IconBook],
           [t("nav_educators"),   "/educators",       IconGraduate],
           [t("nav_howItWorks"),  "/how-it-works",    IconMicroscope],
@@ -187,6 +188,15 @@ export default function Navbar() {
         ]}/>
 
         <NavLink label={t("nav_contact")} path="/contact" pathname={pathname}/>
+
+        <span
+          onClick={() => navigate("/get-started")}
+          style={{ background:"none", color:"var(--accent)", border:"1.5px solid var(--accent)", borderRadius:100, padding:"6px 16px", fontSize:13, fontWeight:500, cursor:"pointer", display:"flex", alignItems:"center", gap:6, transition:"background 0.15s, color 0.15s, transform 0.15s", flexShrink:0 }}
+          onMouseEnter={e => { e.currentTarget.style.background="var(--accent)"; e.currentTarget.style.color="#fff"; e.currentTarget.style.transform="scale(1.03)" }}
+          onMouseLeave={e => { e.currentTarget.style.background="none"; e.currentTarget.style.color="var(--accent)"; e.currentTarget.style.transform="scale(1)" }}
+        >
+          Get started
+        </span>
 
         <span
           onClick={() => navigate("/download")}

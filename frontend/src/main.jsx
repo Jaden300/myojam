@@ -52,6 +52,8 @@ import ResearchExplorer from "./ResearchExplorer"
 import Mission from "./Mission"
 import MyoCode from "./MyoCode"
 import LiveSignal from "./App"
+import GetStarted from "./GetStarted"
+import SignalGuesser from "./SignalGuesser"
 
 import { initTheme } from "./theme"
 initTheme()
@@ -111,6 +113,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/mission" element={<Mission />} />
         <Route path="/myocode" element={<MyoCode />} />
         <Route path="/signal" element={<LiveSignal />} />
+        <Route path="/get-started" element={<GetStarted />} />
+        <Route path="/guess" element={<SignalGuesser />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

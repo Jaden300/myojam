@@ -1,9 +1,95 @@
+import { useRef, useEffect, useState } from "react"
 import Navbar from "./Navbar"
 import { useNavigate } from "react-router-dom"
 import Footer from "./Footer"
 import UpNext from "./UpNext"
 import ArticleBar from "./ArticleUtils"
 import NeuralNoise from "./components/NeuralNoise"
+
+const PINK = "#FF2D78", BLUE = "#3B82F6", GREEN = "#10B981", PURPLE = "#8B5CF6", AMBER = "#F59E0B"
+
+const CLASSIFIERS = [
+  { name:"Random Forest", acc:84.85, train:"~45s", infer:"<5ms", color:PINK,   note:"myojam's classifier — best cross-subject, fastest inference" },
+  { name:"SVM (RBF)",     acc:82.3,  train:"~8min", infer:"~18ms", color:BLUE,  note:"Strong but slow to train; sensitive to kernel choice" },
+  { name:"k-NN (k=5)",    acc:76.4,  train:"0s",    infer:"~80ms", color:AMBER, note:"No training cost; inference scales with dataset size" },
+  { name:"LDA",           acc:71.8,  train:"~2s",   infer:"<1ms",  color:GREEN, note:"Fastest inference; assumes Gaussian class distributions" },
+]
+
+function ClassifierChart() {
+  const ref = useRef(null)
+  const [vis, setVis] = useState(false)
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true) }, { threshold: 0.2 })
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [])
+  return (
+    <div ref={ref} style={{ background:"var(--bg-secondary)", borderRadius:"var(--radius)", border:"1px solid var(--border)", padding:"24px", margin:"28px 0" }}>
+      <div style={{ fontSize:12, fontWeight:500, color:"var(--text-secondary)", textTransform:"uppercase", letterSpacing:"0.06em", marginBottom:20 }}>
+        Cross-subject LOSO accuracy — classifier comparison
+      </div>
+      {CLASSIFIERS.map((c, i) => (
+        <div key={c.name} style={{ marginBottom:14 }}>
+          <div style={{ display:"flex", justifyContent:"space-between", marginBottom:5 }}>
+            <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+              <span style={{ fontSize:13, fontWeight: c.color===PINK ? 600 : 400, color: c.color===PINK ? PINK : "var(--text-secondary)" }}>{c.name}</span>
+              {c.color===PINK && <span style={{ fontSize:10, fontWeight:600, color:PINK, background:"rgba(255,45,120,0.1)", border:"1px solid rgba(255,45,120,0.25)", borderRadius:100, padding:"1px 8px" }}>selected</span>}
+            </div>
+            <span style={{ fontSize:13, fontWeight:600, color:c.color }}>{c.acc}%</span>
+          </div>
+          <div style={{ height:8, background:"var(--border)", borderRadius:4, overflow:"hidden" }}>
+            <div style={{
+              height:"100%", borderRadius:4, background:c.color,
+              width: vis ? `${c.acc}%` : "0%",
+              transition: `width 0.8s ease ${i * 0.12}s`
+            }} />
+          </div>
+          <div style={{ fontSize:11, color:"var(--text-tertiary)", marginTop:3 }}>Train: {c.train} · Infer: {c.infer} — {c.note}</div>
+        </div>
+      ))}
+      <div style={{ marginTop:14, fontSize:11, color:"var(--text-tertiary)", fontStyle:"italic" }}>
+        All classifiers trained on the same 64-dim Hudgins feature vectors, evaluated with 10-fold LOSO cross-validation on Ninapro DB5.
+      </div>
+    </div>
+  )
+}
+
+function FeatureImportanceBars() {
+  const ref = useRef(null)
+  const [vis, setVis] = useState(false)
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true) }, { threshold: 0.2 })
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [])
+  const features = [
+    { label:"MAV — Mean Absolute Value",   pct:35, color:PINK,   note:"Activation energy · strongest discriminator" },
+    { label:"RMS — Root Mean Square",      pct:27, color:PURPLE, note:"Signal power · correlated with MAV" },
+    { label:"WL — Waveform Length",        pct:25, color:BLUE,   note:"Contraction complexity · frequency-sensitive" },
+    { label:"ZCR — Zero Crossing Rate",    pct:13, color:GREEN,  note:"Frequency proxy · lowest individual contribution" },
+  ]
+  return (
+    <div ref={ref}>
+      {features.map(({ label, pct, color, note }) => (
+        <div key={label} style={{ marginBottom:16 }}>
+          <div style={{ display:"flex", justifyContent:"space-between", marginBottom:6 }}>
+            <div>
+              <span style={{ fontSize:13, fontWeight:500, color:"var(--text)" }}>{label}</span>
+              <span style={{ fontSize:11, color:"var(--text-tertiary)", fontWeight:300, marginLeft:10 }}>{note}</span>
+            </div>
+            <span style={{ fontSize:13, fontWeight:700, color }}>{pct}%</span>
+          </div>
+          <div style={{ height:8, background:"var(--border)", borderRadius:4, overflow:"hidden" }}>
+            <div style={{
+              height:"100%", width: vis ? `${pct * 2.86}%` : "0%", background:color, borderRadius:4,
+              transition:`width 0.8s ease ${features.indexOf(features.find(f=>f.label===label)) * 0.1}s`
+            }} />
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
 
 function FaceAvatar({ seed, size = 48 }) {
   const skinTones = ["#f5dce4", "#e8c9a0", "#c8956c", "#8d5524", "#f5dce4"]
@@ -131,6 +217,9 @@ export default function RandomForestEMG() {
           ))}
         </div>
 
+        {/* Classifier comparison */}
+        <ClassifierChart />
+
         {/* Feature importance chart */}
         <div style={{ border: "1px solid var(--border)", borderRadius: "var(--radius)", overflow: "hidden", marginBottom: 48 }}>
           <div style={{ padding: "14px 20px", background: "var(--bg-secondary)", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -140,25 +229,7 @@ export default function RandomForestEMG() {
           <div style={{ padding: "24px 24px 20px" }}>
             {/* Total by feature type */}
             <div style={{ fontSize: 11, fontWeight: 600, color: "var(--text-tertiary)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 14 }}>Total MDI by feature type (all 16 channels)</div>
-            {[
-              { label: "MAV — Mean Absolute Value",   pct: 35, color: "#FF2D78", note: "Activation energy · strongest discriminator" },
-              { label: "RMS — Root Mean Square",      pct: 27, color: "#8B5CF6", note: "Signal power · correlated with MAV" },
-              { label: "WL — Waveform Length",        pct: 25, color: "#3B82F6", note: "Contraction complexity · frequency-sensitive" },
-              { label: "ZCR — Zero Crossing Rate",    pct: 13, color: "#10B981", note: "Frequency proxy · lowest individual contribution" },
-            ].map(({ label, pct, color, note }) => (
-              <div key={label} style={{ marginBottom: 16 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-                  <div>
-                    <span style={{ fontSize: 13, fontWeight: 500, color: "var(--text)" }}>{label}</span>
-                    <span style={{ fontSize: 11, color: "var(--text-tertiary)", fontWeight: 300, marginLeft: 10 }}>{note}</span>
-                  </div>
-                  <span style={{ fontSize: 13, fontWeight: 700, color }}>{pct}%</span>
-                </div>
-                <div style={{ height: 8, background: "var(--border)", borderRadius: 4, overflow: "hidden" }}>
-                  <div style={{ height: "100%", width: `${pct * 2.86}%`, background: color, borderRadius: 4 }} />
-                </div>
-              </div>
-            ))}
+            <FeatureImportanceBars />
 
             <div style={{ height: 1, background: "var(--border)", margin: "24px 0" }} />
 

@@ -3,7 +3,7 @@ import Navbar from "./Navbar"
 import Footer from "./Footer"
 import UpNext from "./UpNext"
 import { Reveal } from "./Animate"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 
 const AUTHORS = [
   { name:"myojam Research Team", affil:"1", role:"Conceptualisation, methodology, software, validation, formal analysis, writing" },
@@ -213,6 +213,13 @@ const REFERENCES = [
 ]
 
 function LOSOFoldChart() {
+  const [vis, setVis] = useState(false)
+  const ref = useRef(null)
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true) }, { threshold: 0.2 })
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [])
   const folds = [
     { label:"Subject 1",  val:87.2 },
     { label:"Subject 2",  val:83.1 },
@@ -226,14 +233,14 @@ function LOSOFoldChart() {
     { label:"Subject 10", val:83.9 },
   ]
   return (
-    <div style={{ display:"flex", flexDirection:"column", gap:6 }}>
+    <div ref={ref} style={{ display:"flex", flexDirection:"column", gap:6 }}>
       {folds.map((f,i) => {
         const color = f.val >= 86 ? "#10B981" : f.val >= 84 ? "#3B82F6" : "#F59E0B"
         return (
           <div key={i} style={{ display:"flex", alignItems:"center", gap:10 }}>
             <div style={{ width:68, fontSize:11, color:"var(--text-secondary)", fontWeight:300, textAlign:"right", flexShrink:0 }}>{f.label}</div>
             <div style={{ flex:1, height:9, background:"var(--border)", borderRadius:100, overflow:"hidden" }}>
-              <div style={{ height:"100%", width:`${f.val}%`, background:color, borderRadius:100 }}/>
+              <div style={{ height:"100%", width: vis ? `${f.val}%` : "0%", background:color, borderRadius:100, transition:`width 0.7s ease ${i * 0.06}s` }}/>
             </div>
             <div style={{ width:40, fontSize:11, fontWeight:600, color, flexShrink:0 }}>{f.val}%</div>
           </div>
@@ -252,6 +259,13 @@ function LOSOFoldChart() {
 }
 
 function ClassifierComparisonChart() {
+  const [vis, setVis] = useState(false)
+  const ref = useRef(null)
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true) }, { threshold: 0.2 })
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [])
   const classifiers = [
     { label:"Random Forest",  val:84.85, se:1.91, color:"#FF2D78" },
     { label:"SVM (RBF)",      val:82.30, se:2.14, color:"#3B82F6" },
@@ -259,12 +273,12 @@ function ClassifierComparisonChart() {
     { label:"LDA",            val:71.80, se:2.87, color:"#F59E0B" },
   ]
   return (
-    <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
-      {classifiers.map(c => (
+    <div ref={ref} style={{ display:"flex", flexDirection:"column", gap:10 }}>
+      {classifiers.map((c, i) => (
         <div key={c.label} style={{ display:"flex", alignItems:"center", gap:10 }}>
           <div style={{ width:96, fontSize:12, color:"var(--text-secondary)", fontWeight:300, textAlign:"right", flexShrink:0 }}>{c.label}</div>
           <div style={{ flex:1, height:13, background:"var(--border)", borderRadius:100, overflow:"hidden" }}>
-            <div style={{ height:"100%", width:`${c.val}%`, background:c.color, borderRadius:100 }}/>
+            <div style={{ height:"100%", width: vis ? `${c.val}%` : "0%", background:c.color, borderRadius:100, transition:`width 0.8s ease ${i * 0.12}s` }}/>
           </div>
           <div style={{ width:76, fontSize:11, fontWeight:600, color:c.color, flexShrink:0 }}>{c.val}% ±{c.se}</div>
         </div>
@@ -277,6 +291,13 @@ function ClassifierComparisonChart() {
 }
 
 function FeatureImportanceChart() {
+  const [vis, setVis] = useState(false)
+  const ref = useRef(null)
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true) }, { threshold: 0.2 })
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [])
   const features = [
     { label:"MAV", val:37, color:"#FF2D78", desc:"Mean Absolute Value" },
     { label:"WL",  val:29, color:"#3B82F6", desc:"Waveform Length" },
@@ -285,12 +306,12 @@ function FeatureImportanceChart() {
   ]
   return (
     <div>
-      <div style={{ display:"flex", flexDirection:"column", gap:9 }}>
-        {features.map(f => (
+      <div ref={ref} style={{ display:"flex", flexDirection:"column", gap:9 }}>
+        {features.map((f, i) => (
           <div key={f.label} style={{ display:"flex", alignItems:"center", gap:10 }}>
             <div style={{ width:32, fontSize:12, color:f.color, fontWeight:700, textAlign:"right", flexShrink:0 }}>{f.label}</div>
             <div style={{ flex:1, height:12, background:"var(--border)", borderRadius:100, overflow:"hidden" }}>
-              <div style={{ height:"100%", width:`${f.val}%`, background:f.color, borderRadius:100 }}/>
+              <div style={{ height:"100%", width: vis ? `${f.val}%` : "0%", background:f.color, borderRadius:100, transition:`width 0.8s ease ${i * 0.15}s` }}/>
             </div>
             <div style={{ width:100, fontSize:11, color:f.color, fontWeight:600, flexShrink:0 }}>{f.val}%  {f.desc}</div>
           </div>

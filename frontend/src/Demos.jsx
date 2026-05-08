@@ -198,6 +198,34 @@ function PipelineViz() {
   )
 }
 
+function GuesserViz() {
+  const pts = [0,2,3,2,1,0,-1,0,1,2,4,10,18,26,22,14,8,3,0,-3,-5,-4,-2,0,2,4,8,14,20,16,10,5,1,-1,0,1,2,1,0]
+  const W=200, H=90, MY=45
+  const path = pts.map((y,i)=>`${i===0?"M":"L"}${i*5+4},${MY-y*0.95}`).join(" ")
+  const gestures = [
+    {label:"Fist",col:RED,x:8,y:108},{label:"Index",col:BLUE,x:56,y:108},
+    {label:"Middle",col:PURPLE,x:104,y:108},{label:"Ring",col:AMBER,x:8,y:126},
+    {label:"Pinky",col:GREEN,x:56,y:126},{label:"Thumb",col:PINK,x:104,y:126},
+  ]
+  return(
+    <svg width="100%" viewBox="0 0 200 150" style={{overflow:"visible"}}>
+      <rect x={0} y={0} width={200} height={96} rx={6} fill="#030209" stroke="rgba(255,255,255,0.07)" strokeWidth={0.8}/>
+      {[-20,0,20].map(y=>(
+        <line key={y} x1={4} x2={196} y1={MY-y*0.95} y2={MY-y*0.95} stroke={`${PINK}10`} strokeWidth={0.6}/>
+      ))}
+      <path d={path} fill="none" stroke={PINK} strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" style={{filter:`drop-shadow(0 0 3px ${PINK}70)`}}/>
+      <text x={100} y={64} textAnchor="middle" fill="rgba(255,255,255,0.15)" fontSize={22} fontWeight={900}>?</text>
+      <text x={100} y={82} textAnchor="middle" fill="rgba(255,255,255,0.22)" fontSize={7.5}>Pick the gesture →</text>
+      {gestures.map(g=>(
+        <g key={g.label}>
+          <rect x={g.x} y={g.y} width={44} height={14} rx={4} fill={`${g.col}18`} stroke={`${g.col}40`} strokeWidth={0.7}/>
+          <text x={g.x+22} y={g.y+10} textAnchor="middle" fill={g.col} fontSize={7.5} fontWeight={600}>{g.label}</text>
+        </g>
+      ))}
+    </svg>
+  )
+}
+
 function LiveSignalViz() {
   const channels = [
     { cy: 30, amp: 11, phase: 0.0, color: "#FF2D78" },
@@ -264,6 +292,17 @@ function MyoCodeViz() {
 
 // ── Tool data ─────────────────────────────────────────────────────────────────
 const TOOLS = [
+  {
+    slug: "/guess",
+    tag: "Interactive game",
+    title: "Signal Guesser",
+    desc: "We show you a real EMG window from Ninapro DB5 — three electrode channels, one second of data. Pick which of the 6 gestures caused it. 5 rounds. The AI's answer is revealed after each guess.",
+    features: ["Real Ninapro DB5 data", "5 rounds per session", "AI confidence reveal", "Biomechanical explanations"],
+    cta: "Play now →",
+    accent: PINK,
+    Viz: GuesserViz,
+    what: "You'll feel first-hand why ring and pinky flex are nearly indistinguishable on a circumferential electrode array — and why 84.85% cross-subject accuracy is harder than it sounds.",
+  },
   {
     slug: "/playground",
     tag: "Signal processing",
@@ -364,10 +403,10 @@ export default function Demos() {
               Learn by doing.<br/><span style={{ color: PINK }}>No hardware required.</span>
             </h1>
             <p style={{ fontSize: 16, color: "rgba(255,255,255,0.65)", fontWeight: 300, lineHeight: 1.8, maxWidth: 500, marginBottom: 36 }}>
-              Seven interactive tools for exploring EMG signal processing, gesture classification, and machine learning — five run entirely in the browser, two connect to live hardware.
+              Eight interactive tools for exploring EMG signal processing, gesture classification, and machine learning — six run entirely in the browser, two connect to live hardware.
             </p>
             <div style={{ display: "flex", gap: 36, flexWrap: "wrap" }}>
-              {[["7","interactive tools"],["16,269","EMG windows"],["5","browser-only"]].map(([v,l])=>(
+              {[["8","interactive tools"],["16,269","EMG windows"],["6","browser-only"]].map(([v,l])=>(
                 <div key={l}>
                   <div style={{ fontSize: 22, fontWeight: 700, color: "#fff", letterSpacing: "-0.5px" }}>{v}</div>
                   <div style={{ fontSize: 9.5, color: "rgba(255,255,255,0.38)", fontWeight: 300, textTransform: "uppercase", letterSpacing: "0.08em", marginTop: 2 }}>{l}</div>

@@ -547,13 +547,13 @@ export default function Mission() {
 
           <div style={{ marginTop: 32 }}>
             {[
-              { num: "01", text: "Technology should adapt to people — not the other way around. An interface that requires users to conform to hardware constraints has it exactly backwards." },
-              { num: "02", text: "Open source isn't just a license. It's a moral commitment to the people who come after you, and to the transparency that good science requires." },
-              { num: "03", text: "The hardest technical problems deserve the clearest possible explanations. Complexity that can only be understood by specialists is a failure of communication, not a feature of the work." },
-              { num: "04", text: "A published accuracy number that obscures its limitations is worse than no number at all. Honest science means documenting what doesn't work as carefully as what does." },
-              { num: "05", text: "Students who understand this technology today will shape who controls it tomorrow. Education isn't outreach — it's the mechanism by which power gets distributed." },
-              { num: "06", text: "Assistive technology built without the people it's meant to serve is just a product. The clinical applications of EMG are too important to be designed only by engineers." },
-              { num: "07", text: "One person with public data and consumer hardware can produce meaningful science. That should be celebrated and replicated — not treated as a curiosity." },
+              { num: "01", text: "Technology should adapt to people — not the other way around. We built on Arduino Uno rather than a proprietary EMG armband so anyone with $30 in parts can replicate the full pipeline. No SDK license. No locked API. The hardware constraint was a design choice." },
+              { num: "02", text: "Open source isn't just a license. It's a moral commitment to the people who come after you. We chose MIT — not GPL, not Apache — specifically so clinical researchers bound by institutional IP agreements can use this work without needing to contribute back. The license is load-bearing." },
+              { num: "03", text: "The hardest technical problems deserve the clearest possible explanations. The How It Works page on this site explains the full Butterworth → windowing → feature extraction → Random Forest pipeline at a level a biology student can follow. That's not documentation. It's a design requirement." },
+              { num: "04", text: "A published accuracy number that obscures its methodology is worse than no number at all. We report 84.85% with leave-one-subject-out validation — not the 91.4% we'd get by testing on the best single subject. The methodology is in the text, not the footnotes." },
+              { num: "05", text: "Students who understand this technology today will shape who controls it tomorrow. MyoCode exists as a teaching environment, not a demo. The education hub has 11 articles because education isn't outreach — it's the mechanism by which knowledge stops being locked in labs." },
+              { num: "06", text: "Assistive technology built without the people it's meant to serve is just a product. We've done limited formal user research with motor-impaired users, and we say so openly on our Careers page rather than claiming otherwise. Honesty about gaps is the first step to closing them." },
+              { num: "07", text: "One person with public data and consumer hardware can produce meaningful science. The Ninapro DB5 is publicly available. An Arduino Uno costs $28. The code is on GitHub. The barrier was never the data or the hardware — it was the assumption that this required a lab." },
             ].map((item, i) => (
               <ManifestoItem key={item.num} num={item.num} text={item.text} delay={i * 0.05} />
             ))}
