@@ -3,6 +3,7 @@ import Navbar from "./Navbar"
 import Footer from "./Footer"
 import { Reveal, SectionPill } from "./Animate"
 import ContactForm from "./components/ContactForm"
+import { IconClock, IconMicroscope, IconWrench, IconAlert } from "./Icons"
 import NeuralNoise from "./components/NeuralNoise"
 
 const PINK   = "#FF2D78"
@@ -231,13 +232,13 @@ export default function Contact() {
                 <div style={{ fontSize: 10, fontWeight: 700, color: "var(--text-tertiary)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 14 }}>What to expect</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                   {[
-                    { icon: "⏱", label: "Reply time", val: "Usually 1–3 business days" },
-                    { icon: "🔬", label: "Research Qs", val: "Always welcome; cite the paper" },
-                    { icon: "🛠", label: "Hardware Qs", val: "Check GitHub Discussions first" },
-                    { icon: "🚫", label: "What we skip", val: "Sales pitches and cold outreach" },
-                  ].map(({ icon, label, val }) => (
+                    { Icon: IconClock,      label: "Reply time",   val: "Usually 1–3 business days" },
+                    { Icon: IconMicroscope, label: "Research Qs",  val: "Always welcome; cite the paper" },
+                    { Icon: IconWrench,     label: "Hardware Qs",  val: "Check GitHub Discussions first" },
+                    { Icon: IconAlert,      label: "What we skip", val: "Sales pitches and cold outreach" },
+                  ].map(({ Icon, label, val }) => (
                     <div key={label} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-                      <span style={{ fontSize: 14, flexShrink: 0, marginTop: 1 }}>{icon}</span>
+                      <Icon size={14} color="var(--text-tertiary)"/>
                       <div>
                         <div style={{ fontSize: 12, fontWeight: 600, color: "var(--text)" }}>{label}</div>
                         <div style={{ fontSize: 11, color: "var(--text-secondary)", fontWeight: 300, lineHeight: 1.5 }}>{val}</div>

@@ -6,7 +6,7 @@ import { Reveal, SectionPill } from "./Animate"
 import NeuralNoise from "./components/NeuralNoise"
 import Quiz from "./educators/Quiz"
 import ContactForm from "./components/ContactForm"
-import { IconBolt, IconBrain, IconPuzzle, IconBook, IconMicroscope, IconGear, IconLaptop, IconBarChart, IconHandshake, IconMedical } from "./Icons"
+import { IconBolt, IconBrain, IconPuzzle, IconBook, IconMicroscope, IconGear, IconLaptop, IconBarChart, IconHandshake, IconMedical, IconDocument, IconClipboard, IconDatabase, IconMap } from "./Icons"
 
 const GREEN  = "#10B981"
 const PINK   = "#FF2D78"
@@ -103,12 +103,12 @@ const RESOURCE_CARD = {
   title: "Educator resource library",
   summary: "Printable handouts, slide deck templates, assessment rubrics, Ninapro dataset downloads, and curriculum alignment guides.",
   items: [
-    { icon: "📄", label: "Student handouts", desc: "Print-ready worksheets for all 3 lessons" },
-    { icon: "📊", label: "Slide decks", desc: "Editable keynote + PPTX for each lesson" },
-    { icon: "📋", label: "Assessment rubrics", desc: "Marking guides with performance descriptors" },
-    { icon: "💾", label: "Dataset access", desc: "Pre-filtered Ninapro DB5 CSV for classroom use" },
-    { icon: "🗺️", label: "Curriculum maps", desc: "Detailed alignment for 5 major frameworks" },
-    { icon: "📘", label: "Teacher guides", desc: "Step-by-step facilitation notes per lesson" },
+    { Icon: IconDocument,  label: "Student handouts", desc: "Print-ready worksheets for all 3 lessons" },
+    { Icon: IconBarChart,  label: "Slide decks", desc: "Editable keynote + PPTX for each lesson" },
+    { Icon: IconClipboard, label: "Assessment rubrics", desc: "Marking guides with performance descriptors" },
+    { Icon: IconDatabase,  label: "Dataset access", desc: "Pre-filtered Ninapro DB5 CSV for classroom use" },
+    { Icon: IconMap,       label: "Curriculum maps", desc: "Detailed alignment for 5 major frameworks" },
+    { Icon: IconBook,      label: "Teacher guides", desc: "Step-by-step facilitation notes per lesson" },
   ],
   color: GREEN,
   icon: IconBook,
@@ -469,7 +469,7 @@ export default function Educators() {
               <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 0 }}>
                 {RESOURCE_CARD.items.map((item, i) => (
                   <div key={i} style={{ padding: "16px 20px", borderRight: i % 3 < 2 ? `1px solid ${GREEN}12` : "", borderBottom: i < 3 ? `1px solid ${GREEN}12` : "", display: "flex", alignItems: "flex-start", gap: 10 }}>
-                    <span style={{ fontSize: 18, flexShrink: 0 }}>{item.icon}</span>
+                    <div style={{ flexShrink: 0 }}><item.Icon size={18} color={GREEN}/></div>
                     <div>
                       <div style={{ fontSize: 12, fontWeight: 600, color: "var(--text)", marginBottom: 2 }}>{item.label}</div>
                       <div style={{ fontSize: 11, color: "var(--text-tertiary)", fontWeight: 300 }}>{item.desc}</div>

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Navbar from "./Navbar"
 import Footer from "./Footer"
 import LiquidChrome from "./components/LiquidChrome"
+import { IconBolt, IconPlug, IconWrench, IconClipboard, IconWave, IconBarChart, IconSprout, IconAlert } from "./Icons"
 
 const PINK   = "#FF2D78"
 const BLUE   = "#3B82F6"
@@ -14,7 +15,7 @@ const PATHS = [
   {
     id: "no-hardware",
     color: PINK,
-    emoji: "⚡",
+    Icon: IconBolt,
     title: "Try it now",
     sub: "No hardware needed",
     time: "2 min",
@@ -49,7 +50,7 @@ const PATHS = [
   {
     id: "hardware",
     color: BLUE,
-    emoji: "🔌",
+    Icon: IconPlug,
     title: "Use real muscles",
     sub: "MyoWare 2.0 + Arduino",
     time: "~30 min setup",
@@ -92,7 +93,7 @@ const PATHS = [
   {
     id: "developer",
     color: PURPLE,
-    emoji: "🛠",
+    Icon: IconWrench,
     title: "Build on it",
     sub: "Fork, extend, or integrate",
     time: "Varies",
@@ -135,7 +136,7 @@ const PATHS = [
   {
     id: "educator",
     color: GREEN,
-    emoji: "📋",
+    Icon: IconClipboard,
     title: "Teach with myojam",
     sub: "Classroom-ready",
     time: "Free",
@@ -226,7 +227,7 @@ function PathCard({ path, selected, onClick }) {
       onMouseEnter={e => { if (!selected) { e.currentTarget.style.borderColor = `${path.color}60`; e.currentTarget.style.transform = "translateY(-1px)" } }}
       onMouseLeave={e => { if (!selected) { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.transform = "translateY(0)" } }}
     >
-      <div style={{ fontSize: 24, marginBottom: 10 }}>{path.emoji}</div>
+      <div style={{ marginBottom: 10 }}><path.Icon size={24} color={selected ? path.color : "var(--text-secondary)"}/></div>
       <div style={{ fontSize: 15, fontWeight: 700, color: selected ? path.color : "var(--text)", marginBottom: 3, transition: "color 0.18s" }}>{path.title}</div>
       <div style={{ fontSize: 12, color: selected ? path.color : "var(--text-tertiary)", fontWeight: 400, marginBottom: 10, transition: "color 0.18s" }}>{path.sub}</div>
       <div style={{ display: "inline-flex", alignItems: "center", gap: 5, background: selected ? `${path.color}18` : "var(--bg-secondary)", border: `1px solid ${selected ? path.color + "40" : "var(--border)"}`, borderRadius: 100, padding: "3px 10px", fontSize: 11, color: selected ? path.color : "var(--text-tertiary)", fontWeight: 500, transition: "all 0.18s" }}>
@@ -312,8 +313,8 @@ export default function GetStarted() {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
-              <div style={{ width: 40, height: 40, borderRadius: 12, background: `${active.color}18`, border: `1.5px solid ${active.color}40`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}>
-                {active.emoji}
+              <div style={{ width: 40, height: 40, borderRadius: 12, background: `${active.color}18`, border: `1.5px solid ${active.color}40`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <active.Icon size={20} color={active.color}/>
               </div>
               <div>
                 <div style={{ fontSize: 18, fontWeight: 700, color: "var(--text)" }}>{active.title}</div>
@@ -346,14 +347,14 @@ export default function GetStarted() {
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                 {[
-                  { icon: "〜", color: PINK,   text: "A surface EMG signal is the electrical activity of your muscles, measured from the skin surface. It looks like noise — until you filter and window it." },
-                  { icon: "⊞", color: BLUE,   text: "myojam extracts 4 time-domain features (MAV, RMS, WL, ZCR) from each 1-second window across 16 electrode channels — 64 numbers total." },
-                  { icon: "🌲", color: GREEN,  text: "A 500-tree Random Forest classifies those 64 numbers into one of 6 gestures. It was trained on 10 subjects from Ninapro DB5 under LOSO cross-validation." },
-                  { icon: "⚠", color: AMBER,  text: "Honest limitation: 84.85% across subjects. Move electrodes 1 cm and it drops ~15 pp. Real prosthetic use would require per-user calibration." },
+                  { Icon: IconWave,     color: PINK,   text: "A surface EMG signal is the electrical activity of your muscles, measured from the skin surface. It looks like noise — until you filter and window it." },
+                  { Icon: IconBarChart, color: BLUE,   text: "myojam extracts 4 time-domain features (MAV, RMS, WL, ZCR) from each 1-second window across 16 electrode channels — 64 numbers total." },
+                  { Icon: IconSprout,   color: GREEN,  text: "A 500-tree Random Forest classifies those 64 numbers into one of 6 gestures. It was trained on 10 subjects from Ninapro DB5 under LOSO cross-validation." },
+                  { Icon: IconAlert,    color: AMBER,  text: "Honest limitation: 84.85% across subjects. Move electrodes 1 cm and it drops ~15 pp. Real prosthetic use would require per-user calibration." },
                 ].map((item, i) => (
                   <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
-                    <div style={{ width: 28, height: 28, borderRadius: 8, background: `${item.color}18`, border: `1px solid ${item.color}30`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, color: item.color, flexShrink: 0 }}>
-                      {item.icon}
+                    <div style={{ width: 28, height: 28, borderRadius: 8, background: `${item.color}18`, border: `1px solid ${item.color}30`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      <item.Icon size={14} color={item.color}/>
                     </div>
                     <p style={{ fontSize: 12.5, color: "var(--text-secondary)", fontWeight: 300, lineHeight: 1.7, margin: 0 }}>{item.text}</p>
                   </div>
@@ -377,7 +378,7 @@ export default function GetStarted() {
                       onMouseEnter={e => { e.currentTarget.style.borderColor = `${path.color}60`; e.currentTarget.style.background = `${path.color}06` }}
                       onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.background = "none" }}
                     >
-                      <span style={{ fontSize: 16 }}>{path.emoji}</span>
+                      <path.Icon size={16} color={path.color}/>
                       <div style={{ flex: 1 }}>
                         <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text)" }}>{path.title}</div>
                         <div style={{ fontSize: 11, color: "var(--text-tertiary)", fontWeight: 300 }}>{path.sub} · {path.time}</div>

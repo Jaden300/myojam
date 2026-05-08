@@ -4,6 +4,7 @@ import Navbar from "./Navbar"
 import Footer from "./Footer"
 import { Reveal, SectionPill } from "./Animate"
 import LiquidChrome from "./components/LiquidChrome"
+import { IconBolt, IconMicroscope, IconArm, IconDatabase, IconRocket } from "./Icons"
 
 const CYAN="#06B6D4", BLUE="#3B82F6", PURPLE="#8B5CF6", GREEN="#10B981", AMBER="#F59E0B", PINK="#FF2D78", RED="#EF4444"
 
@@ -508,12 +509,12 @@ function FrequencyCard(){
 
 // ── CARD 5: HISTORY ───────────────────────────────────────────────────────────
 const MILESTONES=[
-  {year:"1791",icon:"⚡",color:AMBER,era:"Foundation",title:"Galvani's discovery",detail:"Luigi Galvani discovers animal electricity — a frog's leg twitches when touched with two dissimilar metals. First evidence that electricity mediates muscle contraction. Published in De Viribus Electricitatis in Motu Musculari Commentarius."},
-  {year:"1849",icon:"🔬",color:"#E8A030",era:"Discovery",title:"First intentional EMG",detail:"Emil du Bois-Reymond records the first deliberate EMG signal from human muscle contraction using a galvanometer. Establishes the measurability of bioelectric phenomena at the muscle surface."},
-  {year:"1940s",icon:"📡",color:"#D4922A",era:"Clinical",title:"Practical surface EMG",detail:"Amplifiers become powerful enough for skin-surface detection. EMG transitions from lab curiosity to clinical diagnostic tool, used primarily for nerve conduction studies and muscle disease diagnosis."},
-  {year:"1960s",icon:"🦾",color:"#C07820",era:"Prosthetics",title:"First myoelectric arm",detail:"First commercial myoelectric prosthetic: a single degree-of-freedom hook controlled by bicep EMG amplitude threshold. One muscle, one motion. The core principle is identical to myojam's classifier input."},
-  {year:"2012",icon:"💾",color:"#F59E0B",era:"Benchmark",title:"Ninapro DB5 released",detail:"Ninapro DB5: 10 subjects, 16 high-density surface EMG channels, 53 hand and wrist gesture classes. The first large-scale public benchmark enabling cross-laboratory cross-subject comparison."},
-  {year:"2025",icon:"🚀",color:AMBER,era:"myojam",title:"84.85% cross-subject",detail:"myojam achieves 84.85% cross-subject accuracy on Ninapro DB5 using Random Forest with 64-feature vectors. Open source, open education, browser-accessible classifier. Desktop app. 11 articles. MIT license."},
+  {year:"1791",Icon:IconBolt,color:AMBER,era:"Foundation",title:"Galvani's discovery",detail:"Luigi Galvani discovers animal electricity — a frog's leg twitches when touched with two dissimilar metals. First evidence that electricity mediates muscle contraction. Published in De Viribus Electricitatis in Motu Musculari Commentarius."},
+  {year:"1849",Icon:IconMicroscope,color:"#E8A030",era:"Discovery",title:"First intentional EMG",detail:"Emil du Bois-Reymond records the first deliberate EMG signal from human muscle contraction using a galvanometer. Establishes the measurability of bioelectric phenomena at the muscle surface."},
+  {year:"1940s",Icon:IconArm,color:"#D4922A",era:"Clinical",title:"Practical surface EMG",detail:"Amplifiers become powerful enough for skin-surface detection. EMG transitions from lab curiosity to clinical diagnostic tool, used primarily for nerve conduction studies and muscle disease diagnosis."},
+  {year:"1960s",Icon:IconArm,color:"#C07820",era:"Prosthetics",title:"First myoelectric arm",detail:"First commercial myoelectric prosthetic: a single degree-of-freedom hook controlled by bicep EMG amplitude threshold. One muscle, one motion. The core principle is identical to myojam's classifier input."},
+  {year:"2012",Icon:IconDatabase,color:"#F59E0B",era:"Benchmark",title:"Ninapro DB5 released",detail:"Ninapro DB5: 10 subjects, 16 high-density surface EMG channels, 53 hand and wrist gesture classes. The first large-scale public benchmark enabling cross-laboratory cross-subject comparison."},
+  {year:"2025",Icon:IconRocket,color:AMBER,era:"myojam",title:"84.85% cross-subject",detail:"myojam achieves 84.85% cross-subject accuracy on Ninapro DB5 using Random Forest with 64-feature vectors. Open source, open education, browser-accessible classifier. Desktop app. 11 articles. MIT license."},
 ]
 
 function HistoryCard(){
@@ -548,7 +549,7 @@ function HistoryCard(){
                   display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,
                   transition:"all 0.25s",boxShadow:active===i?`0 0 18px ${m.color}60`:"none",
                   opacity:vis?1:0,transform:vis?"scale(1)":"scale(0.3)",
-                  transitionDelay:`${0.3+i*0.12}s`}}>{m.icon}</div>
+                  transitionDelay:`${0.3+i*0.12}s`}}><m.Icon size={16} color={active===i?"#fff":m.color}/></div>
                 <div style={{fontSize:8.5,fontWeight:700,color:active===i?m.color:`${m.color}48`,marginTop:6,textAlign:"center"}}>{m.year}</div>
                 <div style={{fontSize:7.5,color:`${m.color}38`,textAlign:"center",lineHeight:1.2}}>{m.era}</div>
               </div>
@@ -560,7 +561,7 @@ function HistoryCard(){
         <div key={m.year} style={{display:active===i?"grid":"none",gridTemplateColumns:"80px 1fr",gap:0,
           padding:"26px 36px",background:"linear-gradient(135deg,#120C00,#0A0800)",borderBottom:`1px solid ${AMBER}12`}}>
           <div style={{display:"flex",flexDirection:"column",alignItems:"center",paddingTop:2}}>
-            <div style={{fontSize:28,marginBottom:6}}>{m.icon}</div>
+            <div style={{marginBottom:6}}><m.Icon size={28} color={m.color}/></div>
             <div style={{fontSize:14,fontWeight:800,color:m.color,letterSpacing:"-0.5px"}}>{m.year}</div>
             <div style={{fontSize:8.5,color:`${m.color}60`,textTransform:"uppercase",letterSpacing:"0.06em",marginTop:2,textAlign:"center"}}>{m.era}</div>
           </div>

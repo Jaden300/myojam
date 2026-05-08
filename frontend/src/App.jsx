@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts"
 import Navbar from "./Navbar"
 import HandModel from "./HandModel"
-import { IconChat } from "./Icons"
+import { IconChat, IconGestureIndex, IconGestureMiddle, IconGestureRing, IconGesturePinky, IconGestureThumb, IconGestureFist } from "./Icons"
 
 const API = import.meta.env.VITE_API_URL
 
@@ -15,6 +14,15 @@ const GESTURE_COLORS = {
   "pinky flex":  "#10B981",
   "thumb flex":  "#F59E0B",
   "fist":        "#EF4444",
+}
+
+const GESTURE_ICON = {
+  "index flex":  IconGestureIndex,
+  "middle flex": IconGestureMiddle,
+  "ring flex":   IconGestureRing,
+  "pinky flex":  IconGesturePinky,
+  "thumb flex":  IconGestureThumb,
+  "fist":        IconGestureFist,
 }
 
 const HAND_COLORS = [
@@ -34,7 +42,6 @@ const GESTURES = [
   { id: 6, name: "fist",        action: "Spacebar",     key: "▬" },
 ]
 
-// Confusion matrix from model training - 10 subjects, 3254 test samples
 const LABELS = ["index flex", "middle flex", "ring flex", "pinky flex", "thumb flex", "fist"]
 
 const GESTURE_RECALL = [
@@ -68,20 +75,110 @@ function computeFingerCurls(emgWindow) {
 }
 
 const card = {
-  background: "var(--bg-secondary)",
-  border: "1px solid var(--border)",
-  borderRadius: "var(--radius)",
+  background: "rgba(255,255,255,0.04)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: 16,
 }
 
+// ── Custom SVG waveform (replaces Recharts) ───────────────────────────────────
+function WaveformSVG({ data }) {
+  const CH_COLORS = ["#FF2D78", "#3B82F6", "#10B981"]
+  const W = 800, H = 180
+  const channels = ["ch1", "ch2", "ch3"]
 
+  if (!data || data.length < 2) {
+    return (
+      <div style={{ height: H, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <span style={{ color: "rgba(255,255,255,0.18)", fontSize: 13 }}>Loading signal…</span>
+      </div>
+    )
+  }
+
+  const allVals = data.flatMap(d => channels.map(c => d[c] ?? 0))
+  const minV = Math.min(...allVals)
+  const maxV = Math.max(...allVals)
+  const range = maxV - minV || 0.001
+  const tx = i => (i / (data.length - 1)) * W
+  const ty = v => 12 + (1 - (v - minV) / range) * (H - 24)
+
+  return (
+    <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" style={{ display: "block" }}>
+      <defs>
+        {CH_COLORS.map((c, i) => (
+          <linearGradient key={i} id={`wg${i}`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={c} stopOpacity="0.2"/>
+            <stop offset="100%" stopColor={c} stopOpacity="0"/>
+          </linearGradient>
+        ))}
+        <filter id="wglow">
+          <feGaussianBlur stdDeviation="1.5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      {[0.15, 0.35, 0.5, 0.65, 0.85].map((t, i) => (
+        <line key={i} x1={0} x2={W} y1={H * t} y2={H * t}
+          stroke="rgba(255,255,255,0.04)" strokeWidth={1}/>
+      ))}
+      {channels.map((ch, ci) => {
+        const pts = data.map((d, i) => `${tx(i)},${ty(d[ch] ?? 0)}`).join(" ")
+        const areaD = `M${tx(0)},${ty(data[0][ch] ?? 0)} ` +
+          data.slice(1).map((d, i) => `L${tx(i+1)},${ty(d[ch] ?? 0)}`).join(" ") +
+          ` L${W},${H} L0,${H} Z`
+        return (
+          <g key={ch}>
+            {ci === 0 && <path d={areaD} fill={`url(#wg${ci})`}/>}
+            <polyline
+              points={pts} fill="none"
+              stroke={CH_COLORS[ci]}
+              strokeWidth={ci === 0 ? 1.8 : 1.2}
+              filter="url(#wglow)"
+              opacity={ci === 0 ? 1 : 0.7}
+            />
+          </g>
+        )
+      })}
+    </svg>
+  )
+}
+
+// ── Animated confidence arc ───────────────────────────────────────────────────
+function ConfArc({ value, color, animated }) {
+  const SIZE = 96, STROKE = 7, R = (SIZE - STROKE) / 2
+  const CIRC = 2 * Math.PI * R
+  const pct = animated ? value : 0
+  return (
+    <div style={{ position: "relative", width: SIZE, height: SIZE, flexShrink: 0 }}>
+      <svg width={SIZE} height={SIZE} style={{ transform: "rotate(-90deg)", display: "block" }}>
+        <circle cx={SIZE/2} cy={SIZE/2} r={R} fill="none" stroke={color} strokeWidth={STROKE} strokeOpacity={0.12}/>
+        <circle cx={SIZE/2} cy={SIZE/2} r={R} fill="none" stroke={color} strokeWidth={STROKE}
+          strokeLinecap="round"
+          strokeDasharray={`${CIRC * pct} ${CIRC * (1 - pct)}`}
+          style={{
+            transition: "stroke-dasharray 0.6s cubic-bezier(0.34,1.56,0.64,1)",
+            filter: `drop-shadow(0 0 5px ${color}88)`
+          }}
+        />
+      </svg>
+      <div style={{
+        position: "absolute", inset: 0,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        fontSize: 18, fontWeight: 700, color,
+        letterSpacing: "-0.5px"
+      }}>
+        {animated ? `${(value * 100).toFixed(0)}%` : ""}
+      </div>
+    </div>
+  )
+}
+
+// ── Per-gesture accuracy rings ────────────────────────────────────────────────
 function AccuracyRings() {
   const [visible, setVisible] = useState(true)
   const [animated, setAnimated] = useState(false)
-  
 
   useEffect(() => {
-  const t = setTimeout(() => setAnimated(true), 100)
-  return () => clearTimeout(t)
+    const t = setTimeout(() => setAnimated(true), 100)
+    return () => clearTimeout(t)
   }, [])
 
   function handleToggle() {
@@ -93,33 +190,23 @@ function AccuracyRings() {
     })
   }
 
-  const SIZE = 72
-  const STROKE = 6
-  const R = (SIZE - STROKE) / 2
+  const SIZE = 72, STROKE = 6, R = (SIZE - STROKE) / 2
   const CIRC = 2 * Math.PI * R
 
   return (
     <div style={{
-      background: "var(--bg-secondary)", border: "1px solid var(--border)",
-      borderRadius: "var(--radius)", padding: "24px", marginTop: 16
+      background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)",
+      borderRadius: 16, padding: "24px", marginTop: 16
     }}>
-      <div
-        onClick={handleToggle}
-        style={{
-          display: "flex", justifyContent: "space-between",
-          alignItems: "center", cursor: "pointer", userSelect: "none"
-        }}
-      >
+      <div onClick={handleToggle} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer", userSelect: "none" }}>
         <div>
-          <div style={{ fontSize: 14, fontWeight: 500, color: "var(--text)" }}>
-            Per-gesture accuracy
-          </div>
-          <div style={{ fontSize: 12, color: "var(--text-tertiary)", fontWeight: 300, marginTop: 2 }}>
+          <div style={{ fontSize: 14, fontWeight: 500, color: "#fff" }}>Per-gesture accuracy</div>
+          <div style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", fontWeight: 300, marginTop: 2 }}>
             84.85% overall · 3,254 test samples · 10 subjects
           </div>
         </div>
         <div style={{
-          fontSize: 13, color: "var(--text-tertiary)",
+          fontSize: 13, color: "rgba(255,255,255,0.4)",
           transition: "transform 0.25s ease",
           transform: visible ? "rotate(180deg)" : "rotate(0deg)",
           display: "inline-block"
@@ -132,49 +219,29 @@ function AccuracyRings() {
         opacity: visible ? 1 : 0,
         transition: "max-height 0.4s ease, opacity 0.3s ease",
       }}>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(6, 1fr)",
-          gap: 12, marginTop: 24
-        }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 12, marginTop: 24 }}>
           {GESTURE_RECALL.map((g, i) => {
             const progress = animated ? g.recall / 100 : 0
             const dash = CIRC * progress
             const gap = CIRC - dash
-
             return (
               <div key={g.name} style={{
-                display: "flex", flexDirection: "column",
-                alignItems: "center", gap: 10,
+                display: "flex", flexDirection: "column", alignItems: "center", gap: 10,
                 opacity: animated ? 1 : 0,
                 transform: animated ? "translateY(0)" : "translateY(12px)",
                 transition: `opacity 0.4s ease ${i * 0.07}s, transform 0.4s ease ${i * 0.07}s`
               }}>
-                {/* Ring */}
                 <div style={{ position: "relative", width: SIZE, height: SIZE }}>
                   <svg width={SIZE} height={SIZE} style={{ transform: "rotate(-90deg)" }}>
-                    {/* Track */}
-                    <circle
-                      cx={SIZE/2} cy={SIZE/2} r={R}
-                      fill="none"
-                      stroke={g.color}
-                      strokeWidth={STROKE}
-                      strokeOpacity={0.12}
-                    />
-                    {/* Progress */}
-                    <circle
-                      cx={SIZE/2} cy={SIZE/2} r={R}
-                      fill="none"
-                      stroke={g.color}
-                      strokeWidth={STROKE}
-                      strokeLinecap="round"
-                      strokeDasharray={`${dash} ${gap}`}
+                    <circle cx={SIZE/2} cy={SIZE/2} r={R} fill="none" stroke={g.color} strokeWidth={STROKE} strokeOpacity={0.15}/>
+                    <circle cx={SIZE/2} cy={SIZE/2} r={R} fill="none" stroke={g.color} strokeWidth={STROKE}
+                      strokeLinecap="round" strokeDasharray={`${dash} ${gap}`}
                       style={{
-                        transition: `stroke-dasharray 0.8s cubic-bezier(0.34,1.56,0.64,1) ${i * 0.07}s`
+                        transition: `stroke-dasharray 0.8s cubic-bezier(0.34,1.56,0.64,1) ${i * 0.07}s`,
+                        filter: `drop-shadow(0 0 3px ${g.color}88)`
                       }}
                     />
                   </svg>
-                  {/* Center % */}
                   <div style={{
                     position: "absolute", inset: 0,
                     display: "flex", alignItems: "center", justifyContent: "center",
@@ -183,33 +250,18 @@ function AccuracyRings() {
                     {animated ? `${g.recall.toFixed(0)}%` : ""}
                   </div>
                 </div>
-
-                {/* Label */}
-                <div style={{
-                  fontSize: 11, color: "var(--text-secondary)",
-                  fontWeight: 400, textAlign: "center", lineHeight: 1.4
-                }}>
-                  {g.name.replace(" flex", "")}
-                  {g.name !== "fist" ? " flex" : ""}
+                <div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", fontWeight: 400, textAlign: "center", lineHeight: 1.4 }}>
+                  {g.name.replace(" flex", "")}{g.name !== "fist" ? " flex" : ""}
                 </div>
-
-                {/* Count */}
-                <div style={{
-                  fontSize: 10, color: "var(--text-tertiary)",
-                  fontWeight: 300
-                }}>
+                <div style={{ fontSize: 10, color: "rgba(255,255,255,0.25)", fontWeight: 300 }}>
                   {g.correct}/{g.total}
                 </div>
               </div>
             )
           })}
         </div>
-
-        <p style={{
-          fontSize: 11, color: "var(--text-tertiary)", fontWeight: 300,
-          marginTop: 20, lineHeight: 1.6
-        }}>
-          Recall per gesture - correct predictions divided by total samples of that gesture in the test set.
+        <p style={{ fontSize: 11, color: "rgba(255,255,255,0.25)", fontWeight: 300, marginTop: 20, lineHeight: 1.6 }}>
+          Recall per gesture — correct predictions divided by total samples of that gesture in the test set.
         </p>
       </div>
     </div>
@@ -230,16 +282,17 @@ export default function App() {
   const [serialStatus, setSerialStatus] = useState("disconnected")
   const [fingerCurls, setFingerCurls] = useState([0, 0, 0, 0, 0])
   const [handColor, setHandColor] = useState("#f5dce4")
+  const [confAnimated, setConfAnimated] = useState(false)
   const intervalRef = useRef(null)
   const serialBufferRef = useRef([])
   const logRef = useRef(null)
 
   const addLog = useCallback((gesture, confidence) => {
-    const color = GESTURE_COLORS[gesture] || "var(--accent)"
+    const color = GESTURE_COLORS[gesture] || "#FF2D78"
     const g = GESTURES.find(g => g.name === gesture)
     setActionLog(prev => [{
       id: Date.now() + Math.random(), gesture, confidence, color,
-      action: g?.action || " - ", key: g?.key || "?",
+      action: g?.action || "—", key: g?.key || "?",
       time: new Date().toLocaleTimeString("en-US", { hour12: false })
     }, ...prev].slice(0, 40))
   }, [])
@@ -252,9 +305,11 @@ export default function App() {
       setChartData(windowToChart(emgWindow))
       setFingerCurls(computeFingerCurls(emgWindow))
       addLog(result.gesture_name, result.confidence)
+      setConfAnimated(false)
+      setTimeout(() => setConfAnimated(true), 50)
       return result
     } catch (e) {
-      setError("Backend unreachable - is the server running?")
+      setError("Backend unreachable — is the server running?")
     }
   }, [addLog])
 
@@ -262,28 +317,26 @@ export default function App() {
     setLoading(true)
     setError(null)
     try {
-      // Try up to 5 samples until model agrees with label
       for (let attempt = 0; attempt < 5; attempt++) {
         const url = gestureId ? `${API}/sample?gesture_id=${gestureId}` : `${API}/sample`
         const { data: sample } = await axios.get(url)
         const { data: result } = await axios.post(`${API}/predict`, { emg_window: sample.emg_window })
-        
-        // If no specific gesture requested, or model agrees with label
         if (!gestureId || result.gesture_id === gestureId) {
           setPrediction(result)
           setAllProbs(result.all_probabilities)
           setChartData(windowToChart(sample.emg_window))
           setFingerCurls(computeFingerCurls(sample.emg_window))
           addLog(result.gesture_name, result.confidence)
+          setConfAnimated(false)
+          setTimeout(() => setConfAnimated(true), 50)
           return
         }
       }
-      // Fallback - just use last result even if mismatch
       const url = gestureId ? `${API}/sample?gesture_id=${gestureId}` : `${API}/sample`
       const { data: sample } = await axios.get(url)
       await predict(sample.emg_window)
     } catch (e) {
-      setError("Backend unreachable - is the server running?")
+      setError("Backend unreachable — is the server running?")
     } finally {
       setLoading(false)
     }
@@ -361,91 +414,102 @@ export default function App() {
     }
   }
 
-  const activeColor = prediction
-    ? (GESTURE_COLORS[prediction.gesture_name] || "var(--accent)")
-    : "var(--accent)"
+  const activeColor = prediction ? (GESTURE_COLORS[prediction.gesture_name] || "#FF2D78") : "#FF2D78"
 
   return (
-    <div style={{ minHeight: "100vh", paddingTop: 52, background: "var(--bg)" }}>
+    <div style={{ minHeight: "100vh", paddingTop: 52, background: "#05051a" }}>
       <Navbar />
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 32px" }}>
+      {/* Hero strip */}
+      <div style={{
+        background: "linear-gradient(180deg, rgba(255,45,120,0.07) 0%, transparent 100%)",
+        borderBottom: "1px solid rgba(255,255,255,0.07)",
+        padding: "32px 32px 24px"
+      }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div>
+              <div style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", fontWeight: 400, marginBottom: 6, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                myojam · live demo
+              </div>
+              <h1 style={{ fontSize: 28, fontWeight: 700, color: "#fff", letterSpacing: "-0.8px", margin: 0 }}>
+                EMG Gesture Classifier
+              </h1>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginTop: 4, fontWeight: 300 }}>
+                {mode === "sensor"
+                  ? "Live sensor · 16 channels · 9600 baud"
+                  : "Ninapro DB5 dataset · Random Forest · 84.85% accuracy"}
+              </p>
+            </div>
 
-        {/* Header */}
-        <div style={{
-          display: "flex", justifyContent: "space-between",
-          alignItems: "flex-end", marginBottom: 32,
-          borderBottom: "1px solid var(--border)", paddingBottom: 20
-        }}>
-          <div>
-            <h1 style={{
-              fontSize: 28, fontWeight: 600,
-              letterSpacing: "-0.8px", color: "var(--text)"
-            }}>myojam demo</h1>
-            <p style={{
-              fontSize: 13, color: "var(--text-secondary)",
-              marginTop: 4, fontWeight: 300
-            }}>Real-time EMG gesture classification</p>
-          </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              {isLive && (
+                <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                  <div style={{
+                    width: 7, height: 7, borderRadius: "50%", background: "#FF2D78",
+                    boxShadow: "0 0 10px #FF2D78, 0 0 20px #FF2D7866"
+                  }}/>
+                  <span style={{ fontSize: 12, color: "#FF2D78", fontWeight: 600, letterSpacing: "0.05em" }}>LIVE</span>
+                </div>
+              )}
 
-          {/* Mode switcher */}
-          <div style={{
-            display: "flex", gap: 2,
-            background: "var(--bg-secondary)",
-            border: "1px solid var(--border)",
-            borderRadius: 100, padding: 3
-          }}>
-            {[["dataset", "Dataset"], ["sensor", "Sensor"]].map(([m, label]) => (
-              <button key={m} onClick={() => { setMode(m); setIsLive(false) }} style={{
-                background: mode === m ? "#fff" : "transparent",
-                border: "none",
-                color: mode === m ? "var(--text)" : "var(--text-secondary)",
-                borderRadius: 100, padding: "6px 18px",
-                fontFamily: "var(--font)", fontSize: 13, fontWeight: mode === m ? 500 : 400,
-                cursor: "pointer", transition: "all 0.15s",
-                boxShadow: mode === m ? "0 1px 4px rgba(0,0,0,0.08)" : "none"
-              }}>{label}</button>
-            ))}
+              <div style={{
+                display: "flex", gap: 2,
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                borderRadius: 100, padding: 3
+              }}>
+                {[["dataset", "Dataset"], ["sensor", "Sensor"]].map(([m, label]) => (
+                  <button key={m} onClick={() => { setMode(m); setIsLive(false) }} style={{
+                    background: mode === m ? "rgba(255,255,255,0.12)" : "transparent",
+                    border: "none",
+                    color: mode === m ? "#fff" : "rgba(255,255,255,0.4)",
+                    borderRadius: 100, padding: "6px 18px",
+                    fontFamily: "var(--font)", fontSize: 13, fontWeight: mode === m ? 500 : 400,
+                    cursor: "pointer", transition: "all 0.15s",
+                    boxShadow: mode === m ? "0 1px 4px rgba(0,0,0,0.3)" : "none"
+                  }}>{label}</button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Error */}
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "24px 32px 64px" }}>
+
         {error && (
           <div style={{
-            background: "#FFF0F5", border: "1px solid rgba(255,45,120,0.2)",
-            borderRadius: "var(--radius-sm)", padding: "10px 16px",
-            fontSize: 13, color: "var(--accent)", marginBottom: 20
+            background: "rgba(255,45,120,0.1)", border: "1px solid rgba(255,45,120,0.25)",
+            borderRadius: 12, padding: "10px 16px",
+            fontSize: 13, color: "#FF2D78", marginBottom: 20
           }}>{error}</div>
         )}
 
-        {/* Sensor banner */}
         {mode === "sensor" && (
           <div style={{
-            ...card,
-            background: serialStatus === "connected" ? "var(--accent-soft)" : "var(--bg-secondary)",
-            border: `1px solid ${serialStatus === "connected" ? "rgba(255,45,120,0.2)" : "var(--border)"}`,
-            padding: "14px 20px",
+            background: serialStatus === "connected" ? "rgba(255,45,120,0.08)" : "rgba(255,255,255,0.04)",
+            border: `1px solid ${serialStatus === "connected" ? "rgba(255,45,120,0.25)" : "rgba(255,255,255,0.08)"}`,
+            borderRadius: 12, padding: "14px 20px",
             display: "flex", justifyContent: "space-between", alignItems: "center",
             marginBottom: 20
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <div style={{
                 width: 8, height: 8, borderRadius: "50%",
-                background: serialStatus === "connected" ? "var(--accent)" : "var(--text-tertiary)"
+                background: serialStatus === "connected" ? "#FF2D78" : "rgba(255,255,255,0.2)",
+                boxShadow: serialStatus === "connected" ? "0 0 8px #FF2D78" : "none"
               }}/>
-              <span style={{
-                fontSize: 13, fontWeight: 500,
-                color: serialStatus === "connected" ? "var(--accent)" : "var(--text-secondary)"
-              }}>
+              <span style={{ fontSize: 13, fontWeight: 500, color: serialStatus === "connected" ? "#FF2D78" : "rgba(255,255,255,0.5)" }}>
                 {serialStatus === "connected" ? "Sensor connected" : "No sensor connected"}
               </span>
             </div>
             <button
               onClick={serialStatus === "connected" ? disconnectSensor : connectSensor}
               style={{
-                background: serialStatus === "connected" ? "transparent" : "var(--accent)",
+                background: serialStatus === "connected" ? "transparent" : "#FF2D78",
                 border: serialStatus === "connected" ? "1px solid rgba(255,45,120,0.3)" : "none",
-                color: serialStatus === "connected" ? "var(--accent)" : "#fff",
+                color: serialStatus === "connected" ? "#FF2D78" : "#fff",
                 borderRadius: 100, padding: "6px 18px",
                 fontFamily: "var(--font)", fontSize: 13, fontWeight: 500, cursor: "pointer"
               }}>
@@ -457,69 +521,50 @@ export default function App() {
         {/* Main grid */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 300px", gap: 16 }}>
 
-          {/* LEFT */}
+          {/* LEFT column */}
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
 
-            {/* Waveform */}
+            {/* Waveform card */}
             <div style={{ ...card, padding: 24 }}>
-              <div style={{
-                display: "flex", justifyContent: "space-between",
-                alignItems: "center", marginBottom: 20
-              }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
                 <div>
-                  <div style={{ fontSize: 14, fontWeight: 500, color: "var(--text)", marginBottom: 2 }}>
-                    EMG signal
-                  </div>
-                  <div style={{ fontSize: 12, color: "var(--text-tertiary)", fontWeight: 300 }}>
-                    {mode === "sensor" ? "Live sensor · 16 channels · 9600 baud" : "Ninapro DB5 · 16 channels · 200 Hz"}
+                  <div style={{ fontSize: 14, fontWeight: 500, color: "#fff", marginBottom: 2 }}>EMG signal</div>
+                  <div style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", fontWeight: 300 }}>
+                    {mode === "sensor" ? "Live · 16 ch · 9600 baud" : "Ninapro DB5 · 16 ch · 200 Hz"}
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: 8 }}>
                   {mode === "dataset" && (
                     <button onClick={() => fetchDataset()} disabled={loading} style={{
-                      background: "transparent", border: "1px solid var(--border-mid)",
-                      color: loading ? "var(--text-tertiary)" : "var(--text-secondary)",
+                      background: "transparent",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      color: loading ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.5)",
                       borderRadius: 100, padding: "5px 16px",
                       fontFamily: "var(--font)", fontSize: 13,
-                      cursor: loading ? "not-allowed" : "pointer"
-                    }}>{loading ? "..." : "↺ New sample"}</button>
+                      cursor: loading ? "not-allowed" : "pointer",
+                      transition: "border-color 0.15s, color 0.15s"
+                    }}>{loading ? "…" : "↺ New sample"}</button>
                   )}
                   {mode === "dataset" && (
                     <button onClick={() => setIsLive(l => !l)} style={{
-                      background: isLive ? "var(--accent-soft)" : "var(--accent)",
-                      border: isLive ? "1px solid rgba(255,45,120,0.3)" : "none",
-                      color: isLive ? "var(--accent)" : "#fff",
+                      background: isLive ? "rgba(255,45,120,0.15)" : "#FF2D78",
+                      border: isLive ? "1px solid rgba(255,45,120,0.35)" : "none",
+                      color: isLive ? "#FF2D78" : "#fff",
                       borderRadius: 100, padding: "5px 18px",
-                      fontFamily: "var(--font)", fontSize: 13, fontWeight: 500, cursor: "pointer"
-                    }}>{isLive ? "Stop" : "▶ Live"}</button>
+                      fontFamily: "var(--font)", fontSize: 13, fontWeight: 500,
+                      cursor: "pointer", transition: "all 0.15s"
+                    }}>{isLive ? "■ Stop" : "▶ Live"}</button>
                   )}
                 </div>
               </div>
 
-              <ResponsiveContainer width="100%" height={180}>
-                <LineChart data={chartData}>
-                  <XAxis dataKey="t" hide />
-                  <YAxis hide />
-                  <Tooltip
-                    contentStyle={{
-                      background: "#fff", border: "1px solid var(--border)",
-                      borderRadius: 10, fontFamily: "var(--font)", fontSize: 12,
-                      boxShadow: "var(--shadow)"
-                    }}
-                    formatter={v => [v.toFixed(4), ""]}
-                    labelStyle={{ display: "none" }}
-                  />
-                  <Line type="monotone" dataKey="ch1" stroke="#FF2D78" dot={false} strokeWidth={1.5} isAnimationActive={false} />
-                  <Line type="monotone" dataKey="ch2" stroke="#3B82F6" dot={false} strokeWidth={1} isAnimationActive={false} />
-                  <Line type="monotone" dataKey="ch3" stroke="#10B981" dot={false} strokeWidth={1} isAnimationActive={false} opacity={0.8} />
-                </LineChart>
-              </ResponsiveContainer>
+              <WaveformSVG data={chartData} />
 
               <div style={{ display: "flex", gap: 20, marginTop: 12 }}>
                 {[["Ch 1", "#FF2D78"], ["Ch 2", "#3B82F6"], ["Ch 3", "#10B981"]].map(([l, c]) => (
                   <div key={l} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <div style={{ width: 14, height: 2, background: c, borderRadius: 1 }}/>
-                    <span style={{ fontSize: 12, color: "var(--text-tertiary)", fontWeight: 300 }}>{l}</span>
+                    <div style={{ width: 14, height: 2, background: c, borderRadius: 1, boxShadow: `0 0 4px ${c}` }}/>
+                    <span style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", fontWeight: 300 }}>{l}</span>
                   </div>
                 ))}
               </div>
@@ -530,33 +575,41 @@ export default function App() {
               <div style={{
                 ...card,
                 borderLeft: `3px solid ${activeColor}`,
-                padding: "20px 24px",
-                display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
-                gap: 20, alignItems: "center"
+                padding: "24px",
+                display: "grid", gridTemplateColumns: "auto 1fr auto",
+                gap: 24, alignItems: "center"
               }}>
+                <ConfArc value={prediction.confidence} color={activeColor} animated={confAnimated} />
+
                 <div>
-                  <div style={{ fontSize: 12, color: "var(--text-tertiary)", fontWeight: 300, marginBottom: 6 }}>
+                  <div style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", fontWeight: 300, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.07em" }}>
                     Detected gesture
                   </div>
-                  <div style={{ fontSize: 24, fontWeight: 600, color: activeColor, letterSpacing: "-0.5px" }}>
+                  <div style={{ fontSize: 28, fontWeight: 700, color: activeColor, letterSpacing: "-0.5px", lineHeight: 1.1, display: "flex", alignItems: "center", gap: 10 }}>
+                    {(() => { const I = GESTURE_ICON[prediction.gesture_name]; return I ? <I size={28} color={activeColor} /> : null })()}
                     {prediction.gesture_name}
                   </div>
-                </div>
-                <div>
-                  <div style={{ fontSize: 12, color: "var(--text-tertiary)", fontWeight: 300, marginBottom: 6 }}>
-                    Assistive action
-                  </div>
-                  <div style={{ fontSize: 16, fontWeight: 500, color: "var(--text)" }}>
-                    {GESTURES.find(g => g.name === prediction.gesture_name)?.action || " - "}
+                  <div style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginTop: 8, fontWeight: 300 }}>
+                    Mapped to:{" "}
+                    <span style={{ color: "rgba(255,255,255,0.75)", fontWeight: 500 }}>
+                      {GESTURES.find(g => g.name === prediction.gesture_name)?.action || "—"}
+                    </span>
                   </div>
                 </div>
-                <div style={{ textAlign: "right" }}>
-                  <div style={{ fontSize: 12, color: "var(--text-tertiary)", fontWeight: 300, marginBottom: 6 }}>
-                    Confidence
+
+                <div style={{ textAlign: "center" }}>
+                  <div style={{
+                    width: 52, height: 52,
+                    background: `${activeColor}15`,
+                    border: `1.5px solid ${activeColor}40`,
+                    borderRadius: 12,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: 22, color: activeColor, fontWeight: 700,
+                    boxShadow: `0 0 20px ${activeColor}28`
+                  }}>
+                    {GESTURES.find(g => g.name === prediction.gesture_name)?.key || "?"}
                   </div>
-                  <div style={{ fontSize: 36, fontWeight: 600, color: activeColor, letterSpacing: "-1px" }}>
-                    {(prediction.confidence * 100).toFixed(0)}%
-                  </div>
+                  <div style={{ fontSize: 10, color: "rgba(255,255,255,0.2)", marginTop: 6 }}>action key</div>
                 </div>
               </div>
             )}
@@ -564,9 +617,7 @@ export default function App() {
             {/* Probability bars */}
             {prediction && (
               <div style={{ ...card, padding: "20px 24px" }}>
-                <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text)", marginBottom: 16 }}>
-                  Class probabilities
-                </div>
+                <div style={{ fontSize: 13, fontWeight: 500, color: "#fff", marginBottom: 16 }}>Class probabilities</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   {GESTURES.map(g => {
                     const prob = allProbs[g.name] || 0
@@ -574,26 +625,20 @@ export default function App() {
                     const color = GESTURE_COLORS[g.name]
                     return (
                       <div key={g.id} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                        <span style={{
-                          fontSize: 13, fontWeight: isActive ? 500 : 300,
-                          color: isActive ? color : "var(--text-secondary)",
-                          width: 96
-                        }}>{g.name}</span>
-                        <div style={{
-                          flex: 1, height: 4, background: "var(--border)",
-                          borderRadius: 100, overflow: "hidden"
-                        }}>
+                        <span style={{ fontSize: 13, fontWeight: isActive ? 500 : 300, color: isActive ? color : "rgba(255,255,255,0.4)", width: 96 }}>
+                          {g.name}
+                        </span>
+                        <div style={{ flex: 1, height: 6, background: "rgba(255,255,255,0.07)", borderRadius: 100, overflow: "hidden" }}>
                           <div style={{
                             width: `${prob * 100}%`, height: "100%",
-                            background: isActive ? color : "var(--border-mid)",
-                            borderRadius: 100, transition: "width 0.3s ease"
+                            background: isActive ? color : "rgba(255,255,255,0.14)",
+                            borderRadius: 100, transition: "width 0.35s ease",
+                            boxShadow: isActive ? `0 0 8px ${color}66` : "none"
                           }}/>
                         </div>
-                        <span style={{
-                          fontSize: 13, fontWeight: isActive ? 500 : 300,
-                          color: isActive ? color : "var(--text-tertiary)",
-                          width: 36, textAlign: "right"
-                        }}>{(prob * 100).toFixed(0)}%</span>
+                        <span style={{ fontSize: 13, fontWeight: isActive ? 600 : 300, color: isActive ? color : "rgba(255,255,255,0.3)", width: 36, textAlign: "right" }}>
+                          {(prob * 100).toFixed(0)}%
+                        </span>
                       </div>
                     )
                   })}
@@ -602,13 +647,13 @@ export default function App() {
             )}
           </div>
 
-          {/* RIGHT */}
+          {/* RIGHT column */}
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
 
             {/* 3D hand */}
             <div style={{ ...card, overflow: "hidden" }}>
               <div style={{ padding: "14px 18px 8px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span style={{ fontSize: 13, fontWeight: 500, color: "var(--text)" }}>3D model</span>
+                <span style={{ fontSize: 13, fontWeight: 500, color: "#fff" }}>3D model</span>
                 <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
                   {HAND_COLORS.map(c => (
                     <div
@@ -618,8 +663,9 @@ export default function App() {
                       style={{
                         width: 14, height: 14, borderRadius: "50%",
                         background: c.color,
-                        border: handColor === c.color ? "2px solid #FF2D78" : "2px solid rgba(0,0,0,0.1)",
-                        cursor: "pointer", transition: "border 0.15s"
+                        border: handColor === c.color ? "2px solid #FF2D78" : "2px solid rgba(255,255,255,0.1)",
+                        cursor: "pointer", transition: "border 0.15s",
+                        boxShadow: handColor === c.color ? "0 0 6px #FF2D7866" : "none"
                       }}
                     />
                   ))}
@@ -632,44 +678,37 @@ export default function App() {
 
             {/* Action log */}
             <div style={{ ...card, padding: "18px 20px", flex: 1 }}>
-              <div style={{
-                display: "flex", justifyContent: "space-between",
-                alignItems: "center", marginBottom: 14
-              }}>
-                <span style={{ fontSize: 13, fontWeight: 500, color: "var(--text)" }}>Action log</span>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+                <span style={{ fontSize: 13, fontWeight: 500, color: "#fff" }}>Action log</span>
                 {actionLog.length > 0 && (
                   <button onClick={() => setActionLog([])} style={{
                     background: "none", border: "none",
-                    fontSize: 12, color: "var(--text-tertiary)",
+                    fontSize: 12, color: "rgba(255,255,255,0.3)",
                     cursor: "pointer", fontFamily: "var(--font)"
                   }}>Clear</button>
                 )}
               </div>
-              <div ref={logRef} style={{
-                maxHeight: 260, overflowY: "auto",
-                display: "flex", flexDirection: "column", gap: 4
-              }}>
+              <div ref={logRef} style={{ maxHeight: 260, overflowY: "auto", display: "flex", flexDirection: "column", gap: 4 }}>
                 {actionLog.length === 0 ? (
-                  <div style={{
-                    fontSize: 13, color: "var(--text-tertiary)",
-                    padding: "20px 0", textAlign: "center", fontWeight: 300
-                  }}>No activity yet</div>
+                  <div style={{ fontSize: 13, color: "rgba(255,255,255,0.2)", padding: "20px 0", textAlign: "center", fontWeight: 300 }}>
+                    No activity yet
+                  </div>
                 ) : actionLog.map(entry => (
                   <div key={entry.id} style={{
-                    display: "flex", justifyContent: "space-between",
-                    alignItems: "center", padding: "8px 12px",
-                    background: "var(--bg)",
-                    borderRadius: "var(--radius-sm)",
-                    border: "1px solid var(--border)",
+                    display: "flex", justifyContent: "space-between", alignItems: "center",
+                    padding: "8px 12px",
+                    background: "rgba(255,255,255,0.03)",
+                    borderRadius: 10,
+                    border: "1px solid rgba(255,255,255,0.06)",
                     borderLeft: `3px solid ${entry.color}`
                   }}>
                     <div>
-                      <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text)" }}>{entry.gesture}</div>
-                      <div style={{ fontSize: 11, color: "var(--text-tertiary)", fontWeight: 300 }}>{entry.action}</div>
+                      <div style={{ fontSize: 13, fontWeight: 500, color: "#fff" }}>{entry.gesture}</div>
+                      <div style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", fontWeight: 300 }}>{entry.action}</div>
                     </div>
                     <div style={{ textAlign: "right" }}>
                       <div style={{ fontSize: 13, fontWeight: 500, color: entry.color }}>{(entry.confidence * 100).toFixed(0)}%</div>
-                      <div style={{ fontSize: 11, color: "var(--text-tertiary)", fontWeight: 300 }}>{entry.time}</div>
+                      <div style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", fontWeight: 300 }}>{entry.time}</div>
                     </div>
                   </div>
                 ))}
@@ -680,9 +719,14 @@ export default function App() {
 
         {/* Gesture map */}
         {prediction && (
-          <div style={{ ...card, padding: "20px 24px", marginTop: 16 }}>
-            <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text)", marginBottom: 16 }}>
-              Gesture map
+          <div style={{ ...card, padding: "24px", marginTop: 16 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
+              <div style={{ fontSize: 13, fontWeight: 500, color: "#fff" }}>Gesture map</div>
+              {mode === "dataset" && (
+                <div style={{ fontSize: 12, color: "rgba(255,255,255,0.25)", fontWeight: 300 }}>
+                  Click any gesture to load a real dataset sample
+                </div>
+              )}
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 10 }}>
               {GESTURES.map(g => {
@@ -693,76 +737,84 @@ export default function App() {
                     key={g.id}
                     onClick={() => mode === "dataset" && fetchDataset(g.id)}
                     style={{
-                      background: isActive ? "var(--accent-soft)" : "var(--bg)",
-                      border: `1px solid ${isActive ? "rgba(255,45,120,0.25)" : "var(--border)"}`,
-                      borderRadius: "var(--radius-sm)", padding: "14px 10px",
+                      background: isActive ? `${color}18` : "rgba(255,255,255,0.03)",
+                      border: `1px solid ${isActive ? `${color}45` : "rgba(255,255,255,0.07)"}`,
+                      borderRadius: 14, padding: "16px 10px",
                       cursor: mode === "dataset" ? "pointer" : "default",
-                      transition: "all 0.2s", textAlign: "center"
+                      transition: "all 0.2s", textAlign: "center",
+                      boxShadow: isActive ? `0 0 24px ${color}22` : "none"
+                    }}
+                    onMouseEnter={e => {
+                      if (!isActive && mode === "dataset") {
+                        e.currentTarget.style.background = "rgba(255,255,255,0.07)"
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"
+                      }
+                    }}
+                    onMouseLeave={e => {
+                      if (!isActive) {
+                        e.currentTarget.style.background = "rgba(255,255,255,0.03)"
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)"
+                      }
                     }}
                   >
+                    <div style={{ marginBottom: 8, display: "flex", justifyContent: "center" }}>
+                      {(() => { const I = GESTURE_ICON[g.name]; return I ? <I size={26} color={isActive ? color : "rgba(255,255,255,0.45)"} /> : null })()}
+                    </div>
                     <div style={{
-                      width: 8, height: 8, borderRadius: "50%",
-                      background: isActive ? "var(--accent)" : "var(--border-mid)",
-                      margin: "0 auto 10px", transition: "all 0.2s"
-                    }}/>
+                      fontSize: 11, fontWeight: isActive ? 600 : 300,
+                      color: isActive ? color : "rgba(255,255,255,0.45)",
+                      marginBottom: 8, lineHeight: 1.3
+                    }}>
+                      {g.name}
+                    </div>
                     <div style={{
-                      fontSize: 12, fontWeight: isActive ? 500 : 300,
-                      color: isActive ? "var(--accent)" : "var(--text-secondary)",
-                      marginBottom: 6
-                    }}>{g.name}</div>
-                    <div style={{
-                      fontSize: 18,
-                      color: isActive ? "var(--accent)" : "var(--text-tertiary)",
-                      marginBottom: 4
-                    }}>{g.key}</div>
-                    <div style={{
-                      fontSize: 10, fontWeight: 300,
-                      color: isActive ? "var(--accent)" : "var(--text-tertiary)"
-                    }}>{g.action}</div>
+                      display: "inline-block",
+                      background: isActive ? `${color}22` : "rgba(255,255,255,0.06)",
+                      border: `1px solid ${isActive ? `${color}40` : "rgba(255,255,255,0.1)"}`,
+                      borderRadius: 6, padding: "2px 8px",
+                      fontSize: 10, color: isActive ? color : "rgba(255,255,255,0.3)",
+                      fontWeight: 500
+                    }}>
+                      {g.action}
+                    </div>
                   </div>
                 )
               })}
             </div>
-            {mode === "dataset" && (
-              <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 12, fontWeight: 300 }}>
-                Click any gesture to load a real sample from the dataset.
-              </p>
-            )}
           </div>
         )}
 
-        {/* Accuracy rings - always visible */}
         <AccuracyRings />
       </div>
 
-        {/* Feedback button */}
-        <button
-          data-tally-open="jaWR24"
-          data-tally-width="400"
-          data-tally-hide-title="1"
-          style={{
-            position: "fixed", bottom: 24, left: 24, zIndex: 100,
-            background: "var(--bg)", border: "1px solid var(--border)",
-            borderRadius: 100, padding: "10px 18px",
-            fontFamily: "var(--font)", fontSize: 13, fontWeight: 500,
-            color: "var(--text-secondary)", cursor: "pointer",
-            boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
-            display: "flex", alignItems: "center", gap: 8,
-            transition: "border-color 0.15s, color 0.15s, transform 0.15s"
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.borderColor = "rgba(255,45,120,0.3)"
-            e.currentTarget.style.color = "var(--accent)"
-            e.currentTarget.style.transform = "scale(1.04)"
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.borderColor = "var(--border)"
-            e.currentTarget.style.color = "var(--text-secondary)"
-            e.currentTarget.style.transform = "scale(1)"
-          }}
-        >
-          <IconChat size={14} color="var(--text-secondary)" /> Give feedback
-        </button>
+      {/* Feedback button */}
+      <button
+        data-tally-open="jaWR24"
+        data-tally-width="400"
+        data-tally-hide-title="1"
+        style={{
+          position: "fixed", bottom: 24, left: 24, zIndex: 100,
+          background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)",
+          borderRadius: 100, padding: "10px 18px",
+          fontFamily: "var(--font)", fontSize: 13, fontWeight: 500,
+          color: "rgba(255,255,255,0.5)", cursor: "pointer",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+          display: "flex", alignItems: "center", gap: 8,
+          transition: "border-color 0.15s, color 0.15s, transform 0.15s"
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.borderColor = "rgba(255,45,120,0.4)"
+          e.currentTarget.style.color = "#FF2D78"
+          e.currentTarget.style.transform = "scale(1.04)"
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"
+          e.currentTarget.style.color = "rgba(255,255,255,0.5)"
+          e.currentTarget.style.transform = "scale(1)"
+        }}
+      >
+        <IconChat size={14} color="currentColor" /> Give feedback
+      </button>
 
     </div>
   )

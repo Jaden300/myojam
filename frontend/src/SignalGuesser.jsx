@@ -2,6 +2,7 @@ import { useState, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import Navbar from "./Navbar"
 import Footer from "./Footer"
+import { IconGestureFist, IconGestureIndex, IconGestureMiddle, IconGestureRing, IconGesturePinky, IconGestureThumb, IconScore0, IconScore1, IconScore2, IconScore3, IconScore4, IconScore5 } from "./Icons"
 
 const PINK   = "#FF2D78"
 const BLUE   = "#3B82F6"
@@ -11,13 +12,15 @@ const AMBER  = "#F59E0B"
 const RED    = "#EF4444"
 
 const GESTURES = [
-  { id:"fist",   label:"Fist",        emoji:"✊", color:RED    },
-  { id:"index",  label:"Index Flex",  emoji:"☝️", color:BLUE   },
-  { id:"middle", label:"Middle Flex", emoji:"🖖", color:PURPLE },
-  { id:"ring",   label:"Ring Flex",   emoji:"💍", color:AMBER  },
-  { id:"pinky",  label:"Pinky Flex",  emoji:"🤙", color:GREEN  },
-  { id:"thumb",  label:"Thumb Flex",  emoji:"👍", color:PINK   },
+  { id:"fist",   label:"Fist",        Icon:IconGestureFist,   color:RED    },
+  { id:"index",  label:"Index Flex",  Icon:IconGestureIndex,  color:BLUE   },
+  { id:"middle", label:"Middle Flex", Icon:IconGestureMiddle, color:PURPLE },
+  { id:"ring",   label:"Ring Flex",   Icon:IconGestureRing,   color:AMBER  },
+  { id:"pinky",  label:"Pinky Flex",  Icon:IconGesturePinky,  color:GREEN  },
+  { id:"thumb",  label:"Thumb Flex",  Icon:IconGestureThumb,  color:PINK   },
 ]
+
+const SCORE_ICONS = [IconScore0, IconScore1, IconScore2, IconScore3, IconScore4, IconScore5]
 
 // [ch1_amp, ch2_amp, ch3_amp] × oscillation frequency
 // ch1 = extensor digitorum  ch2 = flexor digitorum  ch3 = ulnar side
@@ -49,12 +52,12 @@ const WHY = {
 }
 
 const RESULT_COPY = [
-  { emoji:"💀", label:"Yikes.",         msg:"Legendary effort. Please don't apply to our team." },
-  { emoji:"😅", label:"Rough.",         msg:"In your defense, the AI only manages 84.85% too." },
-  { emoji:"🤔", label:"Getting there.", msg:"EMG is hard. Ring and pinky confuse everyone." },
-  { emoji:"✅", label:"Average.",       msg:"Most humans score here. The AI averages 4.2/5 on this set." },
-  { emoji:"👏", label:"Nice work.",     msg:"Better than expected. Ring–pinky probably got you once." },
-  { emoji:"🧠", label:"Impressive.",    msg:"You out-guessed the AI. That's genuinely rare." },
+  { label:"Yikes.",         msg:"Legendary effort. Please don't apply to our team." },
+  { label:"Rough.",         msg:"In your defense, the AI only manages 84.85% too." },
+  { label:"Getting there.", msg:"EMG is hard. Ring and pinky confuse everyone." },
+  { label:"Average.",       msg:"Most humans score here. The AI averages 4.2/5 on this set." },
+  { label:"Nice work.",     msg:"Better than expected. Ring–pinky probably got you once." },
+  { label:"Impressive.",    msg:"You out-guessed the AI. That's genuinely rare." },
 ]
 
 const POOL = [
@@ -179,7 +182,7 @@ export default function SignalGuesser() {
       <div style={{minHeight:"100vh",background:"#05030f"}}>
         <Navbar/>
         <div style={{maxWidth:520,margin:"0 auto",padding:"120px 28px 80px",textAlign:"center"}}>
-          <div style={{fontSize:72,marginBottom:12}}>{res.emoji}</div>
+          <div style={{marginBottom:16,display:"flex",justifyContent:"center"}}>{(() => { const I = SCORE_ICONS[score]; return I ? <I size={64} color={PINK} /> : null })()}</div>
           <div style={{fontSize:11,fontWeight:700,color:PINK,textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:10}}>Game Over</div>
           <div style={{fontSize:80,fontWeight:900,letterSpacing:"-4px",color:"#fff",lineHeight:1,marginBottom:4}}>
             {score}<span style={{fontSize:36,color:"rgba(255,255,255,0.3)",fontWeight:300}}>/5</span>
@@ -266,7 +269,7 @@ export default function SignalGuesser() {
                 style={{background:bg,border:`1.5px solid ${border}`,borderRadius:14,padding:"14px 8px",cursor:revealed?"default":"pointer",fontFamily:"var(--font)",textAlign:"center",transition:"all 0.18s",transform:tf,color:tc}}
                 onMouseEnter={e=>{if(!revealed){e.currentTarget.style.background=`${g.color}14`;e.currentTarget.style.borderColor=`${g.color}55`}}}
                 onMouseLeave={e=>{if(!revealed){e.currentTarget.style.background="rgba(255,255,255,0.04)";e.currentTarget.style.borderColor="rgba(255,255,255,0.09)"}}}>
-                <div style={{fontSize:28,marginBottom:5,lineHeight:1}}>{g.emoji}</div>
+                <div style={{marginBottom:5,display:"flex",justifyContent:"center"}}><g.Icon size={28} color={tc}/></div>
                 <div style={{fontSize:12,fontWeight:600,lineHeight:1.3}}>{g.label}</div>
                 {revealed&&g.id===q.id && <div style={{fontSize:9,marginTop:4,color:g.color,fontWeight:700}}>✓ correct</div>}
                 {revealed&&g.id===sel&&g.id!==q.id && <div style={{fontSize:9,marginTop:4,color:"#EF4444"}}>✗ wrong</div>}

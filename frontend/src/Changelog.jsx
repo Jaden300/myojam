@@ -3,6 +3,7 @@ import Navbar from "./Navbar"
 import Footer from "./Footer"
 import { Reveal, SectionPill } from "./Animate"
 import NeuralNoise from "./components/NeuralNoise"
+import { IconAlert, IconPencil } from "./Icons"
 
 const LOGS = [
   {
@@ -132,10 +133,10 @@ const LOGS = [
 ]
 
 const TYPE_CONFIG = {
-  milestone:   { color:"#10B981", bg:"rgba(16,185,129,0.08)",  border:"rgba(16,185,129,0.2)",  icon:"✓", label:"Milestone" },
-  bug:         { color:"#EF4444", bg:"rgba(239,68,68,0.06)",    border:"rgba(239,68,68,0.2)",    icon:"⚠", label:"Bug fixed" },
-  improvement: { color:"#3B82F6", bg:"rgba(59,130,246,0.07)",   border:"rgba(59,130,246,0.2)",   icon:"↑", label:"Improvement" },
-  note:        { color:"#AEAEB2", bg:"rgba(174,174,178,0.07)",  border:"rgba(174,174,178,0.2)",  icon:"✎", label:"Note" },
+  milestone:   { color:"#10B981", bg:"rgba(16,185,129,0.08)",  border:"rgba(16,185,129,0.2)",  icon:"✓",         label:"Milestone" },
+  bug:         { color:"#EF4444", bg:"rgba(239,68,68,0.06)",    border:"rgba(239,68,68,0.2)",    Icon:IconAlert,   label:"Bug fixed" },
+  improvement: { color:"#3B82F6", bg:"rgba(59,130,246,0.07)",   border:"rgba(59,130,246,0.2)",   icon:"↑",         label:"Improvement" },
+  note:        { color:"#AEAEB2", bg:"rgba(174,174,178,0.07)",  border:"rgba(174,174,178,0.2)",  Icon:IconPencil,  label:"Note" },
 }
 
 const STATS = [
@@ -385,7 +386,7 @@ export default function Changelog() {
                               padding:"11px 15px",
                             }}>
                               <div style={{ width:20, height:20, borderRadius:"50%", background:`${tc.color}20`, border:`1px solid ${tc.color}40`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:11, color:tc.color, fontWeight:700, flexShrink:0, marginTop:1 }}>
-                                {tc.icon}
+                                {tc.Icon ? <tc.Icon size={11} color={tc.color}/> : tc.icon}
                               </div>
                               <div style={{ flex:1 }}>
                                 <div style={{ fontSize:10, fontWeight:600, color:tc.color, textTransform:"uppercase", letterSpacing:"0.07em", marginBottom:3 }}>{tc.label}</div>

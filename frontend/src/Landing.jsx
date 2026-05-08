@@ -6,7 +6,7 @@ import { Reveal, StaggerList, HoverCard, SectionPill } from "./Animate"
 import Threads from "./Threads"
 import SignalModel3D from "./components/SignalModel3D"
 import { t } from "./i18n"
-import { IconBook, IconGraduate, IconBolt, IconMicroscope } from "./Icons"
+import { IconBook, IconGraduate, IconBolt, IconMicroscope, IconGame, IconBrain, IconPencil, IconTarget, IconSparkle } from "./Icons"
 
 const PINK = "#FF2D78", BLUE = "#3B82F6", GREEN = "#10B981", PURPLE = "#8B5CF6", AMBER = "#F59E0B", RED = "#EF4444"
 
@@ -421,7 +421,7 @@ export default function Landing() {
       <section style={{ padding:"72px 32px", borderBottom:"1px solid var(--border)", background:"var(--bg)" }}>
         <div style={{ maxWidth:1000, margin:"0 auto" }}>
           <Reveal>
-            <SectionPill>🎮 Try it now</SectionPill>
+            <SectionPill><IconGame size={11} color="var(--accent)"/> Try it now</SectionPill>
             <h2 style={{ fontSize:"clamp(28px,4vw,46px)", fontWeight:800, letterSpacing:"-1.5px", color:"var(--text)", marginBottom:10 }}>
               Don't just read about it.
             </h2>
@@ -436,21 +436,21 @@ export default function Landing() {
               {[
                 {
                   grad:"linear-gradient(135deg,#FF2D78 0%,#F97316 100%)",
-                  emoji:"🧠", badge:"✨ NEW",
+                  Icon:IconBrain, badge:"NEW",
                   title:"Signal Guesser",
                   desc:"5 rounds. Real EMG data. Can you out-guess a Random Forest?",
                   cta:"Play →", slug:"/guess",
                 },
                 {
                   grad:"linear-gradient(135deg,#2563EB 0%,#7C3AED 100%)",
-                  emoji:"✏️", badge:"⚡ LIVE",
+                  Icon:IconBolt, badge:"LIVE",
                   title:"Signal Playground",
                   desc:"Draw any waveform with your mouse. Watch MAV, RMS, ZC, WL update as you draw.",
                   cta:"Draw →", slug:"/playground",
                 },
                 {
                   grad:"linear-gradient(135deg,#D97706 0%,#F59E0B 100%)",
-                  emoji:"🎯", badge:"🎮 GAME",
+                  Icon:IconTarget, badge:"GAME",
                   title:"Gesture Game",
                   desc:"A target gesture appears — match it before time runs out. Three difficulty levels.",
                   cta:"Play →", slug:"/game",
@@ -465,7 +465,7 @@ export default function Landing() {
                   {/* Decorative circle */}
                   <div style={{ position:"absolute", top:-30, right:-30, width:120, height:120, borderRadius:"50%", background:"rgba(255,255,255,0.08)", pointerEvents:"none" }}/>
                   <div style={{ background:"rgba(255,255,255,0.22)", borderRadius:100, padding:"3px 10px", fontSize:10, color:"#fff", fontWeight:700, letterSpacing:"0.04em", display:"inline-block", marginBottom:14 }}>{card.badge}</div>
-                  <div style={{ fontSize:48, lineHeight:1, marginBottom:12 }}>{card.emoji}</div>
+                  <div style={{ marginBottom:16, display:"flex" }}><card.Icon size={44} color="rgba(255,255,255,0.9)"/></div>
                   <div style={{ fontSize:20, fontWeight:800, color:"#fff", letterSpacing:"-0.4px", marginBottom:8 }}>{card.title}</div>
                   <p style={{ fontSize:13, color:"rgba(255,255,255,0.82)", fontWeight:300, lineHeight:1.65, margin:"0 0 20px" }}>{card.desc}</p>
                   <button

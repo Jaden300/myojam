@@ -5,6 +5,7 @@ import Footer from "./Footer"
 import { Reveal, SectionPill } from "./Animate"
 import NeuralNoise from "./components/NeuralNoise"
 import { t } from "./i18n"
+import { IconBarChart, IconGear, IconRocket, IconBook, IconLaptop, IconDocument, IconGlobe, IconMicroscope, IconBolt } from "./Icons"
 
 /* ── palette ──────────────────────────────────────────────── */
 const PINK   = "#FF2D78"
@@ -266,13 +267,13 @@ function DriftScatter() {
 /* ── interactive project timeline ────────────────────────── */
 const TIMELINE = [
   { date:"Aug 2024", label:"Research begins", body:"Question posed: can one person build a clinically meaningful gesture classifier using only public data and $60 of hardware?", color:BLUE, icon:"?" },
-  { date:"Sep 2024", label:"Dataset selected", body:"Ninapro DB5 chosen — 10 subjects, sEMG from 10 forearm electrodes, 52 gestures. Subset to 6 classes for initial experiment.", color:PURPLE, icon:"📊" },
-  { date:"Oct 2024", label:"Pipeline built", body:"Signal preprocessing pipeline implemented: 200Hz sampling, 300ms sliding windows, MAV + RMS + WL + ZCR feature extraction across channels.", color:AMBER, icon:"⚙️" },
+  { date:"Sep 2024", label:"Dataset selected", body:"Ninapro DB5 chosen — 10 subjects, sEMG from 10 forearm electrodes, 52 gestures. Subset to 6 classes for initial experiment.", color:PURPLE, Icon:IconBarChart },
+  { date:"Oct 2024", label:"Pipeline built", body:"Signal preprocessing pipeline implemented: 200Hz sampling, 300ms sliding windows, MAV + RMS + WL + ZCR feature extraction across channels.", color:AMBER, Icon:IconGear },
   { date:"Dec 2024", label:"Classifier achieved", body:"Random Forest reaches 84.85% cross-subject accuracy — the original research question answered.", color:PINK, icon:"✓" },
-  { date:"Jan 2025", label:"Platform launched", body:"Education hub goes live with first 3 articles, interactive signal playground, and open-source pipeline documentation.", color:GREEN, icon:"🚀" },
-  { date:"Feb 2025", label:"Lesson plans", body:"Three structured lesson plans written for secondary and university educators. First classroom adoption reported.", color:BLUE, icon:"📚" },
-  { date:"Mar 2025", label:"Desktop app", body:"macOS, Windows, and Linux desktop app released. Real-time gesture inference from webcam-compatible sEMG hardware.", color:PURPLE, icon:"💻" },
-  { date:"Apr 2025", label:"Research papers", body:"Four peer-structured research papers published: classifier analysis, variability review, windowing analysis, and the main paper.", color:PINK, icon:"📄" },
+  { date:"Jan 2025", label:"Platform launched", body:"Education hub goes live with first 3 articles, interactive signal playground, and open-source pipeline documentation.", color:GREEN, Icon:IconRocket },
+  { date:"Feb 2025", label:"Lesson plans", body:"Three structured lesson plans written for secondary and university educators. First classroom adoption reported.", color:BLUE, Icon:IconBook },
+  { date:"Mar 2025", label:"Desktop app", body:"macOS, Windows, and Linux desktop app released. Real-time gesture inference from webcam-compatible sEMG hardware.", color:PURPLE, Icon:IconLaptop },
+  { date:"Apr 2025", label:"Research papers", body:"Four peer-structured research papers published: classifier analysis, variability review, windowing analysis, and the main paper.", color:PINK, Icon:IconDocument },
 ]
 
 function Timeline() {
@@ -532,13 +533,13 @@ function MiniEMG() {
 
 /* ── VALUES data ─────────────────────────────────────────── */
 const VALUES = [
-  { icon:"📖", color:BLUE,   title:"Education as the mission",
+  { Icon:IconBook,       color:BLUE,   title:"Education as the mission",
     body:"MyoCode, the education hub, and the How It Works page together account for more development time than the classifier itself. The articles, lesson plans, and interactive tools aren't supplements — they are the project." },
-  { icon:"🌍", color:GREEN,  title:"Open source by default",
+  { Icon:IconGlobe,      color:GREEN,  title:"Open source by default",
     body:"Every model weight, training script, and architecture decision is on GitHub under MIT — including the experiments that didn't work. We publish the full confusion matrix, not just the headline accuracy. Reproducibility is the minimum bar." },
-  { icon:"🔬", color:PURPLE, title:"Honest science, clear writing",
+  { Icon:IconMicroscope, color:PURPLE, title:"Honest science, clear writing",
     body:"We report 84.85% with leave-one-subject-out validation, not the higher number we'd get by choosing the best test subject. The methodology is in the text, not buried in a footnote. Rigour and clarity aren't in tension." },
-  { icon:"⚡", color:PINK,   title:"Technology adapts to people",
+  { Icon:IconBolt,       color:PINK,   title:"Technology adapts to people",
     body:"The gesture vocabulary, confidence thresholds, and electrode placement guidance are all user-adjustable. Assistive technology that requires users to conform to hardware constraints has the relationship exactly backwards." },
 ]
 
@@ -756,7 +757,7 @@ export default function About() {
                     e.currentTarget.style.boxShadow = "none"
                   }}
                 >
-                  <div style={{ fontSize:28, marginBottom:14 }}>{v.icon}</div>
+                  <div style={{ marginBottom:14 }}><v.Icon size={28} color={v.color}/></div>
                   <div style={{ fontSize:15, fontWeight:600, color:"var(--text)", marginBottom:10 }}>{v.title}</div>
                   <p style={{ fontSize:13, color:"var(--text-secondary)", lineHeight:1.75, fontWeight:300, margin:0 }}>{v.body}</p>
                 </div>

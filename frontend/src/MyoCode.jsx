@@ -3,18 +3,19 @@ import Navbar from "./Navbar"
 import Footer from "./Footer"
 import NeuralNoise from "./components/NeuralNoise"
 import { Reveal } from "./Animate"
+import { IconGestureIndex, IconGestureMiddle, IconGestureRing, IconGesturePinky, IconGestureThumb, IconGestureFist } from "./Icons"
 
 // ── Stage
 const STAGE_W = 480, STAGE_H = 310
 
 // ── Gesture registry
 const GESTURES = [
-  { name:"index flex",  key:"1", color:"#FF2D78", emoji:"☝️" },
-  { name:"middle flex", key:"2", color:"#3B82F6", emoji:"✌️" },
-  { name:"ring flex",   key:"3", color:"#8B5CF6", emoji:"🤙" },
-  { name:"pinky flex",  key:"4", color:"#10B981", emoji:"🤞" },
-  { name:"thumb flex",  key:"5", color:"#F59E0B", emoji:"👍" },
-  { name:"fist",        key:"6", color:"#EF4444", emoji:"✊" },
+  { name:"index flex",  key:"1", color:"#FF2D78", Icon:IconGestureIndex  },
+  { name:"middle flex", key:"2", color:"#3B82F6", Icon:IconGestureMiddle },
+  { name:"ring flex",   key:"3", color:"#8B5CF6", Icon:IconGestureRing   },
+  { name:"pinky flex",  key:"4", color:"#10B981", Icon:IconGesturePinky  },
+  { name:"thumb flex",  key:"5", color:"#F59E0B", Icon:IconGestureThumb  },
+  { name:"fist",        key:"6", color:"#EF4444", Icon:IconGestureFist   },
 ]
 const GESTURE_NAMES = GESTURES.map(g => g.name)
 
@@ -219,10 +220,10 @@ const EXAMPLES = [
       { type:"when_start",   params:{} },
       { type:"say",          params:{ text:"Make a gesture!", secs:2 } },
       { type:"wait_for_any", params:{} },
-      { type:"say",          params:{ text:"Nice work! 💪", secs:2 } },
+      { type:"say",          params:{ text:"Nice work!", secs:2 } },
       { type:"beep",         params:{} },
       { type:"when_gesture", params:{ gesture:"fist" } },
-      { type:"say",          params:{ text:"Power fist! ✊", secs:2 } },
+      { type:"say",          params:{ text:"Power fist!", secs:2 } },
     ],
   },
   {
@@ -450,7 +451,7 @@ export default function MyoCode() {
       case "wait_for_any": {
         addLog({ kind:"wait", text:"Waiting for any gesture…" })
         const g = await waitForAnyGesture(signal)
-        addLog({ kind:"gesture", text:`▸ ${g.emoji} ${g.name}`, color:g.color })
+        addLog({ kind:"gesture", text:`▸ ${g.name}`, color:g.color, Icon:g.Icon })
         setFlashGesture(g); setTimeout(()=>setFlashGesture(null), 550)
         break
       }
@@ -476,7 +477,7 @@ export default function MyoCode() {
       case "clear": clearCanvas(); await sleep(STEP,signal); break
       case "say":
         setSayText(p.text||"Hello!")
-        addLog({ kind:"say", text:`💬 "${p.text||"Hello!"}"` })
+        addLog({ kind:"say", text:`"${p.text||"Hello!"}"` })
         await sleep(Number(p.secs||2)*1000, signal)
         setSayText(null); break
       case "beep": playBeep(); await sleep(350,signal); break
@@ -881,7 +882,7 @@ export default function MyoCode() {
                     onMouseEnter={e=>{if(running){e.currentTarget.style.background=g.color+"30";e.currentTarget.style.transform="scale(1.04)"}}}
                     onMouseLeave={e=>{e.currentTarget.style.background=g.color+(running?"1A":"0A");e.currentTarget.style.transform="scale(1)"}}
                   >
-                    <span style={{ fontSize:15 }}>{g.emoji}</span>
+                    <g.Icon size={15} color={g.color}/>
                     <span style={{ opacity:0.75 }}>[{g.key}] {g.name}</span>
                   </button>
                 ))}

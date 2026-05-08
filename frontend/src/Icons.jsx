@@ -491,3 +491,173 @@ export function IconGestureFist({ size = 24, color = "currentColor" }) {
     </svg>
   )
 }
+
+export function IconDatabase({ size = 16, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <ellipse cx="8" cy="4.5" rx="5" ry="2" stroke={color} strokeWidth="1.3"/>
+      <path d="M3 4.5v7c0 1.1 2.24 2 5 2s5-.9 5-2v-7" stroke={color} strokeWidth="1.3"/>
+      <path d="M3 8c0 1.1 2.24 2 5 2s5-.9 5-2" stroke={color} strokeWidth="1.3"/>
+    </svg>
+  )
+}
+
+export function IconMap({ size = 16, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <path d="M1.5 4L5.5 2.5l5 2L14.5 3v9.5L10.5 14l-5-2-4 1V4Z" stroke={color} strokeWidth="1.3" strokeLinejoin="round"/>
+      <path d="M5.5 2.5v9M10.5 4.5v9" stroke={color} strokeWidth="1.3" strokeLinecap="round"/>
+    </svg>
+  )
+}
+
+export function IconTarget({ size = 16, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <circle cx="8" cy="8" r="6" stroke={color} strokeWidth="1.3"/>
+      <circle cx="8" cy="8" r="3" stroke={color} strokeWidth="1.3"/>
+      <circle cx="8" cy="8" r="1.2" fill={color}/>
+    </svg>
+  )
+}
+
+export function IconGame({ size = 16, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <rect x="1.5" y="5" width="13" height="7.5" rx="3" stroke={color} strokeWidth="1.3"/>
+      <path d="M5 8.8H7M6 7.8v2" stroke={color} strokeWidth="1.3" strokeLinecap="round"/>
+      <circle cx="10.5" cy="8.2" r="0.8" fill={color}/>
+      <circle cx="12" cy="9.4" r="0.8" fill={color}/>
+    </svg>
+  )
+}
+
+export function IconSparkle({ size = 16, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <path d="M8 1.5L9.2 6.8L14.5 8L9.2 9.2L8 14.5L6.8 9.2L1.5 8L6.8 6.8L8 1.5Z" stroke={color} strokeWidth="1.3" strokeLinejoin="round"/>
+    </svg>
+  )
+}
+
+export function IconPlug({ size = 16, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <path d="M6 2v4.5M10 2v4.5" stroke={color} strokeWidth="1.3" strokeLinecap="round"/>
+      <path d="M4 6.5h8v1.8a4 4 0 0 1-8 0V6.5Z" stroke={color} strokeWidth="1.3" strokeLinejoin="round"/>
+      <path d="M8 10.5v3" stroke={color} strokeWidth="1.3" strokeLinecap="round"/>
+    </svg>
+  )
+}
+
+export function IconAlert({ size = 16, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <path d="M8 2L1.5 13.5h13L8 2Z" stroke={color} strokeWidth="1.3" strokeLinejoin="round"/>
+      <path d="M8 7v3" stroke={color} strokeWidth="1.3" strokeLinecap="round"/>
+      <circle cx="8" cy="11.2" r="0.7" fill={color}/>
+    </svg>
+  )
+}
+
+export function IconLoop({ size = 16, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <path d="M11.5 4A5 5 0 1 0 13.2 8" stroke={color} strokeWidth="1.3" strokeLinecap="round"/>
+      <path d="M13.2 4.5v3.5H9.8" stroke={color} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  )
+}
+
+export function IconArm({ size = 16, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <path d="M3 12.5l3-3h3V7h4a1 1 0 0 0 0-2H9V3H6L3 6v6.5Z" stroke={color} strokeWidth="1.3" strokeLinejoin="round"/>
+      <path d="M9 9.5v3M7 9.5v3" stroke={color} strokeWidth="1.2" strokeLinecap="round"/>
+      <path d="M6.5 12.5h3" stroke={color} strokeWidth="1.3" strokeLinecap="round"/>
+    </svg>
+  )
+}
+
+export function IconLineChart({ size = 16, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <path d="M2 13.5h12" stroke={color} strokeWidth="1.3" strokeLinecap="round"/>
+      <path d="M2 11l3-4 3 2 3-5 3 2.5" stroke={color} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  )
+}
+
+export function IconClipboard({ size = 16, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <path d="M6 2.5h4M5 2.5H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-10a1 1 0 0 0-1-1h-1" stroke={color} strokeWidth="1.3" strokeLinecap="round"/>
+      <rect x="6" y="1.5" width="4" height="2.5" rx="1" stroke={color} strokeWidth="1.3"/>
+      <path d="M5.5 7h5M5.5 9.5h5M5.5 12h3" stroke={color} strokeWidth="1.3" strokeLinecap="round"/>
+    </svg>
+  )
+}
+
+export function IconMuscle({ size = 16, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
+      <path d="M3 10.5c0-3 1.5-5 4-5h2c1.5 0 2.5 1 2.5 2.5S10.5 10.5 9 10.5H7" stroke={color} strokeWidth="1.3" strokeLinecap="round"/>
+      <path d="M7 10.5c-1.5 0-2.5 1-2.5 2S5.5 14.5 7 14.5h5.5" stroke={color} strokeWidth="1.3" strokeLinecap="round"/>
+      <path d="M12.5 14.5c.8 0 1.5-.7 1.5-1.5V5a2 2 0 0 0-4 0v2" stroke={color} strokeWidth="1.3" strokeLinecap="round"/>
+    </svg>
+  )
+}
+
+export function IconScore0({ size = 20, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none">
+      <circle cx="10" cy="10" r="8" stroke={color} strokeWidth="1.5"/>
+      <path d="M7 7l6 6M13 7l-6 6" stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
+    </svg>
+  )
+}
+
+export function IconScore1({ size = 20, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none">
+      <circle cx="10" cy="10" r="8" stroke={color} strokeWidth="1.5"/>
+      <circle cx="10" cy="10" r="1.5" fill={color}/>
+      <path d="M10 5v2M10 13v2" stroke={color} strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  )
+}
+
+export function IconScore2({ size = 20, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none">
+      <path d="M10 2a8 8 0 0 1 0 16" stroke={color} strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M10 2a8 8 0 0 0 0 16" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 3"/>
+    </svg>
+  )
+}
+
+export function IconScore3({ size = 20, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none">
+      <circle cx="10" cy="10" r="8" stroke={color} strokeWidth="1.5"/>
+      <path d="M6.5 10.5l2.5 2.5 5-5" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  )
+}
+
+export function IconScore4({ size = 20, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none">
+      <path d="M10 12L4 8l6-4 6 4-6 4Z" stroke={color} strokeWidth="1.5" strokeLinejoin="round"/>
+      <path d="M4 8v4l6 4 6-4V8" stroke={color} strokeWidth="1.5" strokeLinejoin="round"/>
+    </svg>
+  )
+}
+
+export function IconScore5({ size = 20, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none">
+      <path d="M10 2l1.8 5.5H18l-4.9 3.6 1.9 5.8L10 13.5l-5 3.4 1.9-5.8L2 7.5h6.2L10 2Z" stroke={color} strokeWidth="1.4" strokeLinejoin="round"/>
+    </svg>
+  )
+}

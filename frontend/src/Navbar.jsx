@@ -110,7 +110,7 @@ function NavLink({ label, path, pathname, accent }) {
       onMouseEnter={e=>e.currentTarget.style.opacity="0.7"}
       onMouseLeave={e=>e.currentTarget.style.opacity="1"}
     >
-      {label}{accent?" ✦":""}
+      {label}{accent ? <span style={{ display:"inline-block", width:5, height:5, borderRadius:"50%", background:"var(--accent)", marginLeft:5, verticalAlign:"middle" }}/> : null}
     </span>
   )
 }

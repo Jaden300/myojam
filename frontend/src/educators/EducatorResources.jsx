@@ -3,6 +3,7 @@ import Navbar from "../Navbar"
 import Footer from "../Footer"
 import { Reveal, HoverCard, SectionPill } from "../Animate"
 import NeuralNoise from "../components/NeuralNoise"
+import { IconClipboard, IconLaptop, IconBarChart, IconMicroscope, IconPencil } from "../Icons"
 
 const PINK   = "#FF2D78"
 const BLUE   = "#3B82F6"
@@ -65,11 +66,11 @@ const RESOURCE_SECTIONS = [
 ]
 
 const QUICKSTART = [
-  { step:"01", color:PINK,   icon:"📋", title:"Choose a lesson plan", desc:"Start with 'EMG Basics' for biology classes or 'Gesture Classifier' for CS. Each comes with a full teacher guide, student worksheet, and exit ticket." },
-  { step:"02", color:BLUE,   icon:"💻", title:"Open the interactive tools", desc:"All tools run in any modern browser — Chrome recommended for full WebSerial support. No accounts, downloads, or installs needed.", href:"/demos" },
-  { step:"03", color:GREEN,  icon:"📊", title:"Download the dataset (optional)", desc:"For deeper investigations, students can download Ninapro DB5 from ninapro.hevs.ch under an academic use agreement. Registration required.", href:"http://ninapro.hevs.ch/" },
-  { step:"04", color:PURPLE, icon:"🔬", title:"Run the myojam demo", desc:"Load any of the 6 gesture classes in Dataset mode. Students observe the EMG waveform, class probabilities, and 3D hand model respond in real time.", href:"/signal" },
-  { step:"05", color:AMBER,  icon:"📝", title:"Collect exit tickets", desc:"The 3-2-1 exit tickets from Lesson 1 and the design brief from Lesson 3 are strong formative assessments. Share unusual student proposals with us!" },
+  { step:"01", color:PINK,   Icon:IconClipboard,  title:"Choose a lesson plan", desc:"Start with 'EMG Basics' for biology classes or 'Gesture Classifier' for CS. Each comes with a full teacher guide, student worksheet, and exit ticket." },
+  { step:"02", color:BLUE,   Icon:IconLaptop,     title:"Open the interactive tools", desc:"All tools run in any modern browser — Chrome recommended for full WebSerial support. No accounts, downloads, or installs needed.", href:"/demos" },
+  { step:"03", color:GREEN,  Icon:IconBarChart,   title:"Download the dataset (optional)", desc:"For deeper investigations, students can download Ninapro DB5 from ninapro.hevs.ch under an academic use agreement. Registration required.", href:"http://ninapro.hevs.ch/" },
+  { step:"04", color:PURPLE, Icon:IconMicroscope, title:"Run the myojam demo", desc:"Load any of the 6 gesture classes in Dataset mode. Students observe the EMG waveform, class probabilities, and 3D hand model respond in real time.", href:"/signal" },
+  { step:"05", color:AMBER,  Icon:IconPencil,     title:"Collect exit tickets", desc:"The 3-2-1 exit tickets from Lesson 1 and the design brief from Lesson 3 are strong formative assessments. Share unusual student proposals with us!" },
 ]
 
 const CURRICULUM = [
@@ -165,7 +166,7 @@ export default function EducatorResources() {
                   onMouseEnter={e => { if (s.href) e.currentTarget.style.background = "var(--bg-secondary)" }}
                   onMouseLeave={e => { if (s.href) e.currentTarget.style.background = "transparent" }}
                 >
-                  <span style={{ fontSize:22, flexShrink:0, lineHeight:1.2 }}>{s.icon}</span>
+                  <s.Icon size={22} color={s.color}/>
                   <div>
                     <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:4 }}>
                       <span style={{ fontSize:10, fontWeight:700, color:s.color, background:`${s.color}14`, borderRadius:100, padding:"2px 8px", letterSpacing:"0.06em" }}>STEP {s.step}</span>

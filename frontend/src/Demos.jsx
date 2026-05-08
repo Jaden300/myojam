@@ -50,36 +50,40 @@ function SignalViz() {
 
 function GameViz() {
   const GESTURES = [
-    {label:"Fist",   emoji:"✊", x:50,  y:38 },
-    {label:"Point",  emoji:"👆", x:100, y:28 },
-    {label:"Peace",  emoji:"✌️", x:150, y:38 },
-    {label:"Open",   emoji:"🖐", x:150, y:85 },
-    {label:"Pinch",  emoji:"🤌", x:100, y:95 },
-    {label:"Rest",   emoji:"✋", x:50,  y:85 },
+    {label:"Fist",  short:"FS", x:50,  y:38 },
+    {label:"Peace", short:"PC", x:150, y:38 },
+    {label:"Open",  short:"OP", x:150, y:85 },
+    {label:"Pinch", short:"PH", x:100, y:95 },
+    {label:"Rest",  short:"RS", x:50,  y:85 },
   ]
   return(
     <svg width="100%" viewBox="0 0 200 130" style={{overflow:"visible"}}>
-      {/* Active target circle */}
       <circle cx={100} cy={28} r={24} fill={`${AMBER}18`} stroke={AMBER} strokeWidth={1.5}/>
-      {/* Progress ring */}
       <circle cx={100} cy={28} r={20} fill="none" stroke={`${AMBER}50`} strokeWidth={3}
         strokeDasharray="94" strokeDashoffset="30" strokeLinecap="round" transform="rotate(-90 100 28)"/>
-      <text x={100} y={32} textAnchor="middle" fontSize={18}>👆</text>
-      <text x={100} y={56} textAnchor="middle" fill={AMBER} fontSize={7.5} fontWeight={700} textTransform="uppercase" letterSpacing="0.06em">POINT ← target</text>
-      {/* Other gestures */}
-      {GESTURES.filter(g=>g.label!=="Point").map((g,i)=>(
+      {/* Active: index finger pointing up */}
+      <svg x={91} y={18} width={18} height={18} viewBox="0 0 24 24" fill="none">
+        <path d="M9 17V8a3 3 0 0 1 6 0v9" stroke={AMBER} strokeWidth="1.6" strokeLinecap="round"/>
+        <rect x="9" y="14" width="6" height="7" rx="3" stroke={AMBER} strokeWidth="1.6"/>
+        <path d="M9 13c-1.5 0-3 1-3 3v1" stroke={AMBER} strokeWidth="1.4" strokeLinecap="round"/>
+        <path d="M15 13c1.5 0 3 1 3 3v1" stroke={AMBER} strokeWidth="1.4" strokeLinecap="round"/>
+      </svg>
+      <text x={100} y={56} textAnchor="middle" fill={AMBER} fontSize={7.5} fontWeight={700} letterSpacing="0.06em">POINT — target</text>
+      {GESTURES.map((g,i)=>(
         <g key={g.label}>
           <circle cx={g.x} cy={g.y} r={16} fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" strokeWidth={1}/>
-          <text x={g.x} y={g.y+5} textAnchor="middle" fontSize={14}>{g.emoji}</text>
+          <text x={g.x} y={g.y+4} textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize={8} fontWeight={700}>{g.short}</text>
         </g>
       ))}
-      {/* Key hint */}
-      {[["Q","✊",50,115],["W","✌️",80,115],["E","🖐",110,115],["R","🤌",140,115],["T","✋",170,115]].map(([k,e,x,y])=>(
-        <g key={k}>
-          <rect x={x-8} y={y-10} width={16} height={14} rx={3} fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.15)" strokeWidth={1}/>
-          <text x={x} y={y} textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize={8} fontWeight={700}>{k}</text>
-        </g>
-      ))}
+      {["Q","W","E","R","T"].map((k,i)=>{
+        const x=[50,80,110,140,170][i]
+        return(
+          <g key={k}>
+            <rect x={x-8} y={105} width={16} height={14} rx={3} fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.15)" strokeWidth={1}/>
+            <text x={x} y={115} textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize={8} fontWeight={700}>{k}</text>
+          </g>
+        )
+      })}
     </svg>
   )
 }
@@ -257,7 +261,12 @@ function LiveSignalViz() {
       <text x={115} y={121} textAnchor="end" fill="rgba(255,255,255,0.6)" fontSize={7} fontWeight={600}>94.2%</text>
       {/* 3D hand panel */}
       <rect x={132} y={0} width={68} height={100} rx={6} fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.07)" strokeWidth={0.5}/>
-      <text x={166} y={56} textAnchor="middle" fontSize={38}>✊</text>
+      <svg x={142} y={24} width={48} height={48} viewBox="0 0 24 24" fill="none">
+        <rect x="5" y="10" width="14" height="11" rx="3" stroke="rgba(255,255,255,0.5)" strokeWidth="1.4"/>
+        <path d="M8 10V7.5a2 2 0 0 1 4 0V10" stroke="rgba(255,255,255,0.5)" strokeWidth="1.4" strokeLinecap="round"/>
+        <path d="M12 10V8a2 2 0 0 1 4 0v2" stroke="rgba(255,255,255,0.5)" strokeWidth="1.4" strokeLinecap="round"/>
+        <path d="M5 14h14" stroke="rgba(255,255,255,0.25)" strokeWidth="1.2" strokeLinecap="round"/>
+      </svg>
       <text x={166} y={88} textAnchor="middle" fill="rgba(255,255,255,0.22)" fontSize={6.5} fontWeight={300}>3D model</text>
       <text x={166} y={136} textAnchor="middle" fill="rgba(255,45,120,0.5)" fontSize={7} fontWeight={600}>LIVE SENSOR</text>
     </svg>

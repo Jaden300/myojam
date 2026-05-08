@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import Footer from "./Footer"
 import UpNext from "./UpNext"
 import ArticleBar from "./ArticleUtils"
+import { IconRobot, IconAccessibility, IconChat, IconMuscle } from "./Icons"
 
 // ─────────────────────────────────────────────────────────────
 // Live oscilloscope canvas — hero centrepiece
@@ -205,9 +206,9 @@ function FilterDemo() {
 // ─────────────────────────────────────────────────────────────
 function SignalChainDiagram() {
   const nodes = [
-    { id: "brain",  label: "Brain",      sub: "motor cortex",    icon: "🧠", x: 40 },
-    { id: "nerve",  label: "Motor nerve", sub: "action potential", icon: "⚡", x: 180 },
-    { id: "muscle", label: "Muscle",      sub: "fibres fire",     icon: "💪", x: 320 },
+    { id: "brain",  label: "Brain",      sub: "motor cortex",    icon: null, x: 40 },
+    { id: "nerve",  label: "Motor nerve", sub: "action potential", icon: null, x: 180 },
+    { id: "muscle", label: "Muscle",      sub: "fibres fire",     icon: null, x: 320 },
     { id: "elec",   label: "Electrode",   sub: "skin surface",    icon: "◉",  x: 460 },
     { id: "signal", label: "EMG signal",  sub: "voltage output",  icon: "~",  x: 600 },
   ]
@@ -223,7 +224,22 @@ function SignalChainDiagram() {
             </line>
           )}
           <circle cx={n.x} cy={50} r={28} fill="rgba(255,45,120,0.08)" stroke="rgba(255,45,120,0.25)" strokeWidth={1}/>
-          <text x={n.x} y={47} textAnchor="middle" fontSize={17}>{n.icon}</text>
+          {n.icon ? (
+            <text x={n.x} y={47} textAnchor="middle" fontSize={17}>{n.icon}</text>
+          ) : n.id === "brain" ? (
+            <svg x={n.x-9} y={32} width={18} height={18} viewBox="0 0 16 16">
+              <path d="M8 3C5.8 3 4 4.8 4 7c0 1.1.45 2.1 1.17 2.83L5 13h6l-.17-3.17A4 4 0 0 0 8 3Z" stroke="rgba(255,45,120,0.9)" strokeWidth="1.3" strokeLinejoin="round" fill="none"/>
+              <path d="M6 7h4M7 9.5h2" stroke="rgba(255,45,120,0.9)" strokeWidth="1.3" strokeLinecap="round"/>
+            </svg>
+          ) : n.id === "nerve" ? (
+            <svg x={n.x-9} y={32} width={18} height={18} viewBox="0 0 16 16">
+              <path d="M9.5 2L5 9h4.5L6.5 14l6.5-8H8.5L9.5 2Z" stroke="rgba(255,45,120,0.9)" strokeWidth="1.3" strokeLinejoin="round" fill="none"/>
+            </svg>
+          ) : (
+            <svg x={n.x-9} y={32} width={18} height={18} viewBox="0 0 16 16">
+              <path d="M2 8c1-3 2-4 3-4s2 2 3 4 2 4 3 4 2-1 3-4" stroke="rgba(255,45,120,0.9)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+            </svg>
+          )}
           <text x={n.x} y={86} textAnchor="middle" fontSize={9} fill="var(--text-secondary)" fontFamily="monospace">{n.label}</text>
           <text x={n.x} y={97} textAnchor="middle" fontSize={8} fill="var(--text-tertiary)">{n.sub}</text>
         </g>
@@ -234,17 +250,17 @@ function SignalChainDiagram() {
 
 function HardwareChain() {
   const items = [
-    { label: "Forearm",    sub: "muscle activity",    icon: "💪", color: "#FF2D78" },
-    { label: "MyoWare 2.0",sub: "amplify + rectify",  icon: "⬡",  color: "#8B5CF6" },
-    { label: "Arduino Uno",sub: "ADC → USB serial",   icon: "◻",  color: "#3B82F6" },
-    { label: "Python app", sub: "classify → act",     icon: "⚙",  color: "#10B981" },
+    { label: "Forearm",    sub: "muscle activity",    Icon: IconMuscle, color: "#FF2D78" },
+    { label: "MyoWare 2.0",sub: "amplify + rectify",  icon: "⬡",        color: "#8B5CF6" },
+    { label: "Arduino Uno",sub: "ADC → USB serial",   icon: "◻",        color: "#3B82F6" },
+    { label: "Python app", sub: "classify → act",     icon: "⚙",        color: "#10B981" },
   ]
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
       {items.map((it, i) => (
         <div key={it.label} style={{ display: "flex", alignItems: "center", flex: 1 }}>
           <div style={{ flex: 1, textAlign: "center", padding: "0 4px" }}>
-            <div style={{ width: 44, height: 44, borderRadius: 10, background: `${it.color}12`, border: `1px solid ${it.color}35`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, margin: "0 auto 6px" }}>{it.icon}</div>
+            <div style={{ width: 44, height: 44, borderRadius: 10, background: `${it.color}12`, border: `1px solid ${it.color}35`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 6px" }}>{it.Icon ? <it.Icon size={20} color={it.color}/> : <span style={{fontSize:18}}>{it.icon}</span>}</div>
             <div style={{ fontSize: 11, fontWeight: 600, color: "var(--text)", lineHeight: 1.2 }}>{it.label}</div>
             <div style={{ fontSize: 9, color: "var(--text-tertiary)", marginTop: 2, fontFamily: "monospace" }}>{it.sub}</div>
           </div>
@@ -314,15 +330,15 @@ function FeaturePipelineDiagram() {
 
 function AssistiveTechCases() {
   const cases = [
-    { title: "Prosthetic limb",    body: "Amputees control robotic prosthetics by contracting residual forearm muscles — the same electrodes, the same signal.", icon: "🤖", color: "#FF2D78" },
-    { title: "Spinal cord injury", body: "Patients with limited hand mobility can control mice, keyboards, or wheelchairs via EMG without finger contact.", icon: "♿", color: "#8B5CF6" },
-    { title: "ALS / MND",          body: "As motor neuron disease progresses, surface EMG may preserve communication long after speech and fine movement fail.", icon: "💬", color: "#3B82F6" },
+    { title: "Prosthetic limb",    body: "Amputees control robotic prosthetics by contracting residual forearm muscles — the same electrodes, the same signal.", Icon: IconRobot,         color: "#FF2D78" },
+    { title: "Spinal cord injury", body: "Patients with limited hand mobility can control mice, keyboards, or wheelchairs via EMG without finger contact.", Icon: IconAccessibility,  color: "#8B5CF6" },
+    { title: "ALS / MND",          body: "As motor neuron disease progresses, surface EMG may preserve communication long after speech and fine movement fail.", Icon: IconChat,           color: "#3B82F6" },
   ]
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
       {cases.map(c => (
         <div key={c.title} style={{ display: "flex", gap: 12, padding: "12px 14px", background: `${c.color}08`, border: `1px solid ${c.color}20`, borderRadius: 8, borderLeft: `3px solid ${c.color}` }}>
-          <span style={{ fontSize: 20, flexShrink: 0 }}>{c.icon}</span>
+          <div style={{ flexShrink: 0 }}><c.Icon size={20} color={c.color}/></div>
           <div>
             <div style={{ fontSize: 12, fontWeight: 700, color: c.color, marginBottom: 3 }}>{c.title}</div>
             <div style={{ fontSize: 11, color: "var(--text-secondary)", lineHeight: 1.55 }}>{c.body}</div>

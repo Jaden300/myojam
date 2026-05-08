@@ -4,6 +4,7 @@ import Navbar from "./Navbar"
 import Footer from "./Footer"
 import { Reveal, SectionPill } from "./Animate"
 import NeuralNoise from "./components/NeuralNoise"
+import { IconBolt, IconBarChart, IconLineChart, IconMicroscope, IconGlobe, IconLoop } from "./Icons"
 
 // ── colours ──────────────────────────────────────────────────────────────────
 const PINK   = "#FF2D78"
@@ -479,10 +480,10 @@ function GapWaterfall({ vis }) {
 
 // ── Tabbed data dashboard ─────────────────────────────────────────────────────
 const TABS = [
-  { id:0, label:"Classifier Race",    icon:"⚡" },
-  { id:1, label:"Confusion Matrix",   icon:"⬛" },
-  { id:2, label:"Windowing Analysis", icon:"📈" },
-  { id:3, label:"Feature Importance", icon:"🔬" },
+  { id:0, label:"Classifier Race",    Icon:IconBolt },
+  { id:1, label:"Confusion Matrix",   Icon:IconBarChart },
+  { id:2, label:"Windowing Analysis", Icon:IconLineChart },
+  { id:3, label:"Feature Importance", Icon:IconMicroscope },
 ]
 
 function DataDashboard() {
@@ -501,7 +502,7 @@ function DataDashboard() {
             borderBottom:`2px solid ${active===t.id ? PINK : "transparent"}`,
             transition:"all 0.2s", display:"flex", alignItems:"center", gap:6, flexShrink:0,
           }}>
-            <span style={{ fontSize:13 }}>{t.icon}</span>
+            <t.Icon size={13} color={active===t.id ? PINK : "var(--text-tertiary)"}/>
             {t.label}
           </button>
         ))}
@@ -797,12 +798,12 @@ export default function ResearchHub() {
           <div style={{ marginBottom:48 }}>
             <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:14 }}>
               {[
-                { color:GREEN,  icon:"🌍", title:"Open access by default",   body:"Full papers, all data, and the trained model are publicly available at no cost, no login required." },
-                { color:BLUE,   icon:"🔁", title:"Reproducible by design",   body:"Every accuracy figure, every hyperparameter, every evaluation decision can be reproduced from the public codebase." },
-                { color:PURPLE, icon:"📊", title:"Built on public data",      body:"Ninapro DB5 is independently verifiable and directly comparable to other published work." },
+                { color:GREEN,  Icon:IconGlobe,    title:"Open access by default",   body:"Full papers, all data, and the trained model are publicly available at no cost, no login required." },
+                { color:BLUE,   Icon:IconLoop,     title:"Reproducible by design",   body:"Every accuracy figure, every hyperparameter, every evaluation decision can be reproduced from the public codebase." },
+                { color:PURPLE, Icon:IconBarChart, title:"Built on public data",      body:"Ninapro DB5 is independently verifiable and directly comparable to other published work." },
               ].map(v => (
                 <div key={v.title} style={{ background:"var(--bg-secondary)", borderRadius:12, border:"1px solid var(--border)", borderTop:`3px solid ${v.color}`, padding:"22px 22px" }}>
-                  <div style={{ fontSize:22, marginBottom:10 }}>{v.icon}</div>
+                  <div style={{ marginBottom:10 }}><v.Icon size={22} color={v.color}/></div>
                   <div style={{ fontSize:13, fontWeight:700, color:"var(--text)", marginBottom:8 }}>{v.title}</div>
                   <p style={{ fontSize:12.5, color:"var(--text-secondary)", lineHeight:1.7, fontWeight:300, margin:0 }}>{v.body}</p>
                 </div>
