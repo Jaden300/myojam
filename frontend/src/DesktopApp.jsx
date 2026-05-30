@@ -9,12 +9,12 @@ const MAC_URL = "https://github.com/Jaden300/myojam/releases/download/v1.0.0-mac
 const WIN_URL   = "https://github.com/Jaden300/myojam/releases/download/v1.0.0-windows/myojam-windows.zip"
 const LINUX_URL = "https://github.com/Jaden300/myojam/releases/download/v1.0.0-linux/myojam-linux.tar.gz"
 
-// Stable references — defined at module level so LiquidChrome's useEffect dep
+// Stable references - defined at module level so LiquidChrome's useEffect dep
 // comparison never sees a "new" array and won't tear down/rebuild the canvas.
 const HERO_CHROME   = { baseColor: [0.07, 0.0, 0.18], speed: 0.12, amplitude: 0.28, frequencyX: 2.8, frequencyY: 2.8 }
 const FOOTER_CHROME = { baseColor: [0.07, 0.0, 0.18], speed: 0.08, amplitude: 0.22, frequencyX: 2.5, frequencyY: 2.5 }
 
-// Pre-computed waveform path for Mac banner — 1600 wide (double for seamless loop)
+// Pre-computed waveform path for Mac banner - 1600 wide (double for seamless loop)
 // Uses harmonics 3, 8, 21 of period=800 so the signal repeats exactly at x=800
 function buildWave(W, centerY, amp, phase = 0) {
   const pts = []
@@ -118,7 +118,7 @@ function MacBanner({ hovered }) {
             <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#28CA42" }}/>
           </div>
           <div style={{ flex: 1, textAlign: "center", fontSize: 10, color: "rgba(255,255,255,0.3)", fontWeight: 500 }}>
-            myojam — Live Signal
+            myojam - Live Signal
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 4, background: "rgba(255,45,120,0.18)", border: "1px solid rgba(255,45,120,0.3)", borderRadius: 100, padding: "2px 7px" }}>
             <div style={{ width: 4, height: 4, borderRadius: "50%", background: "#FF2D78" }}/>
@@ -224,7 +224,7 @@ function WindowsBanner({ hovered }) {
               <rect x="9" y="9" width="7" height="7" rx="1" fill="rgba(0,180,255,0.45)"/>
             </svg>
           </div>
-          <span style={{ flex: 1, fontSize: 10, color: "rgba(255,255,255,0.5)", fontWeight: 500 }}>myojam — EMG Classifier</span>
+          <span style={{ flex: 1, fontSize: 10, color: "rgba(255,255,255,0.5)", fontWeight: 500 }}>myojam - EMG Classifier</span>
           {["─", "□", "✕"].map((sym, i) => (
             <div key={sym} style={{
               width: 36, height: 30, display: "flex", alignItems: "center", justifyContent: "center",
@@ -335,7 +335,7 @@ function LinuxBanner({ hovered }) {
           <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#FF5F57" }}/>
           <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#FFBD2E" }}/>
           <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#28CA42" }}/>
-          <div style={{ flex: 1, textAlign: "center", fontSize: 9, color: "rgba(255,255,255,0.3)", fontWeight: 500 }}>bash — myojam</div>
+          <div style={{ flex: 1, textAlign: "center", fontSize: 9, color: "rgba(255,255,255,0.3)", fontWeight: 500 }}>bash - myojam</div>
         </div>
 
         {/* Terminal content */}
@@ -476,7 +476,7 @@ function MacDownloadButton({ hovered }) {
       <svg width="15" height="15" viewBox="0 0 12 12" fill="none">
         <path d="M6 1v7M3 5l3 3 3-3M1 10h10" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
-      Download for macOS — Free
+      Download for macOS - Free
     </a>
   )
 }
@@ -505,7 +505,7 @@ function WindowsDownloadButton({ hovered }) {
       <svg width="15" height="15" viewBox="0 0 12 12" fill="none">
         <path d="M6 1v7M3 5l3 3 3-3M1 10h10" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
-      Download for Windows — Free
+      Download for Windows - Free
     </a>
   )
 }
@@ -534,7 +534,7 @@ function LinuxDownloadButton({ hovered }) {
       <svg width="15" height="15" viewBox="0 0 12 12" fill="none">
         <path d="M6 1v7M3 5l3 3 3-3M1 10h10" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
-      Download for Linux — Free
+      Download for Linux - Free
     </a>
   )
 }
@@ -549,7 +549,7 @@ const FEATURES = [
       </svg>
     ),
     title: "Live EMG waveform",
-    body: "Watch your forearm's electrical signal render in real time — every contraction, every twitch. A glowing waveform built for the dark, with a 3-layer glow effect that makes the signal feel alive.",
+    body: "Watch your forearm's electrical signal render in real time - every contraction, every twitch. A glowing waveform built for the dark, with a 3-layer glow effect that makes the signal feel alive.",
   },
   {
     accent: "#A78BFA",
@@ -561,7 +561,7 @@ const FEATURES = [
       </svg>
     ),
     title: "Gesture classification",
-    body: "Six gesture classes — index flex, middle flex, ring flex, pinky flex, thumb flex, and fist — classified in real time using the same 84.85%-accurate Random Forest that powers the research.",
+    body: "Six gesture classes - index flex, middle flex, ring flex, pinky flex, thumb flex, and fist - classified in real time using the same 84.85%-accurate Random Forest that powers the research.",
   },
   {
     accent: "#22D3EE",
@@ -573,7 +573,7 @@ const FEATURES = [
       </svg>
     ),
     title: "3D hand model",
-    body: "A rotating Three.js hand model animates each finger to match your detected gesture — curling in real time as the classifier updates. Visual confirmation that the system sees what you're doing.",
+    body: "A rotating Three.js hand model animates each finger to match your detected gesture - curling in real time as the classifier updates. Visual confirmation that the system sees what you're doing.",
   },
   {
     accent: "#10B981",
@@ -598,7 +598,7 @@ const STEPS = [
   {
     num: "02",
     title: "See your signal",
-    body: "The live EMG waveform appears immediately. Flex any finger and watch the amplitude spike. This is the raw signal — before filtering, before classification.",
+    body: "The live EMG waveform appears immediately. Flex any finger and watch the amplitude spike. This is the raw signal - before filtering, before classification.",
     accent: "#A78BFA",
   },
   {
@@ -651,7 +651,7 @@ export default function DesktopApp() {
               Download myojam.
             </h1>
             <p style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.60)", fontWeight: 300, lineHeight: 1.75, maxWidth: 500, marginBottom: 56 }}>
-              Real-time EMG gesture classification. Runs locally on your machine — no internet, no account, no latency. Backed by research you can read.
+              Real-time EMG gesture classification. Runs locally on your machine - no internet, no account, no latency. Backed by research you can read.
             </p>
 
             {/* Platform cards */}
@@ -738,7 +738,7 @@ export default function DesktopApp() {
               From sensor to gesture in three steps.
             </h2>
             <p style={{ fontSize: 16, color: "var(--text-secondary)", fontWeight: 300, lineHeight: 1.75, maxWidth: 480, marginBottom: 64 }}>
-              You need a MyoWare 2.0 sensor and an Arduino. Everything else — filtering, feature extraction, classification — happens inside the app.
+              You need a MyoWare 2.0 sensor and an Arduino. Everything else - filtering, feature extraction, classification - happens inside the app.
             </p>
           </Reveal>
 
@@ -823,7 +823,7 @@ export default function DesktopApp() {
                   </tbody>
                 </table>
                 <div style={{ padding: "14px 20px", fontSize: 11, color: "var(--text-tertiary)", fontWeight: 300, lineHeight: 1.6, borderTop: "1px solid var(--border)" }}>
-                  Place the sensor on your forearm, centred over the flexor digitorum. Electrode placement matters — see the education hub article for a guide.
+                  Place the sensor on your forearm, centred over the flexor digitorum. Electrode placement matters - see the education hub article for a guide.
                 </div>
               </div>
             </Reveal>
@@ -857,7 +857,7 @@ void loop() {
           <Reveal delay={0.15}>
             <div style={{ marginTop: 24, display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }}>
               {[
-                { tip: "Sensor placement", body: "Centre the electrode pad over the belly of the flexor digitorum superficialis — roughly 3–4 cm below the elbow crease, forearm facing up.", color: "#FF2D78" },
+                { tip: "Sensor placement", body: "Centre the electrode pad over the belly of the flexor digitorum superficialis - roughly 3–4 cm below the elbow crease, forearm facing up.", color: "#FF2D78" },
                 { tip: "Reference electrode", body: "Attach the reference (REF) electrode on a bony, muscle-free area: the bony point of the elbow (olecranon) works well and reduces interference.", color: "#A78BFA" },
                 { tip: "Between sessions", body: "Remove and reattach the sensor in the same position each time. Even 1–2 cm of drift degrades accuracy by 5–10pp. Mark your forearm with a pen as a guide.", color: "#22D3EE" },
               ].map(({ tip, body, color }) => (
@@ -880,7 +880,7 @@ void loop() {
               Not a demo. A research instrument.
             </h2>
             <p style={{ fontSize: 16, color: "var(--text-secondary)", fontWeight: 300, lineHeight: 1.75, maxWidth: 520, marginBottom: 48 }}>
-              The classifier embedded in myojam is the same one documented in four open-access technical reports — every hyperparameter, every design decision, every tradeoff, published.
+              The classifier embedded in myojam is the same one documented in four open-access technical reports - every hyperparameter, every design decision, every tradeoff, published.
             </p>
           </Reveal>
 
@@ -930,7 +930,7 @@ void loop() {
               <SectionPill>Requirements</SectionPill>
               <h3 style={{ fontSize: 24, fontWeight: 600, letterSpacing: "-0.8px", color: "var(--text)", marginBottom: 24, marginTop: 16 }}>What you need</h3>
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                {[["Operating system", "macOS 12+ · Windows 10+ · Ubuntu 20.04+"], ["Hardware sensor", "MyoWare 2.0 EMG sensor"], ["Microcontroller", "Arduino Uno or compatible"], ["Processor", "Apple Silicon · Intel · x64 · ARM64"], ["Download size", "~280–295 MB (platform bundle)"], ["License", "MIT — free to use, modify, and distribute"]].map(([k, v]) => (
+                {[["Operating system", "macOS 12+ · Windows 10+ · Ubuntu 20.04+"], ["Hardware sensor", "MyoWare 2.0 EMG sensor"], ["Microcontroller", "Arduino Uno or compatible"], ["Processor", "Apple Silicon · Intel · x64 · ARM64"], ["Download size", "~280–295 MB (platform bundle)"], ["License", "MIT - free to use, modify, and distribute"]].map(([k, v]) => (
                   <div key={k} style={{ display: "flex", gap: 16, padding: "10px 0", borderBottom: "1px solid var(--border)" }}>
                     <span style={{ fontSize: 13, color: "var(--text-tertiary)", fontWeight: 300, minWidth: 140 }}>{k}</span>
                     <span style={{ fontSize: 13, color: "var(--text)", fontWeight: 400 }}>{v}</span>
@@ -943,7 +943,7 @@ void loop() {
               <SectionPill>Open source</SectionPill>
               <h3 style={{ fontSize: 24, fontWeight: 600, letterSpacing: "-0.8px", color: "var(--text)", marginBottom: 16, marginTop: 16 }}>Everything is public</h3>
               <p style={{ fontSize: 14, color: "var(--text-secondary)", fontWeight: 300, lineHeight: 1.8, marginBottom: 24 }}>
-                The desktop app source — Python, PyQt6, the signal processing pipeline, and the trained Random Forest model — is on GitHub under MIT. Fork it, modify it, build on it.
+                The desktop app source - Python, PyQt6, the signal processing pipeline, and the trained Random Forest model - is on GitHub under MIT. Fork it, modify it, build on it.
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {["Signal processing pipeline (bandpass filter, windowing, feature extraction)", "64-feature Random Forest classifier (MAV, RMS, WL, ZCR × 16 channels)", "Live serial reader from Arduino at 115200 baud", "PyQt6 dark-theme UI with custom widget painting", "Three.js 3D hand model (embedded in QWebEngineView)"].map((item, i) => (

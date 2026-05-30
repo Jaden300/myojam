@@ -377,7 +377,7 @@ export default function PipelineExplorer() {
               <span style={{ color: "var(--accent)" }}>actually decide?</span>
             </h1>
             <p style={{ fontSize: 16, color: "rgba(255,255,255,0.70)", fontWeight: 400, lineHeight: 1.7, maxWidth: 560, marginBottom: 28 }}>
-              Select a gesture. myojam fetches a real 200-sample window from the Ninapro DB5 dataset, runs the full 64-feature extraction pipeline in your browser, and calls the trained Random Forest — showing every transformation step live.
+              Select a gesture. myojam fetches a real 200-sample window from the Ninapro DB5 dataset, runs the full 64-feature extraction pipeline in your browser, and calls the trained Random Forest - showing every transformation step live.
             </p>
             <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
               {[
@@ -468,7 +468,7 @@ export default function PipelineExplorer() {
           {/* ── Step 1: Raw signal */}
           <StepCard
             n={1}
-            title="Raw EMG signal — 200 × 16"
+            title="Raw EMG signal - 200 × 16"
             subtitle={`A single gesture window (1 second at 200 Hz) from Ninapro DB5, labeled "${gesture?.name}". All 16 electrode channels are shown stacked.`}
           >
             <MultiChannelCanvas emgWindow={emgWindow} highlightCh={hovCh} />
@@ -492,7 +492,7 @@ export default function PipelineExplorer() {
           {/* ── Step 2: Bandpass filter */}
           <StepCard
             n={2}
-            title="Bandpass filter — 20 to 90 Hz"
+            title="Bandpass filter - 20 to 90 Hz"
             subtitle="Zero-phase 4th-order Butterworth applied per channel. Pink = raw signal. Cyan = filtered signal retaining only the gesture band."
           >
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10 }}>
@@ -523,7 +523,7 @@ export default function PipelineExplorer() {
           {/* ── Step 3: Feature heatmap */}
           <StepCard
             n={3}
-            title="Feature extraction — 4 × 16 = 64 values"
+            title="Feature extraction - 4 × 16 = 64 values"
             subtitle="Each row is one time-domain feature computed from the filtered signal of each electrode. Colour intensity = relative magnitude within that feature. The % labels are MDI feature importances from the trained RF."
           >
             <FeatureHeatmap features={features} onHover={setHovCh} />
@@ -546,7 +546,7 @@ export default function PipelineExplorer() {
           {/* ── Step 4: Prediction */}
           <StepCard
             n={4}
-            title="Random Forest classification — 500 trees"
+            title="Random Forest classification - 500 trees"
             subtitle="The 64-feature vector is passed to the trained model. Each tree votes independently; the gesture with the plurality wins. Confidence = fraction of trees that agreed."
           >
             {prediction ? (
@@ -558,7 +558,7 @@ export default function PipelineExplorer() {
             )}
             {prediction && (
               <p style={{ fontSize: 11, color: "var(--text-tertiary)", marginTop: 14, lineHeight: 1.65 }}>
-                The model was trained under leave-one-subject-out (LOSO) cross-validation: 9 of 10 subjects trained, 1 tested, repeated for all subjects. Cross-subject accuracy = 84.85% ± 1.91%. Low confidence on a correct prediction typically indicates gesture similarity — see the Confusion Matrix for which pairs confuse the model.
+                The model was trained under leave-one-subject-out (LOSO) cross-validation: 9 of 10 subjects trained, 1 tested, repeated for all subjects. Cross-subject accuracy = 84.85% ± 1.91%. Low confidence on a correct prediction typically indicates gesture similarity - see the Confusion Matrix for which pairs confuse the model.
               </p>
             )}
           </StepCard>

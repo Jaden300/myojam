@@ -33,7 +33,7 @@ function FaceAvatar({ seed, size = 48 }) {
   )
 }
 
-const ABSTRACT = "Surface EMG gesture classification achieves impressive accuracy in controlled laboratory settings — myojam included, at 84.85% cross-subject LOSO. But controlled lab conditions are systematically different from deployment. This article quantifies six specific failure modes, citing the studies that measured them, and maps each to its best-available mitigation. The combined effect of all six factors simultaneously can push accuracy below 52% — a drop of over 40 percentage points from the laboratory ceiling."
+const ABSTRACT = "Surface EMG gesture classification achieves impressive accuracy in controlled laboratory settings - myojam included, at 84.85% cross-subject LOSO. But controlled lab conditions are systematically different from deployment. This article quantifies six specific failure modes, citing the studies that measured them, and maps each to its best-available mitigation. The combined effect of all six factors simultaneously can push accuracy below 52% - a drop of over 40 percentage points from the laboratory ceiling."
 
 // ── Degradation chart ─────────────────────────────────────────────────────────
 const SCENARIOS = [
@@ -87,7 +87,7 @@ const FAILURE_MODES = [
     color: RED,
     drop: "−28 pp",
     dropNum: 28,
-    mechanism: "A shift of 1 cm moves the electrode's detection volume past the edge of the target motor unit pool. The classifier now receives signal from a qualitatively different set of muscle fibres — a different input distribution, not a noisy version of the same one.",
+    mechanism: "A shift of 1 cm moves the electrode's detection volume past the edge of the target motor unit pool. The classifier now receives signal from a qualitatively different set of muscle fibres - a different input distribution, not a noisy version of the same one.",
     trigger: "Longitudinal shift: −28 pp at 1 cm. Transverse shift: −25 pp at 1 cm. Below 0.5 cm: minor (< 8 pp).",
     mitigations: [
       { label: "Anatomical landmarks", detail: "Place relative to muscle belly centre and bony reference points (lateral epicondyle). Reduces placement variance from ~2 cm to ~0.4 cm.", gain: "+8–12 pp" },
@@ -102,7 +102,7 @@ const FAILURE_MODES = [
     color: AMBER,
     drop: "−10–17 pp",
     dropNum: 14,
-    mechanism: "Skin impedance changes with temperature, hydration, and perspiration. Motor unit fibre composition drifts slightly over weeks. The signal the classifier sees on Friday is systematically different from the Monday signal it trained on — even with perfect electrode placement.",
+    mechanism: "Skin impedance changes with temperature, hydration, and perspiration. Motor unit fibre composition drifts slightly over weeks. The signal the classifier sees on Friday is systematically different from the Monday signal it trained on - even with perfect electrode placement.",
     trigger: "Any re-attachment. Even daily reuse without skin preparation produces measurable drift. Variance is highest for first session after a rest day.",
     mitigations: [
       { label: "Few-shot calibration", detail: "Collect 10–20 labelled windows per gesture class from the user at session start. Recovers 8–12 pp of lost accuracy in under 60 seconds of user interaction.", gain: "+8–12 pp" },
@@ -117,7 +117,7 @@ const FAILURE_MODES = [
     color: RED,
     drop: "−15–25 pp",
     dropNum: 20,
-    mechanism: "Arm position changes the geometry of forearm muscles relative to circumferential electrodes. Shoulder elevation also activates postural stabilisers (deltoid, triceps) that were quiescent during training — their EMG bleeds into forearm electrode channels as cross-talk.",
+    mechanism: "Arm position changes the geometry of forearm muscles relative to circumferential electrodes. Shoulder elevation also activates postural stabilisers (deltoid, triceps) that were quiescent during training - their EMG bleeds into forearm electrode channels as cross-talk.",
     trigger: "Any arm position not represented in training data. Most published datasets (including Ninapro DB5) record only: seated, elbow ~90°, forearm horizontal. Elevation, pronation, or elbow extension all trigger degradation.",
     mitigations: [
       { label: "Multi-posture training", detail: "Record the same gesture set in 3–5 arm orientations. Improves generalisation to untrained positions by 10–20 pp at the cost of 3–5× training time.", gain: "+10–20 pp" },
@@ -147,7 +147,7 @@ const FAILURE_MODES = [
     color: PURPLE,
     drop: "−5–12 pp",
     dropNum: 8,
-    mechanism: "Over 20 muscles are packed into the forearm. Surface electrodes detect volume-conducted activity from muscles several centimetres away. Ring and pinky finger flexion are the worst-affected gestures — the flexor digitorum superficialis (FDS) shares deep finger slips, so activating one finger inevitably co-activates adjacent regions of the same muscle belly.",
+    mechanism: "Over 20 muscles are packed into the forearm. Surface electrodes detect volume-conducted activity from muscles several centimetres away. Ring and pinky finger flexion are the worst-affected gestures - the flexor digitorum superficialis (FDS) shares deep finger slips, so activating one finger inevitably co-activates adjacent regions of the same muscle belly.",
     trigger: "Worse for: isolated finger flexions (vs. power grasp), small forearm circumference (<24 cm), and lateral electrode positions close to thenar/hypothenar muscles.",
     mitigations: [
       { label: "High-density electrode arrays", detail: "128+ electrodes with spatial filtering (Laplacian) can localise single motor units, nearly eliminating cross-talk. Not feasible on consumer hardware.", gain: "+8–15 pp" },
@@ -162,7 +162,7 @@ const FAILURE_MODES = [
     color: PURPLE,
     drop: "Variable",
     dropNum: 18,
-    mechanism: "Classifier performance is only valid for the population distribution of the training data. Most benchmark datasets (Ninapro DB5: 10 subjects, ages 22–40, intact limb, right-handed) systematically exclude elderly users, left-handed users, individuals with spasticity or reduced grip strength, and — critically — prosthetic users, who are the primary intended beneficiary of EMG control.",
+    mechanism: "Classifier performance is only valid for the population distribution of the training data. Most benchmark datasets (Ninapro DB5: 10 subjects, ages 22–40, intact limb, right-handed) systematically exclude elderly users, left-handed users, individuals with spasticity or reduced grip strength, and - critically - prosthetic users, who are the primary intended beneficiary of EMG control.",
     trigger: "Any user characteristic not represented in training distribution. Estimated accuracy on amputees from able-bodied training: 55–70% (Fougner et al., 2012). Accuracy on elderly users (60+): 65–75% (Scheme et al., 2013).",
     mitigations: [
       { label: "User-specific calibration", detail: "Even 20 labelled windows per class from the target user, appended to the training set, shifts the decision boundary toward the user's personal signal characteristics.", gain: "+10–25 pp" },
@@ -294,7 +294,7 @@ export default function WhyEMGHard() {
             <span style={{ color:"var(--accent)" }}>Six failure modes, quantified.</span>
           </h1>
           <p style={{ fontSize:17, color:"rgba(255,255,255,0.72)", fontWeight:300, lineHeight:1.75, marginBottom:36, maxWidth:580 }}>
-            95% in the lab. 52% when everything goes wrong at once. The gap is not a mystery — each failure mode has a name, a magnitude, and a mitigation.
+            95% in the lab. 52% when everything goes wrong at once. The gap is not a mystery - each failure mode has a name, a magnitude, and a mitigation.
           </p>
           <div style={{ display:"flex", alignItems:"center", gap:12 }}>
             <FaceAvatar seed={2} size={40} />
@@ -335,7 +335,7 @@ export default function WhyEMGHard() {
           <div style={{ fontSize:12, fontWeight:700, color:"var(--text-tertiary)", textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:16 }}>The accuracy spectrum</div>
           <GapChart />
           <p style={{ fontSize:12, color:"var(--text-tertiary)", fontWeight:300, lineHeight:1.7, marginTop:12 }}>
-            The gap between 95% (controlled lab) and 52% (all failure modes combined) is not a modelling failure — it's six distinct engineering problems. Addressing them individually recovers most of the loss.
+            The gap between 95% (controlled lab) and 52% (all failure modes combined) is not a modelling failure - it's six distinct engineering problems. Addressing them individually recovers most of the loss.
           </p>
         </div>
 
@@ -403,7 +403,7 @@ export default function WhyEMGHard() {
         <div style={{ background:"var(--bg-secondary)", borderRadius:"var(--radius)", padding:"40px", border:"1px solid var(--border)" }}>
           <div style={{ fontSize:11, fontWeight:500, color:"var(--accent)", textTransform:"uppercase", letterSpacing:"0.06em", marginBottom:14 }}>Conclusion</div>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 16px" }}>
-            None of these failure modes are unsolvable — each maps to an engineering intervention with a quantified expected recovery. But they compound. Addressing only electrode placement while ignoring session drift and limb position leaves 30+ percentage points on the table.
+            None of these failure modes are unsolvable - each maps to an engineering intervention with a quantified expected recovery. But they compound. Addressing only electrode placement while ignoring session drift and limb position leaves 30+ percentage points on the table.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:0 }}>
             The 84.85% myojam reports is a meaningful baseline for a classifier with zero per-user calibration. Closing the gap to the 95% laboratory ceiling requires concurrent progress on at least three of these fronts: better placement protocols, at-session calibration, and multi-posture training data. That's the actual research problem.

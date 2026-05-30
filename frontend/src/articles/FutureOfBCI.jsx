@@ -177,9 +177,9 @@ function AccuracyChart() {
   const data = [
     { label:"sEMG cross-subject (myojam)",     acc:84.85, color:GREEN,  note:"Ninapro DB5 LOSO, 6 gestures" },
     { label:"HD-sEMG with MU decomposition",   acc:95.0,  color:BLUE,   note:"Lab-grade, controlled conditions" },
-    { label:"PNI — amputees (2023)",            acc:94.0,  color:AMBER,  note:"AMI + USEA, dexterous hand control" },
-    { label:"ECoG — 26 gestures (within-sess)",acc:97.0,  color:PURPLE, note:"Chang Lab, UCSF, epilepsy patients" },
-    { label:"ICA — handwriting (2021)",         acc:94,    color:RED,    note:"~94 wpm; BrainGate, 1 subject" },
+    { label:"PNI - amputees (2023)",            acc:94.0,  color:AMBER,  note:"AMI + USEA, dexterous hand control" },
+    { label:"ECoG - 26 gestures (within-sess)",acc:97.0,  color:PURPLE, note:"Chang Lab, UCSF, epilepsy patients" },
+    { label:"ICA - handwriting (2021)",         acc:94,    color:RED,    note:"~94 wpm; BrainGate, 1 subject" },
   ]
   return (
     <div ref={ref} style={{ display:"flex", flexDirection:"column", gap:12 }}>
@@ -227,7 +227,7 @@ export default function FutureBCI() {
             <span style={{ color:"var(--accent)" }}>The full BCI spectrum, by the numbers.</span>
           </h1>
           <p style={{ fontSize:17, color:"rgba(255,255,255,0.72)", fontWeight:300, lineHeight:1.75, marginBottom:36, maxWidth:580 }}>
-            Surface EMG is where the spectrum starts. Here's what's above it — and what each step upstream costs, achieves, and requires.
+            Surface EMG is where the spectrum starts. Here's what's above it - and what each step upstream costs, achieves, and requires.
           </p>
           <div style={{ display:"flex", alignItems:"center", gap:12 }}>
             <FaceAvatar seed={4} size={40} />
@@ -266,7 +266,7 @@ export default function FutureBCI() {
         {/* Spectrum diagram */}
         <div style={{ border:"1px solid var(--border)", borderRadius:14, overflow:"hidden", marginBottom:48 }}>
           <div style={{ padding:"14px 20px", background:"var(--bg-secondary)", borderBottom:"1px solid var(--border)" }}>
-            <span style={{ fontSize:12, fontWeight:600, color:"var(--text)", textTransform:"uppercase", letterSpacing:"0.06em" }}>The BCI spectrum — by invasiveness</span>
+            <span style={{ fontSize:12, fontWeight:600, color:"var(--text)", textTransform:"uppercase", letterSpacing:"0.06em" }}>The BCI spectrum - by invasiveness</span>
           </div>
           <div style={{ padding:"24px 20px 16px" }}>
             <SpectrumDiagram />
@@ -282,7 +282,7 @@ export default function FutureBCI() {
           <div style={{ padding:"24px" }}>
             <AccuracyChart />
             <div style={{ marginTop:12, fontSize:10.5, color:"var(--text-tertiary)", fontWeight:300, lineHeight:1.7 }}>
-              These are best-published figures under favorable conditions — not head-to-head comparisons. The "97% ECoG" and "94 wpm ICA" figures are within-session, single-subject results, while the sEMG figure is cross-subject. Direct comparison overstates the gap.
+              These are best-published figures under favorable conditions - not head-to-head comparisons. The "97% ECoG" and "94 wpm ICA" figures are within-session, single-subject results, while the sEMG figure is cross-subject. Direct comparison overstates the gap.
             </div>
           </div>
         </div>
@@ -370,7 +370,7 @@ export default function FutureBCI() {
             </table>
           </div>
           <div style={{ padding:"12px 20px", fontSize:11, color:"var(--text-tertiary)", fontWeight:300, borderTop:"1px solid var(--border)", background:"var(--bg-secondary)" }}>
-            TRL = Technology Readiness Level (1 = concept, 9 = commercial product). Best accuracy figures are maximum reported under favourable conditions — not directly comparable across modalities.
+            TRL = Technology Readiness Level (1 = concept, 9 = commercial product). Best accuracy figures are maximum reported under favourable conditions - not directly comparable across modalities.
           </div>
         </div>
 
@@ -378,10 +378,10 @@ export default function FutureBCI() {
         <div style={{ background:"var(--bg-secondary)", borderRadius:"var(--radius)", padding:"40px", border:"1px solid var(--border)" }}>
           <div style={{ fontSize:11, fontWeight:500, color:"var(--accent)", textTransform:"uppercase", letterSpacing:"0.06em", marginBottom:14 }}>Conclusion</div>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 16px" }}>
-            The spectrum isn't a competition — it's a toolkit. Surface EMG is TRL 9 and costs $68. Intracortical arrays require neurosurgery, cost $200k+, and are TRL 4. These are different solutions to different problems, and advances at the frontier don't make the accessible end obsolete.
+            The spectrum isn't a competition - it's a toolkit. Surface EMG is TRL 9 and costs $68. Intracortical arrays require neurosurgery, cost $200k+, and are TRL 4. These are different solutions to different problems, and advances at the frontier don't make the accessible end obsolete.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:0 }}>
-            The most important near-term development for myojam-level systems isn't neural implants — it's HD-sEMG decomposition algorithms that can run in real time on consumer hardware. Getting from 84.85% to 95% cross-subject without surgery is the tractable problem. Single-neuron recording can wait.
+            The most important near-term development for myojam-level systems isn't neural implants - it's HD-sEMG decomposition algorithms that can run in real time on consumer hardware. Getting from 84.85% to 95% cross-subject without surgery is the tractable problem. Single-neuron recording can wait.
           </p>
         </div>
 

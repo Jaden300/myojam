@@ -9,7 +9,7 @@ import NeuralNoise from "./components/NeuralNoise"
 const PINK = "#FF2D78", BLUE = "#3B82F6", GREEN = "#10B981", PURPLE = "#8B5CF6", AMBER = "#F59E0B"
 
 const CLASSIFIERS = [
-  { name:"Random Forest", acc:84.85, train:"~45s", infer:"<5ms", color:PINK,   note:"myojam's classifier — best cross-subject, fastest inference" },
+  { name:"Random Forest", acc:84.85, train:"~45s", infer:"<5ms", color:PINK,   note:"myojam's classifier - best cross-subject, fastest inference" },
   { name:"SVM (RBF)",     acc:82.3,  train:"~8min", infer:"~18ms", color:BLUE,  note:"Strong but slow to train; sensitive to kernel choice" },
   { name:"k-NN (k=5)",    acc:76.4,  train:"0s",    infer:"~80ms", color:AMBER, note:"No training cost; inference scales with dataset size" },
   { name:"LDA",           acc:71.8,  train:"~2s",   infer:"<1ms",  color:GREEN, note:"Fastest inference; assumes Gaussian class distributions" },
@@ -26,7 +26,7 @@ function ClassifierChart() {
   return (
     <div ref={ref} style={{ background:"var(--bg-secondary)", borderRadius:"var(--radius)", border:"1px solid var(--border)", padding:"24px", margin:"28px 0" }}>
       <div style={{ fontSize:12, fontWeight:500, color:"var(--text-secondary)", textTransform:"uppercase", letterSpacing:"0.06em", marginBottom:20 }}>
-        Cross-subject LOSO accuracy — classifier comparison
+        Cross-subject LOSO accuracy - classifier comparison
       </div>
       {CLASSIFIERS.map((c, i) => (
         <div key={c.name} style={{ marginBottom:14 }}>
@@ -44,7 +44,7 @@ function ClassifierChart() {
               transition: `width 0.8s ease ${i * 0.12}s`
             }} />
           </div>
-          <div style={{ fontSize:11, color:"var(--text-tertiary)", marginTop:3 }}>Train: {c.train} · Infer: {c.infer} — {c.note}</div>
+          <div style={{ fontSize:11, color:"var(--text-tertiary)", marginTop:3 }}>Train: {c.train} · Infer: {c.infer} - {c.note}</div>
         </div>
       ))}
       <div style={{ marginTop:14, fontSize:11, color:"var(--text-tertiary)", fontStyle:"italic" }}>
@@ -63,10 +63,10 @@ function FeatureImportanceBars() {
     return () => obs.disconnect()
   }, [])
   const features = [
-    { label:"MAV — Mean Absolute Value",   pct:35, color:PINK,   note:"Activation energy · strongest discriminator" },
-    { label:"RMS — Root Mean Square",      pct:27, color:PURPLE, note:"Signal power · correlated with MAV" },
-    { label:"WL — Waveform Length",        pct:25, color:BLUE,   note:"Contraction complexity · frequency-sensitive" },
-    { label:"ZCR — Zero Crossing Rate",    pct:13, color:GREEN,  note:"Frequency proxy · lowest individual contribution" },
+    { label:"MAV - Mean Absolute Value",   pct:35, color:PINK,   note:"Activation energy · strongest discriminator" },
+    { label:"RMS - Root Mean Square",      pct:27, color:PURPLE, note:"Signal power · correlated with MAV" },
+    { label:"WL - Waveform Length",        pct:25, color:BLUE,   note:"Contraction complexity · frequency-sensitive" },
+    { label:"ZCR - Zero Crossing Rate",    pct:13, color:GREEN,  note:"Frequency proxy · lowest individual contribution" },
   ]
   return (
     <div ref={ref}>
@@ -309,7 +309,7 @@ export default function RandomForestEMG() {
             </table>
           </div>
           <div style={{ padding: "12px 20px", fontSize: 11, color: "var(--text-tertiary)", fontWeight: 300, lineHeight: 1.6, borderTop: "1px solid var(--border)", background: "var(--bg-secondary)" }}>
-            The winning configuration (500 trees, unlimited depth, sqrt features) was robust — the top 4 configs differ by less than 0.5pp, confirming Random Forest's low sensitivity to exact hyperparameter choice.
+            The winning configuration (500 trees, unlimited depth, sqrt features) was robust - the top 4 configs differ by less than 0.5pp, confirming Random Forest's low sensitivity to exact hyperparameter choice.
           </div>
         </div>
 

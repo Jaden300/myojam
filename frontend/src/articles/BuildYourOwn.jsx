@@ -33,7 +33,7 @@ function FaceAvatar({ seed, size = 48 }) {
   )
 }
 
-const ABSTRACT = "Consumer EMG hardware has reached a price point where a working single-channel surface EMG acquisition system can be assembled for $68 using off-the-shelf components. This article provides a complete, reproducible guide to building and validating such a system — covering component selection with costs, electrode placement, wiring, Arduino firmware, signal quality validation, and the path from raw waveform to gesture classifier."
+const ABSTRACT = "Consumer EMG hardware has reached a price point where a working single-channel surface EMG acquisition system can be assembled for $68 using off-the-shelf components. This article provides a complete, reproducible guide to building and validating such a system - covering component selection with costs, electrode placement, wiring, Arduino firmware, signal quality validation, and the path from raw waveform to gesture classifier."
 
 // ── Wiring diagram SVG ───────────────────────────────────────────────────────
 function WiringDiagram() {
@@ -249,7 +249,7 @@ export default function BuildYourOwn() {
   const [copiedFirmware, setCopiedFirmware] = useState(false)
   const [copiedPython, setCopiedPython] = useState(false)
 
-  const FIRMWARE = `// myojam single-channel EMG — Arduino firmware
+  const FIRMWARE = `// myojam single-channel EMG - Arduino firmware
 // Sample at ~200 Hz over serial (9600 baud)
 
 const int EMG_PIN = A0;
@@ -316,7 +316,7 @@ while True:
           </div>
           <h1 style={{ fontSize:"clamp(28px, 5vw, 52px)", fontWeight:600, letterSpacing:"-1.5px", color:"#fff", lineHeight:1.08, marginBottom:24 }}>
             Build a working EMG rig for $68.<br/>
-            <span style={{ color:"var(--accent)" }}>Complete guide — parts, wiring, firmware.</span>
+            <span style={{ color:"var(--accent)" }}>Complete guide - parts, wiring, firmware.</span>
           </h1>
           <p style={{ fontSize:17, color:"rgba(255,255,255,0.72)", fontWeight:300, lineHeight:1.75, marginBottom:36, maxWidth:580 }}>
             MyoWare 2.0 + Arduino Uno R3 + three Ag/AgCl electrodes. That's the full bill of materials. Here's how to wire it, validate the signal, and feed it into a classifier.
@@ -364,7 +364,7 @@ while True:
             <CostComparisonChart />
           </div>
           <div style={{ padding:"12px 20px", fontSize:11, color:"var(--text-tertiary)", fontWeight:300, lineHeight:1.6, borderTop:"1px solid var(--border)", background:"var(--bg-secondary)" }}>
-            Log scale used — costs span three orders of magnitude. Clinical-grade and research-grade systems include wireless transmission, higher channel counts, medical certification, and vendor support.
+            Log scale used - costs span three orders of magnitude. Clinical-grade and research-grade systems include wireless transmission, higher channel counts, medical certification, and vendor support.
           </div>
         </div>
 
@@ -425,19 +425,19 @@ while True:
             <WiringDiagram />
           </div>
           <div style={{ padding:"12px 20px", fontSize:11, color:"var(--text-tertiary)", fontWeight:300, lineHeight:1.7, borderTop:"1px solid var(--border)", background:"var(--bg-secondary)" }}>
-            Use Arduino's 3.3V rail (not 5V) to power MyoWare 2.0. The sensor's signal output is ratiometric to supply voltage — at 3.3V, rest state centres near 1.65V, mapped to ADC value ~512.
+            Use Arduino's 3.3V rail (not 5V) to power MyoWare 2.0. The sensor's signal output is ratiometric to supply voltage - at 3.3V, rest state centres near 1.65V, mapped to ADC value ~512.
           </div>
         </div>
 
         {/* Electrode placement */}
         <div style={{ border:`1px solid ${PURPLE}22`, borderRadius:14, padding:"28px", background:`${PURPLE}06`, marginBottom:48 }}>
-          <div style={{ fontSize:11, fontWeight:700, color:PURPLE, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:14 }}>Electrode placement — step by step</div>
+          <div style={{ fontSize:11, fontWeight:700, color:PURPLE, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:14 }}>Electrode placement - step by step</div>
           <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
             {[
               {
                 step:"01", color:PURPLE,
                 title:"Locate the muscle",
-                body:"Make a fist. With your other hand, feel the anterior forearm — the large muscle that bulges below your elbow crease is flexor digitorum superficialis (FDS). This is your target.",
+                body:"Make a fist. With your other hand, feel the anterior forearm - the large muscle that bulges below your elbow crease is flexor digitorum superficialis (FDS). This is your target.",
               },
               {
                 step:"02", color:BLUE,
@@ -452,7 +452,7 @@ while True:
               {
                 step:"04", color:AMBER,
                 title:"Place the reference",
-                body:"Clip the reference (REF) electrode to the lateral epicondyle — the bony prominence on the outside of your elbow. This is electrically quiet and gives the differential amplifier a stable reference.",
+                body:"Clip the reference (REF) electrode to the lateral epicondyle - the bony prominence on the outside of your elbow. This is electrically quiet and gives the differential amplifier a stable reference.",
               },
             ].map((s) => (
               <div key={s.step} style={{ display:"flex", gap:12 }}>
@@ -539,7 +539,7 @@ while True:
             <AccuracyChart />
           </div>
           <div style={{ padding:"12px 20px", fontSize:11, color:"var(--text-tertiary)", fontWeight:300, lineHeight:1.6, borderTop:"1px solid var(--border)", background:"var(--bg-secondary)" }}>
-            Within-session accuracy benefits from consistent electrode placement and fresh electrode gel. Cross-session drop is driven by electrode repositioning variance — the single biggest source of degradation in consumer EMG systems.
+            Within-session accuracy benefits from consistent electrode placement and fresh electrode gel. Cross-session drop is driven by electrode repositioning variance - the single biggest source of degradation in consumer EMG systems.
           </div>
         </div>
 
@@ -551,7 +551,7 @@ while True:
           </p>
           <div style={{ display:"grid", gap:10 }}>
             {[
-              { step:"1", text:"Collect 6 repetitions of each target gesture at 200 Hz — about 2 minutes of recording per gesture.", color:PINK },
+              { step:"1", text:"Collect 6 repetitions of each target gesture at 200 Hz - about 2 minutes of recording per gesture.", color:PINK },
               { step:"2", text:"Segment into 200-sample (1 s) windows with 75% overlap. Extract 4 features per window: MAV, RMS, WL, ZCR.", color:BLUE },
               { step:"3", text:"Train a Random Forest on labelled feature vectors. Cross-validate with leave-one-session-out.", color:GREEN },
               { step:"4", text:"Deploy: stream live windows from Arduino, extract features, pass to classifier, read prediction.", color:AMBER },
@@ -571,7 +571,7 @@ while True:
 
         <ArticleBar
           url="https://myojam.com/education/build-your-own-emg"
-          title="Build a working EMG rig for $68 — complete guide"
+          title="Build a working EMG rig for $68 - complete guide"
           citation={{ apa:`Wong, J. (2026, April 5). Build a working EMG rig for $68. myojam. https://myojam.com/education/build-your-own-emg` }}
           presetLikes={61}
           storageKey="like_build_your_own"

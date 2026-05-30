@@ -68,7 +68,7 @@ function GameViz() {
         <path d="M9 13c-1.5 0-3 1-3 3v1" stroke={AMBER} strokeWidth="1.4" strokeLinecap="round"/>
         <path d="M15 13c1.5 0 3 1 3 3v1" stroke={AMBER} strokeWidth="1.4" strokeLinecap="round"/>
       </svg>
-      <text x={100} y={56} textAnchor="middle" fill={AMBER} fontSize={7.5} fontWeight={700} letterSpacing="0.06em">POINT — target</text>
+      <text x={100} y={56} textAnchor="middle" fill={AMBER} fontSize={7.5} fontWeight={700} letterSpacing="0.06em">POINT - target</text>
       {GESTURES.map((g,i)=>(
         <g key={g.label}>
           <circle cx={g.x} cy={g.y} r={16} fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" strokeWidth={1}/>
@@ -196,7 +196,7 @@ function PipelineViz() {
       {/* Output gesture */}
       <rect x={14} y={96} width={172} height={46} rx={8} fill={`${GREEN}10`} stroke={`${GREEN}30`} strokeWidth={1}/>
       <text x={100} y={114} textAnchor="middle" fill={GREEN} fontSize={9} fontWeight={700}>Classified gesture</text>
-      <text x={100} y={128} textAnchor="middle" fill={`${GREEN}70`} fontSize={8}>Fist — 91.2% confidence</text>
+      <text x={100} y={128} textAnchor="middle" fill={`${GREEN}70`} fontSize={8}>Fist - 91.2% confidence</text>
       <path d="M100,90 L100,96" stroke={`${GREEN}50`} strokeWidth={1.2} strokeDasharray="2,2"/>
     </svg>
   )
@@ -305,12 +305,12 @@ const TOOLS = [
     slug: "/guess",
     tag: "Interactive game",
     title: "Signal Guesser",
-    desc: "We show you a real EMG window from Ninapro DB5 — three electrode channels, one second of data. Pick which of the 6 gestures caused it. 5 rounds. The AI's answer is revealed after each guess.",
+    desc: "We show you a real EMG window from Ninapro DB5 - three electrode channels, one second of data. Pick which of the 6 gestures caused it. 5 rounds. The AI's answer is revealed after each guess.",
     features: ["Real Ninapro DB5 data", "5 rounds per session", "AI confidence reveal", "Biomechanical explanations"],
     cta: "Play now →",
     accent: PINK,
     Viz: GuesserViz,
-    what: "You'll feel first-hand why ring and pinky flex are nearly indistinguishable on a circumferential electrode array — and why 84.85% cross-subject accuracy is harder than it sounds.",
+    what: "You'll feel first-hand why ring and pinky flex are nearly indistinguishable on a circumferential electrode array - and why 84.85% cross-subject accuracy is harder than it sounds.",
   },
   {
     slug: "/playground",
@@ -321,18 +321,18 @@ const TOOLS = [
     cta: "Open playground →",
     accent: BLUE,
     Viz: SignalViz,
-    what: "You'll understand why a brief muscle contraction produces a different feature vector than a sustained hold — and what that means for the classifier.",
+    what: "You'll understand why a brief muscle contraction produces a different feature vector than a sustained hold - and what that means for the classifier.",
   },
   {
     slug: "/game",
     tag: "Learning game",
     title: "Gesture Reaction Game",
-    desc: "A target gesture appears — press the matching key before time runs out. Three difficulty levels designed to build intuition for the 6 gesture classes used in myojam's classifier.",
+    desc: "A target gesture appears - press the matching key before time runs out. Three difficulty levels designed to build intuition for the 6 gesture classes used in myojam's classifier.",
     features: ["3 difficulty levels", "6 gesture classes", "Reaction scoring", "Keyboard-driven"],
     cta: "Play now →",
     accent: AMBER,
     Viz: GameViz,
-    what: "You'll understand why pinch and peace are hard to separate — they share similar finger extension patterns — which is exactly why the classifier confuses them.",
+    what: "You'll understand why pinch and peace are hard to separate - they share similar finger extension patterns - which is exactly why the classifier confuses them.",
   },
   {
     slug: "/frequency",
@@ -343,18 +343,18 @@ const TOOLS = [
     cta: "Open analyzer →",
     accent: PURPLE,
     Viz: FreqViz,
-    what: "You'll see exactly how much of the raw signal is noise — and why the 50Hz powerline spike sits right in the middle of the useful band.",
+    what: "You'll see exactly how much of the raw signal is noise - and why the 50Hz powerline spike sits right in the middle of the useful band.",
   },
   {
     slug: "/confusion",
     tag: "Model evaluation",
     title: "Confusion Matrix Explorer",
-    desc: "An interactive heatmap of the classifier's cross-subject accuracy. Click any cell to see how often one gesture is confused for another — and the biomechanical reason why.",
+    desc: "An interactive heatmap of the classifier's cross-subject accuracy. Click any cell to see how often one gesture is confused for another - and the biomechanical reason why.",
     features: ["Interactive 6×6 heatmap", "Per-gesture recall", "Biomechanical explanations", "Click-to-explore"],
     cta: "Explore →",
     accent: GREEN,
     Viz: MatrixViz,
-    what: "You'll see that accuracy is not uniform — some gestures hit 88%, others 80% — and why the off-diagonal errors follow a predictable anatomical pattern.",
+    what: "You'll see that accuracy is not uniform - some gestures hit 88%, others 80% - and why the off-diagonal errors follow a predictable anatomical pattern.",
   },
   {
     slug: "/pipeline",
@@ -365,7 +365,7 @@ const TOOLS = [
     cta: "Trace a prediction →",
     accent: PINK,
     Viz: PipelineViz,
-    what: "You'll see the full signal-to-prediction chain in a single view — the only tool that shows all four pipeline stages simultaneously on real data.",
+    what: "You'll see the full signal-to-prediction chain in a single view - the only tool that shows all four pipeline stages simultaneously on real data.",
   },
   {
     slug: "/signal",
@@ -376,18 +376,18 @@ const TOOLS = [
     cta: "Open live view →",
     accent: "#FF2D78",
     Viz: LiveSignalViz,
-    what: "You'll see your own forearm signal — not simulated data — processed and classified live. The latency between muscle contraction and gesture label is typically under 5ms.",
+    what: "You'll see your own forearm signal - not simulated data - processed and classified live. The latency between muscle contraction and gesture label is typically under 5ms.",
   },
   {
     slug: "/myocode",
     tag: "Block coding",
     title: "MyoCode",
-    desc: "A Scratch-style block coding environment where your EMG gestures trigger code. Build programs that respond to fist, point, peace, and more — no typing required, just flex.",
+    desc: "A Scratch-style block coding environment where your EMG gestures trigger code. Build programs that respond to fist, point, peace, and more - no typing required, just flex.",
     features: ["Gesture-driven blocks", "Canvas stage", "6 gesture triggers", "No hardware needed"],
     cta: "Open MyoCode →",
     accent: "#F59E0B",
     Viz: MyoCodeViz,
-    what: "You'll understand how gesture events can replace keyboard inputs — the foundation of every muscle-computer interface, expressed as visual code anyone can modify.",
+    what: "You'll understand how gesture events can replace keyboard inputs - the foundation of every muscle-computer interface, expressed as visual code anyone can modify.",
   },
 ]
 
@@ -412,7 +412,7 @@ export default function Demos() {
               Learn by doing.<br/><span style={{ color: PINK }}>No hardware required.</span>
             </h1>
             <p style={{ fontSize: 16, color: "rgba(255,255,255,0.65)", fontWeight: 300, lineHeight: 1.8, maxWidth: 500, marginBottom: 36 }}>
-              Eight interactive tools for exploring EMG signal processing, gesture classification, and machine learning — six run entirely in the browser, two connect to live hardware.
+              Eight interactive tools for exploring EMG signal processing, gesture classification, and machine learning - six run entirely in the browser, two connect to live hardware.
             </p>
             <div style={{ display: "flex", gap: 36, flexWrap: "wrap" }}>
               {[["8","interactive tools"],["16,269","EMG windows"],["6","browser-only"]].map(([v,l])=>(
@@ -524,7 +524,7 @@ export default function Demos() {
             <div>
               <div style={{ fontSize: 15, fontWeight: 700, color: "var(--text)", marginBottom: 5, letterSpacing: "-0.2px" }}>Want the science behind the tools?</div>
               <p style={{ fontSize: 13, color: "var(--text-secondary)", fontWeight: 300, lineHeight: 1.7, margin: 0, maxWidth: 420 }}>
-                11 full articles cover the neuroscience, signal processing theory, and machine learning behind every tool — from first principles to implementation details.
+                11 full articles cover the neuroscience, signal processing theory, and machine learning behind every tool - from first principles to implementation details.
               </p>
             </div>
             <button onClick={() => navigate("/education")} style={{ flexShrink: 0, background: "var(--accent)", color: "#fff", borderRadius: 100, padding: "12px 26px", fontSize: 14, fontWeight: 500, border: "none", fontFamily: "var(--font)", cursor: "pointer", boxShadow: "0 4px 16px rgba(255,45,120,0.3)", transition: "transform 0.15s,box-shadow 0.15s" }}

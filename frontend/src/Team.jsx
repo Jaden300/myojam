@@ -11,25 +11,25 @@ const MILESTONES = [
     date: "Early 2024",
     color: "#FF2D78",
     title: "The question.",
-    body: "Why does EMG gesture recognition work in a lab and fall apart on a real person's arm? Cross-subject generalization isn't a minor gap — it's the entire problem. We decided to build around it instead of ignoring it.",
+    body: "Why does EMG gesture recognition work in a lab and fall apart on a real person's arm? Cross-subject generalization isn't a minor gap - it's the entire problem. We decided to build around it instead of ignoring it.",
   },
   {
     date: "Mid 2024",
     color: "#8B5CF6",
     title: "Hardware meets data.",
-    body: "MyoWare 2.0 sensors, Arduino Uno, 200 Hz sampling. 16 channels of surface EMG. Then the Ninapro DB5 — 10 real subjects, 6 gesture classes, publicly available. Finally: a dataset honest enough to train on.",
+    body: "MyoWare 2.0 sensors, Arduino Uno, 200 Hz sampling. 16 channels of surface EMG. Then the Ninapro DB5 - 10 real subjects, 6 gesture classes, publicly available. Finally: a dataset honest enough to train on.",
   },
   {
     date: "Late 2024",
     color: "#3B82F6",
     title: "84.85%.",
-    body: "Leave-one-subject-out cross-validation. Random Forest, 500 trees, Hudgins feature set. Not perfect — but real. The model had never seen the test subject. That's the only number we trust.",
+    body: "Leave-one-subject-out cross-validation. Random Forest, 500 trees, Hudgins feature set. Not perfect - but real. The model had never seen the test subject. That's the only number we trust.",
   },
   {
     date: "2025",
     color: "#10B981",
     title: "Open source everything.",
-    body: "MIT license. Model weights, training code, web app, education layer — all public. If the mission is accessibility, locking the tools behind a paywall defeats the mission. Simple as that.",
+    body: "MIT license. Model weights, training code, web app, education layer - all public. If the mission is accessibility, locking the tools behind a paywall defeats the mission. Simple as that.",
   },
 ]
 
@@ -39,13 +39,13 @@ const VALUES = [
     color: "#FF2D78",
     icon: IconHandshake,
     title: "Accessibility is the product.",
-    body: "Not a feature, not a polish pass, not a checkbox. Every design decision starts with: does this work for someone who genuinely needs it? That's not a constraint on what we build — it's the reason we build at all.",
+    body: "Not a feature, not a polish pass, not a checkbox. Every design decision starts with: does this work for someone who genuinely needs it? That's not a constraint on what we build - it's the reason we build at all.",
   },
   {
     color: "#3B82F6",
     icon: IconGlobe,
     title: "Open, or it didn't happen.",
-    body: "The model weights, the training pipeline, the web app, the lesson plans — all of it is public. Research that can't be replicated isn't research. Tools that help people shouldn't be walled off from the people they're meant to help.",
+    body: "The model weights, the training pipeline, the web app, the lesson plans - all of it is public. Research that can't be replicated isn't research. Tools that help people shouldn't be walled off from the people they're meant to help.",
   },
   {
     color: "#8B5CF6",
@@ -87,7 +87,7 @@ export default function Team() {
             One stubborn idea.
           </h1>
           <p style={{ fontSize:18, color:"rgba(255,255,255,0.66)", fontWeight:300, lineHeight:1.78, margin:"0 0 40px", animation:"fadeUp 0.55s 0.14s ease both" }}>
-            A small team building open-source assistive technology — because gesture-based computing should belong to everyone, not just people with lab access.
+            A small team building open-source assistive technology - because gesture-based computing should belong to everyone, not just people with lab access.
           </p>
 
           {/* Stats */}
@@ -117,13 +117,13 @@ export default function Team() {
                 The lab problem nobody talks about.
               </h2>
               <p style={{ fontSize:16, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.88, marginBottom:18 }}>
-                Most EMG gesture recognition research reports accuracy on data from the same subjects used to train the model. That's a controlled environment number, not a real-world number. The moment a new person puts on the electrodes — different skin, different muscle geometry, different fatigue state — the model often falls apart.
+                Most EMG gesture recognition research reports accuracy on data from the same subjects used to train the model. That's a controlled environment number, not a real-world number. The moment a new person puts on the electrodes - different skin, different muscle geometry, different fatigue state - the model often falls apart.
               </p>
               <p style={{ fontSize:16, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.88, marginBottom:18 }}>
-                myojam started as a direct answer to that problem. We used leave-one-subject-out validation from the start, trained on Ninapro DB5 because it has real subjects and real variability, and published the number we actually got — 84.85% — not the number we got by picking the best subject as the test set.
+                myojam started as a direct answer to that problem. We used leave-one-subject-out validation from the start, trained on Ninapro DB5 because it has real subjects and real variability, and published the number we actually got - 84.85% - not the number we got by picking the best subject as the test set.
               </p>
               <p style={{ fontSize:16, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.88, margin:0 }}>
-                The MIT license came later, but the logic was the same: if the goal is accessibility, the tools need to be accessible. Anyone can download the model, fork the repo, and build on it today. That's not generosity — that's the design.
+                The MIT license came later, but the logic was the same: if the goal is accessibility, the tools need to be accessible. Anyone can download the model, fork the repo, and build on it today. That's not generosity - that's the design.
               </p>
             </Reveal>
 
@@ -199,7 +199,7 @@ export default function Team() {
               Not slogans. Decisions we've already made.
             </h2>
             <p style={{ fontSize:15, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.75, maxWidth:520, marginBottom:44 }}>
-              Every value on this page has a concrete consequence — something we built or didn't build, shipped or didn't ship, because of it.
+              Every value on this page has a concrete consequence - something we built or didn't build, shipped or didn't ship, because of it.
             </p>
           </Reveal>
 
@@ -231,7 +231,7 @@ export default function Team() {
                 We don't have job listings. We have GitHub issues.
               </h2>
               <p style={{ fontSize:15, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.8, marginBottom:28 }}>
-                myojam is MIT-licensed and genuinely open to contribution. Whether you're a researcher, teacher, hardware hacker, or someone who just uses assistive technology and has opinions — there's a place for you here.
+                myojam is MIT-licensed and genuinely open to contribution. Whether you're a researcher, teacher, hardware hacker, or someone who just uses assistive technology and has opinions - there's a place for you here.
               </p>
               <div style={{ display:"flex", gap:12, flexWrap:"wrap" }}>
                 <a

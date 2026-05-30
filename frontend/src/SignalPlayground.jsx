@@ -76,28 +76,28 @@ const FEATURE_META = [
   {
     key: "mav", label: "MAV", full: "Mean Absolute Value",
     formula: "MAV = (1/N) Σ |xᵢ|",
-    desc: "Average signal energy — how active the muscle is overall. Scales with contraction force.",
+    desc: "Average signal energy - how active the muscle is overall. Scales with contraction force.",
     color: "#FF2D78",
     maxVal: 0.5,
   },
   {
     key: "rms", label: "RMS", full: "Root Mean Square",
     formula: "RMS = √((1/N) Σ xᵢ²)",
-    desc: "Signal power — similar to MAV but emphasises high-amplitude peaks over sustained activity.",
+    desc: "Signal power - similar to MAV but emphasises high-amplitude peaks over sustained activity.",
     color: "#3B82F6",
     maxVal: 0.5,
   },
   {
     key: "zc", label: "ZCR", full: "Zero Crossing Rate",
     formula: "ZCR = Σ 𝟙[xᵢ · xᵢ₋₁ < 0]",
-    desc: "How often the signal crosses zero — a proxy for dominant frequency content without FFT.",
+    desc: "How often the signal crosses zero - a proxy for dominant frequency content without FFT.",
     color: "#8B5CF6",
     maxVal: 80,
   },
   {
     key: "wl", label: "WL", full: "Waveform Length",
     formula: "WL = Σ |xᵢ - xᵢ₋₁|",
-    desc: "Total waveform variation — captures both amplitude and frequency in a single scalar.",
+    desc: "Total waveform variation - captures both amplitude and frequency in a single scalar.",
     color: "#10B981",
     maxVal: 4.0,
   },
@@ -139,7 +139,7 @@ export default function SignalPlayground() {
       ctx.fillStyle = "rgba(255,255,255,0.12)"
       ctx.font = "14px system-ui"
       ctx.textAlign = "center"
-      ctx.fillText("Draw here — or load a preset gesture →", W/2, mid)
+      ctx.fillText("Draw here - or load a preset gesture →", W/2, mid)
       return
     }
 
@@ -326,7 +326,7 @@ export default function SignalPlayground() {
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 10 }}>
                   <span style={{ fontSize: 13, fontWeight: 700, color: f.color }}>{f.label}</span>
                   <span style={{ fontSize: 15, fontWeight: 700, color: "var(--text)", fontFamily: "monospace" }}>
-                    {features ? (f.key === "zc" ? Math.round(raw) : raw.toFixed(3)) : "—"}
+                    {features ? (f.key === "zc" ? Math.round(raw) : raw.toFixed(3)) : "-"}
                   </span>
                 </div>
                 <div style={{ height: 6, background: "var(--border)", borderRadius: 3, overflow: "hidden", marginBottom: 8 }}>

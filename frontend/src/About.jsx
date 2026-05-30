@@ -267,9 +267,9 @@ function DriftScatter() {
 /* ── interactive project timeline ────────────────────────── */
 const TIMELINE = [
   { date:"Aug 2024", label:"Research begins", body:"Question posed: can one person build a clinically meaningful gesture classifier using only public data and $60 of hardware?", color:BLUE, icon:"?" },
-  { date:"Sep 2024", label:"Dataset selected", body:"Ninapro DB5 chosen — 10 subjects, sEMG from 10 forearm electrodes, 52 gestures. Subset to 6 classes for initial experiment.", color:PURPLE, Icon:IconBarChart },
+  { date:"Sep 2024", label:"Dataset selected", body:"Ninapro DB5 chosen - 10 subjects, sEMG from 10 forearm electrodes, 52 gestures. Subset to 6 classes for initial experiment.", color:PURPLE, Icon:IconBarChart },
   { date:"Oct 2024", label:"Pipeline built", body:"Signal preprocessing pipeline implemented: 200Hz sampling, 300ms sliding windows, MAV + RMS + WL + ZCR feature extraction across channels.", color:AMBER, Icon:IconGear },
-  { date:"Dec 2024", label:"Classifier achieved", body:"Random Forest reaches 84.85% cross-subject accuracy — the original research question answered.", color:PINK, icon:"✓" },
+  { date:"Dec 2024", label:"Classifier achieved", body:"Random Forest reaches 84.85% cross-subject accuracy - the original research question answered.", color:PINK, icon:"✓" },
   { date:"Jan 2025", label:"Platform launched", body:"Education hub goes live with first 3 articles, interactive signal playground, and open-source pipeline documentation.", color:GREEN, Icon:IconRocket },
   { date:"Feb 2025", label:"Lesson plans", body:"Three structured lesson plans written for secondary and university educators. First classroom adoption reported.", color:BLUE, Icon:IconBook },
   { date:"Mar 2025", label:"Desktop app", body:"macOS, Windows, and Linux desktop app released. Real-time gesture inference from webcam-compatible sEMG hardware.", color:PURPLE, Icon:IconLaptop },
@@ -438,7 +438,7 @@ const PROBLEMS = [
     num:"01", color:PINK,
     title:"Cross-subject accuracy gap",
     stat:"84.85%", statSub:"vs ~96% intra-subject",
-    body:"The model generalises to unseen subjects at 84.85%. Closing the 11pp gap to intra-subject accuracy likely requires personalization layers — none exist today.",
+    body:"The model generalises to unseen subjects at 84.85%. Closing the 11pp gap to intra-subject accuracy likely requires personalization layers - none exist today.",
     visual: <AccuracyDonut />,
   },
   {
@@ -534,9 +534,9 @@ function MiniEMG() {
 /* ── VALUES data ─────────────────────────────────────────── */
 const VALUES = [
   { Icon:IconBook,       color:BLUE,   title:"Education as the mission",
-    body:"MyoCode, the education hub, and the How It Works page together account for more development time than the classifier itself. The articles, lesson plans, and interactive tools aren't supplements — they are the project." },
+    body:"MyoCode, the education hub, and the How It Works page together account for more development time than the classifier itself. The articles, lesson plans, and interactive tools aren't supplements - they are the project." },
   { Icon:IconGlobe,      color:GREEN,  title:"Open source by default",
-    body:"Every model weight, training script, and architecture decision is on GitHub under MIT — including the experiments that didn't work. We publish the full confusion matrix, not just the headline accuracy. Reproducibility is the minimum bar." },
+    body:"Every model weight, training script, and architecture decision is on GitHub under MIT - including the experiments that didn't work. We publish the full confusion matrix, not just the headline accuracy. Reproducibility is the minimum bar." },
   { Icon:IconMicroscope, color:PURPLE, title:"Honest science, clear writing",
     body:"We report 84.85% with leave-one-subject-out validation, not the higher number we'd get by choosing the best test subject. The methodology is in the text, not buried in a footnote. Rigour and clarity aren't in tension." },
   { Icon:IconBolt,       color:PINK,   title:"Technology adapts to people",
@@ -619,7 +619,7 @@ export default function About() {
                   Starting in August 2024: can one person build a clinically meaningful EMG gesture classifier using only public datasets and $60 of hardware?
                 </p>
                 <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300 }}>
-                  The answer arrived in December 2024 — <strong style={{ color:"var(--text)", fontWeight:600 }}>84.85% cross-subject accuracy</strong> on Ninapro DB5, trained on 10 subjects, 16,269 labelled 300ms windows, 6 gesture classes.
+                  The answer arrived in December 2024 - <strong style={{ color:"var(--text)", fontWeight:600 }}>84.85% cross-subject accuracy</strong> on Ninapro DB5, trained on 10 subjects, 16,269 labelled 300ms windows, 6 gesture classes.
                 </p>
               </div>
               {/* accuracy donut */}
@@ -643,7 +643,7 @@ export default function About() {
           <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:48 }}>
             <Reveal delay={0.1}>
               <p style={{ fontSize:15, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.8, marginBottom:0 }}>
-                Every decision — dataset choice, classifier architecture, hyperparameters, deployment approach — was documented publicly as it happened. Click any milestone to expand.
+                Every decision - dataset choice, classifier architecture, hyperparameters, deployment approach - was documented publicly as it happened. Click any milestone to expand.
               </p>
             </Reveal>
             <div/>
@@ -700,7 +700,7 @@ export default function About() {
               Three open problems.
             </h2>
             <p style={{ fontSize:15, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.75, marginBottom:48, maxWidth:560 }}>
-              84.85% is a meaningful result — but the gaps between research-grade and clinical deployment are real and worth visualising.
+              84.85% is a meaningful result - but the gaps between research-grade and clinical deployment are real and worth visualising.
             </p>
           </Reveal>
 
@@ -780,11 +780,11 @@ export default function About() {
             </p>
             <div style={{ display:"flex", flexDirection:"column", gap:14 }}>
               {[
-                { n:"React + Vite",  c:BLUE,   d:"Pure SPA — no SSR overhead. Vite's rolldown bundler gives sub-500ms rebuilds, which matters when you're iterating on WebGL animations and canvas timing." },
-                { n:"scikit-learn",  c:AMBER,  d:"Random Forest over PyTorch because inference runs in under 5ms on a CPU. No GPU dependency — a hard requirement for real-time gesture control on consumer hardware." },
+                { n:"React + Vite",  c:BLUE,   d:"Pure SPA - no SSR overhead. Vite's rolldown bundler gives sub-500ms rebuilds, which matters when you're iterating on WebGL animations and canvas timing." },
+                { n:"scikit-learn",  c:AMBER,  d:"Random Forest over PyTorch because inference runs in under 5ms on a CPU. No GPU dependency - a hard requirement for real-time gesture control on consumer hardware." },
                 { n:"WebGL / ogl",   c:PURPLE, d:"ogl is a minimal WebGL wrapper with no Three.js overhead. The live signal canvas renders 16 channels at 60fps with under 2ms draw time per frame." },
                 { n:"Ninapro DB5",   c:PINK,   d:"The only public EMG dataset large enough to validate cross-subject generalization honestly. 10 subjects, 52 repetitions per gesture, recorded at EPFL." },
-                { n:"MIT License",   c:GREEN,  d:"MIT over Apache or GPL specifically to remove friction for clinical researchers under IP agreements. Attribution required, nothing else — no copyleft, no patent clauses." },
+                { n:"MIT License",   c:GREEN,  d:"MIT over Apache or GPL specifically to remove friction for clinical researchers under IP agreements. Attribution required, nothing else - no copyleft, no patent clauses." },
               ].map(({ n, d, c }) => (
                 <div key={n} style={{ display:"flex", gap:12, alignItems:"flex-start", padding:"10px 0", borderBottom:"1px solid var(--border)" }}>
                   <div style={{ width:8, height:8, borderRadius:"50%", background:c, flexShrink:0, marginTop:5 }}/>
@@ -815,7 +815,7 @@ export default function About() {
               <div>
                 <div style={{ fontSize:22, fontWeight:600, color:"var(--text)", letterSpacing:"-0.5px", marginBottom:10 }}>myojam is fully open source</div>
                 <p style={{ fontSize:15, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:480 }}>
-                  Signal processing pipeline, ML model, React frontend, FastAPI backend — all public under the MIT license.
+                  Signal processing pipeline, ML model, React frontend, FastAPI backend - all public under the MIT license.
                 </p>
               </div>
               <div style={{ display:"flex", gap:12, flexWrap:"wrap" }}>

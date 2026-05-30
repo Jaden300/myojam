@@ -41,26 +41,26 @@ function FaceAvatar({ seed, size = 48 }) {
 const ABSTRACT = "As surface EMG transitions from research tool to consumer interface, it brings with it a set of ethical questions that the assistive technology and human-computer interaction communities have not yet adequately addressed. This article examines three specific concerns: EMG as biometric identifier, involuntary health disclosure, and the data rights of users who train personalised models."
 
 const RISK_LEVELS = [
-  { level: 1, label: "Gesture intent", color: GREEN,  risk: "Low",    detail: "Which movement the user intends — the primary use case. Necessary for the interface to function.", canInfer: "Hand pose, finger configuration, grip type" },
+  { level: 1, label: "Gesture intent", color: GREEN,  risk: "Low",    detail: "Which movement the user intends - the primary use case. Necessary for the interface to function.", canInfer: "Hand pose, finger configuration, grip type" },
   { level: 2, label: "Fatigue state", color: AMBER,   risk: "Medium", detail: "Median frequency drop >20% signals muscular fatigue. Detectable from routine interaction data.", canInfer: "Cognitive load, physical strain, sleep deficit" },
   { level: 3, label: "Identity",       color: PINK,    risk: "High",   detail: "Motor unit recruitment patterns are individually unique. Identification accuracy >95% without cooperation.", canInfer: "Person identity, linked biometric profile" },
   { level: 4, label: "Health markers", color: RED,     risk: "High",   detail: "Tremor frequency, conduction velocity, and asymmetry indicate neurological and musculoskeletal conditions.", canInfer: "Parkinson's, MS, carpal tunnel, age, injury history" },
 ]
 
 const PRIVACY_ROWS = [
-  { dimension: "Raw signal storage",        myojam: "Never — discarded after feature extraction",    commercial: "Often retained on-server indefinitely",       myojamGood: true },
-  { dimension: "Network transmission",      myojam: "None — fully local inference",                  commercial: "Signals sent to cloud APIs for processing",    myojamGood: true },
+  { dimension: "Raw signal storage",        myojam: "Never - discarded after feature extraction",    commercial: "Often retained on-server indefinitely",       myojamGood: true },
+  { dimension: "Network transmission",      myojam: "None - fully local inference",                  commercial: "Signals sent to cloud APIs for processing",    myojamGood: true },
   { dimension: "Biometric linking",         myojam: "Architecturally prevented (no ID tied to data)", commercial: "Account-linked; cross-app ID possible",        myojamGood: true },
   { dimension: "Third-party data sharing",  myojam: "None (open-source, auditable)",                 commercial: "Often permitted in terms of service",          myojamGood: true },
-  { dimension: "User model ownership",      myojam: "Full — model stays on device, user-deletable", commercial: "Usually owned by the platform",                myojamGood: true },
-  { dimension: "Feature extraction audit",  myojam: "Open — source code publicly visible",          commercial: "Closed; features unknown to user",             myojamGood: true },
+  { dimension: "User model ownership",      myojam: "Full - model stays on device, user-deletable", commercial: "Usually owned by the platform",                myojamGood: true },
+  { dimension: "Feature extraction audit",  myojam: "Open - source code publicly visible",          commercial: "Closed; features unknown to user",             myojamGood: true },
 ]
 
 const DESIGN_CHECKS = [
   { id:"01", criterion:"Local-only processing",     status:"done",    detail:"All signal processing and inference happen on the user's device. No EMG data leaves the browser.", color:GREEN },
   { id:"02", criterion:"No raw signal retention",   status:"done",    detail:"Raw ADC samples are never written to storage. Feature vectors are computed then discarded.", color:GREEN },
   { id:"03", criterion:"Opt-in data collection",    status:"done",    detail:"Training data is collected only when the user explicitly triggers a calibration session.", color:GREEN },
-  { id:"04", criterion:"Open feature extraction",   status:"done",    detail:"The full feature pipeline (MAV, RMS, ZC, WL) is in public source code — no hidden signal mining.", color:GREEN },
+  { id:"04", criterion:"Open feature extraction",   status:"done",    detail:"The full feature pipeline (MAV, RMS, ZC, WL) is in public source code - no hidden signal mining.", color:GREEN },
   { id:"05", criterion:"User-deletable models",     status:"done",    detail:"Calibration data is stored in browser localStorage and can be cleared at any time via the UI.", color:GREEN },
   { id:"06", criterion:"No third-party API calls",  status:"done",    detail:"Inference runs in-browser. No analytics, tracking pixels, or external ML API calls during sessions.", color:GREEN },
 ]
@@ -69,7 +69,7 @@ function RiskSpectrumDiagram() {
   return (
     <div style={{ background:"var(--bg-secondary)", borderRadius:"var(--radius)", border:"1px solid var(--border)", padding:"28px 24px", margin:"28px 0" }}>
       <div style={{ fontSize:12, fontWeight:500, color:"var(--text-secondary)", textTransform:"uppercase", letterSpacing:"0.06em", marginBottom:20 }}>
-        What EMG can reveal — inference risk spectrum
+        What EMG can reveal - inference risk spectrum
       </div>
       <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
         {RISK_LEVELS.map((r) => (
@@ -252,7 +252,7 @@ export default function EthicsOfEMG() {
           </div>
           <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", marginBottom:16 }}>You can be identified by your muscle signals</h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, marginBottom:8 }}>
-            EMG signals are individually distinctive. The pattern of motor unit recruitment, conduction velocity distribution, and muscle geometry that produces your EMG signal is effectively unique to your physiology. Research has demonstrated identification accuracy above 95% from short recordings — even without subject cooperation — placing EMG firmly alongside fingerprint and face recognition as a biometric modality.
+            EMG signals are individually distinctive. The pattern of motor unit recruitment, conduction velocity distribution, and muscle geometry that produces your EMG signal is effectively unique to your physiology. Research has demonstrated identification accuracy above 95% from short recordings - even without subject cooperation - placing EMG firmly alongside fingerprint and face recognition as a biometric modality.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, marginBottom:20 }}>
             Any system storing raw EMG data is therefore storing a biometric identifier. Unlike passwords, biometrics cannot be changed. This creates permanent liability for systems that retain raw signals or allow cross-session linkage.
@@ -273,9 +273,9 @@ export default function EthicsOfEMG() {
             <div style={{ width:32, height:32, borderRadius:"50%", background:"var(--accent-soft)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:12, fontWeight:600, color:"var(--accent)" }}>02</div>
             <span style={{ fontSize:11, fontWeight:500, color:"var(--accent)", textTransform:"uppercase", letterSpacing:"0.06em" }}>Health disclosure</span>
           </div>
-          <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", marginBottom:16 }}>What EMG reveals about you — beyond gesture intent</h2>
+          <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", marginBottom:16 }}>What EMG reveals about you - beyond gesture intent</h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, marginBottom:8 }}>
-            EMG signals contain more information than gesture intent. The frequency content of a signal shifts measurably with age. Tremor signatures — rhythmic 4–8 Hz oscillations — are characteristic of Parkinson's disease and essential tremor. Fatigue alters motor unit recruitment dynamics in ways that correlate with sleep deprivation and cognitive load. Signal asymmetries can indicate musculoskeletal injury or nerve damage.
+            EMG signals contain more information than gesture intent. The frequency content of a signal shifts measurably with age. Tremor signatures - rhythmic 4–8 Hz oscillations - are characteristic of Parkinson's disease and essential tremor. Fatigue alters motor unit recruitment dynamics in ways that correlate with sleep deprivation and cognitive load. Signal asymmetries can indicate musculoskeletal injury or nerve damage.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, marginBottom:20 }}>
             A sufficiently trained model, applied to routine interaction data, could infer health status without user awareness or consent. The risk escalates with data volume: a single session reveals little; months of continuous use creates a longitudinal health record.
@@ -292,14 +292,14 @@ export default function EthicsOfEMG() {
           </div>
           <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", marginBottom:16 }}>Who owns a personalised model?</h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, marginBottom:8 }}>
-            When users train personalised classifiers using their own EMG data, the resulting model encodes statistical patterns derived from their body — its weights are, in a real sense, a compressed representation of their physiology. The architecture and training pipeline originate elsewhere, but the learned parameters are a product of the user's unique signal.
+            When users train personalised classifiers using their own EMG data, the resulting model encodes statistical patterns derived from their body - its weights are, in a real sense, a compressed representation of their physiology. The architecture and training pipeline originate elsewhere, but the learned parameters are a product of the user's unique signal.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300 }}>
-            In open-source contexts the answer is clearer: the user can inspect, export, or delete the model freely. Commercial systems typically obscure ownership terms within licensing agreements. Some transfer model ownership to the platform on upload, meaning a user's physiological data — in compressed form — becomes a platform asset. myojam stores calibration models exclusively in the user's browser localStorage. They are never uploaded, and the user can delete them at any time.
+            In open-source contexts the answer is clearer: the user can inspect, export, or delete the model freely. Commercial systems typically obscure ownership terms within licensing agreements. Some transfer model ownership to the platform on upload, meaning a user's physiological data - in compressed form - becomes a platform asset. myojam stores calibration models exclusively in the user's browser localStorage. They are never uploaded, and the user can delete them at any time.
           </p>
         </div>
 
-        {/* Section 04 — Privacy comparison */}
+        {/* Section 04 - Privacy comparison */}
         <div style={{ padding:"48px 0", borderBottom:"1px solid var(--border)" }}>
           <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:16 }}>
             <div style={{ width:32, height:32, borderRadius:"50%", background:"var(--accent-soft)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:12, fontWeight:600, color:"var(--accent)" }}>04</div>
@@ -307,16 +307,16 @@ export default function EthicsOfEMG() {
           </div>
           <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", marginBottom:16 }}>The regulatory gap</h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, marginBottom:8 }}>
-            Biometric regulation exists in some jurisdictions — GDPR in the EU, BIPA in Illinois, CPRA in California — but EMG-specific consumer frameworks do not exist anywhere. Medical regulation (FDA 510(k), CE mark) applies only when EMG is used diagnostically. Consumer gesture interfaces fall outside this scope entirely, leaving users with minimal protections governing storage, processing, or third-party sharing of their EMG data.
+            Biometric regulation exists in some jurisdictions - GDPR in the EU, BIPA in Illinois, CPRA in California - but EMG-specific consumer frameworks do not exist anywhere. Medical regulation (FDA 510(k), CE mark) applies only when EMG is used diagnostically. Consumer gesture interfaces fall outside this scope entirely, leaving users with minimal protections governing storage, processing, or third-party sharing of their EMG data.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, marginBottom:20 }}>
-            The gap between technical capability and legal oversight is substantial, and unlikely to close quickly. Until it does, architecture — not regulation — is the primary privacy protection.
+            The gap between technical capability and legal oversight is substantial, and unlikely to close quickly. Until it does, architecture - not regulation - is the primary privacy protection.
           </p>
 
           <PrivacyTable />
         </div>
 
-        {/* Section 05 — Design checklist */}
+        {/* Section 05 - Design checklist */}
         <div style={{ padding:"48px 0 0" }}>
           <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:16 }}>
             <div style={{ width:32, height:32, borderRadius:"50%", background:"var(--accent-soft)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:12, fontWeight:600, color:"var(--accent)" }}>05</div>
@@ -324,7 +324,7 @@ export default function EthicsOfEMG() {
           </div>
           <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", marginBottom:16 }}>What responsible design looks like</h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, marginBottom:20 }}>
-            Responsible EMG systems prioritise local processing, avoid transmitting raw signals, maintain transparency in feature extraction, and give users explicit control over data retention. These are not technical constraints imposed by hardware — they are product decisions. The checklist below summarises where myojam currently stands.
+            Responsible EMG systems prioritise local processing, avoid transmitting raw signals, maintain transparency in feature extraction, and give users explicit control over data retention. These are not technical constraints imposed by hardware - they are product decisions. The checklist below summarises where myojam currently stands.
           </p>
 
           <DesignChecklist />
@@ -334,7 +334,7 @@ export default function EthicsOfEMG() {
         <div style={{ marginTop:56, background:"var(--bg-secondary)", borderRadius:"var(--radius)", padding:"40px", border:"1px solid var(--border)" }}>
           <div style={{ fontSize:11, fontWeight:500, color:"var(--accent)", textTransform:"uppercase", letterSpacing:"0.06em", marginBottom:14 }}>Conclusion</div>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:0 }}>
-            EMG interfaces derive power from deeply personal biological signals. That power introduces proportional ethical responsibility. Identification accuracy above 95%, zero EMG-specific regulations, and escalating health inference capabilities mean that architecture — where signals are processed, what is retained, who has access — is the only meaningful protection currently available to users. myojam's local-first design is a deliberate response to these constraints, not an incidental feature.
+            EMG interfaces derive power from deeply personal biological signals. That power introduces proportional ethical responsibility. Identification accuracy above 95%, zero EMG-specific regulations, and escalating health inference capabilities mean that architecture - where signals are processed, what is retained, who has access - is the only meaningful protection currently available to users. myojam's local-first design is a deliberate response to these constraints, not an incidental feature.
           </p>
         </div>
 

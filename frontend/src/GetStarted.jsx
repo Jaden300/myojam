@@ -40,7 +40,7 @@ const PATHS = [
       {
         num: "03",
         title: "Understand what just happened",
-        body: "The EMG Explainer walks through the full signal chain — from muscle fibre to gesture prediction — in about 8 minutes.",
+        body: "The EMG Explainer walks through the full signal chain - from muscle fibre to gesture prediction - in about 8 minutes.",
         href: "/education/emg-explainer",
         cta: "Read the explainer",
         external: false,
@@ -110,7 +110,7 @@ const PATHS = [
       {
         num: "02",
         title: "Walk the pipeline interactively",
-        body: "The Pipeline Explorer shows each step — raw signal, bandpass filter, windowing, feature extraction, classifier — with real data you can inspect.",
+        body: "The Pipeline Explorer shows each step - raw signal, bandpass filter, windowing, feature extraction, classifier - with real data you can inspect.",
         href: "/pipeline",
         cta: "Pipeline explorer",
         external: false,
@@ -126,7 +126,7 @@ const PATHS = [
       {
         num: "04",
         title: "Clone the repo",
-        body: "Open source on GitHub. Issues are tagged by difficulty. Fork it, break it, extend it — that's the point.",
+        body: "Open source on GitHub. Issues are tagged by difficulty. Fork it, break it, extend it - that's the point.",
         href: "https://github.com/Jaden300/myojam",
         cta: "View on GitHub",
         external: true,
@@ -145,7 +145,7 @@ const PATHS = [
       {
         num: "01",
         title: "Preview the student tools",
-        body: "The demo and Signal Playground work in any browser with no install. Try them yourself before class — they're what students will use.",
+        body: "The demo and Signal Playground work in any browser with no install. Try them yourself before class - they're what students will use.",
         href: "/demos",
         cta: "Preview tools",
         external: false,
@@ -270,7 +270,7 @@ export default function GetStarted() {
             <span style={{ color: PINK }}>to begin?</span>
           </h1>
           <p style={{ fontSize: 17, color: "rgba(255,255,255,0.72)", fontWeight: 300, lineHeight: 1.75, maxWidth: 520, margin: 0 }}>
-            myojam works at every level — from a 2-minute browser demo to a full hardware build. Pick the path that fits where you are right now.
+            myojam works at every level - from a 2-minute browser demo to a full hardware build. Pick the path that fits where you are right now.
           </p>
         </div>
       </div>
@@ -347,8 +347,8 @@ export default function GetStarted() {
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                 {[
-                  { Icon: IconWave,     color: PINK,   text: "A surface EMG signal is the electrical activity of your muscles, measured from the skin surface. It looks like noise — until you filter and window it." },
-                  { Icon: IconBarChart, color: BLUE,   text: "myojam extracts 4 time-domain features (MAV, RMS, WL, ZCR) from each 1-second window across 16 electrode channels — 64 numbers total." },
+                  { Icon: IconWave,     color: PINK,   text: "A surface EMG signal is the electrical activity of your muscles, measured from the skin surface. It looks like noise - until you filter and window it." },
+                  { Icon: IconBarChart, color: BLUE,   text: "myojam extracts 4 time-domain features (MAV, RMS, WL, ZCR) from each 1-second window across 16 electrode channels - 64 numbers total." },
                   { Icon: IconSprout,   color: GREEN,  text: "A 500-tree Random Forest classifies those 64 numbers into one of 6 gestures. It was trained on 10 subjects from Ninapro DB5 under LOSO cross-validation." },
                   { Icon: IconAlert,    color: AMBER,  text: "Honest limitation: 84.85% across subjects. Move electrodes 1 cm and it drops ~15 pp. Real prosthetic use would require per-user calibration." },
                 ].map((item, i) => (

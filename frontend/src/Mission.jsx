@@ -240,7 +240,7 @@ export default function Mission() {
       <Navbar />
 
       {/* ════════════════════════════════════════════════════════════════
-          HERO — sonar ripples, full viewport
+          HERO - sonar ripples, full viewport
       ════════════════════════════════════════════════════════════════ */}
       <section style={{
         position: "relative", minHeight: "100vh",
@@ -284,7 +284,7 @@ export default function Mission() {
             color: CREAM2, fontWeight: 300, lineHeight: 1.8,
             maxWidth: 540, marginBottom: 56,
           }}>
-            myojam started as a question asked by one person. It became a platform, a body of research, and an education hub. This page is about why — and what we believe we owe to everyone who uses it.
+            myojam started as a question asked by one person. It became a platform, a body of research, and an education hub. This page is about why - and what we believe we owe to everyone who uses it.
           </p>
 
           {/* Stats strip */}
@@ -319,7 +319,7 @@ export default function Mission() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
-          OPENING CONVICTION — editorial pull quote
+          OPENING CONVICTION - editorial pull quote
       ════════════════════════════════════════════════════════════════ */}
       <section style={{ background: SURFACE, borderBottom: `1px solid ${BORDER}`, padding: "96px 32px" }}>
         <div style={{ maxWidth: 760, margin: "0 auto" }}>
@@ -333,17 +333,17 @@ export default function Mission() {
               borderLeft: `4px solid ${AMBER}`,
               paddingLeft: 32,
             }}>
-              Technology should adapt to people, not the other way around. We built myojam to test whether that conviction was achievable — and to make whatever we learned freely available to everyone who comes after us.
+              Technology should adapt to people, not the other way around. We built myojam to test whether that conviction was achievable - and to make whatever we learned freely available to everyone who comes after us.
             </blockquote>
             <div style={{ marginTop: 20, paddingLeft: 36, fontSize: 12, color: CREAM3, fontWeight: 300, letterSpacing: "0.04em" }}>
-              — The founding principle, September 2024
+              - The founding principle, September 2024
             </div>
           </FadeIn>
         </div>
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
-          ORIGIN — how it started
+          ORIGIN - how it started
       ════════════════════════════════════════════════════════════════ */}
       <section style={{ padding: "96px 32px", borderBottom: `1px solid ${BORDER}` }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
@@ -360,7 +360,7 @@ export default function Mission() {
                 In September 2024, one person asked a specific question: <em style={{ color: CREAM, fontStyle: "normal", fontWeight: 500 }}>can you build a gesture classifier that generalises to people it has never seen, using only public data and $60 in hardware?</em>
               </p>
               <p style={{ fontSize: 16, color: CREAM2, fontWeight: 300, lineHeight: 1.85, marginBottom: 20 }}>
-                Three months later, the answer was yes. 84.85% cross-subject accuracy on Ninapro DB5 — 10 subjects, 16,269 labelled windows, 6 gesture classes, tested only on subjects held out entirely from training. A number published honestly, with its limitations documented alongside it.
+                Three months later, the answer was yes. 84.85% cross-subject accuracy on Ninapro DB5 - 10 subjects, 16,269 labelled windows, 6 gesture classes, tested only on subjects held out entirely from training. A number published honestly, with its limitations documented alongside it.
               </p>
               <p style={{ fontSize: 16, color: CREAM2, fontWeight: 300, lineHeight: 1.85 }}>
                 The technical result was interesting. What it revealed was more interesting: the real gap isn't in the classifier. It's in the knowledge infrastructure around it. There was almost no place to learn how surface EMG actually works, to find reproducible implementations, or to use the technology without a research lab. myojam became the attempt to fix that.
@@ -405,7 +405,7 @@ export default function Mission() {
               Three commitments.
             </h2>
             <p style={{ fontSize: 15, color: CREAM3, fontWeight: 300, lineHeight: 1.7, marginBottom: 56, maxWidth: 480 }}>
-              These aren't aspirations. They're constraints we've accepted — things we won't trade away for convenience.
+              These aren't aspirations. They're constraints we've accepted - things we won't trade away for convenience.
             </p>
           </FadeIn>
 
@@ -427,7 +427,7 @@ export default function Mission() {
               {
                 num: "II",
                 title: "Education as the mission",
-                body: "The articles, lesson plans, and interactive tools aren't supplements to the project — they are the project. Building a classifier that nobody understands is not the goal. Building one that teaches people how it works, what it can do, and where it fails, is.",
+                body: "The articles, lesson plans, and interactive tools aren't supplements to the project - they are the project. Building a classifier that nobody understands is not the goal. Building one that teaches people how it works, what it can do, and where it fails, is.",
                 icon: (
                   <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <path d="M16 6L4 12l12 6 12-6-12-6z" stroke={AMBER} strokeWidth="1.6" strokeLinejoin="round" fill="none"/>
@@ -439,7 +439,7 @@ export default function Mission() {
               {
                 num: "III",
                 title: "Research-grade honesty",
-                body: "84.85% is published with its limitations because a number without context isn't data — it's marketing. The cross-subject gap, the prosthetic latency problem, the electrode placement variability: all documented, all public, all part of the record.",
+                body: "84.85% is published with its limitations because a number without context isn't data - it's marketing. The cross-subject gap, the prosthetic latency problem, the electrode placement variability: all documented, all public, all part of the record.",
                 icon: (
                   <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <circle cx="16" cy="16" r="11" stroke={AMBER} strokeWidth="1.6" fill="none"/>
@@ -492,7 +492,7 @@ export default function Mission() {
               Six kinds of people.
             </h2>
             <p style={{ fontSize: 15, color: CREAM3, fontWeight: 300, lineHeight: 1.7, marginBottom: 48, maxWidth: 500 }}>
-              Not a target demographic — a set of people with legitimate claims on what this platform is supposed to do.
+              Not a target demographic - a set of people with legitimate claims on what this platform is supposed to do.
             </p>
           </FadeIn>
 
@@ -502,7 +502,7 @@ export default function Mission() {
               { role: "Teachers",  range: "K-12 → university",  body: "Delivering a unit on biomedical engineering or ethics without needing hardware, grants, or a background in signal processing. The lesson plans were designed with your constraints in mind.", accent: AMBER2 },
               { role: "Independent researchers", range: "Hobbyist → academic", body: "Looking for a reproducible, documented baseline to compare against or build from. Every design decision is published so you can understand and challenge it.", accent: AMBER },
               { role: "Hardware hackers", range: "Makers → embedded engineers", body: "Wanting a working EMG pipeline you can fork, modify, and deploy. The Arduino sketch, serial reader, and feature extractor are all in the repository.", accent: AMBER2 },
-              { role: "Clinicians", range: "Prosthetists → rehabilitation specialists", body: "Needing an honest account of the gap between lab benchmarks and real-world deployment — not a sales pitch. The open problems section was written for you.", accent: AMBER },
+              { role: "Clinicians", range: "Prosthetists → rehabilitation specialists", body: "Needing an honest account of the gap between lab benchmarks and real-world deployment - not a sales pitch. The open problems section was written for you.", accent: AMBER },
               { role: "People who use assistive technology", range: "End users → advocates", body: "Because understanding the tools built for you matters. The articles are written for a general technical audience, not a specialist one.", accent: AMBER2 },
             ].map((p, i) => (
               <FadeIn key={p.role} delay={i * 0.06}>
@@ -531,7 +531,7 @@ export default function Mission() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
-          MANIFESTO — seven numbered convictions
+          MANIFESTO - seven numbered convictions
       ════════════════════════════════════════════════════════════════ */}
       <section style={{ background: SURFACE, borderBottom: `1px solid ${BORDER}`, padding: "96px 32px" }}>
         <div style={{ maxWidth: 820, margin: "0 auto" }}>
@@ -547,13 +547,13 @@ export default function Mission() {
 
           <div style={{ marginTop: 32 }}>
             {[
-              { num: "01", text: "Technology should adapt to people — not the other way around. We built on Arduino Uno rather than a proprietary EMG armband so anyone with $30 in parts can replicate the full pipeline. No SDK license. No locked API. The hardware constraint was a design choice." },
-              { num: "02", text: "Open source isn't just a license. It's a moral commitment to the people who come after you. We chose MIT — not GPL, not Apache — specifically so clinical researchers bound by institutional IP agreements can use this work without needing to contribute back. The license is load-bearing." },
+              { num: "01", text: "Technology should adapt to people - not the other way around. We built on Arduino Uno rather than a proprietary EMG armband so anyone with $30 in parts can replicate the full pipeline. No SDK license. No locked API. The hardware constraint was a design choice." },
+              { num: "02", text: "Open source isn't just a license. It's a moral commitment to the people who come after you. We chose MIT - not GPL, not Apache - specifically so clinical researchers bound by institutional IP agreements can use this work without needing to contribute back. The license is load-bearing." },
               { num: "03", text: "The hardest technical problems deserve the clearest possible explanations. The How It Works page on this site explains the full Butterworth → windowing → feature extraction → Random Forest pipeline at a level a biology student can follow. That's not documentation. It's a design requirement." },
-              { num: "04", text: "A published accuracy number that obscures its methodology is worse than no number at all. We report 84.85% with leave-one-subject-out validation — not the 91.4% we'd get by testing on the best single subject. The methodology is in the text, not the footnotes." },
-              { num: "05", text: "Students who understand this technology today will shape who controls it tomorrow. MyoCode exists as a teaching environment, not a demo. The education hub has 11 articles because education isn't outreach — it's the mechanism by which knowledge stops being locked in labs." },
+              { num: "04", text: "A published accuracy number that obscures its methodology is worse than no number at all. We report 84.85% with leave-one-subject-out validation - not the 91.4% we'd get by testing on the best single subject. The methodology is in the text, not the footnotes." },
+              { num: "05", text: "Students who understand this technology today will shape who controls it tomorrow. MyoCode exists as a teaching environment, not a demo. The education hub has 11 articles because education isn't outreach - it's the mechanism by which knowledge stops being locked in labs." },
               { num: "06", text: "Assistive technology built without the people it's meant to serve is just a product. We've done limited formal user research with motor-impaired users, and we say so openly on our Careers page rather than claiming otherwise. Honesty about gaps is the first step to closing them." },
-              { num: "07", text: "One person with public data and consumer hardware can produce meaningful science. The Ninapro DB5 is publicly available. An Arduino Uno costs $28. The code is on GitHub. The barrier was never the data or the hardware — it was the assumption that this required a lab." },
+              { num: "07", text: "One person with public data and consumer hardware can produce meaningful science. The Ninapro DB5 is publicly available. An Arduino Uno costs $28. The code is on GitHub. The barrier was never the data or the hardware - it was the assumption that this required a lab." },
             ].map((item, i) => (
               <ManifestoItem key={item.num} num={item.num} text={item.text} delay={i * 0.05} />
             ))}
@@ -562,7 +562,7 @@ export default function Mission() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
-          THE LONG GAME — what success looks like
+          THE LONG GAME - what success looks like
       ════════════════════════════════════════════════════════════════ */}
       <section style={{ padding: "96px 32px", borderBottom: `1px solid ${BORDER}` }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
@@ -572,7 +572,7 @@ export default function Mission() {
               What success looks like.
             </h2>
             <p style={{ fontSize: 15, color: CREAM3, fontWeight: 300, lineHeight: 1.7, marginBottom: 56, maxWidth: 500 }}>
-              Not a product roadmap. A description of the world we're trying to reach — and an honest account of how far away we are from it.
+              Not a product roadmap. A description of the world we're trying to reach - and an honest account of how far away we are from it.
             </p>
           </FadeIn>
 
@@ -580,8 +580,8 @@ export default function Mission() {
             {[
               { stage: "Today", label: "Established", items: ["84.85% cross-subject accuracy documented", "11 articles, 3 lesson plans published", "5 interactive browser tools live", "Desktop app for Mac, Windows, Linux", "Full pipeline open on GitHub under MIT"], color: AMBER, active: true },
               { stage: "Near term", label: "In progress", items: ["Adaptive personalisation layer to narrow the cross-subject gap", "Real-world validation outside controlled lab conditions", "Electrode drift detection and automated recalibration", "Expanded gesture vocabulary beyond 6 classes"], color: `rgba(212,146,42,0.65)`, active: false },
-              { stage: "Far term", label: "Target", items: ["Sub-300ms latency with >80% accuracy — closing the prosthetic feasibility gap", "EMG as a standard, accessible input method", "Community-contributed dataset extensions and multilingual education content"], color: `rgba(212,146,42,0.38)`, active: false },
-              { stage: "The goal", label: "Vision", items: ["A world where the interface adapts to you — not the other way around. Where someone who needs assistive control doesn't wait a decade for a clinical trial."], color: `rgba(212,146,42,0.2)`, active: false },
+              { stage: "Far term", label: "Target", items: ["Sub-300ms latency with >80% accuracy - closing the prosthetic feasibility gap", "EMG as a standard, accessible input method", "Community-contributed dataset extensions and multilingual education content"], color: `rgba(212,146,42,0.38)`, active: false },
+              { stage: "The goal", label: "Vision", items: ["A world where the interface adapts to you - not the other way around. Where someone who needs assistive control doesn't wait a decade for a clinical trial."], color: `rgba(212,146,42,0.2)`, active: false },
             ].map((stage, i) => (
               <FadeIn key={stage.stage} delay={i * 0.08} style={{ height: "100%" }}>
                 <div style={{
@@ -612,7 +612,7 @@ export default function Mission() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
-          HOW TO JOIN — three paths
+          HOW TO JOIN - three paths
       ════════════════════════════════════════════════════════════════ */}
       <section style={{ background: SURFACE, borderBottom: `1px solid ${BORDER}`, padding: "96px 32px" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
@@ -622,7 +622,7 @@ export default function Mission() {
               Three ways in.
             </h2>
             <p style={{ fontSize: 15, color: CREAM3, fontWeight: 300, lineHeight: 1.7, marginBottom: 48, maxWidth: 480 }}>
-              Every contribution — a bug fix, a lesson plan, a cited paper — moves the mission forward.
+              Every contribution - a bug fix, a lesson plan, a cited paper - moves the mission forward.
             </p>
           </FadeIn>
 
@@ -680,7 +680,7 @@ export default function Mission() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════
-          CLOSING — the final word
+          CLOSING - the final word
       ════════════════════════════════════════════════════════════════ */}
       <section style={{ padding: "120px 32px 80px" }}>
         <div style={{ maxWidth: 680, margin: "0 auto", textAlign: "center" }}>
@@ -692,7 +692,7 @@ export default function Mission() {
               We haven't solved it yet.<br/>That's why it matters.
             </h2>
             <p style={{ fontSize: 16, color: CREAM2, fontWeight: 300, lineHeight: 1.85, marginBottom: 20 }}>
-              84.85% is a real number. It also means roughly 1 in 7 predictions is wrong. The prosthetic feasibility gap is real. The electrode placement problem is real. We document all of it — not because it's comfortable, but because solving it requires acknowledging it.
+              84.85% is a real number. It also means roughly 1 in 7 predictions is wrong. The prosthetic feasibility gap is real. The electrode placement problem is real. We document all of it - not because it's comfortable, but because solving it requires acknowledging it.
             </p>
             <p style={{ fontSize: 16, color: CREAM2, fontWeight: 300, lineHeight: 1.85, marginBottom: 48 }}>
               If you've read this far, you probably care about the same things we do. That's the whole basis for this project.

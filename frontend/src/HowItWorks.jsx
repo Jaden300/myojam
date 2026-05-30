@@ -522,7 +522,7 @@ const FEATURE_CARDS = [
   {
     name: "MAV", full: "Mean Absolute Value", color: "#FF2D78", type: "mav",
     formula: "1/N · Σ |xₙ|",
-    what: "Average signal amplitude. Scales directly with muscle activation — harder contractions fire more motor units, raising the MAV. Most discriminative single feature in the Hudgins set.",
+    what: "Average signal amplitude. Scales directly with muscle activation - harder contractions fire more motor units, raising the MAV. Most discriminative single feature in the Hudgins set.",
     tag: "Activation level",
   },
   {
@@ -534,13 +534,13 @@ const FEATURE_CARDS = [
   {
     name: "ZC", full: "Zero Crossings", color: "#3B82F6", type: "zc",
     formula: "Σ [sgn(xₙ) ≠ sgn(xₙ₊₁)]",
-    what: "How often the signal crosses zero. Tracks dominant frequency — higher-frequency gestures produce more crossings. A frequency-domain proxy computable in O(N) without a FFT.",
+    what: "How often the signal crosses zero. Tracks dominant frequency - higher-frequency gestures produce more crossings. A frequency-domain proxy computable in O(N) without a FFT.",
     tag: "Frequency proxy",
   },
   {
     name: "WL", full: "Waveform Length", color: "#10B981", type: "wl",
     formula: "Σ |xₙ₊₁ − xₙ|",
-    what: "Total path length of the signal trace. Captures complexity — a gesture recruiting multiple muscle groups produces a longer, more intricate waveform than a simple isolated flex.",
+    what: "Total path length of the signal trace. Captures complexity - a gesture recruiting multiple muscle groups produces a longer, more intricate waveform than a simple isolated flex.",
     tag: "Signal complexity",
   },
 ]
@@ -558,7 +558,7 @@ function FeatureEngineering() {
           </h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.8, maxWidth:600, marginBottom:48 }}>
             Each window of 200 samples is compressed into 64 numbers: four features computed across 16 channels.
-            This is the Hudgins set — proposed in 1993, still competitive today. Here's what each one actually measures.
+            This is the Hudgins set - proposed in 1993, still competitive today. Here's what each one actually measures.
           </p>
         </Reveal>
 
@@ -607,7 +607,7 @@ function FeatureEngineering() {
               <text x="8" y="11.5" textAnchor="middle" fill="rgba(255,45,120,0.8)" fontSize="8" fontWeight="700">i</text>
             </svg>
             <p style={{ fontSize:13, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.7, margin:0 }}>
-              All four features are computed per channel, giving 4 × 16 = <strong style={{ color:"var(--text)", fontWeight:500 }}>64 features per window</strong>. Each feature vector fully describes one 1-second muscle activity snapshot. The Random Forest sees only these 64 numbers — not the raw signal.
+              All four features are computed per channel, giving 4 × 16 = <strong style={{ color:"var(--text)", fontWeight:500 }}>64 features per window</strong>. Each feature vector fully describes one 1-second muscle activity snapshot. The Random Forest sees only these 64 numbers - not the raw signal.
             </p>
           </div>
         </Reveal>
@@ -667,7 +667,7 @@ function LosoChart() {
             ))}
           </div>
           <p style={{ fontSize:12, color:"var(--text-tertiary)", fontWeight:300, lineHeight:1.65, marginTop:20 }}>
-            The 15pp gap between best and worst subject (91.4% vs 76.1%) shows that inter-subject anatomical variability is the binding constraint — not the classifier. S06's lower score tracks with known high-impedance electrode contact in that recording session.
+            The 15pp gap between best and worst subject (91.4% vs 76.1%) shows that inter-subject anatomical variability is the binding constraint - not the classifier. S06's lower score tracks with known high-impedance electrode contact in that recording session.
           </p>
         </Reveal>
 
@@ -728,7 +728,7 @@ const DECISIONS = [
     badge: "Validation",
     choice: "Leave-One-Subject-Out",
     question: "Why not k-fold or a held-out test set?",
-    answer: "K-fold can leak subject identity between folds — if two windows from the same person appear in both train and test, accuracy is artificially inflated. LOSO ensures every prediction comes from a completely unseen person. It's the only protocol that honestly models real deployment.",
+    answer: "K-fold can leak subject identity between folds - if two windows from the same person appear in both train and test, accuracy is artificially inflated. LOSO ensures every prediction comes from a completely unseen person. It's the only protocol that honestly models real deployment.",
     tradeoff: "10× more compute than k-fold. Worth it for honest numbers.",
   },
   {
@@ -736,7 +736,7 @@ const DECISIONS = [
     badge: "Classifier",
     choice: "Random Forest",
     question: "Why not a neural network or SVM?",
-    answer: "Tested under identical LOSO conditions: RF outperformed SVM by 2.6pp, k-NN by 7.75pp, and LDA by 13.35pp. Neural nets need substantially more data to beat tree ensembles on tabular biomedical signals — and add latency we can't afford in a prosthetic loop.",
+    answer: "Tested under identical LOSO conditions: RF outperformed SVM by 2.6pp, k-NN by 7.75pp, and LDA by 13.35pp. Neural nets need substantially more data to beat tree ensembles on tabular biomedical signals - and add latency we can't afford in a prosthetic loop.",
     tradeoff: "Lower ceiling than deep nets, but better variance on N=10 subjects.",
   },
   {
@@ -761,7 +761,7 @@ function DecisionRationale() {
             Why we made each key choice.
           </h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.8, maxWidth:580, marginBottom:48 }}>
-            Every architectural decision in the pipeline had alternatives. Here's what we considered, what we chose, and why — including the tradeoffs we accepted.
+            Every architectural decision in the pipeline had alternatives. Here's what we considered, what we chose, and why - including the tradeoffs we accepted.
           </p>
         </Reveal>
 

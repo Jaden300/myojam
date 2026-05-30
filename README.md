@@ -1,6 +1,6 @@
 # myojam
 
-Real-time EMG gesture classification for assistive human-computer interaction — with an open education platform built on top of the research.
+Real-time EMG gesture classification for assistive human-computer interaction - with an open education platform built on top of the research.
 
 [![Live site](https://img.shields.io/badge/live-myojam.com-FF2D78?style=flat-square)](https://myojam.com)
 [![License: MIT](https://img.shields.io/badge/license-MIT-10B981?style=flat-square)](LICENSE)
@@ -52,7 +52,7 @@ EMG Electrodes → MyoWare 2.0 → Arduino Uno → USB Serial
 
 ## Interactive demos
 
-All demos run in the browser — no hardware or install required.
+All demos run in the browser - no hardware or install required.
 
 | Demo | Description |
 |------|-------------|
@@ -69,19 +69,19 @@ All demos run in the browser — no hardware or install required.
 
 11 articles, 3 structured lesson plans (NGSS/AP/IB aligned), and an interactive tool suite for classrooms. No hardware required to teach the concepts.
 
-- [EMG Explainer](https://myojam.com/education/emg-explainer) — from motor cortex to gesture prediction
-- [Why EMG is Hard](https://myojam.com/education/why-emg-is-hard) — noise, placement variability, individual anatomy
-- [Build Your Own](https://myojam.com/education/build-your-own) — $68 hardware setup, full wiring guide
-- [Educator Hub](https://myojam.com/educators) — lesson plans, rubrics, curriculum alignment
+- [EMG Explainer](https://myojam.com/education/emg-explainer) - from motor cortex to gesture prediction
+- [Why EMG is Hard](https://myojam.com/education/why-emg-is-hard) - noise, placement variability, individual anatomy
+- [Build Your Own](https://myojam.com/education/build-your-own) - $68 hardware setup, full wiring guide
+- [Educator Hub](https://myojam.com/educators) - lesson plans, rubrics, curriculum alignment
 
 ## Research
 
 Four peer-structured papers published at [myojam.com/research](https://myojam.com/research):
 
-1. **Main paper** — classifier design, dataset, evaluation methodology
-2. **Classifier Analysis** — Random Forest vs SVM vs KNN cross-subject comparison
-3. **Variability Review** — sources of cross-subject accuracy loss
-4. **Windowing Analysis** — window size vs accuracy vs latency trade-offs
+1. **Main paper** - classifier design, dataset, evaluation methodology
+2. **Classifier Analysis** - Random Forest vs SVM vs KNN cross-subject comparison
+3. **Variability Review** - sources of cross-subject accuracy loss
+4. **Windowing Analysis** - window size vs accuracy vs latency trade-offs
 
 ## Download
 
@@ -107,7 +107,7 @@ Grant Accessibility permission when prompted (System Settings → Privacy & Secu
 ## Train your own model
 
 ```bash
-python3 collect_data.py    # record your gestures — 60 samples each
+python3 collect_data.py    # record your gestures - 60 samples each
 python3 train_my_model.py  # trains and saves a personalized model
 ```
 
@@ -133,7 +133,7 @@ Built by [Jaden W.](https://github.com/Jaden300) with contributions from Matthew
 
 ## License
 
-MIT — see [LICENSE](LICENSE) for details.
+MIT - see [LICENSE](LICENSE) for details.
 
 ---
 

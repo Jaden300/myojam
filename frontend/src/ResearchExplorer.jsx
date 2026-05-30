@@ -40,10 +40,10 @@ const WINDOW_DATA = [
 ]
 
 const FEATURES = [
-  { name: "MAV",  full: "Mean Absolute Value", pct: 35, color: "#FF2D78", desc: "Mean signal amplitude — primary recruitment indicator" },
-  { name: "RMS",  full: "Root Mean Square",    pct: 27, color: "#F59E0B", desc: "Signal power — correlated with force level"            },
-  { name: "WL",   full: "Waveform Length",     pct: 25, color: "#10B981", desc: "Morphological complexity — signal variation over time"  },
-  { name: "ZCR",  full: "Zero Crossing Rate",  pct: 13, color: "#8B5CF6", desc: "Dominant frequency proxy — spectral content indicator" },
+  { name: "MAV",  full: "Mean Absolute Value", pct: 35, color: "#FF2D78", desc: "Mean signal amplitude - primary recruitment indicator" },
+  { name: "RMS",  full: "Root Mean Square",    pct: 27, color: "#F59E0B", desc: "Signal power - correlated with force level"            },
+  { name: "WL",   full: "Waveform Length",     pct: 25, color: "#10B981", desc: "Morphological complexity - signal variation over time"  },
+  { name: "ZCR",  full: "Zero Crossing Rate",  pct: 13, color: "#8B5CF6", desc: "Dominant frequency proxy - spectral content indicator" },
 ]
 
 // ─────────────────────────────────────────────────────────────
@@ -112,7 +112,7 @@ function FeasibilityChart() {
           <div style={{ color: "var(--text-secondary)", fontSize: 11 }}>{hpt.samples} samples at 200 Hz</div>
           <div style={{ color: hpt.acc >= 80 ? "#10B981" : "#EF4444", fontWeight: 600, marginTop: 4 }}>{hpt.acc}% accuracy</div>
           <div style={{ color: hpt.dur <= 300 ? "#10B981" : "#EF4444", fontSize: 11, marginTop: 2 }}>
-            Latency: {hpt.dur + 5} ms — {hpt.dur <= 300 ? "✓ clinical" : "✗ too slow"}
+            Latency: {hpt.dur + 5} ms - {hpt.dur <= 300 ? "✓ clinical" : "✗ too slow"}
           </div>
           {hpt.current && <div style={{ marginTop: 4, fontSize: 10, color: "var(--accent)", fontWeight: 600 }}>← myojam baseline</div>}
           {hpt.peak   && <div style={{ marginTop: 4, fontSize: 10, color: "#10B981", fontWeight: 600 }}>← peak accuracy</div>}
@@ -132,11 +132,11 @@ function FeasibilityChart() {
         </defs>
 
         {/* Feasibility zones */}
-        {/* "Latency OK" zone — left of 300ms line */}
+        {/* "Latency OK" zone - left of 300ms line */}
         <rect x={PAD.l} y={PAD.t} width={latencyX - PAD.l} height={CH} fill="#10B981" fillOpacity="0.06"/>
-        {/* "Accuracy OK" zone — above 80% line */}
+        {/* "Accuracy OK" zone - above 80% line */}
         <rect x={PAD.l} y={PAD.t} width={CW} height={accuracyY - PAD.t} fill="#3B82F6" fillOpacity="0.04"/>
-        {/* INFEASIBILITY GAP — both zones but no points exist there */}
+        {/* INFEASIBILITY GAP - both zones but no points exist there */}
         <rect x={PAD.l} y={PAD.t} width={latencyX - PAD.l} height={accuracyY - PAD.t} fill="url(#hatch)"/>
         <rect x={PAD.l} y={PAD.t} width={latencyX - PAD.l} height={accuracyY - PAD.t} fill="#EF4444" fillOpacity="0.04"/>
 
@@ -329,7 +329,7 @@ function LOSOGrid() {
         ))}
       </div>
       <p style={{ fontSize: 12, color: "var(--text-tertiary)", marginTop: 12, lineHeight: 1.65 }}>
-        The 13 pp spread across folds is larger than the gap between the two best classifiers (2.55 pp), confirming that inter-subject physiological variability — not classifier architecture — is the primary performance bottleneck.
+        The 13 pp spread across folds is larger than the gap between the two best classifiers (2.55 pp), confirming that inter-subject physiological variability - not classifier architecture - is the primary performance bottleneck.
       </p>
     </div>
   )
@@ -530,7 +530,7 @@ export default function ResearchExplorer() {
           n="01"
           accent="#EF4444"
           title="The Prosthetic Feasibility Gap"
-          caption="The central finding of the windowing analysis. No window duration simultaneously satisfies the clinical latency constraint (≤300 ms, Farrell & Weir 2007) and the accuracy floor (≥80%) for 200 Hz hardware. The hatched region is where you would need to be — and cannot reach."
+          caption="The central finding of the windowing analysis. No window duration simultaneously satisfies the clinical latency constraint (≤300 ms, Farrell & Weir 2007) and the accuracy floor (≥80%) for 200 Hz hardware. The hatched region is where you would need to be - and cannot reach."
         >
           <FeasibilityChart />
         </Section>
@@ -550,7 +550,7 @@ export default function ResearchExplorer() {
           n="03"
           accent="#8B5CF6"
           title="Per-Subject LOSO Results (Random Forest)"
-          caption="Individual fold accuracies across all 10 leave-one-subject-out runs. The 13 percentage-point spread reveals inter-subject physiological variability as the dominant performance bottleneck — larger than the gap between any two classifier architectures."
+          caption="Individual fold accuracies across all 10 leave-one-subject-out runs. The 13 percentage-point spread reveals inter-subject physiological variability as the dominant performance bottleneck - larger than the gap between any two classifier architectures."
         >
           <LOSOGrid />
         </Section>

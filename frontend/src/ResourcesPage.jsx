@@ -269,7 +269,7 @@ export default function ResourcesPage() {
               Further reading.<br/><span style={{ color:"var(--accent)" }}>Beyond myojam.</span>
             </h1>
             <p style={{ fontSize:17, color:"rgba(255,255,255,0.72)", fontWeight:300, lineHeight:1.75, maxWidth:520, marginBottom:36 }}>
-              Datasets, foundational papers, software libraries, and courses that form the broader context for what myojam does — curated for students, educators, and independent researchers.
+              Datasets, foundational papers, software libraries, and courses that form the broader context for what myojam does - curated for students, educators, and independent researchers.
             </p>
             <div style={{ display:"flex", gap:28 }}>
               {[[String(TOTAL),"curated resources"],["5","categories"],["Free","all open access"]].map(([val, label]) => (

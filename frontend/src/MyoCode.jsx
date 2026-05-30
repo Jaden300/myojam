@@ -248,25 +248,25 @@ const LEARNING_MAP = [
     block:"When gesture detected",
     concept:"Event-driven programming",
     color:"#FF2D78",
-    body:"Real software — GUIs, games, IoT devices — responds to events rather than running top-to-bottom forever. In MyoCode your EMG signal is the event. This is the exact model used in every modern user interface.",
+    body:"Real software - GUIs, games, IoT devices - responds to events rather than running top-to-bottom forever. In MyoCode your EMG signal is the event. This is the exact model used in every modern user interface.",
   },
   {
     block:"Repeat N times",
     concept:"Iteration & loops",
     color:"#F97316",
-    body:"Instead of writing 'move right' 100 times, write it once inside a loop. Loops are one of the most powerful ideas in computing — they turn repetition into abstraction.",
+    body:"Instead of writing 'move right' 100 times, write it once inside a loop. Loops are one of the most powerful ideas in computing - they turn repetition into abstraction.",
   },
   {
     block:"Set / Change variable",
     concept:"State & memory",
     color:"#EA580C",
-    body:"Variables let your program remember things — a score, a position, a count. State is what separates a static instruction list from a living program that evolves as it runs.",
+    body:"Variables let your program remember things - a score, a position, a count. State is what separates a static instruction list from a living program that evolves as it runs.",
   },
   {
     block:"Pen down + Move",
     concept:"Algorithms & geometry",
     color:"#8B5CF6",
-    body:"The path your sprite draws is an algorithm — a sequence of precise instructions that produces a predictable, reproducible result. Change one step and the whole shape changes.",
+    body:"The path your sprite draws is an algorithm - a sequence of precise instructions that produces a predictable, reproducible result. Change one step and the whole shape changes.",
   },
 ]
 
@@ -618,7 +618,7 @@ export default function MyoCode() {
             Your forearm<br/>is the controller.
           </h1>
           <p style={{ fontSize:17, color:"rgba(255,255,255,0.66)", fontWeight:300, lineHeight:1.78, maxWidth:520, marginBottom:40 }}>
-            MyoCode is the first programming environment where EMG gestures are first-class events — not keybindings, not macros. You write programs. Your muscles run them.
+            MyoCode is the first programming environment where EMG gestures are first-class events - not keybindings, not macros. You write programs. Your muscles run them.
           </p>
 
           <div style={{ display:"flex", gap:40 }}>
@@ -664,7 +664,7 @@ export default function MyoCode() {
           {running && (
             <div style={{ display:"flex", alignItems:"center", gap:7, fontSize:13, color:"var(--accent)" }}>
               <div style={{ width:7,height:7,borderRadius:"50%",background:"var(--accent)",animation:"pulse 1s infinite" }}/>
-              Running — press 1–6
+              Running - press 1–6
             </div>
           )}
 
@@ -743,7 +743,7 @@ export default function MyoCode() {
             onDrop={e=>{ const t=e.dataTransfer.getData("paletteType"); if(t&&BLOCK_DEFS[t]) addBlock(t) }}
           >
             <div style={{ fontSize:10, fontWeight:600, color:"rgba(139,92,246,0.5)", textTransform:"uppercase", letterSpacing:"0.06em", marginBottom:8, paddingLeft:4 }}>
-              Script — {script.length} block{script.length!==1?"s":""}
+              Script - {script.length} block{script.length!==1?"s":""}
             </div>
 
             {script.length===0 && (
@@ -865,7 +865,7 @@ export default function MyoCode() {
             {/* Gesture pad */}
             <div style={{ marginTop:8, background:"var(--bg-secondary)", borderRadius:12, border:"1px solid var(--border)", padding:"11px 12px" }}>
               <div style={{ fontSize:10, color:"var(--text-tertiary)", fontWeight:500, textTransform:"uppercase", letterSpacing:"0.06em", marginBottom:8 }}>
-                Gesture pad {running?"— active":"— start program first"}
+                Gesture pad {running?"- active":"- start program first"}
               </div>
               <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:5 }}>
                 {GESTURES.map(g=>(
@@ -921,7 +921,7 @@ export default function MyoCode() {
           </div>
           <h2 style={{ fontSize:28, fontWeight:600, color:"var(--text)", letterSpacing:"-0.9px", margin:"0 0 8px" }}>Start here.</h2>
           <p style={{ fontSize:14, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.75, marginBottom:28, maxWidth:520 }}>
-            Three starter programs, increasing in complexity. Each one loads a partial script — your job is to run it, understand it, and take it further.
+            Three starter programs, increasing in complexity. Each one loads a partial script - your job is to run it, understand it, and take it further.
           </p>
         </Reveal>
 
@@ -961,7 +961,7 @@ export default function MyoCode() {
           <span style={{ fontSize:12, fontWeight:600, color:"var(--accent)", textTransform:"uppercase", letterSpacing:"0.07em" }}>Computer science, embodied</span>
           <h2 style={{ fontSize:28, fontWeight:600, color:"var(--text)", letterSpacing:"-0.9px", margin:"6px 0 8px" }}>What you're actually learning.</h2>
           <p style={{ fontSize:14, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.75, marginBottom:28, maxWidth:520 }}>
-            Every block in MyoCode maps directly to a concept taught in introductory computer science. This is not a toy — it is a teaching environment for a new kind of computing.
+            Every block in MyoCode maps directly to a concept taught in introductory computer science. This is not a toy - it is a teaching environment for a new kind of computing.
           </p>
         </Reveal>
 
@@ -987,7 +987,7 @@ export default function MyoCode() {
           <Reveal>
             <div style={{ fontSize:12, fontWeight:600, color:"var(--accent)", textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:16 }}>The idea</div>
             <p style={{ fontSize:19, color:"var(--text)", fontWeight:400, lineHeight:1.8, letterSpacing:"-0.3px", margin:"0 0 18px" }}>
-              "Programming has always assumed fingers on a keyboard. We think the next interface is your body. MyoCode is where that idea becomes a learning environment — not a demo, a tool."
+              "Programming has always assumed fingers on a keyboard. We think the next interface is your body. MyoCode is where that idea becomes a learning environment - not a demo, a tool."
             </p>
             <p style={{ fontSize:13, color:"var(--text-tertiary)", fontWeight:300 }}>
               Built on Ninapro DB5 · 84.85% cross-subject accuracy · MIT License · Open source

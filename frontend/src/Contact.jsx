@@ -98,7 +98,7 @@ export default function Contact() {
               <span style={{ color: PINK }}>your muscles.</span>
             </h1>
             <p style={{ fontSize: 17, color: "rgba(255,255,255,0.65)", lineHeight: 1.75, fontWeight: 300, maxWidth: 520, marginBottom: 36 }}>
-              Research questions, hardware problems, collaboration ideas — we read every message. Most get a reply within a few days.
+              Research questions, hardware problems, collaboration ideas - we read every message. Most get a reply within a few days.
             </p>
             <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
               {[
@@ -122,7 +122,7 @@ export default function Contact() {
           <Reveal>
             <SectionPill>What are you reaching out about?</SectionPill>
             <p style={{ fontSize: 15, color: "var(--text-secondary)", fontWeight: 300, lineHeight: 1.7, marginTop: 12, marginBottom: 36, maxWidth: 540 }}>
-              Different questions get better answers when you include the right context. Pick the category that fits and follow the hint — it saves a round-trip.
+              Different questions get better answers when you include the right context. Pick the category that fits and follow the hint - it saves a round-trip.
             </p>
           </Reveal>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
@@ -166,7 +166,7 @@ export default function Contact() {
                 Write to us directly
               </h2>
               <p style={{ fontSize: 14, color: "var(--text-secondary)", fontWeight: 300, lineHeight: 1.7, marginBottom: 28 }}>
-                For longer or more technical questions, GitHub Discussions is often faster. For everything else — here's the form.
+                For longer or more technical questions, GitHub Discussions is often faster. For everything else - here's the form.
               </p>
             </Reveal>
             <Reveal delay={0.08}>

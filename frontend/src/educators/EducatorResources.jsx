@@ -22,14 +22,14 @@ const RESOURCE_SECTIONS = [
       { title:"Ninapro DB5",         source:"Atzori et al. / HES-SO Valais",      year:"2014–ongoing", href:"http://ninapro.hevs.ch/", desc:"The dataset myojam trains on. 10 subjects, 16 EMG channels, 200 Hz, 52 hand movements. Freely available under academic terms.", tags:["EMG","Gesture","Benchmark","Free"] },
       { title:"Ninapro full collection", source:"Ninapro project",               year:"2012–2022",    href:"http://ninapro.hevs.ch/", desc:"DB1–DB10 spanning >200 subjects, multiple hardware platforms, and amputee subjects. A complete benchmark family for prosthetics research.", tags:["EMG","Multi-database","Prosthetics"] },
       { title:"UCI EMG for Gestures", source:"Lobov et al. / UCI ML Repository", year:"2018",         href:"https://archive.ics.uci.edu/dataset/481/emg+data+for+gestures", desc:"30 subjects, 2-channel forearm EMG at 1000 Hz, 8 gesture classes. Accessible entry point for classroom experiments.", tags:["EMG","2-channel","Introductory"] },
-      { title:"PhysioNet EEGMMIDB",  source:"Goldberger et al. / PhysioNet",     year:"2009",         href:"https://physionet.org/content/eegmmidb/1.0.0/", desc:"109 subjects, EEG + motor execution tasks. Bridges EMG concepts to EEG and motor imagery — useful for interdisciplinary units.", tags:["EEG","Motor imagery","BCI"] },
+      { title:"PhysioNet EEGMMIDB",  source:"Goldberger et al. / PhysioNet",     year:"2009",         href:"https://physionet.org/content/eegmmidb/1.0.0/", desc:"109 subjects, EEG + motor execution tasks. Bridges EMG concepts to EEG and motor imagery - useful for interdisciplinary units.", tags:["EEG","Motor imagery","BCI"] },
     ]
   },
   {
     id: "tools",
     label: "myojam interactive tools",
     color: PINK,
-    desc: "Browser-based tools — no install required.",
+    desc: "Browser-based tools - no install required.",
     items: [
       { title:"Signal playground",         source:"myojam",    year:"",   href:"/playground", desc:"Draw waveforms with the mouse and watch MAV, RMS, ZC, and WL update in real time. Ideal for introducing feature extraction hands-on.", tags:["Feature extraction","Interactive","Foundations"] },
       { title:"Confusion matrix explorer", source:"myojam",    year:"",   href:"/confusion",  desc:"Interactive heatmap of the classifier's errors. Students identify which gestures are confused and reason about the anatomical cause.", tags:["Evaluation","ML","Interactive"] },
@@ -43,7 +43,7 @@ const RESOURCE_SECTIONS = [
     id: "papers",
     label: "Foundational papers",
     color: BLUE,
-    desc: "Seminal work that underpins the myojam methodology — most are open access.",
+    desc: "Seminal work that underpins the myojam methodology - most are open access.",
     items: [
       { title:"Feature reduction and selection for EMG signal classification", source:"Phinyomark, Phukpattaranont & Limsakul",      year:"2012", href:"https://doi.org/10.1016/j.eswa.2012.02.119", desc:"Established MAV, RMS, ZC, and WL as near-optimal time-domain features. The direct empirical basis for myojam's feature design.", tags:["Feature extraction","Open access"] },
       { title:"Electromyography data for non-invasive naturally-controlled robotic hand prostheses", source:"Atzori et al.",          year:"2014", href:"https://doi.org/10.1038/sdata.2014.53",       desc:"The Ninapro database paper. Background reading for students using DB5 data in class.", tags:["Dataset","Open access"] },
@@ -60,14 +60,14 @@ const RESOURCE_SECTIONS = [
       { title:"myojam GitHub repository",     source:"myojam (MIT License)",  year:"",   href:"https://github.com/Jaden300/myojam", desc:"Full open-source codebase: signal processing pipeline, Random Forest trainer, web app, and lesson materials. Fork and build.", tags:["Python","JavaScript","MIT"] },
       { title:"scikit-learn",                source:"scikit-learn community", year:"",   href:"https://scikit-learn.org/",            desc:"The ML library used for myojam's Random Forest classifier. Extensive documentation with beginner-friendly examples.", tags:["Python","ML","Free"] },
       { title:"scipy.signal (bandpass filter)", source:"SciPy project",      year:"",   href:"https://docs.scipy.org/doc/scipy/reference/signal.html", desc:"Used for the Butterworth bandpass filter in the myojam pipeline. filtfilt documentation is especially relevant.", tags:["Python","Signal processing","Free"] },
-      { title:"OpenBCI GUI",                 source:"OpenBCI",               year:"",   href:"https://docs.openbci.com/Software/OpenBCISoftware/GUIWidgets/", desc:"A visual EMG/EEG recording interface. Useful if students have access to hardware — compatible with OpenBCI Cyton boards.", tags:["Hardware","GUI","Visualization"] },
+      { title:"OpenBCI GUI",                 source:"OpenBCI",               year:"",   href:"https://docs.openbci.com/Software/OpenBCISoftware/GUIWidgets/", desc:"A visual EMG/EEG recording interface. Useful if students have access to hardware - compatible with OpenBCI Cyton boards.", tags:["Hardware","GUI","Visualization"] },
     ]
   },
 ]
 
 const QUICKSTART = [
   { step:"01", color:PINK,   Icon:IconClipboard,  title:"Choose a lesson plan", desc:"Start with 'EMG Basics' for biology classes or 'Gesture Classifier' for CS. Each comes with a full teacher guide, student worksheet, and exit ticket." },
-  { step:"02", color:BLUE,   Icon:IconLaptop,     title:"Open the interactive tools", desc:"All tools run in any modern browser — Chrome recommended for full WebSerial support. No accounts, downloads, or installs needed.", href:"/demos" },
+  { step:"02", color:BLUE,   Icon:IconLaptop,     title:"Open the interactive tools", desc:"All tools run in any modern browser - Chrome recommended for full WebSerial support. No accounts, downloads, or installs needed.", href:"/demos" },
   { step:"03", color:GREEN,  Icon:IconBarChart,   title:"Download the dataset (optional)", desc:"For deeper investigations, students can download Ninapro DB5 from ninapro.hevs.ch under an academic use agreement. Registration required.", href:"http://ninapro.hevs.ch/" },
   { step:"04", color:PURPLE, Icon:IconMicroscope, title:"Run the myojam demo", desc:"Load any of the 6 gesture classes in Dataset mode. Students observe the EMG waveform, class probabilities, and 3D hand model respond in real time.", href:"/signal" },
   { step:"05", color:AMBER,  Icon:IconPencil,     title:"Collect exit tickets", desc:"The 3-2-1 exit tickets from Lesson 1 and the design brief from Lesson 3 are strong formative assessments. Share unusual student proposals with us!" },

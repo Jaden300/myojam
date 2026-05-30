@@ -29,7 +29,7 @@ const DATA = [
   { slug:"/resources",    tag:"Hub",  title:"Resources",          desc:"Curated datasets, papers, software, and courses" },
   { slug:"/educators",    tag:"Hub",  title:"For educators",      desc:"Lesson plans, tools, curriculum alignment" },
   { slug:"/demos",        tag:"Hub",  title:"Interactive demos",  desc:"4 browser-based EMG tools" },
-  { slug:"/download",     tag:"Page", title:"Desktop app",         desc:"macOS, Windows & Linux download — real-time EMG gesture classification" },
+  { slug:"/download",     tag:"Page", title:"Desktop app",         desc:"macOS, Windows & Linux download - real-time EMG gesture classification" },
   { slug:"/blog",         tag:"Page", title:"Blog",               desc:"myojam news and EMG fact posts" },
   { slug:"/about",        tag:"Page", title:"About myojam",       desc:"Mission, open source, approach" },
   { slug:"/how-it-works", tag:"Page", title:"How it works",       desc:"Signal processing pipeline overview" },

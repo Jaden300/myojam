@@ -152,7 +152,7 @@ function LatencyCard(){
           ))}
         </div>
         <div style={{marginTop:10,fontSize:10.5,color:"rgba(255,255,255,0.38)",textAlign:"center",fontWeight:300}}>
-          Total real-world: <strong style={{color:`${RED}90`,fontWeight:700}}>~640ms</strong> — already 2× over the 300ms budget
+          Total real-world: <strong style={{color:`${RED}90`,fontWeight:700}}>~640ms</strong> - already 2× over the 300ms budget
         </div>
       </div>
       <div style={{display:"grid",gridTemplateColumns:"1fr 240px"}}>
@@ -179,7 +179,7 @@ function LatencyCard(){
             ))}
           </div>
           <div style={{marginTop:12,padding:"11px 13px",background:"rgba(255,255,255,0.03)",borderRadius:9,border:"1px solid rgba(255,255,255,0.07)"}}>
-            <div style={{fontSize:10,color:"rgba(255,255,255,0.35)",lineHeight:1.75,fontWeight:300}}>A 1,000ms window takes at least 1,000ms to fill — before a single feature is computed. High accuracy and low latency are mutually exclusive. That is the fundamental constraint.</div>
+            <div style={{fontSize:10,color:"rgba(255,255,255,0.35)",lineHeight:1.75,fontWeight:300}}>A 1,000ms window takes at least 1,000ms to fill - before a single feature is computed. High accuracy and low latency are mutually exclusive. That is the fundamental constraint.</div>
           </div>
         </div>
       </div>
@@ -254,7 +254,7 @@ function CrossSubjectCard(){
             <span style={{fontSize:10,fontWeight:700,color:BLUE,background:`${BLUE}15`,border:`1px solid ${BLUE}35`,borderRadius:100,padding:"3px 12px",letterSpacing:"0.06em",textTransform:"uppercase"}}>Deep Dive 02</span>
             <h2 style={{fontSize:32,fontWeight:800,color:"#fff",letterSpacing:"-1.2px",lineHeight:1.05,margin:"14px 0 10px"}}>The generalization<br/><span style={{color:BLUE}}>problem.</span></h2>
             <p style={{fontSize:13,color:"rgba(255,255,255,0.5)",fontWeight:300,lineHeight:1.75,maxWidth:400,margin:0}}>
-              Training and testing on the same person gives inflated numbers. Cross-subject testing — the only honest measure — reveals an 11.25 percentage-point gap.
+              Training and testing on the same person gives inflated numbers. Cross-subject testing - the only honest measure - reveals an 11.25 percentage-point gap.
             </p>
           </div>
           <div style={{textAlign:"right",flexShrink:0}}>
@@ -281,7 +281,7 @@ function CrossSubjectCard(){
       </div>
       <div style={{padding:"20px 28px",borderTop:`1px solid ${BLUE}12`,background:`${BLUE}05`}}>
         <p style={{fontSize:12.5,color:"rgba(255,255,255,0.42)",fontWeight:300,lineHeight:1.85,margin:0}}>
-          <strong style={{color:`${BLUE}CC`,fontWeight:600}}>Why this matters:</strong> Most published EMG classifiers report intra-subject accuracy — that number tells you how well a model memorized its training user. Cross-subject accuracy is the real test: does it work for someone it has never seen? The 11.25pp gap is an unsolved domain adaptation problem that makes EMG interfaces hard to ship at scale.
+          <strong style={{color:`${BLUE}CC`,fontWeight:600}}>Why this matters:</strong> Most published EMG classifiers report intra-subject accuracy - that number tells you how well a model memorized its training user. Cross-subject accuracy is the real test: does it work for someone it has never seen? The 11.25pp gap is an unsolved domain adaptation problem that makes EMG interfaces hard to ship at scale.
         </p>
       </div>
     </article>
@@ -353,7 +353,7 @@ function ForearmCard(){
           <span style={{fontSize:10,fontWeight:700,color:PURPLE,background:`${PURPLE}14`,border:`1px solid ${PURPLE}30`,borderRadius:100,padding:"3px 12px",letterSpacing:"0.06em",textTransform:"uppercase"}}>Deep Dive 03</span>
           <h2 style={{fontSize:32,fontWeight:800,color:"var(--text)",letterSpacing:"-1.2px",lineHeight:1.05,margin:"14px 0 10px"}}>20+ muscles.<br/><span style={{color:PURPLE}}>One electrode.</span></h2>
           <p style={{fontSize:13,color:"var(--text-secondary)",fontWeight:300,lineHeight:1.75,maxWidth:380,marginBottom:24}}>
-            A 2cm surface electrode sits on skin overlying 2–3 muscles simultaneously. The recorded signal is the summed electrical field of every motor unit within range — separating them is mathematically underdetermined.
+            A 2cm surface electrode sits on skin overlying 2–3 muscles simultaneously. The recorded signal is the summed electrical field of every motor unit within range - separating them is mathematically underdetermined.
           </p>
           <div style={{display:"grid",gap:7,marginBottom:22}}>
             {muscles.map((m,i)=>(
@@ -370,7 +370,7 @@ function ForearmCard(){
           </div>
           <div style={{padding:"13px 16px",background:`${PURPLE}07`,border:`1px solid ${PURPLE}18`,borderLeft:`3px solid ${PURPLE}`,borderRadius:"0 10px 10px 0"}}>
             <div style={{fontSize:13,fontWeight:700,color:PURPLE,marginBottom:3}}>16 electrodes → 64 features</div>
-            <div style={{fontSize:11,color:"var(--text-tertiary)",lineHeight:1.7,fontWeight:300}}>Ninapro DB5 places 16 electrodes around the forearm. 4 statistical features per channel (MAV, RMS, WL, ZCR) gives a 64-dimensional vector — enough spatial diversity to separate gestures that share underlying muscle activity.</div>
+            <div style={{fontSize:11,color:"var(--text-tertiary)",lineHeight:1.7,fontWeight:300}}>Ninapro DB5 places 16 electrodes around the forearm. 4 statistical features per channel (MAV, RMS, WL, ZCR) gives a 64-dimensional vector - enough spatial diversity to separate gestures that share underlying muscle activity.</div>
           </div>
         </div>
         <div style={{padding:"32px 28px 32px 0",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",borderLeft:`1px solid ${PURPLE}12`}}>
@@ -388,7 +388,7 @@ function ForearmCard(){
       </div>
       <div style={{padding:"20px 36px",background:`${PURPLE}04`}}>
         <p style={{fontSize:12.5,color:"var(--text-secondary)",fontWeight:300,lineHeight:1.85,margin:0}}>
-          <strong style={{color:PURPLE,fontWeight:600}}>The cross-talk problem:</strong> The flexor digitorum superficialis has four separate tendon slips but a shared muscle belly — bending your middle finger partially activates fibres adjacent to your index and ring tendons. The dashed lines show this leakage. A classifier cannot remove it; it can only learn to work around it with sufficient spatial sampling across all 16 channels.
+          <strong style={{color:PURPLE,fontWeight:600}}>The cross-talk problem:</strong> The flexor digitorum superficialis has four separate tendon slips but a shared muscle belly - bending your middle finger partially activates fibres adjacent to your index and ring tendons. The dashed lines show this leakage. A classifier cannot remove it; it can only learn to work around it with sufficient spatial sampling across all 16 channels.
         </p>
       </div>
     </article>
@@ -457,7 +457,7 @@ function FreqSpectrumSVG({filtered=false,vis=true,uid="a"}){
 function FrequencyCard(){
   const [ref,vis]=useInView(0.08)
   const CHAIN=[
-    {step:"20–90Hz bandpass",desc:"4th-order Butterworth. Maximally flat passband — no amplitude distortion within the useful band. –40 dB/decade rolloff outside.",c:GREEN},
+    {step:"20–90Hz bandpass",desc:"4th-order Butterworth. Maximally flat passband - no amplitude distortion within the useful band. –40 dB/decade rolloff outside.",c:GREEN},
     {step:"50Hz notch filter",desc:"Removes the powerline interference spike that sits directly in the center of the muscle signal band.",c:AMBER},
     {step:"DC offset removal",desc:"Eliminates the electrode–skin interface potential that biases the amplifier baseline.",c:CYAN},
     {step:"Full-wave rectification",desc:"Optional. Converts bipolar EMG to envelope-friendly unipolar signal for amplitude-based features like MAV.",c:PURPLE},
@@ -481,11 +481,11 @@ function FrequencyCard(){
         </div>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20}}>
           <div>
-            <div style={{fontSize:9.5,fontWeight:700,color:`${RED}80`,textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:10}}>Before — raw EMG</div>
+            <div style={{fontSize:9.5,fontWeight:700,color:`${RED}80`,textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:10}}>Before - raw EMG</div>
             <FreqSpectrumSVG filtered={false} vis={vis} uid="raw"/>
           </div>
           <div>
-            <div style={{fontSize:9.5,fontWeight:700,color:GREEN,textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:10}}>After — filtered</div>
+            <div style={{fontSize:9.5,fontWeight:700,color:GREEN,textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:10}}>After - filtered</div>
             <FreqSpectrumSVG filtered={true} vis={vis} uid="flt"/>
           </div>
         </div>
@@ -509,7 +509,7 @@ function FrequencyCard(){
 
 // ── CARD 5: HISTORY ───────────────────────────────────────────────────────────
 const MILESTONES=[
-  {year:"1791",Icon:IconBolt,color:AMBER,era:"Foundation",title:"Galvani's discovery",detail:"Luigi Galvani discovers animal electricity — a frog's leg twitches when touched with two dissimilar metals. First evidence that electricity mediates muscle contraction. Published in De Viribus Electricitatis in Motu Musculari Commentarius."},
+  {year:"1791",Icon:IconBolt,color:AMBER,era:"Foundation",title:"Galvani's discovery",detail:"Luigi Galvani discovers animal electricity - a frog's leg twitches when touched with two dissimilar metals. First evidence that electricity mediates muscle contraction. Published in De Viribus Electricitatis in Motu Musculari Commentarius."},
   {year:"1849",Icon:IconMicroscope,color:"#E8A030",era:"Discovery",title:"First intentional EMG",detail:"Emil du Bois-Reymond records the first deliberate EMG signal from human muscle contraction using a galvanometer. Establishes the measurability of bioelectric phenomena at the muscle surface."},
   {year:"1940s",Icon:IconArm,color:"#D4922A",era:"Clinical",title:"Practical surface EMG",detail:"Amplifiers become powerful enough for skin-surface detection. EMG transitions from lab curiosity to clinical diagnostic tool, used primarily for nerve conduction studies and muscle disease diagnosis."},
   {year:"1960s",Icon:IconArm,color:"#C07820",era:"Prosthetics",title:"First myoelectric arm",detail:"First commercial myoelectric prosthetic: a single degree-of-freedom hook controlled by bicep EMG amplitude threshold. One muscle, one motion. The core principle is identical to myojam's classifier input."},
@@ -592,12 +592,12 @@ function HistoryCard(){
 // ── JOURNAL ───────────────────────────────────────────────────────────────────
 const TAG_MAP={"Launch":PINK,"Content":PURPLE,"Milestone":GREEN,"Open source":BLUE,"Research":AMBER}
 const JOURNAL=[
-  {id:"n9",tag:"Launch",date:"Apr 27, 2025",title:"Desktop app — completely rebuilt",body:"Dark theme, live waveform, 3D hand model, session tracking. Animated confidence bars, rotating 3D hand that mirrors your gesture in real time.",meta:"v1.0 · macOS 12+ · ~295 MB · MIT",link:"/download"},
+  {id:"n9",tag:"Launch",date:"Apr 27, 2025",title:"Desktop app - completely rebuilt",body:"Dark theme, live waveform, 3D hand model, session tracking. Animated confidence bars, rotating 3D hand that mirrors your gesture in real time.",meta:"v1.0 · macOS 12+ · ~295 MB · MIT",link:"/download"},
   {id:"n7",tag:"Milestone",date:"Apr 10, 2025",title:"11 articles and counting",body:"Neuromuscular junction, windowing, bioethics, phantom limb, and more. Started as build notes; became a genuine EMG education resource.",meta:"11 articles · 9 topics · 450+ reads",link:"/education"},
   {id:"n6",tag:"Launch",date:"Mar 18, 2025",title:"The educators hub is live",body:"Three full lesson plans with curriculum standards, differentiation, assessment rubrics, and built-in quizzes. Designed for 75 minutes with a class new to EMG.",meta:"3 plans · Grades 7–uni · Free",link:"/educators"},
-  {id:"n4",tag:"Launch",date:"Feb 20, 2025",title:"Four browser demos. No hardware.",body:"Signal playground, confusion matrix explorer, frequency analyzer, gesture game — all running on real Ninapro data. No sensor required.",meta:"4 tools · Browser-only · Real data",link:"/demos"},
-  {id:"n2",tag:"Open source",date:"Jan 14, 2025",title:"Everything is open source",body:"Signal pipeline, ML model, React frontend, FastAPI backend — all MIT-licensed on GitHub. No private forks, no login, no waitlist.",meta:"MIT · GitHub · Full source",link:null},
-  {id:"n1",tag:"Research",date:"Dec 18, 2024",title:"84.85% — and we mean it",body:"Cross-subject accuracy, tested on people never seen during training. 1 in 7 predictions still wrong. That is the honest baseline.",meta:"16,269 windows · 10 subjects · LOSO",link:"/research/paper"},
+  {id:"n4",tag:"Launch",date:"Feb 20, 2025",title:"Four browser demos. No hardware.",body:"Signal playground, confusion matrix explorer, frequency analyzer, gesture game - all running on real Ninapro data. No sensor required.",meta:"4 tools · Browser-only · Real data",link:"/demos"},
+  {id:"n2",tag:"Open source",date:"Jan 14, 2025",title:"Everything is open source",body:"Signal pipeline, ML model, React frontend, FastAPI backend - all MIT-licensed on GitHub. No private forks, no login, no waitlist.",meta:"MIT · GitHub · Full source",link:null},
+  {id:"n1",tag:"Research",date:"Dec 18, 2024",title:"84.85% - and we mean it",body:"Cross-subject accuracy, tested on people never seen during training. 1 in 7 predictions still wrong. That is the honest baseline.",meta:"16,269 windows · 10 subjects · LOSO",link:"/research/paper"},
 ]
 
 function JournalCard({entry,navigate}){
@@ -677,7 +677,7 @@ export default function Blog(){
         <Reveal delay={0.1}>
           <div style={{margin:"8px 0 56px",padding:"24px 28px",background:"var(--bg-secondary)",borderRadius:16,border:"1px solid var(--border)",display:"flex",alignItems:"center",justifyContent:"space-between",gap:20,flexWrap:"wrap"}}>
             <div>
-              <div style={{fontSize:15,fontWeight:700,color:"var(--text)",marginBottom:4,letterSpacing:"-0.3px"}}>Go deeper — 11 full articles</div>
+              <div style={{fontSize:15,fontWeight:700,color:"var(--text)",marginBottom:4,letterSpacing:"-0.3px"}}>Go deeper - 11 full articles</div>
               <p style={{fontSize:12.5,color:"var(--text-secondary)",fontWeight:300,lineHeight:1.6,margin:0}}>The education hub covers neuromuscular anatomy, signal processing theory, ML pipeline, bioethics, and more.</p>
             </div>
             <button onClick={()=>navigate("/education")} style={{flexShrink:0,background:"var(--accent)",color:"#fff",border:"none",borderRadius:100,padding:"11px 24px",fontSize:13,fontWeight:500,cursor:"pointer",fontFamily:"var(--font)",boxShadow:`0 4px 16px ${PINK}28`,transition:"transform 0.15s,box-shadow 0.15s",whiteSpace:"nowrap"}}

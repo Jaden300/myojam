@@ -261,7 +261,7 @@ function AccuracyRings() {
           })}
         </div>
         <p style={{ fontSize: 11, color: "rgba(255,255,255,0.25)", fontWeight: 300, marginTop: 20, lineHeight: 1.6 }}>
-          Recall per gesture — correct predictions divided by total samples of that gesture in the test set.
+          Recall per gesture - correct predictions divided by total samples of that gesture in the test set.
         </p>
       </div>
     </div>
@@ -292,7 +292,7 @@ export default function App() {
     const g = GESTURES.find(g => g.name === gesture)
     setActionLog(prev => [{
       id: Date.now() + Math.random(), gesture, confidence, color,
-      action: g?.action || "—", key: g?.key || "?",
+      action: g?.action || "-", key: g?.key || "?",
       time: new Date().toLocaleTimeString("en-US", { hour12: false })
     }, ...prev].slice(0, 40))
   }, [])
@@ -309,7 +309,7 @@ export default function App() {
       setTimeout(() => setConfAnimated(true), 50)
       return result
     } catch (e) {
-      setError("Backend unreachable — is the server running?")
+      setError("Backend unreachable - is the server running?")
     }
   }, [addLog])
 
@@ -336,7 +336,7 @@ export default function App() {
       const { data: sample } = await axios.get(url)
       await predict(sample.emg_window)
     } catch (e) {
-      setError("Backend unreachable — is the server running?")
+      setError("Backend unreachable - is the server running?")
     } finally {
       setLoading(false)
     }
@@ -592,7 +592,7 @@ export default function App() {
                   <div style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginTop: 8, fontWeight: 300 }}>
                     Mapped to:{" "}
                     <span style={{ color: "rgba(255,255,255,0.75)", fontWeight: 500 }}>
-                      {GESTURES.find(g => g.name === prediction.gesture_name)?.action || "—"}
+                      {GESTURES.find(g => g.name === prediction.gesture_name)?.action || "-"}
                     </span>
                   </div>
                 </div>

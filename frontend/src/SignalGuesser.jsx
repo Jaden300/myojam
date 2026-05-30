@@ -43,12 +43,12 @@ const CONFIDENCES = {
 }
 
 const WHY = {
-  fist:   "Fist fires all 16 channels at once — the easiest pattern to identify. A beginner move.",
+  fist:   "Fist fires all 16 channels at once - the easiest pattern to identify. A beginner move.",
   index:  "Index flex dominates ch1 (extensor region) but leaks into adjacent flexors. Mild ambiguity with middle.",
   middle: "Middle flexors spatially overlap with both index and ring. The model hedges between neighbours.",
-  ring:   "Ring finger has poor voluntary isolation. Co-contraction with pinky is almost unavoidable — hence the 27% confusion.",
+  ring:   "Ring finger has poor voluntary isolation. Co-contraction with pinky is almost unavoidable - hence the 27% confusion.",
   pinky:  "Pinky and ring share nearly identical spatial patterns on a circumferential array. Even trained clinicians mix these up.",
-  thumb:  "Thumb activates the thenar eminence — a distinct muscle group. Distinctive once the model has learned it.",
+  thumb:  "Thumb activates the thenar eminence - a distinct muscle group. Distinctive once the model has learned it.",
 }
 
 const RESULT_COPY = [
@@ -68,7 +68,7 @@ const POOL = [
 ]
 
 const CH_COLORS = [PINK, BLUE, GREEN]
-const CH_LABELS = ["CH1 — Extensor", "CH2 — Flexor", "CH3 — Ulnar"]
+const CH_LABELS = ["CH1 - Extensor", "CH2 - Flexor", "CH3 - Ulnar"]
 
 function makeChannels(id, seed) {
   const {ch, freq} = PROFILES[id]

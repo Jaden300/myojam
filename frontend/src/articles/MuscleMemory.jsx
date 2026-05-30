@@ -33,7 +33,7 @@ function FaceAvatar({ seed, size = 48 }) {
   )
 }
 
-const ABSTRACT = "Muscle memory is real — but neuroscientists locate it in the brain, not the muscle. This article examines the motor learning pathway from motor cortex plasticity to cerebellar automation, with specific data on how consistent gesture practice affects EMG signal variance, feature cluster tightness, and ultimately classification accuracy. The practical upshot: as gestures become more motor-learned, the EMG classifier's job becomes measurably easier."
+const ABSTRACT = "Muscle memory is real - but neuroscientists locate it in the brain, not the muscle. This article examines the motor learning pathway from motor cortex plasticity to cerebellar automation, with specific data on how consistent gesture practice affects EMG signal variance, feature cluster tightness, and ultimately classification accuracy. The practical upshot: as gestures become more motor-learned, the EMG classifier's job becomes measurably easier."
 
 // ── Motor pathway diagram ─────────────────────────────────────────────────────
 function MotorPathwayDiagram() {
@@ -195,10 +195,10 @@ export default function MuscleMemory() {
           </div>
           <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", letterSpacing:"-0.4px", marginBottom:14 }}>Muscle memory isn't in your muscles</h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 16px" }}>
-            When pianists say their fingers "just know" where to go, they're describing a real phenomenon — but the memory isn't stored in the muscles. Muscles can't store information. What's actually happening is motor program consolidation in the cerebellum and basal ganglia. Repeated movements get encoded as efficient neural pathways that bypass the slow, effortful processing of the prefrontal cortex.
+            When pianists say their fingers "just know" where to go, they're describing a real phenomenon - but the memory isn't stored in the muscles. Muscles can't store information. What's actually happening is motor program consolidation in the cerebellum and basal ganglia. Repeated movements get encoded as efficient neural pathways that bypass the slow, effortful processing of the prefrontal cortex.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 24px" }}>
-            The motor system has three main learning nodes: the motor cortex (M1) refines the movement map, the basal ganglia habituate the sequence, and the cerebellum handles real-time error correction and timing. The result is that practised movements are driven by a leaner, more consistent neural command — measurable directly in the EMG signal.
+            The motor system has three main learning nodes: the motor cortex (M1) refines the movement map, the basal ganglia habituate the sequence, and the cerebellum handles real-time error correction and timing. The result is that practised movements are driven by a leaner, more consistent neural command - measurable directly in the EMG signal.
           </p>
           <div style={{ border:"1px solid var(--border)", borderRadius:14, overflow:"hidden" }}>
             <div style={{ padding:"12px 18px", background:"var(--bg-secondary)", borderBottom:"1px solid var(--border)" }}>
@@ -221,14 +221,14 @@ export default function MuscleMemory() {
           </div>
           <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", letterSpacing:"-0.4px", marginBottom:14 }}>How practice shapes the EMG signal</h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 16px" }}>
-            Furuya, Altenmüller, Katayose & Kinoshita (2013) compared forearm EMG in professional pianists vs novices performing matched dynamics passages. Professionals produced 30–40% lower MAV and RMS amplitude at identical note loudness, reflecting more efficient motor unit recruitment — fewer units activated, each firing more consistently.
+            Furuya, Altenmüller, Katayose & Kinoshita (2013) compared forearm EMG in professional pianists vs novices performing matched dynamics passages. Professionals produced 30–40% lower MAV and RMS amplitude at identical note loudness, reflecting more efficient motor unit recruitment - fewer units activated, each firing more consistently.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 24px" }}>
-            Separately, Pascual-Leone et al. (1995) showed measurable motor cortex map expansion after just two weeks of daily practice with TMS cortical mapping — the brain physically allocates more cortical area to a practised movement sequence. This is the neuroanatomical basis for improved signal consistency.
+            Separately, Pascual-Leone et al. (1995) showed measurable motor cortex map expansion after just two weeks of daily practice with TMS cortical mapping - the brain physically allocates more cortical area to a practised movement sequence. This is the neuroanatomical basis for improved signal consistency.
           </p>
           <div style={{ padding:"16px 20px", background:`${BLUE}08`, border:`1px solid ${BLUE}20`, borderRadius:10 }}>
             <p style={{ fontSize:13.5, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.7, margin:0 }}>
-              <span style={{ fontWeight:600, color:BLUE }}>For myojam specifically:</span> A personal classifier trained on your own data will likely improve over weeks of regular use — not because the model updates, but because your gestures become more motor-learned, producing tighter feature clusters that the fixed classifier can separate more reliably.
+              <span style={{ fontWeight:600, color:BLUE }}>For myojam specifically:</span> A personal classifier trained on your own data will likely improve over weeks of regular use - not because the model updates, but because your gestures become more motor-learned, producing tighter feature clusters that the fixed classifier can separate more reliably.
             </p>
           </div>
         </div>
@@ -241,11 +241,11 @@ export default function MuscleMemory() {
           </div>
           <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", letterSpacing:"-0.4px", marginBottom:14 }}>Feature variance decreases with practice</h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 24px" }}>
-            Tkach, Huang & Kuiken (2010) measured within-class feature vector variance across repeated recording sessions over 8 weeks. Both groups improved, but motor-learned gesture producers started lower and declined further — their feature clusters tightened by 15–25% relative to the novice group.
+            Tkach, Huang & Kuiken (2010) measured within-class feature vector variance across repeated recording sessions over 8 weeks. Both groups improved, but motor-learned gesture producers started lower and declined further - their feature clusters tightened by 15–25% relative to the novice group.
           </p>
           <div style={{ border:"1px solid var(--border)", borderRadius:14, overflow:"hidden" }}>
             <div style={{ padding:"14px 20px", background:"var(--bg-secondary)", borderBottom:"1px solid var(--border)" }}>
-              <span style={{ fontSize:12, fontWeight:600, color:"var(--text)", textTransform:"uppercase", letterSpacing:"0.06em" }}>Within-class MAV variance — practised vs novice</span>
+              <span style={{ fontSize:12, fontWeight:600, color:"var(--text)", textTransform:"uppercase", letterSpacing:"0.06em" }}>Within-class MAV variance - practised vs novice</span>
             </div>
             <div style={{ padding:"24px" }}>
               <ConsistencyChart />
@@ -261,10 +261,10 @@ export default function MuscleMemory() {
           </div>
           <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", letterSpacing:"-0.4px", marginBottom:14 }}>Fatigue reverses consistency gains</h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 16px" }}>
-            Fatigue is the nemesis of motor consistency. As muscle fibres tire, the nervous system recruits additional motor units to maintain force — motor unit substitution. This changes the EMG signal in predictable ways: amplitude increases, frequency content shifts downward (fatigued fibres have slower conduction velocity at 30–50% of fresh value), and intra-class variance increases.
+            Fatigue is the nemesis of motor consistency. As muscle fibres tire, the nervous system recruits additional motor units to maintain force - motor unit substitution. This changes the EMG signal in predictable ways: amplitude increases, frequency content shifts downward (fatigued fibres have slower conduction velocity at 30–50% of fresh value), and intra-class variance increases.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:0 }}>
-            A practised user's fresh-muscle signal may show 25% lower variance than a novice — but after 10 minutes of continuous high-intensity gesture use, the practised signal can degrade to match or exceed the novice's fresh-muscle variance. The motor cortex has learned efficiency; fatigue temporarily overwrites it at the metabolic level.
+            A practised user's fresh-muscle signal may show 25% lower variance than a novice - but after 10 minutes of continuous high-intensity gesture use, the practised signal can degrade to match or exceed the novice's fresh-muscle variance. The motor cortex has learned efficiency; fatigue temporarily overwrites it at the metabolic level.
           </p>
         </div>
 
@@ -315,10 +315,10 @@ export default function MuscleMemory() {
         <div style={{ background:"var(--bg-secondary)", borderRadius:"var(--radius)", padding:"40px", border:"1px solid var(--border)" }}>
           <div style={{ fontSize:11, fontWeight:500, color:"var(--accent)", textTransform:"uppercase", letterSpacing:"0.06em", marginBottom:14 }}>Conclusion</div>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 16px" }}>
-            Motor learning is real, measurable in EMG, and directly relevant to how well gesture classifiers perform. Consistent gestures are more classifiable gestures — not as a subjective observation, but as a measurable reduction in within-class feature space variance.
+            Motor learning is real, measurable in EMG, and directly relevant to how well gesture classifiers perform. Consistent gestures are more classifiable gestures - not as a subjective observation, but as a measurable reduction in within-class feature space variance.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:0 }}>
-            The practical implication is encouraging: as users practice with a gesture system, performance improves even without retraining the model. Human adaptation is part of the system. This is a fundamentally different path to better accuracy than the usual "better classifier" approach — and it doesn't require a single line of code change.
+            The practical implication is encouraging: as users practice with a gesture system, performance improves even without retraining the model. Human adaptation is part of the system. This is a fundamentally different path to better accuracy than the usual "better classifier" approach - and it doesn't require a single line of code change.
           </p>
         </div>
 

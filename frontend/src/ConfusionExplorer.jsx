@@ -25,21 +25,21 @@ const MATRIX = [
 
 // All 15 unique off-diagonal gesture pairs
 const ALL_PAIR_NOTES = {
-  "0-1": { rate: 4+5, note: "Index and middle both drive the flexor digitorum superficialis (FDS). The FDS muscle belly spans all four fingers — when index or middle flex, the same electrode channels see overlapping FDS activation, making spatial separation difficult at 200 Hz." },
-  "1-2": { rate: 6+7, note: "The highest single confusion pair. Middle and ring fingers share a common FDS tendon in ~80% of the population (the FDS middle head is fused with the ring head). The resulting co-activation produces near-identical 16-channel feature vectors — the classifier can only distinguish them by subtle amplitude asymmetries." },
-  "2-3": { rate: 5+6, note: "Ring and pinky share the FDS (ring head) and the flexor digiti minimi. Both muscles lie on the ulnar aspect of the forearm — the same electrode zone. Spatial resolution at the sensor level is insufficient to cleanly separate their activation envelopes." },
-  "0-2": { rate: 3+3, note: "Index and ring are separated by the middle finger in the FDS arrangement, providing a natural anatomical gap. Confusion is mainly biomechanical spillover — strong index contractions sometimes co-activate ring through FDS coupling." },
-  "0-3": { rate: 1+2, note: "Index and pinky are anatomically distant — index activates the radial FDS head while pinky activates flexor digiti minimi. Low confusion rate reflects this separation. Remaining errors are likely electrode placement near-field artifacts." },
+  "0-1": { rate: 4+5, note: "Index and middle both drive the flexor digitorum superficialis (FDS). The FDS muscle belly spans all four fingers - when index or middle flex, the same electrode channels see overlapping FDS activation, making spatial separation difficult at 200 Hz." },
+  "1-2": { rate: 6+7, note: "The highest single confusion pair. Middle and ring fingers share a common FDS tendon in ~80% of the population (the FDS middle head is fused with the ring head). The resulting co-activation produces near-identical 16-channel feature vectors - the classifier can only distinguish them by subtle amplitude asymmetries." },
+  "2-3": { rate: 5+6, note: "Ring and pinky share the FDS (ring head) and the flexor digiti minimi. Both muscles lie on the ulnar aspect of the forearm - the same electrode zone. Spatial resolution at the sensor level is insufficient to cleanly separate their activation envelopes." },
+  "0-2": { rate: 3+3, note: "Index and ring are separated by the middle finger in the FDS arrangement, providing a natural anatomical gap. Confusion is mainly biomechanical spillover - strong index contractions sometimes co-activate ring through FDS coupling." },
+  "0-3": { rate: 1+2, note: "Index and pinky are anatomically distant - index activates the radial FDS head while pinky activates flexor digiti minimi. Low confusion rate reflects this separation. Remaining errors are likely electrode placement near-field artifacts." },
   "1-3": { rate: 2+3, note: "Middle and pinky occupy opposite ends of the FDS and rarely co-activate. The low confusion rate confirms that the 16-channel array has adequate spatial coverage to resolve this pair in most subjects." },
   "0-4": { rate: 2+3, note: "Index and thumb operate on distinct muscle groups (FDS vs. thenar eminence), so confusion is unlikely from biomechanical spillover. Observed errors are likely caused by inter-session electrode placement drift shifting the detection volume toward the thenar." },
   "1-4": { rate: 2+2, note: "Middle finger and thumb recruit completely separate muscle groups. The low confusion confirms that the thenar eminence (thumb) and FDS (middle) are reliably separable with 16-channel coverage. Residual errors reflect classification uncertainty near gesture onset." },
   "2-4": { rate: 2+2, note: "Ring and thumb rarely co-activate. Confusion at this rate (2%) may reflect borderline subjects where the Myo armband sits slightly distally, bringing the thenar detection volume partially into the FDS ring-channel zone." },
   "3-4": { rate: 3+3, note: "Pinky and thumb both have dedicated small muscles (flexor digiti minimi vs. opponens pollicis) with well-separated anatomical locations. The 3% confusion likely reflects borderline cases where thumb flexion involves partial co-contraction of the hypothenar region." },
-  "0-5": { rate: 2+2, note: "Fist recruits all finger flexors simultaneously, so its MAV and WL values are substantially higher than any single-finger gesture. Index flex produces a subset of fist's activation. Low confusion is expected — fist is one of the most reliably classified gestures overall." },
+  "0-5": { rate: 2+2, note: "Fist recruits all finger flexors simultaneously, so its MAV and WL values are substantially higher than any single-finger gesture. Index flex produces a subset of fist's activation. Low confusion is expected - fist is one of the most reliably classified gestures overall." },
   "1-5": { rate: 2+2, note: "Middle and fist are reliably distinguished by amplitude: fist produces roughly 4–5× the MAV of single-finger flex. Confusion at 2% likely reflects partial-effort fist contractions or high-effort middle flexions that push amplitude toward fist territory." },
-  "2-5": { rate: 3+3, note: "Ring and fist confusion is slightly higher than index/fist, possibly because ring is the second-weakest isolated gesture (after pinky) — its amplitude profile overlaps more with partial fist closures than index or thumb do." },
+  "2-5": { rate: 3+3, note: "Ring and fist confusion is slightly higher than index/fist, possibly because ring is the second-weakest isolated gesture (after pinky) - its amplitude profile overlaps more with partial fist closures than index or thumb do." },
   "3-5": { rate: 4+4, note: "Pinky and fist is the highest single-finger vs. fist confusion pair. Pinky flex is the weakest isolated gesture (lowest MAV), and its feature vector can resemble a partial fist contraction where not all fingers are fully extended. The 4% rate reflects this inherent ambiguity." },
-  "4-5": { rate: 3+2, note: "Fist always involves strong thumb opposition (opponens pollicis), activating the same thenar eminence that thumb flex uses. The classifier must rely on the broader co-activation pattern of full fist to distinguish the two — achievable but produces the most frequent single-vs-fist confusion." },
+  "4-5": { rate: 3+2, note: "Fist always involves strong thumb opposition (opponens pollicis), activating the same thenar eminence that thumb flex uses. The classifier must rely on the broader co-activation pattern of full fist to distinguish the two - achievable but produces the most frequent single-vs-fist confusion." },
 }
 
 function getNote(row, col) {
@@ -217,7 +217,7 @@ export default function ConfusionExplorer() {
               <tbody>
                 {GESTURES.map((g, i) => {
                   const recall = MATRIX[i][i]
-                  // Precision = TP / (TP + FP) — sum of column i, diagonal is TP
+                  // Precision = TP / (TP + FP) - sum of column i, diagonal is TP
                   const colSum = MATRIX.reduce((s, row) => s + row[i], 0)
                   const precision = Math.round((recall / (colSum / MATRIX[i].reduce((s,v)=>s+v,0) * 100 + recall - recall)) * 100) || recall
                   // Simplified: compute from matrix percentages
@@ -270,7 +270,7 @@ export default function ConfusionExplorer() {
 
         {/* Ranked error pairs */}
         <div style={{ marginBottom: 48 }}>
-          <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text)", marginBottom: 4 }}>All 15 gesture pairs — ranked by confusion rate</div>
+          <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text)", marginBottom: 4 }}>All 15 gesture pairs - ranked by confusion rate</div>
           <div style={{ fontSize: 12, color: "var(--text-tertiary)", fontWeight: 300, marginBottom: 20 }}>Confusion rate = sum of off-diagonal errors for that pair (both directions)</div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             {Object.entries(ALL_PAIR_NOTES)

@@ -39,7 +39,7 @@ const PILLARS = [
     slug:"/education", icon:IconBook, color:BLUE,
     title:"Education hub",
     sub:"11 in-depth articles",
-    desc:"EMG science doesn't have a good public textbook. These 11 articles are the resource we wished existed — from how action potentials produce muscle electrical signals to why cross-subject generalization is still an open research problem.",
+    desc:"EMG science doesn't have a good public textbook. These 11 articles are the resource we wished existed - from how action potentials produce muscle electrical signals to why cross-subject generalization is still an open research problem.",
   },
   {
     slug:"/educators", icon:IconGraduate, color:PURPLE,
@@ -51,7 +51,7 @@ const PILLARS = [
     slug:"/demos", icon:IconBolt, color:PINK,
     title:"Interactive tools",
     sub:"Seven browser tools",
-    desc:"A real-time signal playground, frequency analyzer, confusion matrix explorer, reaction game, live EMG canvas, gesture block-coding environment, and classifier visualizer — all running in your browser, no install required.",
+    desc:"A real-time signal playground, frequency analyzer, confusion matrix explorer, reaction game, live EMG canvas, gesture block-coding environment, and classifier visualizer - all running in your browser, no install required.",
   },
   {
     slug:"/research", icon:IconMicroscope, color:GREEN,
@@ -253,7 +253,7 @@ function GapViz() {
 
   const rows = [
     { label:"Within-session",      sub:"same person, same session",               val:96.4,  color:GREEN,  bold:false },
-    { label:"Cross-subject",        sub:"our result — 10 unseen subjects, LOSO",   val:84.85, color:PINK,   bold:true  },
+    { label:"Cross-subject",        sub:"our result - 10 unseen subjects, LOSO",   val:84.85, color:PINK,   bold:true  },
     { label:"Real-world (est.)",    sub:"electrode shift · fatigue · co-contraction", val:70, color:AMBER,  bold:false },
   ]
 
@@ -329,7 +329,7 @@ export default function Landing() {
         <div style={{ position:"absolute", inset:0, background:"radial-gradient(ellipse 65% 55% at 15% 50%, rgba(255,45,120,0.09) 0%, transparent 70%)", zIndex:1, pointerEvents:"none" }}/>
         <div style={{ maxWidth:1000, margin:"0 auto", padding:"120px 32px 100px", position:"relative", zIndex:3, width:"100%" }}>
           <div style={{ display:"grid", gridTemplateColumns:"1fr 420px", gap:56, alignItems:"center" }}>
-            {/* Left — text */}
+            {/* Left - text */}
             <div>
               <div style={{ display:"inline-flex", alignItems:"center", gap:8, background:"rgba(255,255,255,0.06)", border:"1px solid rgba(255,45,120,0.2)", borderRadius:100, padding:"5px 16px", fontSize:12, color:"rgba(255,255,255,0.65)", fontFamily:"monospace", marginBottom:32, animation:"fadeUp 0.5s ease" }}>
                 <span style={{ width:6, height:6, borderRadius:"50%", background:PINK, display:"inline-block", animation:"pulse 2s infinite" }}/>
@@ -371,11 +371,11 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Right — live signal panel */}
+            {/* Right - live signal panel */}
             <div style={{ animation:"fadeUp 0.5s 0.34s ease both" }}>
               <HeroSignalPanel />
               <div style={{ marginTop:10, fontSize:10, color:"rgba(255,255,255,0.22)", textAlign:"center", fontFamily:"monospace", letterSpacing:"0.05em" }}>
-                Animated preview — Ninapro DB5 waveform characteristics · github.com/Jaden300/myojam
+                Animated preview - Ninapro DB5 waveform characteristics · github.com/Jaden300/myojam
               </div>
             </div>
           </div>
@@ -452,7 +452,7 @@ export default function Landing() {
                   grad:"linear-gradient(135deg,#D97706 0%,#F59E0B 100%)",
                   Icon:IconTarget, badge:"GAME",
                   title:"Gesture Game",
-                  desc:"A target gesture appears — match it before time runs out. Three difficulty levels.",
+                  desc:"A target gesture appears - match it before time runs out. Three difficulty levels.",
                   cta:"Play →", slug:"/game",
                 },
               ].map(card => (
@@ -537,13 +537,13 @@ export default function Landing() {
                 The 11-point<br/>gap.
               </h2>
               <p style={{ fontSize:15, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.8, marginBottom:16 }}>
-                A gesture classifier trained and tested on the same person reaches ~96% accuracy. Test it on someone new — different forearm anatomy, different electrode placement — and it drops to 84.85%.
+                A gesture classifier trained and tested on the same person reaches ~96% accuracy. Test it on someone new - different forearm anatomy, different electrode placement - and it drops to 84.85%.
               </p>
               <p style={{ fontSize:15, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.8, marginBottom:24 }}>
                 That 11-percentage-point gap is not a bug. It is the fundamental challenge of sEMG-based control: muscle morphology, subcutaneous fat thickness, and electrode position vary enough across individuals to dramatically shift the signal distribution the model learned from.
               </p>
               <p style={{ fontSize:14, color:"var(--text-tertiary)", fontWeight:300, lineHeight:1.7 }}>
-                myojam documents this honestly. The 84.85% figure is a leave-one-subject-out (LOSO) result — the hardest standard metric — not an inflated within-session number.
+                myojam documents this honestly. The 84.85% figure is a leave-one-subject-out (LOSO) result - the hardest standard metric - not an inflated within-session number.
               </p>
             </Reveal>
             <Reveal delay={0.1}>
@@ -587,9 +587,9 @@ export default function Landing() {
                     { k:"Hardware",     v:"Delsys Trigno Wireless EMG" },
                     { k:"Channels",     v:"16 surface electrodes" },
                     { k:"Sample rate",  v:"200 Hz (processed)" },
-                    { k:"Gestures",     v:"52 total — 6 used in this work" },
+                    { k:"Gestures",     v:"52 total - 6 used in this work" },
                     { k:"Repetitions",  v:"10 per gesture per subject" },
-                    { k:"License",      v:"Academic use — publicly available" },
+                    { k:"License",      v:"Academic use - publicly available" },
                   ].map((r, i) => (
                     <div key={r.k} style={{ display:"grid", gridTemplateColumns:"140px 1fr", borderBottom: i < 7 ? "1px solid var(--border)" : "none" }}>
                       <div style={{ padding:"12px 24px", borderRight:"1px solid var(--border)", fontSize:12, color:"var(--text-tertiary)", fontWeight:600, fontFamily:"monospace" }}>{r.k}</div>
@@ -709,7 +709,7 @@ export default function Landing() {
                   64 features.<br/>4 × 16 channels.
                 </h2>
                 <p style={{ fontSize:15, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.8, marginBottom:24 }}>
-                  Every 200-sample window is compressed to 64 numbers before classification — four time-domain features computed independently for each of the 16 electrode channels.
+                  Every 200-sample window is compressed to 64 numbers before classification - four time-domain features computed independently for each of the 16 electrode channels.
                 </p>
                 <p style={{ fontSize:15, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.8 }}>
                   This is the <span style={{ color:"var(--text)", fontWeight:500 }}>Hudgins feature set</span>, first proposed in 1993 and still competitive in 2025. Its strength: interpretable, fast to compute, robust to moderate noise, and well-suited to Random Forest ensemble learning.
@@ -759,7 +759,7 @@ export default function Landing() {
               What the data shows.
             </h2>
             <p style={{ fontSize:15, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.7, maxWidth:520, marginBottom:48 }}>
-              Every number below is from LOSO cross-validation on Ninapro DB5 — the model tested on subjects it was never trained on.
+              Every number below is from LOSO cross-validation on Ninapro DB5 - the model tested on subjects it was never trained on.
             </p>
           </Reveal>
 
@@ -821,7 +821,7 @@ export default function Landing() {
               </Reveal>
 
               {[
-                { label:"Cross-subject gap", val:"84.85% vs ~96%", sub:"Cross-subject vs. within-session — the 11 pp reality of real-world sEMG deployment", color:AMBER },
+                { label:"Cross-subject gap", val:"84.85% vs ~96%", sub:"Cross-subject vs. within-session - the 11 pp reality of real-world sEMG deployment", color:AMBER },
                 { label:"Inference speed",   val:"< 5 ms",         sub:"Per window on a standard laptop CPU. No GPU required, no network round-trips.", color:GREEN  },
                 { label:"Window budget",     val:"200 samples",    sub:"At 200 Hz = 1 second per window. Chosen to maximise accuracy over prosthetic latency.", color:BLUE  },
               ].map((item, i) => (
@@ -1002,12 +1002,12 @@ export default function Landing() {
           </Reveal>
           <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(400px, 1fr))", gap:2, border:"1px solid var(--border)", borderRadius:"var(--radius)", overflow:"hidden" }}>
             {[
-              { q:"Do I need EMG hardware to use myojam?",         a:"No. All four browser tools — Signal Playground, Frequency Analyzer, Confusion Matrix Explorer, and Gesture Reaction Game — run entirely in your browser using real Ninapro DB5 data. The desktop app requires a MyoWare 2.0 sensor and Arduino, but the website works without any hardware." },
-              { q:'What does "84.85% accuracy" actually mean?',    a:'It\'s cross-subject accuracy: the model was trained on 9 subjects and tested on the 10th, repeated across all 10 subjects (leave-one-subject-out, LOSO). The 84.85% is the mean across all 10 folds. It reflects how the classifier performs on people it has never seen — the realistic, hard metric.' },
+              { q:"Do I need EMG hardware to use myojam?",         a:"No. All four browser tools - Signal Playground, Frequency Analyzer, Confusion Matrix Explorer, and Gesture Reaction Game - run entirely in your browser using real Ninapro DB5 data. The desktop app requires a MyoWare 2.0 sensor and Arduino, but the website works without any hardware." },
+              { q:'What does "84.85% accuracy" actually mean?',    a:'It\'s cross-subject accuracy: the model was trained on 9 subjects and tested on the 10th, repeated across all 10 subjects (leave-one-subject-out, LOSO). The 84.85% is the mean across all 10 folds. It reflects how the classifier performs on people it has never seen - the realistic, hard metric.' },
               { q:"What gestures does myojam recognize?",           a:"Six hand gestures: index finger flex, middle finger flex, ring finger flex, pinky finger flex, thumb flex, and full fist. These were chosen for biomechanical distinctiveness and natural mapping to computer control actions like scroll, click, and navigate." },
-              { q:"Is myojam free? Can I use it commercially?",    a:"Yes. Every part of myojam — the classifier, desktop app, website, research, lesson plans, and datasets — is released under the MIT licence. You can use it, modify it, and build on it commercially with no restrictions beyond attribution." },
-              { q:"How does the classifier run without internet?",  a:"The trained Random Forest model is bundled inside the desktop app as a .pkl file and loaded locally. No API calls, no cloud inference. The entire signal processing pipeline — filter, windowing, feature extraction, prediction — runs on your machine." },
-              { q:"Why is there a gap between 84.85% and clinical use?", a:"Lab benchmarks assume consistent electrode placement, controlled posture, and deliberate isolated movements. Real-world conditions introduce placement shifts between sessions (−5 to −15 pp), limb position changes, co-contraction, and fatigue. Closing this gap is an active open problem — we document it honestly in the research." },
+              { q:"Is myojam free? Can I use it commercially?",    a:"Yes. Every part of myojam - the classifier, desktop app, website, research, lesson plans, and datasets - is released under the MIT licence. You can use it, modify it, and build on it commercially with no restrictions beyond attribution." },
+              { q:"How does the classifier run without internet?",  a:"The trained Random Forest model is bundled inside the desktop app as a .pkl file and loaded locally. No API calls, no cloud inference. The entire signal processing pipeline - filter, windowing, feature extraction, prediction - runs on your machine." },
+              { q:"Why is there a gap between 84.85% and clinical use?", a:"Lab benchmarks assume consistent electrode placement, controlled posture, and deliberate isolated movements. Real-world conditions introduce placement shifts between sessions (−5 to −15 pp), limb position changes, co-contraction, and fatigue. Closing this gap is an active open problem - we document it honestly in the research." },
             ].map(({ q, a }, i) => <FAQItem key={i} q={q} a={a} />)}
           </div>
         </div>
@@ -1048,7 +1048,7 @@ export default function Landing() {
               The future of EMG,<br/>in your hands.
             </h2>
             <p style={{ fontSize:14, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.75, maxWidth:440 }}>
-              Real-time gesture classification from a surface EMG sensor — running locally, powered by a Random Forest with 84.85% cross-subject accuracy. Live waveform, 3D hand model, session tracking.
+              Real-time gesture classification from a surface EMG sensor - running locally, powered by a Random Forest with 84.85% cross-subject accuracy. Live waveform, 3D hand model, session tracking.
             </p>
           </div>
           <div style={{ display:"flex", flexDirection:"column", gap:12, flexShrink:0 }}>

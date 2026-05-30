@@ -204,7 +204,7 @@ export default function Changelog() {
               How myojam<br /><span style={{ color:"var(--accent)" }}>got here.</span>
             </h1>
             <p style={{ fontSize:17, color:"rgba(255,255,255,0.72)", fontWeight:300, lineHeight:1.75, maxWidth:520, marginBottom:48 }}>
-              A complete development log — every version, every milestone, every bug that took too long to fix.
+              A complete development log - every version, every milestone, every bug that took too long to fix.
               Built in public, documented in public.
             </p>
           </Reveal>
@@ -226,7 +226,7 @@ export default function Changelog() {
                 <button
                   className="ver-nav-btn"
                   onClick={() => jumpTo(log.version)}
-                  title={`${log.version} — ${log.title}`}
+                  title={`${log.version} - ${log.title}`}
                   style={{
                     width:32, height:32, borderRadius:"50%",
                     background:`${log.tagColor}22`,
@@ -247,7 +247,7 @@ export default function Changelog() {
               </div>
             ))}
             <span style={{ marginLeft:14, fontSize:11, color:"rgba(255,255,255,0.38)", fontWeight:300, flexShrink:0, fontFamily:"monospace" }}>
-              v0.8 — latest
+              v0.8 - latest
             </span>
           </div>
         </div>

@@ -38,9 +38,9 @@ const ARTICLES = [
   { id:6,  slug:"/education/phantom-limb",        tag:"Neuroscience",      title:"The ghost in the electrode",                            summary:"Amputees generate measurable EMG from limbs they no longer have. What phantom limb signals reveal about cortical remapping and the future of prosthetic control.", readTime:"6 min", date:"2025-12-03", dateLabel:"Dec 3, 2025",  likes:61 },
   { id:7,  slug:"/education/why-emg-is-hard",     tag:"Signal processing", title:"Why EMG is harder than it looks",                       summary:"Lab accuracy numbers are impressive. Real-world performance is not. A systematic breakdown of the six reasons EMG gesture classification keeps failing outside the lab.", readTime:"7 min", date:"2025-11-18", dateLabel:"Nov 18, 2025", likes:44 },
   { id:8,  slug:"/education/build-your-own",      tag:"Hardware",          title:"Build your own EMG sensor for under $60",               summary:"A complete weekend project: parts list, wiring, Arduino firmware, electrode placement, and signal quality checks. From zero to streaming muscle signals in an afternoon.", readTime:"8 min", date:"2025-10-30", dateLabel:"Oct 30, 2025", likes:89 },
-  { id:9,  slug:"/education/future-of-bci",       tag:"Future",            title:"After EMG: what comes next",                            summary:"Surface EMG is one point on a spectrum from skin-surface sensing to direct neural recording. Where the field is heading — high-density arrays, peripheral nerve interfaces.", readTime:"6 min", date:"2025-09-22", dateLabel:"Sep 22, 2025", likes:73 },
+  { id:9,  slug:"/education/future-of-bci",       tag:"Future",            title:"After EMG: what comes next",                            summary:"Surface EMG is one point on a spectrum from skin-surface sensing to direct neural recording. Where the field is heading - high-density arrays, peripheral nerve interfaces.", readTime:"6 min", date:"2025-09-22", dateLabel:"Sep 22, 2025", likes:73 },
   { id:10, slug:"/education/ethics-of-emg",       tag:"Ethics",            title:"Who owns your muscle data?",                            summary:"EMG signals can identify you, reveal your health status, and expose conditions you don't know you have. As gesture interfaces go mainstream, these questions can't wait.", readTime:"5 min", date:"2025-08-14", dateLabel:"Aug 14, 2025", likes:38 },
-  { id:11, slug:"/education/windowing-explained", tag:"Signal processing", title:"The art of cutting a signal into pieces",                summary:"Window size, overlap, and step size are the least glamorous choices in EMG classification — and silently the most consequential. Here's what they actually control.", readTime:"7 min", date:"2025-07-05", dateLabel:"Jul 5, 2025",  likes:29 },
+  { id:11, slug:"/education/windowing-explained", tag:"Signal processing", title:"The art of cutting a signal into pieces",                summary:"Window size, overlap, and step size are the least glamorous choices in EMG classification - and silently the most consequential. Here's what they actually control.", readTime:"7 min", date:"2025-07-05", dateLabel:"Jul 5, 2025",  likes:29 },
 ]
 
 const LEARNING_PATH = [
@@ -638,7 +638,7 @@ export default function Education() {
             </span>
           </h1>
           <p style={{ fontSize:17, lineHeight:1.8, color:"rgba(255,255,255,0.65)", fontWeight:300, maxWidth:"52ch", marginBottom:36 }}>
-            Eleven in-depth articles on the science behind myojam — from how muscles generate electrical signals to how machine learning classifies them into computer actions.
+            Eleven in-depth articles on the science behind myojam - from how muscles generate electrical signals to how machine learning classifies them into computer actions.
           </p>
           {/* Stat pills */}
           <div style={{ display:"flex", gap:10, flexWrap:"wrap" }}>
@@ -746,12 +746,12 @@ export default function Education() {
 
         {displayed.length === 0 && (
           <div style={{ textAlign:"center", padding:"56px 0", color:"var(--text-tertiary)", fontSize:14, fontWeight:300 }}>
-            No articles match — try a different filter or search term.
+            No articles match - try a different filter or search term.
           </div>
         )}
 
         <p style={{ fontSize:13, color:"var(--text-tertiary)", fontWeight:300, textAlign:"center", lineHeight:1.7, maxWidth:"50ch", margin:"0 auto 0" }}>
-          More articles in progress — signal processing, ML for biosignals, and the future of assistive input.
+          More articles in progress - signal processing, ML for biosignals, and the future of assistive input.
         </p>
       </div>
 

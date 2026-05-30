@@ -216,7 +216,7 @@ export default function NinaproDB5() {
                     <td style={{ padding: "9px 14px" }}>
                       {used
                         ? <span style={{ fontSize: 11, fontWeight: 600, color: "var(--accent)", background: "rgba(255,45,120,0.1)", border: "1px solid rgba(255,45,120,0.25)", borderRadius: 100, padding: "2px 10px" }}>✓ myojam</span>
-                        : <span style={{ fontSize: 11, color: "var(--text-tertiary)", fontWeight: 300 }}>—</span>
+                        : <span style={{ fontSize: 11, color: "var(--text-tertiary)", fontWeight: 300 }}>-</span>
                       }
                     </td>
                   </tr>
@@ -225,7 +225,7 @@ export default function NinaproDB5() {
             </table>
           </div>
           <div style={{ padding: "12px 20px", fontSize: 11, color: "var(--text-tertiary)", fontWeight: 300, lineHeight: 1.6, borderTop: "1px solid var(--border)", background: "var(--bg-secondary)" }}>
-            DB5 was chosen for its consumer-grade hardware (Myo armband, now discontinued), public availability, and widespread use as an EMG benchmark — enabling direct comparison with published work.
+            DB5 was chosen for its consumer-grade hardware (Myo armband, now discontinued), public availability, and widespread use as an EMG benchmark - enabling direct comparison with published work.
           </div>
         </div>
 
@@ -241,8 +241,8 @@ import numpy as np
 # Load subject 1, exercise 1 (basic finger movements)
 data = sio.loadmat("S1_E1_A1.mat")
 
-emg        = data["emg"]        # shape: (N_samples, 16)  — raw 16-ch EMG
-restimulus = data["restimulus"] # shape: (N_samples, 1)   — 0=rest, 1–52=gesture
+emg        = data["emg"]        # shape: (N_samples, 16)  - raw 16-ch EMG
+restimulus = data["restimulus"] # shape: (N_samples, 1)   - 0=rest, 1–52=gesture
 
 # Extract 6-gesture subset used by myojam (labels 1–6 from Exercise 1)
 TARGET_LABELS = [1, 2, 3, 4, 5, 6]  # idx flex, mid flex, ring, pinky, thumb, fist
@@ -253,7 +253,7 @@ lbl_6 = restimulus[mask]  # corresponding labels
 print(f"Active samples: {emg_6.shape[0]}")  # ~16,269 after windowing
 print(f"EMG shape: {emg_6.shape}")          # (N, 16)`}</pre>
           <div style={{ padding: "12px 20px", fontSize: 11, color: "var(--text-tertiary)", fontWeight: 300, lineHeight: 1.6, borderTop: "1px solid var(--border)", background: "var(--bg-secondary)" }}>
-            The <span style={{ fontFamily: "monospace", color: "var(--text-secondary)" }}>restimulus</span> field (not <span style={{ fontFamily: "monospace", color: "var(--text-secondary)" }}>stimulus</span>) provides ground-truth labels corrected for movement onset delay — always use this for classification. Files available at <a href="https://ninapro.hevs.ch" target="_blank" rel="noreferrer" style={{ color: "var(--accent)", textDecoration: "none" }}>ninapro.hevs.ch</a>.
+            The <span style={{ fontFamily: "monospace", color: "var(--text-secondary)" }}>restimulus</span> field (not <span style={{ fontFamily: "monospace", color: "var(--text-secondary)" }}>stimulus</span>) provides ground-truth labels corrected for movement onset delay - always use this for classification. Files available at <a href="https://ninapro.hevs.ch" target="_blank" rel="noreferrer" style={{ color: "var(--accent)", textDecoration: "none" }}>ninapro.hevs.ch</a>.
           </div>
         </div>
 

@@ -195,16 +195,16 @@ python validate_range.py
         code:`python model/train_loso.py --features model/features.npy --labels model/labels.npy
 
 # Expected output (per fold):
-# Fold 01 (test: S01) — training... done in 41s  accuracy: 89.2%
-# Fold 02 (test: S02) — training... done in 38s  accuracy: 87.4%
-# Fold 03 (test: S03) — training... done in 43s  accuracy: 83.6%
-# Fold 04 (test: S04) — training... done in 39s  accuracy: 91.0%
-# Fold 05 (test: S05) — training... done in 41s  accuracy: 78.3%
-# Fold 06 (test: S06) — training... done in 40s  accuracy: 85.7%
-# Fold 07 (test: S07) — training... done in 38s  accuracy: 82.1%
-# Fold 08 (test: S08) — training... done in 42s  accuracy: 86.4%
-# Fold 09 (test: S09) — training... done in 40s  accuracy: 88.6%
-# Fold 10 (test: S10) — training... done in 37s  accuracy: 76.2%
+# Fold 01 (test: S01) - training... done in 41s  accuracy: 89.2%
+# Fold 02 (test: S02) - training... done in 38s  accuracy: 87.4%
+# Fold 03 (test: S03) - training... done in 43s  accuracy: 83.6%
+# Fold 04 (test: S04) - training... done in 39s  accuracy: 91.0%
+# Fold 05 (test: S05) - training... done in 41s  accuracy: 78.3%
+# Fold 06 (test: S06) - training... done in 40s  accuracy: 85.7%
+# Fold 07 (test: S07) - training... done in 38s  accuracy: 82.1%
+# Fold 08 (test: S08) - training... done in 42s  accuracy: 86.4%
+# Fold 09 (test: S09) - training... done in 40s  accuracy: 88.6%
+# Fold 10 (test: S10) - training... done in 37s  accuracy: 76.2%
 # ─────────────────────────────────────────────────
 # Mean LOSO accuracy:  84.85%   SD: ±4.42pp
 # Best hyperparameters (from fold 1 search):

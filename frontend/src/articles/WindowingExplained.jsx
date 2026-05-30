@@ -33,7 +33,7 @@ function FaceAvatar({ seed, size = 48 }) {
   )
 }
 
-const ABSTRACT = "Window duration and overlap ratio are the two parameters that silently determine everything downstream in an EMG classification pipeline. Published systems report windows from 100 ms to 2000 ms — a 20× range — with surprisingly little discussion of why. This article synthesises the data from myojam's systematic window duration study (Ninapro DB5, 8 conditions, LOSO cross-validation) to show exactly how accuracy varies with window size, where the clinical feasibility boundary lies, and what the 1 s window used by myojam optimises for."
+const ABSTRACT = "Window duration and overlap ratio are the two parameters that silently determine everything downstream in an EMG classification pipeline. Published systems report windows from 100 ms to 2000 ms - a 20× range - with surprisingly little discussion of why. This article synthesises the data from myojam's systematic window duration study (Ninapro DB5, 8 conditions, LOSO cross-validation) to show exactly how accuracy varies with window size, where the clinical feasibility boundary lies, and what the 1 s window used by myojam optimises for."
 
 // ── Window accuracy data ──────────────────────────────────────────────────────
 const WINDOW_DATA = [
@@ -234,8 +234,8 @@ export default function WindowingExplained() {
         {/* Stats strip */}
         <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:0, border:"1px solid var(--border)", borderRadius:14, overflow:"hidden", marginBottom:48 }}>
           {[
-            { val:"62.4%", label:"100 ms window",  sub:"20 samples — feature estimation fails",  color:RED },
-            { val:"84.85%",label:"1000 ms window", sub:"myojam baseline — near-optimal",          color:PINK },
+            { val:"62.4%", label:"100 ms window",  sub:"20 samples - feature estimation fails",  color:RED },
+            { val:"84.85%",label:"1000 ms window", sub:"myojam baseline - near-optimal",          color:PINK },
             { val:"85.3%", label:"1250 ms window", sub:"Peak accuracy across all 8 conditions",   color:GREEN },
             { val:"295 ms",label:"Clinical limit", sub:"Max latency (Farrell & Weir, 2007)",      color:AMBER },
           ].map(({ val, label, sub, color }, i) => (
@@ -255,10 +255,10 @@ export default function WindowingExplained() {
           </div>
           <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", letterSpacing:"-0.4px", marginBottom:14 }}>The fundamental problem</h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 16px" }}>
-            Machine learning classifiers expect fixed-size input vectors. A continuous EMG stream produces an unbounded sequence of samples at 200 Hz — one new data point every 5 milliseconds, forever. The solution is sliding window analysis: take N consecutive samples, compute features on them, classify, then slide forward by step S and repeat.
+            Machine learning classifiers expect fixed-size input vectors. A continuous EMG stream produces an unbounded sequence of samples at 200 Hz - one new data point every 5 milliseconds, forever. The solution is sliding window analysis: take N consecutive samples, compute features on them, classify, then slide forward by step S and repeat.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:0 }}>
-            This converts a streaming signal into a sequence of discrete classification events. Every design decision downstream — feature variance, model accuracy, real-time responsiveness — is determined by what N and S are. Yet most papers report their window size in a single sentence without explanation.
+            This converts a streaming signal into a sequence of discrete classification events. Every design decision downstream - feature variance, model accuracy, real-time responsiveness - is determined by what N and S are. Yet most papers report their window size in a single sentence without explanation.
           </p>
         </div>
 
@@ -268,7 +268,7 @@ export default function WindowingExplained() {
             <div style={{ width:32, height:32, borderRadius:"50%", background:`${PINK}15`, border:`1px solid ${PINK}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:12, fontWeight:600, color:PINK }}>02</div>
             <span style={{ fontSize:11, fontWeight:500, color:PINK, textTransform:"uppercase", letterSpacing:"0.06em" }}>What the data says</span>
           </div>
-          <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", letterSpacing:"-0.4px", marginBottom:14 }}>62.4% to 85.3% — the full accuracy curve</h2>
+          <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", letterSpacing:"-0.4px", marginBottom:14 }}>62.4% to 85.3% - the full accuracy curve</h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 28px" }}>
             myojam ran a systematic experiment on Ninapro DB5 with 8 window durations from 100 ms to 2000 ms, using LOSO cross-validation on all 10 subjects. The accuracy increases monotonically from 62.4% (100 ms / 20 samples) to a peak of 85.3% at 1250 ms, then declines modestly at 2000 ms as the stationarity assumption begins to break down.
           </p>
@@ -282,7 +282,7 @@ export default function WindowingExplained() {
             </div>
           </div>
           <p style={{ fontSize:13, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.75 }}>
-            The steepest gain is in the 100–500 ms range: +18.8 pp in 400 ms of window duration growth, as feature estimation transitions from essentially random to marginally reliable. Above 750 ms, gains are small — the classifier is near its ceiling given the feature set and number of training examples.
+            The steepest gain is in the 100–500 ms range: +18.8 pp in 400 ms of window duration growth, as feature estimation transitions from essentially random to marginally reliable. Above 750 ms, gains are small - the classifier is near its ceiling given the feature set and number of training examples.
           </p>
         </div>
 
@@ -297,7 +297,7 @@ export default function WindowingExplained() {
             There is a hard clinical constraint on latency: Farrell and Weir (2007) identified 300 ms as the maximum delay before users perceive a prosthetic controller as "laggy" in a psychophysical target-achievement study. Subtract the ~5 ms processing overhead, and the maximum window duration for a clinically responsive system is 295 ms.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 24px" }}>
-            At 200 Hz, 295 ms is 59 samples. From the chart: a 59-sample window achieves approximately 68% accuracy — well below the 80% clinical adequacy floor. This means no window duration simultaneously satisfies both the latency and accuracy requirements for a 200 Hz system. That's not a solvable ML problem — it's a hardware constraint.
+            At 200 Hz, 295 ms is 59 samples. From the chart: a 59-sample window achieves approximately 68% accuracy - well below the 80% clinical adequacy floor. This means no window duration simultaneously satisfies both the latency and accuracy requirements for a 200 Hz system. That's not a solvable ML problem - it's a hardware constraint.
           </p>
           <div style={{ border:"1px solid var(--border)", borderRadius:14, overflow:"hidden", marginBottom:12 }}>
             <div style={{ padding:"14px 20px", background:"var(--bg-secondary)", borderBottom:"1px solid var(--border)" }}>
@@ -322,14 +322,14 @@ export default function WindowingExplained() {
           </div>
           <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", letterSpacing:"-0.4px", marginBottom:14 }}>Trading compute for responsiveness</h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 20px" }}>
-            Overlap ratio controls how often the classifier fires, not how accurate it is. A 1000 ms window with 0% overlap fires once per second. The same window with 75% overlap fires every 250 ms — four predictions per second — using the same window of signal. Accuracy per window is identical; the output just updates more frequently.
+            Overlap ratio controls how often the classifier fires, not how accurate it is. A 1000 ms window with 0% overlap fires once per second. The same window with 75% overlap fires every 250 ms - four predictions per second - using the same window of signal. Accuracy per window is identical; the output just updates more frequently.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 24px" }}>
             myojam uses 75% overlap (250 ms step). This produces 4 predictions per second from a 1 s window. Majority voting across the last 5 consecutive overlapping windows recovers 1.8 pp of accuracy in dynamic conditions, at the cost of 4 additional step intervals (1 s) of latency.
           </p>
           <div style={{ border:"1px solid var(--border)", borderRadius:14, overflow:"hidden" }}>
             <div style={{ padding:"14px 20px", background:"var(--bg-secondary)", borderBottom:"1px solid var(--border)" }}>
-              <span style={{ fontSize:12, fontWeight:600, color:"var(--text)", textTransform:"uppercase", letterSpacing:"0.06em" }}>Overlap visualised — 1000 ms window</span>
+              <span style={{ fontSize:12, fontWeight:600, color:"var(--text)", textTransform:"uppercase", letterSpacing:"0.06em" }}>Overlap visualised - 1000 ms window</span>
             </div>
             <div style={{ padding:"20px" }}>
               <OverlapDiagram />
@@ -389,7 +389,7 @@ export default function WindowingExplained() {
             Windowing is invisible to users but foundational to system behaviour. The 22-point accuracy swing from 100 ms to 1250 ms is driven by a single parameter that costs nothing to change in software.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:0 }}>
-            The myojam choice of 1000 ms is intentional: it captures 99.4% of peak accuracy at 20% lower latency than the 1250 ms optimum, with no other trade-off. For a demo system, this is the right call. For a deployed assistive device on 200 Hz hardware, no window satisfies both clinical constraints simultaneously — that's the actual unsolved problem.
+            The myojam choice of 1000 ms is intentional: it captures 99.4% of peak accuracy at 20% lower latency than the 1250 ms optimum, with no other trade-off. For a demo system, this is the right call. For a deployed assistive device on 200 Hz hardware, no window satisfies both clinical constraints simultaneously - that's the actual unsolved problem.
           </p>
         </div>
 

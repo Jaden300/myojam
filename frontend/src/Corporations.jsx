@@ -459,10 +459,10 @@ function FeatureImportanceChart() {
   }, [])
 
   const FEATURES = [
-    { name: "MAV", full: "Mean Absolute Value",  pct: 35, color: "#FF2D78", desc: "Captures muscle activation level — the primary indicator of gesture strength" },
+    { name: "MAV", full: "Mean Absolute Value",  pct: 35, color: "#FF2D78", desc: "Captures muscle activation level - the primary indicator of gesture strength" },
     { name: "RMS", full: "Root Mean Square",      pct: 27, color: "#3B82F6", desc: "Signal power across the window, robust to noise and baseline drift" },
-    { name: "WL",  full: "Waveform Length",       pct: 25, color: "#8B5CF6", desc: "Signal complexity — differentiates similar-amplitude but morphologically distinct gestures" },
-    { name: "ZCR", full: "Zero Crossing Rate",    pct: 13, color: "#10B981", desc: "Frequency content proxy — separates low- from high-frequency activation patterns" },
+    { name: "WL",  full: "Waveform Length",       pct: 25, color: "#8B5CF6", desc: "Signal complexity - differentiates similar-amplitude but morphologically distinct gestures" },
+    { name: "ZCR", full: "Zero Crossing Rate",    pct: 13, color: "#10B981", desc: "Frequency content proxy - separates low- from high-frequency activation patterns" },
   ]
 
   return (
@@ -665,7 +665,7 @@ export default function Corporations() {
       <Navbar />
 
       {/* ════════════════════════════════════════════════════════
-          HERO — LiquidChrome + live EMG waveforms
+          HERO - LiquidChrome + live EMG waveforms
       ════════════════════════════════════════════════════════ */}
       <section style={{ position: "relative", minHeight: "92vh", display: "flex", alignItems: "center", overflow: "hidden", borderBottom: "1px solid var(--border)" }}>
         <div style={{ position: "absolute", inset: 0 }}>
@@ -703,7 +703,7 @@ export default function Corporations() {
             fontWeight: 300, lineHeight: 1.8, maxWidth: 520, marginBottom: 48,
             animation: "fadeUp 0.5s 0.16s ease both",
           }}>
-            An MIT-licensed gesture classification pipeline trained on clinical-grade public data — with 84.85% cross-subject accuracy, complete documentation, and zero licensing fees. Whether you're building assistive technology, conducting HCI research, or exploring gesture interfaces, myojam is the baseline you can trust.
+            An MIT-licensed gesture classification pipeline trained on clinical-grade public data - with 84.85% cross-subject accuracy, complete documentation, and zero licensing fees. Whether you're building assistive technology, conducting HCI research, or exploring gesture interfaces, myojam is the baseline you can trust.
           </p>
 
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", animation: "fadeUp 0.5s 0.24s ease both" }}>
@@ -763,7 +763,7 @@ export default function Corporations() {
               Electrode to gesture in 5 steps.
             </h2>
             <p style={{ fontSize: 14, color: "var(--text-secondary)", fontWeight: 300, lineHeight: 1.7, marginBottom: 36, maxWidth: 520 }}>
-              Every stage is documented, reproducible, and replaceable — swap in your own classifier, your own windowing strategy, or your own hardware without touching the rest.
+              Every stage is documented, reproducible, and replaceable - swap in your own classifier, your own windowing strategy, or your own hardware without touching the rest.
             </p>
           </Reveal>
           <Reveal delay={0.08}>
@@ -782,7 +782,7 @@ export default function Corporations() {
       </section>
 
       {/* ════════════════════════════════════════════════════════
-          PERFORMANCE CHARTS — side by side
+          PERFORMANCE CHARTS - side by side
       ════════════════════════════════════════════════════════ */}
       <section style={{ padding: "80px 32px", borderBottom: "1px solid var(--border)" }}>
         <div style={{ maxWidth: 960, margin: "0 auto" }}>
@@ -811,7 +811,7 @@ export default function Corporations() {
             <Reveal delay={0.08}>
               <div style={{ background: "var(--bg-secondary)", border: "1px solid var(--border)", borderRadius: "var(--radius)", padding: "28px 28px" }}>
                 <div style={{ fontSize: 11, fontWeight: 600, color: "var(--text-tertiary)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>
-                  Accuracy vs. window size — the prosthetic feasibility gap
+                  Accuracy vs. window size - the prosthetic feasibility gap
                 </div>
                 <WindowChart />
               </div>
@@ -824,7 +824,7 @@ export default function Corporations() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
                 <div>
                   <div style={{ fontSize: 11, fontWeight: 600, color: "var(--text-tertiary)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>
-                    Feature importance — Random Forest Gini reduction
+                    Feature importance - Random Forest Gini reduction
                   </div>
                   <FeatureImportanceChart />
                 </div>
@@ -890,13 +890,13 @@ export default function Corporations() {
               {
                 num: "03", color: "#3B82F6",
                 title: "HCI research",
-                body: "Academic labs and R&D teams can use myojam as a validated baseline for gesture classification experiments — saving months of pipeline development time.",
+                body: "Academic labs and R&D teams can use myojam as a validated baseline for gesture classification experiments - saving months of pipeline development time.",
                 metrics: ["Public Ninapro DB5 training", "Fully reproducible results", "LOSO cross-validation"],
               },
               {
                 num: "04", color: "#10B981",
                 title: "Robotics & prosthetics",
-                body: "The classifier generalises across subjects out of the box. The same architecture that controls a cursor can control an end-effector — swap the output mapping layer.",
+                body: "The classifier generalises across subjects out of the box. The same architecture that controls a cursor can control an end-effector - swap the output mapping layer.",
                 metrics: ["Cross-subject generalisation", "Open MIT license", "Customisable gesture set"],
               },
             ].map((uc, i) => (
@@ -943,7 +943,7 @@ export default function Corporations() {
               Open collaboration, not licensing.
             </h2>
             <p style={{ fontSize: 14, color: "var(--text-secondary)", fontWeight: 300, lineHeight: 1.75, maxWidth: 520, marginBottom: 40 }}>
-              myojam is MIT licensed — use it freely with no royalties. Beyond the code, we offer direct collaboration: integration support, custom model training, and joint research.
+              myojam is MIT licensed - use it freely with no royalties. Beyond the code, we offer direct collaboration: integration support, custom model training, and joint research.
             </p>
           </Reveal>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2, border: "1px solid var(--border)", borderRadius: "var(--radius)", overflow: "hidden" }}>

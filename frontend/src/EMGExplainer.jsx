@@ -7,7 +7,7 @@ import ArticleBar from "./ArticleUtils"
 import { IconRobot, IconAccessibility, IconChat, IconMuscle } from "./Icons"
 
 // ─────────────────────────────────────────────────────────────
-// Live oscilloscope canvas — hero centrepiece
+// Live oscilloscope canvas - hero centrepiece
 // ─────────────────────────────────────────────────────────────
 function Oscilloscope() {
   const ref = useRef(null)
@@ -139,7 +139,7 @@ function Oscilloscope() {
 }
 
 // ─────────────────────────────────────────────────────────────
-// Filter comparison canvas — section 04 visual
+// Filter comparison canvas - section 04 visual
 // ─────────────────────────────────────────────────────────────
 function FilterDemo() {
   const rawRef = useRef(null), filtRef = useRef(null)
@@ -330,7 +330,7 @@ function FeaturePipelineDiagram() {
 
 function AssistiveTechCases() {
   const cases = [
-    { title: "Prosthetic limb",    body: "Amputees control robotic prosthetics by contracting residual forearm muscles — the same electrodes, the same signal.", Icon: IconRobot,         color: "#FF2D78" },
+    { title: "Prosthetic limb",    body: "Amputees control robotic prosthetics by contracting residual forearm muscles - the same electrodes, the same signal.", Icon: IconRobot,         color: "#FF2D78" },
     { title: "Spinal cord injury", body: "Patients with limited hand mobility can control mice, keyboards, or wheelchairs via EMG without finger contact.", Icon: IconAccessibility,  color: "#8B5CF6" },
     { title: "ALS / MND",          body: "As motor neuron disease progresses, surface EMG may preserve communication long after speech and fine movement fail.", Icon: IconChat,           color: "#3B82F6" },
   ]
@@ -384,10 +384,10 @@ const SECTIONS = [
   {
     id: "s01", num: "01", tag: "The biology", color: "#FF2D78",
     title: "What is EMG?",
-    body: `Electromyography (EMG) is the measurement of the electrical activity produced by skeletal muscles. When your brain decides to move a finger, it dispatches a motor command down through the spinal cord and along a motor neuron to the target muscle. At the neuromuscular junction, the electrical impulse triggers the muscle fibres to contract — and that contraction generates a tiny but measurable voltage change in the surrounding tissue.
+    body: `Electromyography (EMG) is the measurement of the electrical activity produced by skeletal muscles. When your brain decides to move a finger, it dispatches a motor command down through the spinal cord and along a motor neuron to the target muscle. At the neuromuscular junction, the electrical impulse triggers the muscle fibres to contract - and that contraction generates a tiny but measurable voltage change in the surrounding tissue.
 
-Surface EMG (sEMG) captures this signal using adhesive electrodes placed directly on the skin, above the muscle of interest. No needles, no surgical implants — just electrodes picking up the electrical chatter of your muscles through your skin. The result is a waveform that encodes when muscles activate, how strongly, and in what pattern.`,
-    callout: "Each electrode records the superposition of action potentials from many individual motor units — a complex signal that grows richer as more fibres are recruited.",
+Surface EMG (sEMG) captures this signal using adhesive electrodes placed directly on the skin, above the muscle of interest. No needles, no surgical implants - just electrodes picking up the electrical chatter of your muscles through your skin. The result is a waveform that encodes when muscles activate, how strongly, and in what pattern.`,
+    callout: "Each electrode records the superposition of action potentials from many individual motor units - a complex signal that grows richer as more fibres are recruited.",
     cta: null,
     Visual: SignalChainDiagram,
     visualCaption: "Signal chain: from brain command to electrode voltage",
@@ -395,52 +395,52 @@ Surface EMG (sEMG) captures this signal using adhesive electrodes placed directl
   {
     id: "s02", num: "02", tag: "The signal", color: "#f472b6",
     title: "What does an EMG signal look like?",
-    body: `At rest, the EMG signal is mostly noise — a faint, random flutter around zero millivolts, with no coherent structure. When you flex a muscle, a burst of activity erupts: rapid oscillations between roughly −1 mV and +1 mV, persisting for as long as the contraction lasts. The harder the contraction, the more motor units fire simultaneously, and the larger and more complex the burst becomes.
+    body: `At rest, the EMG signal is mostly noise - a faint, random flutter around zero millivolts, with no coherent structure. When you flex a muscle, a burst of activity erupts: rapid oscillations between roughly −1 mV and +1 mV, persisting for as long as the contraction lasts. The harder the contraction, the more motor units fire simultaneously, and the larger and more complex the burst becomes.
 
-The signal is also contaminated by interference from several sources: powerline hum at 50 or 60 Hz, motion artefacts from electrode movement (frequencies below ~20 Hz), and cross-talk from adjacent muscles. This is why bandpass filtering is an essential first step before any analysis — the gesture-relevant signal lives between roughly 20 and 90 Hz for consumer-grade hardware.`,
+The signal is also contaminated by interference from several sources: powerline hum at 50 or 60 Hz, motion artefacts from electrode movement (frequencies below ~20 Hz), and cross-talk from adjacent muscles. This is why bandpass filtering is an essential first step before any analysis - the gesture-relevant signal lives between roughly 20 and 90 Hz for consumer-grade hardware.`,
     callout: "The live waveform above shows a synthetic single-channel EMG recording cycling between rest and gesture activation. Real signals look remarkably similar.",
     cta: { label: "See your own signal in Signal Playground →", path: "/playground" },
     Visual: Oscilloscope,
-    visualCaption: "Live synthetic EMG — cycling rest / contraction / rest",
+    visualCaption: "Live synthetic EMG - cycling rest / contraction / rest",
   },
   {
     id: "s03", num: "03", tag: "The hardware", color: "#a855f7",
     title: "How MyoWare 2.0 fits in",
-    body: `Medical-grade EMG amplifiers cost thousands of dollars and require trained clinicians to operate. The MyoWare 2.0 is a consumer-grade muscle sensor that brings surface EMG within reach for students, researchers, and hobbyists — for around $30. It handles the hard parts: differential amplification of the tiny (millivolt-scale) EMG signal relative to a reference electrode, active noise rejection, and signal conditioning into a 0–VCC analogue output that any microcontroller can read.
+    body: `Medical-grade EMG amplifiers cost thousands of dollars and require trained clinicians to operate. The MyoWare 2.0 is a consumer-grade muscle sensor that brings surface EMG within reach for students, researchers, and hobbyists - for around $30. It handles the hard parts: differential amplification of the tiny (millivolt-scale) EMG signal relative to a reference electrode, active noise rejection, and signal conditioning into a 0–VCC analogue output that any microcontroller can read.
 
-myojam chains the MyoWare output to an Arduino Uno R3, which samples it at 200 Hz via a 10-bit ADC and streams the values over USB serial to the Python classifier. The total hardware cost, excluding the laptop, is under $60 — comparable to a meal out, not a medical equipment budget.`,
+myojam chains the MyoWare output to an Arduino Uno R3, which samples it at 200 Hz via a 10-bit ADC and streams the values over USB serial to the Python classifier. The total hardware cost, excluding the laptop, is under $60 - comparable to a meal out, not a medical equipment budget.`,
     callout: "MyoWare 2.0 is not a medical device and is not intended for clinical use. myojam uses it for educational and research demonstrations only.",
     cta: { label: "See the wiring guide in the Desktop App docs →", path: "/download" },
     Visual: HardwareChain,
-    visualCaption: "Signal chain from muscle to classification — ~$60 total hardware",
+    visualCaption: "Signal chain from muscle to classification - ~$60 total hardware",
   },
   {
     id: "s04", num: "04", tag: "Signal processing", color: "#818cf8",
     title: "From raw signal to clean data",
     body: `The Arduino delivers raw ADC counts at 200 samples per second. Before these numbers mean anything to a classifier, they go through two processing stages.
 
-First, a 4th-order zero-phase Butterworth bandpass filter attenuates everything outside 20–90 Hz. This removes DC bias and motion artefact below 20 Hz, and amplifier noise above 90 Hz, leaving only the biologically meaningful muscle activation band. The filter is applied bidirectionally (forward and backward) to preserve phase — so the filtered signal is time-aligned with the raw.
+First, a 4th-order zero-phase Butterworth bandpass filter attenuates everything outside 20–90 Hz. This removes DC bias and motion artefact below 20 Hz, and amplifier noise above 90 Hz, leaving only the biologically meaningful muscle activation band. The filter is applied bidirectionally (forward and backward) to preserve phase - so the filtered signal is time-aligned with the raw.
 
 Second, the cleaned signal is cut into overlapping sliding windows: 200 samples (1 second) long, with a 50-sample (250 ms) step between windows. This gives the classifier a fresh observation roughly every 250 ms while retaining a full second of context per classification.`,
-    callout: "The 75% overlap between consecutive windows means four predictions per second at low computational cost — critical for the responsiveness of real-time control.",
+    callout: "The 75% overlap between consecutive windows means four predictions per second at low computational cost - critical for the responsiveness of real-time control.",
     cta: { label: "Visualise the filter live in the Frequency Analyzer →", path: "/frequency" },
     Visual: FilterDemo,
     visualCaption: "Butterworth bandpass: noise and artefact removed, gesture band preserved",
     extraVisual: WindowingDiagram,
-    extraCaption: "Sliding window extraction — 4 overlapping windows per second",
+    extraCaption: "Sliding window extraction - 4 overlapping windows per second",
   },
   {
     id: "s05", num: "05", tag: "Machine learning", color: "#38bdf8",
     title: "Teaching a computer to read gestures",
-    body: `Raw waveforms are difficult to classify directly — they vary too much across people, sessions, and electrode placements. Instead, myojam compresses each window into four time-domain features computed independently for each of the 16 electrode channels:
+    body: `Raw waveforms are difficult to classify directly - they vary too much across people, sessions, and electrode placements. Instead, myojam compresses each window into four time-domain features computed independently for each of the 16 electrode channels:
 
-• MAV (Mean Absolute Value) — average signal energy; the primary recruitment indicator
-• RMS (Root Mean Square) — signal power; correlated with contraction force
-• ZCR (Zero Crossing Rate) — frequency content proxy; rises with faster oscillations
-• WL (Waveform Length) — morphological complexity; total signal variation over the window
+• MAV (Mean Absolute Value) - average signal energy; the primary recruitment indicator
+• RMS (Root Mean Square) - signal power; correlated with contraction force
+• ZCR (Zero Crossing Rate) - frequency content proxy; rises with faster oscillations
+• WL (Waveform Length) - morphological complexity; total signal variation over the window
 
-These 4 features × 16 channels = 64 numbers form the feature vector. A Random Forest classifier — 500 independent decision trees, each trained on a random feature subset — votes on which gesture the vector most resembles. The majority vote determines the output. Trained under leave-one-subject-out cross-validation on 16,269 windows from 10 Ninapro DB5 subjects, the model achieves 84.85% cross-subject accuracy.`,
-    callout: "Feature importance analysis via MDI shows MAV accounts for 35% and RMS for 27% of the model's total discriminative power — amplitude dominates.",
+These 4 features × 16 channels = 64 numbers form the feature vector. A Random Forest classifier - 500 independent decision trees, each trained on a random feature subset - votes on which gesture the vector most resembles. The majority vote determines the output. Trained under leave-one-subject-out cross-validation on 16,269 windows from 10 Ninapro DB5 subjects, the model achieves 84.85% cross-subject accuracy.`,
+    callout: "Feature importance analysis via MDI shows MAV accounts for 35% and RMS for 27% of the model's total discriminative power - amplitude dominates.",
     cta: { label: "Trace a live prediction in the Pipeline Explorer →", path: "/pipeline" },
     Visual: FeaturePipelineDiagram,
     visualCaption: "Full inference pipeline: window → 64 features → Random Forest → gesture",
@@ -448,9 +448,9 @@ These 4 features × 16 channels = 64 numbers form the feature vector. A Random F
   {
     id: "s06", num: "06", tag: "The bigger picture", color: "#34d399",
     title: "EMG as assistive technology",
-    body: `For people with reduced hand or arm mobility — due to spinal cord injury, stroke, ALS, cerebral palsy, limb difference, or amputation — standard input devices like keyboards and mice can be inaccessible. EMG-based interfaces offer an alternative path: intent expressed through residual muscle activity, no fine motor control required.
+    body: `For people with reduced hand or arm mobility - due to spinal cord injury, stroke, ALS, cerebral palsy, limb difference, or amputation - standard input devices like keyboards and mice can be inaccessible. EMG-based interfaces offer an alternative path: intent expressed through residual muscle activity, no fine motor control required.
 
-Commercial myoelectric prosthetic hands have used EMG control since the 1960s. What myojam contributes is not the concept but the openness: a fully documented, reproducible pipeline, published under the MIT licence, that any researcher or engineer can inspect, modify, and build on. The question isn't whether EMG-based assistive technology is possible — it demonstrably is. The question is whether the tools for building it can be accessible to everyone who needs them.`,
+Commercial myoelectric prosthetic hands have used EMG control since the 1960s. What myojam contributes is not the concept but the openness: a fully documented, reproducible pipeline, published under the MIT licence, that any researcher or engineer can inspect, modify, and build on. The question isn't whether EMG-based assistive technology is possible - it demonstrably is. The question is whether the tools for building it can be accessible to everyone who needs them.`,
     callout: null,
     cta: { label: "Read more in the Education Hub →", path: "/education" },
     Visual: AssistiveTechCases,
@@ -461,11 +461,11 @@ Commercial myoelectric prosthetic hands have used EMG control since the 1960s. W
     title: "Where this technology is going",
     body: `Consumer EMG is genuinely early-stage. The fundamental limitations are well-understood: inter-session electrode placement variability degrades accuracy by 5–15 percentage points between sessions; cross-subject generalization plateaus below 90% with current feature sets; and the latency-accuracy tradeoff means no 200 Hz system simultaneously satisfies clinical requirements for both response speed (≤300 ms) and accuracy (≥80%).
 
-Active research directions include deep learning methods that learn representations from raw signals (potentially closing the latency gap), higher-density electrode arrays that resolve individual finger movements, dry electrodes that eliminate gel preparation, and few-shot adaptation protocols that calibrate to new users in under 60 seconds. The path from 84.85% to clinical deployment isn't a single breakthrough — it's a sequence of incremental engineering solutions to known, quantified problems.`,
+Active research directions include deep learning methods that learn representations from raw signals (potentially closing the latency gap), higher-density electrode arrays that resolve individual finger movements, dry electrodes that eliminate gel preparation, and few-shot adaptation protocols that calibrate to new users in under 60 seconds. The path from 84.85% to clinical deployment isn't a single breakthrough - it's a sequence of incremental engineering solutions to known, quantified problems.`,
     callout: "myojam's windowing analysis documents the prosthetic feasibility gap in detail: no window duration simultaneously satisfies ≤300 ms latency and ≥80% accuracy for 200 Hz hardware.",
     cta: { label: "Read the windowing analysis →", path: "/research/windowing-analysis" },
     Visual: FutureRoadmap,
-    visualCaption: "Technology readiness — where EMG gesture control sits today and what's next",
+    visualCaption: "Technology readiness - where EMG gesture control sits today and what's next",
   },
 ]
 
@@ -559,7 +559,7 @@ export default function EMGExplainer() {
             <span style={{ color: "var(--accent)" }}>muscle-computer interfaces.</span>
           </h1>
           <p style={{ fontSize: 16, color: "rgba(255,255,255,0.65)", fontWeight: 300, lineHeight: 1.75, maxWidth: 560, marginBottom: 32 }}>
-            What is EMG, how does surface signal acquisition work, and how does myojam turn a forearm twitch into a computer action? A full explainer from the biology up — with live visuals at every step.
+            What is EMG, how does surface signal acquisition work, and how does myojam turn a forearm twitch into a computer action? A full explainer from the biology up - with live visuals at every step.
           </p>
 
           {/* Author strip */}
@@ -708,7 +708,7 @@ export default function EMGExplainer() {
           <div style={{ background: "linear-gradient(135deg, rgba(255,45,120,0.06) 0%, transparent 100%)", border: "1px solid rgba(255,45,120,0.15)", borderRadius: 14, padding: "36px 40px" }}>
             <div style={{ fontSize: 10, fontWeight: 700, color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.10em", marginBottom: 12 }}>Conclusion</div>
             <p style={{ fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.82, fontWeight: 300, marginBottom: 20 }}>
-              Surface EMG is a window into the body's intent. With the right hardware, signal processing, and machine learning, it becomes a practical interface between human movement and digital action. myojam demonstrates that this technology doesn't have to be expensive, proprietary, or inaccessible — it can be open-source, reproducible, and built with $60 of consumer hardware and public research data.
+              Surface EMG is a window into the body's intent. With the right hardware, signal processing, and machine learning, it becomes a practical interface between human movement and digital action. myojam demonstrates that this technology doesn't have to be expensive, proprietary, or inaccessible - it can be open-source, reproducible, and built with $60 of consumer hardware and public research data.
             </p>
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
               {[
@@ -731,7 +731,7 @@ export default function EMGExplainer() {
           <div style={{ marginTop: 40 }}>
             <ArticleBar
               url="https://myojam.com/education/emg-explainer"
-              title="The science of muscle-computer interfaces — myojam"
+              title="The science of muscle-computer interfaces - myojam"
               citation={{ apa: `W., J. (2026, April). The science of muscle-computer interfaces. myojam. https://myojam.com/education/emg-explainer` }}
               presetLikes={47}
               storageKey="like_emg_explainer"

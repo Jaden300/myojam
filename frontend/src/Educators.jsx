@@ -75,7 +75,7 @@ const LESSONS = [
     duration: "60 min",
     difficulty: "Beginner-friendly",
     title: "EMG in the real world: applications and bioethics",
-    summary: "Students explore where EMG technology is deployed today, evaluate what 84.85% accuracy means for real people, and debate who benefits — and who doesn't — when technology listens to your body.",
+    summary: "Students explore where EMG technology is deployed today, evaluate what 84.85% accuracy means for real people, and debate who benefits - and who doesn't - when technology listens to your body.",
     objectives: [
       "EMG applications across prosthetics, gaming, and rehab",
       "Accuracy as a stakeholder-dependent concept",
@@ -115,11 +115,11 @@ const RESOURCE_CARD = {
 }
 
 const SUBJECTS = [
-  { icon: IconMicroscope, label: "Biology",          desc: "Motor neurons, muscle contraction, the neuromuscular junction — EMG makes the invisible visible." },
-  { icon: IconGear,       label: "Physics",           desc: "Signal amplitude, frequency, noise filtering — real physics in a biological context." },
+  { icon: IconMicroscope, label: "Biology",          desc: "Motor neurons, muscle contraction, the neuromuscular junction - EMG makes the invisible visible." },
+  { icon: IconGear,       label: "Physics",           desc: "Signal amplitude, frequency, noise filtering - real physics in a biological context." },
   { icon: IconLaptop,     label: "Computer Science",  desc: "Classification, feature extraction, event-driven programming, ML fundamentals." },
   { icon: IconBarChart,   label: "Data Science",      desc: "Real 16-channel, 200Hz datasets. Students clean, visualise, and model genuine research data." },
-  { icon: IconHandshake,  label: "Ethics",            desc: "Biometric data, accessibility, who benefits from technology — rich ethical discussion material." },
+  { icon: IconHandshake,  label: "Ethics",            desc: "Biometric data, accessibility, who benefits from technology - rich ethical discussion material." },
   { icon: IconMedical,    label: "Health & Tech",     desc: "Assistive technology, motor impairment, and the engineering of prosthetics and interfaces." },
 ]
 
@@ -134,7 +134,7 @@ const TEASER_QUESTIONS = [
     question: "myojam achieves what cross-subject classification accuracy?",
     options: ["72.3%", "84.85%", "91.2%", "78.5%"],
     correct: 1,
-    explanation: "84.85% cross-subject accuracy — tested on people the model has never seen — on Ninapro DB5 across 10 subjects and 6 gesture classes."
+    explanation: "84.85% cross-subject accuracy - tested on people the model has never seen - on Ninapro DB5 across 10 subjects and 6 gesture classes."
   },
   {
     question: "Which tool lets students see exactly which gestures the classifier confuses and why?",
@@ -273,7 +273,7 @@ export default function Educators() {
             Bring EMG science<br/>into your<br/><span style={{ color: GREEN }}>classroom.</span>
           </h1>
           <p style={{ fontSize: 17, color: "rgba(255,255,255,0.68)", fontWeight: 300, lineHeight: 1.8, maxWidth: 540, marginBottom: 40, animation: "fadeUp 0.5s 0.16s ease both" }}>
-            Three ready-to-run lesson plans, real 16-channel datasets, and four browser-based tools for teaching neuroscience, machine learning, and assistive technology — from middle school to university. No hardware. No prior EMG experience needed.
+            Three ready-to-run lesson plans, real 16-channel datasets, and four browser-based tools for teaching neuroscience, machine learning, and assistive technology - from middle school to university. No hardware. No prior EMG experience needed.
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", animation: "fadeUp 0.5s 0.24s ease both" }}>
             <a href="#lessons" style={{ background: GREEN, color: "#fff", borderRadius: 100, padding: "13px 32px", fontSize: 14, fontWeight: 600, textDecoration: "none", boxShadow: `0 4px 20px ${GREEN}40`, transition: "transform 0.2s,box-shadow 0.2s" }}
@@ -315,7 +315,7 @@ export default function Educators() {
             <SectionPill>For teachers</SectionPill>
             <h2 style={{ fontSize: "clamp(22px,3.5vw,34px)", fontWeight: 700, letterSpacing: "-1px", color: "var(--text)", marginBottom: 10 }}>You don't need to know EMG to teach it.</h2>
             <p style={{ fontSize: 14, color: "var(--text-secondary)", fontWeight: 300, lineHeight: 1.75, marginBottom: 36, maxWidth: 520 }}>
-              Every lesson includes a step-by-step teacher guide written for educators without a signal processing background. The science is explained in the materials — your job is to facilitate the conversation.
+              Every lesson includes a step-by-step teacher guide written for educators without a signal processing background. The science is explained in the materials - your job is to facilitate the conversation.
             </p>
           </Reveal>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 14 }}>
@@ -329,7 +329,7 @@ export default function Educators() {
               {
                 step: "02",
                 title: "Preview the tools yourself",
-                body: "The four interactive demos take about 15 minutes to explore. No installation — open the browser, try the confusion matrix, close the tab.",
+                body: "The four interactive demos take about 15 minutes to explore. No installation - open the browser, try the confusion matrix, close the tab.",
                 color: BLUE,
               },
               {
@@ -341,7 +341,7 @@ export default function Educators() {
               {
                 step: "04",
                 title: "Run the lesson",
-                body: "The teacher guide covers every transition, likely student questions, and common misconceptions — annotated with timing suggestions.",
+                body: "The teacher guide covers every transition, likely student questions, and common misconceptions - annotated with timing suggestions.",
                 color: AMBER,
               },
             ].map((item, i) => (
@@ -397,16 +397,16 @@ export default function Educators() {
             </p>
             <div style={{ border: "1px solid var(--border)", borderRadius: 14, overflow: "hidden" }}>
               <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", background: "var(--bg-secondary)", borderBottom: "1px solid var(--border)" }}>
-                {["Framework", "L1 — EMG Basics", "L2 — Classifier", "L3 — Ethics"].map((h, i) => (
+                {["Framework", "L1 - EMG Basics", "L2 - Classifier", "L3 - Ethics"].map((h, i) => (
                   <div key={h} style={{ padding: "12px 18px", fontSize: 10.5, fontWeight: 700, color: i === 0 ? "var(--text)" : [PINK, BLUE, PURPLE][i - 1], textTransform: "uppercase", letterSpacing: "0.06em", borderRight: i < 3 ? "1px solid var(--border)" : "" }}>{h}</div>
                 ))}
               </div>
               {[
-                { framework: "Ontario Science (Gr 9–12)", sub: "Biology SBI3U · Physics SPH3U", l1: "SBI3U E2.1, E2.4 — nerve impulse, muscle contraction", l2: "SPH3U — data analysis, signal processing", l3: "SNC2D — technology and society" },
-                { framework: "NGSS (US)", sub: "HS-LS1 · HS-PS4 · HS-ETS1", l1: "HS-LS1-2 — cell specialisation, electrical signalling", l2: "HS-PS4-5 — data analysis, pattern recognition", l3: "HS-ETS1-1 — criteria, constraints, societal impact" },
-                { framework: "IB Biology / Computer Science", sub: "SL/HL Topic 6 · CS Option D", l1: "Topic 6.5 — neurons and synapses", l2: "CS Option D — machine learning, patterns", l3: "Topic 11.4 — bioethics and medical technology" },
-                { framework: "AP Computer Science Principles", sub: "Big Ideas 2, 4, 5", l1: "—", l2: "BI-4 (algorithms) · BI-2 (data representation)", l3: "BI-5 — societal impacts of computing" },
-                { framework: "Cambridge IGCSE / A-Level", sub: "Biology · Computer Science", l1: "A-Level Bio Ch.15 — coordination and response", l2: "IGCSE CS §2 — data, algorithms", l3: "A-Level Bio Ch.16 — nervous system and ethics" },
+                { framework: "Ontario Science (Gr 9–12)", sub: "Biology SBI3U · Physics SPH3U", l1: "SBI3U E2.1, E2.4 - nerve impulse, muscle contraction", l2: "SPH3U - data analysis, signal processing", l3: "SNC2D - technology and society" },
+                { framework: "NGSS (US)", sub: "HS-LS1 · HS-PS4 · HS-ETS1", l1: "HS-LS1-2 - cell specialisation, electrical signalling", l2: "HS-PS4-5 - data analysis, pattern recognition", l3: "HS-ETS1-1 - criteria, constraints, societal impact" },
+                { framework: "IB Biology / Computer Science", sub: "SL/HL Topic 6 · CS Option D", l1: "Topic 6.5 - neurons and synapses", l2: "CS Option D - machine learning, patterns", l3: "Topic 11.4 - bioethics and medical technology" },
+                { framework: "AP Computer Science Principles", sub: "Big Ideas 2, 4, 5", l1: "-", l2: "BI-4 (algorithms) · BI-2 (data representation)", l3: "BI-5 - societal impacts of computing" },
+                { framework: "Cambridge IGCSE / A-Level", sub: "Biology · Computer Science", l1: "A-Level Bio Ch.15 - coordination and response", l2: "IGCSE CS §2 - data, algorithms", l3: "A-Level Bio Ch.16 - nervous system and ethics" },
               ].map(({ framework, sub, l1, l2, l3 }, ri) => (
                 <div key={framework} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", borderBottom: ri < 4 ? "1px solid var(--border)" : "", background: ri % 2 === 0 ? "var(--bg)" : "var(--bg-secondary)" }}>
                   <div style={{ padding: "14px 18px", borderRight: "1px solid var(--border)" }}>
@@ -414,7 +414,7 @@ export default function Educators() {
                     <div style={{ fontSize: 10.5, color: "var(--text-tertiary)", fontWeight: 300 }}>{sub}</div>
                   </div>
                   {[l1, l2, l3].map((val, ci) => (
-                    <div key={ci} style={{ padding: "14px 18px", fontSize: 11, color: val === "—" ? "var(--text-tertiary)" : "var(--text-secondary)", fontWeight: 300, lineHeight: 1.6, borderRight: ci < 2 ? "1px solid var(--border)" : "" }}>{val}</div>
+                    <div key={ci} style={{ padding: "14px 18px", fontSize: 11, color: val === "-" ? "var(--text-tertiary)" : "var(--text-secondary)", fontWeight: 300, lineHeight: 1.6, borderRight: ci < 2 ? "1px solid var(--border)" : "" }}>{val}</div>
                   ))}
                 </div>
               ))}
@@ -492,7 +492,7 @@ export default function Educators() {
               A 3-question preview. Full quizzes are built into each lesson plan.
             </p>
           </Reveal>
-          <Quiz title="EMG & myojam — quick preview" questions={TEASER_QUESTIONS} accentColor={GREEN}/>
+          <Quiz title="EMG & myojam - quick preview" questions={TEASER_QUESTIONS} accentColor={GREEN}/>
         </div>
       </section>
 
@@ -506,7 +506,7 @@ export default function Educators() {
                   <div style={{ fontSize: 10, fontWeight: 700, color: GREEN, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 12 }}>Get in touch</div>
                   <h3 style={{ fontSize: 22, fontWeight: 700, color: "var(--text)", letterSpacing: "-0.5px", marginBottom: 10 }}>Used myojam in a classroom?</h3>
                   <p style={{ fontSize: 13.5, color: "var(--text-secondary)", fontWeight: 300, lineHeight: 1.75, marginBottom: 20 }}>
-                    We're actively developing new lessons. If you've run one of these plans and have feedback — what worked, what didn't, what your students asked — we'd genuinely like to hear it.
+                    We're actively developing new lessons. If you've run one of these plans and have feedback - what worked, what didn't, what your students asked - we'd genuinely like to hear it.
                   </p>
                   <div style={{ display: "grid", gap: 8 }}>
                     {[

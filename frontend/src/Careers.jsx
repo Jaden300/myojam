@@ -368,7 +368,7 @@ const ROLES = [
     title: "ML Research Contributor",
     commitment: "5–10 hrs / week",
     tags: ["Python", "scikit-learn", "EMG", "Signal Processing"],
-    desc: "The current model hits 84.85% LOSO cross-subject accuracy. The ceiling isn't the mean — it's the three subjects that drag it down. S02 (79.3%), S06 (76.1%), and S09 (78.4%) are the open research question. Better features, domain adaptation, or personalized calibration — we don't know which, and that's the point.",
+    desc: "The current model hits 84.85% LOSO cross-subject accuracy. The ceiling isn't the mean - it's the three subjects that drag it down. S02 (79.3%), S06 (76.1%), and S09 (78.4%) are the open research question. Better features, domain adaptation, or personalized calibration - we don't know which, and that's the point.",
     now: "Comparing WL vs. wavelet features on S06 raw data. Investigating whether electrode placement variance explains the accuracy gap on high-variability subjects.",
   },
   {
@@ -376,7 +376,7 @@ const ROLES = [
     title: "Cross-platform Desktop Contributor",
     commitment: "4–8 hrs / week",
     tags: ["Python", "PyQt6", "Windows", "Linux"],
-    desc: "The desktop app runs on macOS only because it uses cliclick and osascript for mouse and keyboard control. Windows and Linux users are locked out. This is the single biggest barrier to new users — and it's a solvable problem with pyautogui, win32api, or xdotool.",
+    desc: "The desktop app runs on macOS only because it uses cliclick and osascript for mouse and keyboard control. Windows and Linux users are locked out. This is the single biggest barrier to new users - and it's a solvable problem with pyautogui, win32api, or xdotool.",
     now: "macOS input layer is ~80 lines in src/input/macos.py. Windows and Linux stubs exist. They need real implementations.",
   },
   {
@@ -384,15 +384,15 @@ const ROLES = [
     title: "Hardware & Firmware Engineer",
     commitment: "3–8 hrs / week",
     tags: ["Arduino", "C++", "MyoWare", "Embedded"],
-    desc: "The current rig needs MyoWare 2.0 + Arduino Uno + a laptop — three devices, ~$150 minimum. The goal is one device, under $50, battery-powered. The real bottleneck is ADC resolution: 10-bit at 200 Hz on the Uno isn't enough headroom for low-amplitude gestures.",
-    now: "Evaluating the RP2040 as an Uno replacement — better ADC, native USB HID, same form factor. Looking for someone to prototype the firmware.",
+    desc: "The current rig needs MyoWare 2.0 + Arduino Uno + a laptop - three devices, ~$150 minimum. The goal is one device, under $50, battery-powered. The real bottleneck is ADC resolution: 10-bit at 200 Hz on the Uno isn't enough headroom for low-amplitude gestures.",
+    now: "Evaluating the RP2040 as an Uno replacement - better ADC, native USB HID, same form factor. Looking for someone to prototype the firmware.",
   },
   {
     area: "Product", color: "#FF2D78", urgent: false,
     title: "Frontend Developer",
     commitment: "4–10 hrs / week",
     tags: ["React", "Canvas API", "WebGL", "Vite"],
-    desc: "myojam.com is a full React SPA — WebGL hero backgrounds, a real-time signal playground, a block-based gesture coding environment, and a research education hub. The code is public. The bar is high. We build things that belong in a design portfolio, not a settings panel.",
+    desc: "myojam.com is a full React SPA - WebGL hero backgrounds, a real-time signal playground, a block-based gesture coding environment, and a research education hub. The code is public. The bar is high. We build things that belong in a design portfolio, not a settings panel.",
     now: "MyoCode needs persistent variable state across script runs. The signal playground needs a frequency analysis overlay. The EMG explainer needs a dynamic windowing animation.",
   },
   {
@@ -400,7 +400,7 @@ const ROLES = [
     title: "Education Content Creator",
     commitment: "2–5 hrs / week",
     tags: ["Science Writing", "Biology", "CS Education"],
-    desc: "The education hub publishes articles on EMG science, signal processing, and gesture recognition. The best ones have real data, cite primary sources, and teach something a biology student couldn't find in a textbook. We're not looking for blog posts — we're looking for pieces that hold up to scrutiny.",
+    desc: "The education hub publishes articles on EMG science, signal processing, and gesture recognition. The best ones have real data, cite primary sources, and teach something a biology student couldn't find in a textbook. We're not looking for blog posts - we're looking for pieces that hold up to scrutiny.",
     now: "Next article queue: muscle fiber type differences in EMG amplitude, fatigue effects on classifier accuracy, and a deep-dive on the Ninapro DB5 recording protocol.",
   },
   {
@@ -408,7 +408,7 @@ const ROLES = [
     title: "UX & Accessibility Researcher",
     commitment: "3–6 hrs / week",
     tags: ["UX Research", "A11y", "User Testing", "Assistive Tech"],
-    desc: "myojam is built for people with limited hand mobility, motor impairments, or RSI. But we've done almost no formal user research with that population. This role closes that gap — structured testing, recruitment, and ethics frameworks for a real user study.",
+    desc: "myojam is built for people with limited hand mobility, motor impairments, or RSI. But we've done almost no formal user research with that population. This role closes that gap - structured testing, recruitment, and ethics frameworks for a real user study.",
     now: "Drafting a recruitment protocol for participants with upper-limb motor impairments. Need help designing the study methodology before any testing begins.",
   },
 ]
@@ -491,7 +491,7 @@ export default function Careers() {
               Right now, we need<br/>help with these.
             </h2>
             <p style={{ fontSize:16, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.75, maxWidth:540 }}>
-              All roles are volunteer and fully remote. This isn't a job — it's a research project with real users, real data, and real open problems. Every role below has a specific current challenge, not a vague mandate.
+              All roles are volunteer and fully remote. This isn't a job - it's a research project with real users, real data, and real open problems. Every role below has a specific current challenge, not a vague mandate.
             </p>
           </div>
 
@@ -500,9 +500,9 @@ export default function Careers() {
             <div style={{ fontSize:10, fontWeight:700, color:"var(--text-tertiary)", textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:20 }}>How contributing works</div>
             <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:28 }}>
               {[
-                { n:"01", title:"Find your angle", body:"Browse the roles below. Each one has a specific open problem and a 'what we're working on right now' callout — not a job description, a research brief." },
+                { n:"01", title:"Find your angle", body:"Browse the roles below. Each one has a specific open problem and a 'what we're working on right now' callout - not a job description, a research brief." },
                 { n:"02", title:"Start the conversation", body:"Open a GitHub issue, reply to an existing thread, or use the application form at the bottom. We read and respond to every message." },
-                { n:"03", title:"Ship something small", body:"Your first contribution doesn't have to be large. A fixed doc, a failing test, a bug report with reproduction steps — that's how every long-term contributor started." },
+                { n:"03", title:"Ship something small", body:"Your first contribution doesn't have to be large. A fixed doc, a failing test, a bug report with reproduction steps - that's how every long-term contributor started." },
               ].map(s=>(
                 <div key={s.n} style={{ display:"flex", gap:14 }}>
                   <div style={{ fontSize:11, fontWeight:700, color:"var(--accent)", opacity:0.45, lineHeight:1, marginTop:2, flexShrink:0 }}>{s.n}</div>

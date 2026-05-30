@@ -33,7 +33,7 @@ function FaceAvatar({ seed, size = 48 }) {
   )
 }
 
-const ABSTRACT = "Phantom limb sensation is experienced by approximately 80% of amputees — and is accompanied, in most cases, by real measurable EMG signals in the residual limb that encode intended movements of the missing hand. This article examines what phantom EMG reveals about cortical plasticity, how researchers measure it, what accuracy amputee prosthetic controllers achieve using this signal, and why the existence of phantom intent matters for the design of all gesture interfaces."
+const ABSTRACT = "Phantom limb sensation is experienced by approximately 80% of amputees - and is accompanied, in most cases, by real measurable EMG signals in the residual limb that encode intended movements of the missing hand. This article examines what phantom EMG reveals about cortical plasticity, how researchers measure it, what accuracy amputee prosthetic controllers achieve using this signal, and why the existence of phantom intent matters for the design of all gesture interfaces."
 
 // ── Cortical remapping diagram ────────────────────────────────────────────────
 function RemappingDiagram() {
@@ -91,10 +91,10 @@ const COMPARISON_ROWS = [
   { feature:"Signal source",         phantom:"Motor cortex → spinal cord → residual stump",       intact:"Motor cortex → spinal cord → forearm muscles" },
   { feature:"Signal origin",         phantom:"Intent, not anatomy",                                 intact:"Anatomy + intent" },
   { feature:"Amplitude (typical)",   phantom:"30–60% of pre-amputation amplitude (varies by years)", intact:"Stable within sessions" },
-  { feature:"Gesture specificity",   phantom:"High — 6-gesture classification 76–82% (residual EMG)", intact:"84.85% cross-subject (myojam LOSO)" },
-  { feature:"Session variability",   phantom:"Higher — cortical map still drifting",                intact:"Moderate (electrode placement dependent)" },
-  { feature:"Calibration needed",    phantom:"Yes — residual stump mapping per user",              intact:"Optional (cross-subject model works)" },
-  { feature:"Fatigue behavior",      phantom:"Less relevant — fewer muscles involved",              intact:"Frequency shift after >5 min sustained use" },
+  { feature:"Gesture specificity",   phantom:"High - 6-gesture classification 76–82% (residual EMG)", intact:"84.85% cross-subject (myojam LOSO)" },
+  { feature:"Session variability",   phantom:"Higher - cortical map still drifting",                intact:"Moderate (electrode placement dependent)" },
+  { feature:"Calibration needed",    phantom:"Yes - residual stump mapping per user",              intact:"Optional (cross-subject model works)" },
+  { feature:"Fatigue behavior",      phantom:"Less relevant - fewer muscles involved",              intact:"Frequency shift after >5 min sustained use" },
 ]
 
 // ── Prevalence chart ──────────────────────────────────────────────────────────
@@ -158,7 +158,7 @@ export default function PhantomLimb() {
             The ghost in the electrode.<br/><span style={{ color:"var(--accent)" }}>80% of amputees produce measurable EMG from limbs they don't have.</span>
           </h1>
           <p style={{ fontSize:17, color:"rgba(255,255,255,0.72)", fontWeight:300, lineHeight:1.75, marginBottom:36, maxWidth:580 }}>
-            Phantom EMG isn't mysticism — it's evidence for how the motor cortex encodes intent, not anatomy. And it's the basis of every myoelectric prosthetic ever built.
+            Phantom EMG isn't mysticism - it's evidence for how the motor cortex encodes intent, not anatomy. And it's the basis of every myoelectric prosthetic ever built.
           </p>
           <div style={{ display:"flex", alignItems:"center", gap:12 }}>
             <FaceAvatar seed={2} size={40} />
@@ -202,10 +202,10 @@ export default function PhantomLimb() {
           </div>
           <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", letterSpacing:"-0.4px", marginBottom:14 }}>What phantom limb actually is</h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 16px" }}>
-            Phantom limb sensation is the perception that a missing limb is still present — and often still moving. About 80% of upper-limb amputees experience it, and 75% report vivid phantom movement perception. It is not a psychological aberration. It is a predictable consequence of how the brain maintains a body map.
+            Phantom limb sensation is the perception that a missing limb is still present - and often still moving. About 80% of upper-limb amputees experience it, and 75% report vivid phantom movement perception. It is not a psychological aberration. It is a predictable consequence of how the brain maintains a body map.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 24px" }}>
-            The sensory and motor cortex contain a point-by-point map of the body surface — the somatosensory homunculus. After amputation, the cortical territory representing the lost limb doesn't go dark. It remains active and, over months to years, gets colonised by neighbouring cortical regions (typically face and trunk). This produces the characteristic sensation that touching the cheek stimulates the phantom hand — documented by Ramachandran et al. (1992) and replicated dozens of times since.
+            The sensory and motor cortex contain a point-by-point map of the body surface - the somatosensory homunculus. After amputation, the cortical territory representing the lost limb doesn't go dark. It remains active and, over months to years, gets colonised by neighbouring cortical regions (typically face and trunk). This produces the characteristic sensation that touching the cheek stimulates the phantom hand - documented by Ramachandran et al. (1992) and replicated dozens of times since.
           </p>
 
           {/* Prevalence chart */}
@@ -227,14 +227,14 @@ export default function PhantomLimb() {
           </div>
           <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", letterSpacing:"-0.4px", marginBottom:14 }}>Phantom EMG is measurable and classifiable</h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 16px" }}>
-            When amputees attempt to move their phantom hand, the motor cortex sends motor commands via the spinal cord to whatever muscle stumps remain in the residual limb. These produce real, recordable EMG signals — sometimes 30–60% of the amplitude of the pre-amputation signal, depending on the degree of muscle loss and years since amputation.
+            When amputees attempt to move their phantom hand, the motor cortex sends motor commands via the spinal cord to whatever muscle stumps remain in the residual limb. These produce real, recordable EMG signals - sometimes 30–60% of the amplitude of the pre-amputation signal, depending on the degree of muscle loss and years since amputation.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 24px" }}>
-            Kuiken et al. (2007) demonstrated that after targeted muscle reinnervation (TMR) surgery — rerouting residual nerves to intact chest muscles — amputees could achieve 76–82% accuracy on a 6-gesture classifier using the same kind of surface EMG that myojam uses. Without TMR, using only residual forearm EMG, accuracy is lower but still sufficient for 3–4 gesture control in many patients.
+            Kuiken et al. (2007) demonstrated that after targeted muscle reinnervation (TMR) surgery - rerouting residual nerves to intact chest muscles - amputees could achieve 76–82% accuracy on a 6-gesture classifier using the same kind of surface EMG that myojam uses. Without TMR, using only residual forearm EMG, accuracy is lower but still sufficient for 3–4 gesture control in many patients.
           </p>
           <div style={{ padding:"16px 20px", background:`${GREEN}08`, border:`1px solid ${GREEN}20`, borderRadius:10 }}>
             <p style={{ fontSize:13.5, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.7, margin:0 }}>
-              <span style={{ fontWeight:600, color:GREEN }}>The key insight:</span> phantom EMG is driven by motor intent, not by muscle anatomy. The brain is trying to move a hand that isn't there, and the motor command leaks out as EMG in whatever tissue is available. This means intent — not limb presence — is the primary information source, and capturing intent is the fundamental design goal of any gesture interface.
+              <span style={{ fontWeight:600, color:GREEN }}>The key insight:</span> phantom EMG is driven by motor intent, not by muscle anatomy. The brain is trying to move a hand that isn't there, and the motor command leaks out as EMG in whatever tissue is available. This means intent - not limb presence - is the primary information source, and capturing intent is the fundamental design goal of any gesture interface.
             </p>
           </div>
         </div>
@@ -245,9 +245,9 @@ export default function PhantomLimb() {
             <div style={{ width:32, height:32, borderRadius:"50%", background:`${AMBER}15`, border:`1px solid ${AMBER}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:12, fontWeight:600, color:AMBER }}>03</div>
             <span style={{ fontSize:11, fontWeight:500, color:AMBER, textTransform:"uppercase", letterSpacing:"0.06em" }}>Cortical plasticity</span>
           </div>
-          <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", letterSpacing:"-0.4px", marginBottom:14 }}>How the brain adapts — and why it complicates prosthetic control</h2>
+          <h2 style={{ fontSize:22, fontWeight:600, color:"var(--text)", letterSpacing:"-0.4px", marginBottom:14 }}>How the brain adapts - and why it complicates prosthetic control</h2>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 24px" }}>
-            Cortical remapping is continuous and progressive. The face region begins colonising the hand territory within weeks of amputation and can expand by 1–2 cm of cortical distance over years. A prosthetic classifier calibrated 3 months after amputation may perform worse at 3 years — not because the hardware or software changed, but because the spatial pattern of motor commands shifted as the cortex reorganised.
+            Cortical remapping is continuous and progressive. The face region begins colonising the hand territory within weeks of amputation and can expand by 1–2 cm of cortical distance over years. A prosthetic classifier calibrated 3 months after amputation may perform worse at 3 years - not because the hardware or software changed, but because the spatial pattern of motor commands shifted as the cortex reorganised.
           </p>
           <div style={{ border:"1px solid var(--border)", borderRadius:14, overflow:"hidden" }}>
             <div style={{ padding:"14px 20px", background:"var(--bg-secondary)", borderBottom:"1px solid var(--border)" }}>
@@ -307,7 +307,7 @@ export default function PhantomLimb() {
             Most myojam users have all their limbs, so phantom EMG is a curiosity rather than a practical constraint. But it illuminates the key principle behind all gesture classification: the classifier is not detecting anatomy, it's detecting motor intent as expressed through anatomy. Fatigue, attention, and learning all modulate motor commands. Cross-subject generalisation is hard precisely because every brain maps gesture intent to muscle activation slightly differently.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:0 }}>
-            The practical implication: systems that explicitly model intent — through user calibration, adaptive interfaces, or neural decoding upstream of the muscle — will outperform systems that model anatomy. Phantom EMG makes this principle concrete. A hand that isn't there produces a classifiable signal, because the brain knows exactly what it's trying to do.
+            The practical implication: systems that explicitly model intent - through user calibration, adaptive interfaces, or neural decoding upstream of the muscle - will outperform systems that model anatomy. Phantom EMG makes this principle concrete. A hand that isn't there produces a classifiable signal, because the brain knows exactly what it's trying to do.
           </p>
         </div>
 
@@ -315,10 +315,10 @@ export default function PhantomLimb() {
         <div style={{ background:"var(--bg-secondary)", borderRadius:"var(--radius)", padding:"40px", border:"1px solid var(--border)" }}>
           <div style={{ fontSize:11, fontWeight:500, color:"var(--accent)", textTransform:"uppercase", letterSpacing:"0.06em", marginBottom:14 }}>Conclusion</div>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:"0 0 16px" }}>
-            Phantom limb EMG is one of neuroscience's stranger gifts to assistive technology. A signal produced by a brain trying to move a hand that isn't there turns out to be one of the cleanest, most intentional EMG signals we can record — because there is no actual movement to create noise, only pure motor command.
+            Phantom limb EMG is one of neuroscience's stranger gifts to assistive technology. A signal produced by a brain trying to move a hand that isn't there turns out to be one of the cleanest, most intentional EMG signals we can record - because there is no actual movement to create noise, only pure motor command.
           </p>
           <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.8, fontWeight:300, margin:0 }}>
-            The lesson is generalisable: motor intent, not muscle anatomy, is the primary information source. Building systems that capture intent — whether through better cross-subject models, calibration protocols, or neural interfaces — is the direction the whole field is moving. Phantom EMG got us there first.
+            The lesson is generalisable: motor intent, not muscle anatomy, is the primary information source. Building systems that capture intent - whether through better cross-subject models, calibration protocols, or neural interfaces - is the direction the whole field is moving. Phantom EMG got us there first.
           </p>
         </div>
 

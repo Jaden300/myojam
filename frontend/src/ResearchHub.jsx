@@ -84,10 +84,10 @@ const WIN_DATA = [
 ]
 
 const FEATURES = [
-  { name:"MAV", full:"Mean Absolute Value", pct:35, color:PINK,   desc:"Primary amplitude indicator — most discriminative feature across all channels" },
-  { name:"RMS", full:"Root Mean Square",    pct:27, color:PURPLE, desc:"Signal energy envelope — correlates with overall muscle force" },
-  { name:"WL",  full:"Waveform Length",     pct:25, color:BLUE,   desc:"Total path length — captures gesture complexity and speed" },
-  { name:"ZCR", full:"Zero Crossing Rate",  pct:13, color:GREEN,  desc:"Frequency proxy — reflects muscular contraction firing rate" },
+  { name:"MAV", full:"Mean Absolute Value", pct:35, color:PINK,   desc:"Primary amplitude indicator - most discriminative feature across all channels" },
+  { name:"RMS", full:"Root Mean Square",    pct:27, color:PURPLE, desc:"Signal energy envelope - correlates with overall muscle force" },
+  { name:"WL",  full:"Waveform Length",     pct:25, color:BLUE,   desc:"Total path length - captures gesture complexity and speed" },
+  { name:"ZCR", full:"Zero Crossing Rate",  pct:13, color:GREEN,  desc:"Frequency proxy - reflects muscular contraction firing rate" },
 ]
 
 const CLASSIFIERS = [
@@ -376,7 +376,7 @@ function FeatureChart({ vis }) {
         </div>
       ))}
       <div style={{ padding:"12px 14px", background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.06)", borderRadius:8, fontSize:11, color:"var(--text-tertiary)", lineHeight:1.6 }}>
-        Mean Decrease in Impurity (MDI) from the trained Random Forest across all 16 electrode channels. MAV + RMS account for 62% of total feature importance — confirming amplitude-based features as primary discriminators for hand gesture classification.
+        Mean Decrease in Impurity (MDI) from the trained Random Forest across all 16 electrode channels. MAV + RMS account for 62% of total feature importance - confirming amplitude-based features as primary discriminators for hand gesture classification.
       </div>
     </div>
   )
@@ -512,16 +512,16 @@ function DataDashboard() {
       <div style={{ padding:"32px 32px" }}>
         {active === 0 && (
           <div>
-            <div style={{ fontSize:13, fontWeight:700, color:"var(--text)", marginBottom:4 }}>Cross-subject accuracy — leave-one-subject-out evaluation</div>
+            <div style={{ fontSize:13, fontWeight:700, color:"var(--text)", marginBottom:4 }}>Cross-subject accuracy - leave-one-subject-out evaluation</div>
             <p style={{ fontSize:12, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.6, marginBottom:24 }}>
-              Each dot beneath the bars represents one of the 10 LOSO folds. The spread shows inter-subject variability — the hardest subjects bring RF down to 76.1%.
+              Each dot beneath the bars represents one of the 10 LOSO folds. The spread shows inter-subject variability - the hardest subjects bring RF down to 76.1%.
             </p>
             <ClassifierChart vis={vis}/>
           </div>
         )}
         {active === 1 && (
           <div>
-            <div style={{ fontSize:13, fontWeight:700, color:"var(--text)", marginBottom:4 }}>6×6 confusion matrix — Random Forest, cross-subject LOSO</div>
+            <div style={{ fontSize:13, fontWeight:700, color:"var(--text)", marginBottom:4 }}>6×6 confusion matrix - Random Forest, cross-subject LOSO</div>
             <p style={{ fontSize:12, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.6, marginBottom:20 }}>
               Hover any cell to see true vs predicted class. Diagonal = correct; off-diagonal = misclassification. Ring and Middle flex are the most confused pair.
             </p>
@@ -539,9 +539,9 @@ function DataDashboard() {
         )}
         {active === 3 && (
           <div>
-            <div style={{ fontSize:13, fontWeight:700, color:"var(--text)", marginBottom:4 }}>Feature importance — Mean Decrease in Impurity (Random Forest)</div>
+            <div style={{ fontSize:13, fontWeight:700, color:"var(--text)", marginBottom:4 }}>Feature importance - Mean Decrease in Impurity (Random Forest)</div>
             <p style={{ fontSize:12, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.6, marginBottom:24 }}>
-              Averaged across all 16 electrode channels. MAV and RMS dominate — amplitude-based features carry the most gesture-discriminative information.
+              Averaged across all 16 electrode channels. MAV and RMS dominate - amplitude-based features carry the most gesture-discriminative information.
             </p>
             <FeatureChart vis={vis}/>
           </div>
@@ -681,7 +681,7 @@ export default function ResearchHub() {
             <div style={{ width:38, height:38, borderRadius:10, background:"rgba(255,45,120,0.12)", border:"1px solid rgba(255,45,120,0.25)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:18 }}>⬡</div>
             <div>
               <div style={{ fontSize:13, fontWeight:600, color:"var(--text)", marginBottom:1 }}>Interactive Research Explorer</div>
-              <div style={{ fontSize:11.5, color:"var(--text-tertiary)", fontWeight:300 }}>4 animated visualizations — feasibility gap, classifier race, LOSO folds, feature importance</div>
+              <div style={{ fontSize:11.5, color:"var(--text-tertiary)", fontWeight:300 }}>4 animated visualizations - feasibility gap, classifier race, LOSO folds, feature importance</div>
             </div>
           </div>
           <button onClick={()=>navigate("/research/explorer")} style={{ background:"var(--accent)", color:"#fff", border:"none", borderRadius:100, padding:"10px 22px", fontSize:13, fontWeight:600, cursor:"pointer", fontFamily:"var(--font)", flexShrink:0, boxShadow:`0 4px 16px ${PINK}25`, transition:"transform 0.15s, box-shadow 0.15s" }}
@@ -706,7 +706,7 @@ export default function ResearchHub() {
                 { step:"01", label:"Start here", title:"Technical Report",      question:"What was built, and what accuracy did it achieve?",                        path:"/research/paper",            color:PINK,   note:"6 sections · Core methodology" },
                 { step:"02", label:"Then read",  title:"Classifier Analysis",   question:"Why Random Forest? How does it compare to SVM, k-NN, and LDA?",            path:"/research/classifier-analysis",color:PURPLE,note:"4 classifiers · MDI analysis" },
                 { step:"03", label:"Then read",  title:"Windowing Analysis",    question:"How does window size affect the accuracy-latency tradeoff?",                path:"/research/windowing-analysis", color:BLUE,  note:"8 conditions · Feasibility gap" },
-                { step:"04", label:"Finally",    title:"Variability Review",    question:"What breaks down in real-world deployment — and why?",                      path:"/research/variability-review", color:GREEN, note:"15 refs · Gap analysis" },
+                { step:"04", label:"Finally",    title:"Variability Review",    question:"What breaks down in real-world deployment - and why?",                      path:"/research/variability-review", color:GREEN, note:"15 refs · Gap analysis" },
               ].map(({ step, label, title, question, path, color, note }, i) => (
                 <div key={step} onClick={()=>navigate(path)} style={{ padding:"20px 18px", borderRight: i<3?"1px solid var(--border)":"none", background:"var(--bg)", cursor:"pointer", transition:"background 0.15s", borderTop:`3px solid ${color}` }}
                   onMouseEnter={e=>e.currentTarget.style.background=`${color}06`}
@@ -741,9 +741,9 @@ export default function ResearchHub() {
         <Reveal>
           <div style={{ marginBottom:64 }}>
             <SectionPill>The accuracy gap</SectionPill>
-            <h2 style={{ fontSize:"clamp(20px,2.8vw,28px)", fontWeight:700, letterSpacing:"-0.8px", color:"var(--text)", marginBottom:8 }}>The 11.25pp cross-subject gap — and how to close it</h2>
+            <h2 style={{ fontSize:"clamp(20px,2.8vw,28px)", fontWeight:700, letterSpacing:"-0.8px", color:"var(--text)", marginBottom:8 }}>The 11.25pp cross-subject gap - and how to close it</h2>
             <p style={{ fontSize:14, color:"var(--text-secondary)", fontWeight:300, lineHeight:1.75, marginBottom:28, maxWidth:600 }}>
-              Within-subject accuracy reaches 96.1%. The same model, evaluated on unseen subjects, falls to 84.85% — an 11.25pp gap. The variability review synthesises 15 papers to quantify how each mitigation strategy recovers ground.
+              Within-subject accuracy reaches 96.1%. The same model, evaluated on unseen subjects, falls to 84.85% - an 11.25pp gap. The variability review synthesises 15 papers to quantify how each mitigation strategy recovers ground.
             </p>
             <div ref={gapRef} style={{ background:"var(--bg-secondary)", border:"1px solid var(--border)", borderRadius:16, padding:"32px 32px" }}>
               <GapWaterfall vis={gapVis}/>
@@ -769,7 +769,7 @@ export default function ResearchHub() {
         <PaperCard num={2} type="Technical Report" color={PURPLE} delay={0.05}
           title="Cross-Subject sEMG Gesture Classification: Feature Engineering and Classifier Comparison on the Ninapro DB5 Benchmark"
           authors="myojam Research Team" affil="myojam Project, Independent Research, Toronto, Ontario, Canada"
-          abstract="A systematic evaluation of four classical machine learning classifiers — Random Forest, SVM (RBF), k-NN, and LDA — for cross-subject sEMG gesture recognition on Ninapro DB5. All classifiers operate on a 64-dimensional time-domain feature vector across 16 channels under leave-one-subject-out evaluation. Random Forest achieves 84.85% mean cross-subject accuracy, outperforming SVM by 2.55 pp, k-NN by 8.45 pp, and LDA by 13.05 pp. Per-fold analysis identifies inter-subject physiological variability as the dominant performance bottleneck. Feature importance analysis via MDI highlights MAV and RMS as the primary discriminative features and localises the most informative electrode positions."
+          abstract="A systematic evaluation of four classical machine learning classifiers - Random Forest, SVM (RBF), k-NN, and LDA - for cross-subject sEMG gesture recognition on Ninapro DB5. All classifiers operate on a 64-dimensional time-domain feature vector across 16 channels under leave-one-subject-out evaluation. Random Forest achieves 84.85% mean cross-subject accuracy, outperforming SVM by 2.55 pp, k-NN by 8.45 pp, and LDA by 13.05 pp. Per-fold analysis identifies inter-subject physiological variability as the dominant performance bottleneck. Feature importance analysis via MDI highlights MAV and RMS as the primary discriminative features and localises the most informative electrode positions."
           keywords={["Cross-subject generalisation","Random Forest","SVM","Feature importance","LOSO evaluation"]}
           meta={[["8","Sections"],["4","Figures"],["12","References"],["4","Classifiers compared"]]}
           path="/research/classifier-analysis"
