@@ -123,14 +123,40 @@ Per-user calibration improves accuracy significantly. Cross-subject baseline is 
 
 ```
 myojam/
-├── myojam.py              # macOS desktop application
-├── keywatcher.py          # global keyboard listener (Quartz)
-├── collect_data.py        # personal EMG data collection
-├── train_my_model.py      # model training pipeline
-├── arduino_sketch/        # Arduino firmware (emg_stream.ino)
-├── model/                 # trained model files
-├── frontend/              # React web application (Vite)
-└── backend/               # FastAPI inference server
+├── frontend/                   # React web app (Vite + React Router)
+│   ├── src/
+│   │   ├── articles/           # long-form education articles
+│   │   ├── components/         # reusable UI components
+│   │   └── educators/          # lesson plan pages
+│   └── public/
+│
+├── backend/                    # FastAPI inference server (Render)
+│   ├── main.py
+│   └── requirements.txt
+│
+├── desktop-app/                # PyQt6 macOS application
+│   ├── myojam.py               # main app
+│   ├── keywatcher.py           # global keyboard listener (Quartz)
+│   ├── collect_data.py         # personal EMG data collection
+│   ├── train_my_model.py       # model training pipeline
+│   ├── emg_classifier.py       # classifier logic
+│   ├── arduino_sketch/         # Arduino firmware (emg_stream.ino)
+│   └── model/                  # trained model files (.pkl)
+│
+├── data/                       # Ninapro DB5 dataset (10 subjects)
+│   └── DB5_s*/
+│
+├── model/                      # shared model files used by backend
+│   ├── gesture_classifier.pkl
+│   └── pipeline_config.pkl
+│
+├── scripts/                    # development & validation scripts
+│   ├── emg_classify_test.py
+│   ├── emg_test.py
+│   └── validate_range.py
+│
+├── requirements.txt            # Python dependencies
+└── vercel.json                 # SPA routing config for Vercel
 ```
 
 ## Team
