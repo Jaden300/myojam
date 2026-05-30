@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="frontend/public/favicon.svg" width="72" height="72" alt="myojam logo"/>
+  <img src="docs/banner.png" alt="myojam - assistive technology" width="100%"/>
+</p>
+
+<p align="center">
+  <img src="docs/logo.png" alt="myojam logo" width="120"/>
 </p>
 
 <h1 align="center">myojam</h1>
@@ -29,7 +33,7 @@ Each gesture maps to a computer action: cursor left/right, scroll up/down, left 
 | Cross-subject accuracy | **84.85%** |
 | Training subjects | 10 (Ninapro DB5) |
 | EMG channels | 16 surface electrodes |
-| Feature vector | 64-dimensional (MAV, RMS, ZC, WL × 16 ch) |
+| Feature vector | 64-dimensional (MAV, RMS, ZC, WL x 16 ch) |
 | Classifier | Random Forest (500 trees) |
 | Inference latency | < 5 ms |
 
@@ -38,11 +42,11 @@ Evaluated under leave-one-subject-out (LOSO) cross-validation.
 ## Architecture
 
 ```
-EMG Electrodes → MyoWare 2.0 → Arduino Uno → USB Serial
-                                                    ↓
+EMG Electrodes -> MyoWare 2.0 -> Arduino Uno -> USB Serial
+                                                    |
                               FastAPI Backend (signal processing + inference)
-                                                    ↓
-                        React Web App  ←→  macOS Desktop App
+                                                    |
+                        React Web App  <->  macOS Desktop App
 ```
 
 ## Stack
@@ -100,7 +104,7 @@ pip3 install PyQt6 scipy scikit-learn numpy pyserial
 chmod +x run.sh && ./run.sh
 ```
 
-Grant Accessibility permission when prompted (System Settings → Privacy & Security → Accessibility).
+Grant Accessibility permission when prompted (System Settings -> Privacy & Security -> Accessibility).
 
 ## Hardware setup
 
@@ -123,40 +127,33 @@ Per-user calibration improves accuracy significantly. Cross-subject baseline is 
 
 ```
 myojam/
-├── frontend/                   # React web app (Vite + React Router)
-│   ├── src/
-│   │   ├── articles/           # long-form education articles
-│   │   ├── components/         # reusable UI components
-│   │   └── educators/          # lesson plan pages
-│   └── public/
-│
-├── backend/                    # FastAPI inference server (Render)
-│   ├── main.py
-│   └── requirements.txt
-│
-├── desktop-app/                # PyQt6 macOS application
-│   ├── myojam.py               # main app
-│   ├── keywatcher.py           # global keyboard listener (Quartz)
-│   ├── collect_data.py         # personal EMG data collection
-│   ├── train_my_model.py       # model training pipeline
-│   ├── emg_classifier.py       # classifier logic
-│   ├── arduino_sketch/         # Arduino firmware (emg_stream.ino)
-│   └── model/                  # trained model files (.pkl)
-│
-├── data/                       # Ninapro DB5 dataset (10 subjects)
-│   └── DB5_s*/
-│
-├── model/                      # shared model files used by backend
-│   ├── gesture_classifier.pkl
-│   └── pipeline_config.pkl
-│
-├── scripts/                    # development & validation scripts
-│   ├── emg_classify_test.py
-│   ├── emg_test.py
-│   └── validate_range.py
-│
-├── requirements.txt            # Python dependencies
-└── vercel.json                 # SPA routing config for Vercel
+|- frontend/                   # React web app (Vite + React Router)
+|  |- src/
+|  |  |- articles/             # long-form education articles
+|  |  |- components/           # reusable UI components
+|  |  \- educators/            # lesson plan pages
+|  \- public/
+|
+|- backend/                    # FastAPI inference server (Render)
+|  |- main.py
+|  \- requirements.txt
+|
+|- desktop-app/                # PyQt6 macOS application
+|  |- myojam.py                # main app
+|  |- keywatcher.py            # global keyboard listener (Quartz)
+|  |- collect_data.py          # personal EMG data collection
+|  |- train_my_model.py        # model training pipeline
+|  |- emg_classifier.py        # classifier logic
+|  |- arduino_sketch/          # Arduino firmware (emg_stream.ino)
+|  \- model/                   # trained model files (.pkl)
+|
+|- data/                       # Ninapro DB5 dataset (10 subjects)
+|  \- DB5_s*/
+|
+|- model/                      # shared model files used by backend
+|- scripts/                    # development & validation scripts
+|- docs/                       # brand assets
+\- vercel.json                 # SPA routing config for Vercel
 ```
 
 ## Team
