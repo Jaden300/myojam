@@ -1,10 +1,16 @@
-# myojam
+<p align="center">
+  <img src="frontend/public/favicon.svg" width="72" height="72" alt="myojam logo"/>
+</p>
 
-Real-time EMG gesture classification for assistive human-computer interaction - with an open education platform built on top of the research.
+<h1 align="center">myojam</h1>
 
-[![Live site](https://img.shields.io/badge/live-myojam.com-FF2D78?style=flat-square)](https://myojam.com)
-[![License: MIT](https://img.shields.io/badge/license-MIT-10B981?style=flat-square)](LICENSE)
-[![Accuracy](https://img.shields.io/badge/accuracy-84.85%25_cross--subject-3B82F6?style=flat-square)](#performance)
+<p align="center">Real-time EMG gesture classification for assistive human-computer interaction - with an open education platform built on top of the research.</p>
+
+<p align="center">
+  <a href="https://myojam.com"><img src="https://img.shields.io/badge/live-myojam.com-FF2D78?style=flat-square" alt="Live site"/></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-10B981?style=flat-square" alt="License: MIT"/></a>
+  <a href="#performance"><img src="https://img.shields.io/badge/accuracy-84.85%25_cross--subject-3B82F6?style=flat-square" alt="Accuracy"/></a>
+</p>
 
 ---
 

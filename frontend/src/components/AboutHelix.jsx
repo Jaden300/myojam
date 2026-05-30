@@ -196,8 +196,8 @@ export default function AboutHelix() {
         const active = i === ai
         tgtColor.set(active ? STAGE_COLORS[ai] : '#4f46e5')
         nodeMats[i].color.lerp(tgtColor, 0.07)
-        nodeMats[i].opacity   += ((active ? 1.0 : 0.5)  - nodeMats[i].opacity)   * 0.07
-        haloMats[i].opacity   += ((active ? 0.13 : 0)   - haloMats[i].opacity)   * 0.07
+        nodeMats[i].opacity   += ((active ? 1.0 : 0.5) - nodeMats[i].opacity)   * 0.07
+        haloMats[i].opacity   += ((active ? 0.13 : 0)  - haloMats[i].opacity)   * 0.07
         const ts = active ? 2.0 : 1.0
         nodes[i].scale.x += (ts - nodes[i].scale.x) * 0.07
         nodes[i].scale.y  = nodes[i].scale.z = nodes[i].scale.x

@@ -234,8 +234,8 @@ export default function FrequencyAnalyzer() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
             <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text)" }}>Time domain</div>
             <div style={{ display: "flex", gap: 16, fontSize: 12, color: "var(--text-tertiary)" }}>
-              <span> -  Raw signal</span>
-              <span style={{ color: g?.color }}> -  Filtered (20–90Hz)</span>
+              <span> - Raw signal</span>
+              <span style={{ color: g?.color }}> - Filtered (20–90Hz)</span>
             </div>
           </div>
           <div style={{ borderRadius: "var(--radius-sm)", overflow: "hidden", border: "1px solid var(--border)" }}>

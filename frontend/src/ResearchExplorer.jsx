@@ -181,7 +181,7 @@ function FeasibilityChart() {
 
         {/* Labels for special points */}
         <text x={tx(1000) + 2} y={ty(84.85) - 10} fontSize={8} fill="#FF2D78" fontFamily="monospace">myojam</text>
-        <text x={tx(1250) + 2} y={ty(85.3)  - 10} fontSize={8} fill="#10B981" fontFamily="monospace">peak</text>
+        <text x={tx(1250) + 2} y={ty(85.3) - 10} fontSize={8} fill="#10B981" fontFamily="monospace">peak</text>
 
         {/* Axes */}
         <line x1={PAD.l} y1={PAD.t} x2={PAD.l} y2={PAD.t + CH} stroke="var(--text-tertiary)" strokeWidth={1}/>

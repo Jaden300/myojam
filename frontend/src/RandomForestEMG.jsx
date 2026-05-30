@@ -336,7 +336,7 @@ export default function RandomForestEMG() {
           <p style={{ fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.8, fontWeight: 300, margin: 0 }}>
             Random Forest is not the most glamorous choice, but it's the right one for myojam's scale and constraints.
             It delivers competitive cross-subject accuracy without the data hunger of deep learning, trains in seconds,
-            and runs inference in under 5ms. Understanding its limitations - no temporal modelling, no online adaptation  - 
+            and runs inference in under 5ms. Understanding its limitations - no temporal modelling, no online adaptation - 
             is equally important: they define exactly what future work needs to address.
           </p>
         </div>

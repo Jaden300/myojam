@@ -336,7 +336,7 @@ export default function Mission() {
               Technology should adapt to people, not the other way around. We built myojam to test whether that conviction was achievable - and to make whatever we learned freely available to everyone who comes after us.
             </blockquote>
             <div style={{ marginTop: 20, paddingLeft: 36, fontSize: 12, color: CREAM3, fontWeight: 300, letterSpacing: "0.04em" }}>
-              - The founding principle, September 2024
+             - The founding principle, September 2024
             </div>
           </FadeIn>
         </div>

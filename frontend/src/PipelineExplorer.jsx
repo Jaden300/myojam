@@ -63,8 +63,8 @@ function normalize(arr) {
 // Dark purple → pink heat colour
 function heatColor(t) {
   const r = Math.round(18 + t * (255 - 18))
-  const g = Math.round(8  + t * (45  - 8))
-  const b = Math.round(38 + t * (90  - 38))
+  const g = Math.round(8  + t * (45 - 8))
+  const b = Math.round(38 + t * (90 - 38))
   return `rgb(${r},${g},${b})`
 }
 

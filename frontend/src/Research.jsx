@@ -228,9 +228,9 @@ python validate_range.py
 # ✓  Model file size:               ~14–18 MB (gesture_classifier.pkl)
 # ─────────────────────────────────────────────────────────────────────
 # If mean accuracy differs by >0.5pp, check:
-#   - sklearn version matches 1.4.2 (pip show scikit-learn)
-#   - restimulus field used (not stimulus) when loading .mat files
-#   - window step=50 samples (not 100) in preprocess.py`,
+#  - sklearn version matches 1.4.2 (pip show scikit-learn)
+#  - restimulus field used (not stimulus) when loading .mat files
+#  - window step=50 samples (not 100) in preprocess.py`,
       },
     ],
   },

@@ -92,7 +92,7 @@ export default function NewsletterPopup() {
             fontSize: 14, color: "var(--text-secondary)", fontWeight: 300,
             lineHeight: 1.6, maxWidth: 420, margin: 0
           }}>
-            New articles, project updates, and breakthroughs in assistive EMG technology  - 
+            New articles, project updates, and breakthroughs in assistive EMG technology - 
             delivered to your inbox. No spam, unsubscribe anytime.
           </p>
         </div>

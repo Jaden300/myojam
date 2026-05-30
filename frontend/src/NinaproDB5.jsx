@@ -241,8 +241,8 @@ import numpy as np
 # Load subject 1, exercise 1 (basic finger movements)
 data = sio.loadmat("S1_E1_A1.mat")
 
-emg        = data["emg"]        # shape: (N_samples, 16)  - raw 16-ch EMG
-restimulus = data["restimulus"] # shape: (N_samples, 1)   - 0=rest, 1–52=gesture
+emg        = data["emg"]        # shape: (N_samples, 16) - raw 16-ch EMG
+restimulus = data["restimulus"] # shape: (N_samples, 1)  - 0=rest, 1–52=gesture
 
 # Extract 6-gesture subset used by myojam (labels 1–6 from Exercise 1)
 TARGET_LABELS = [1, 2, 3, 4, 5, 6]  # idx flex, mid flex, ring, pinky, thumb, fist
