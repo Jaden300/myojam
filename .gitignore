@@ -47,3 +47,7 @@ desktop-app/.venv/
 .idea/
 *.swp
 *.swo
+
+# Local assets
+"myojam Pics/"
+myojam\ Pics/
