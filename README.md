@@ -2,7 +2,9 @@
 
 Real-time EMG gesture classification for assistive human-computer interaction — with an open education platform built on top of the research.
 
-**[myojam.com](https://myojam.com)**
+[![Live site](https://img.shields.io/badge/live-myojam.com-FF2D78?style=flat-square)](https://myojam.com)
+[![License: MIT](https://img.shields.io/badge/license-MIT-10B981?style=flat-square)](LICENSE)
+[![Accuracy](https://img.shields.io/badge/accuracy-84.85%25_cross--subject-3B82F6?style=flat-square)](#performance)
 
 ---
 
